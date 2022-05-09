@@ -1,3 +1,7 @@
+# FTC GodBot SDK
+
+This repository contains the source code for Team 15259 GodBot. The GodBot SDK is an advanced robot controller that is built in a modular way to encourage industry standard techniques and encourage proper coding standards.
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the Freight Frenzy (2021-2022) competition season.
