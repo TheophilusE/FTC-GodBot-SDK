@@ -28,9 +28,9 @@
  */
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -58,17 +58,18 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * @see VuforiaLocalizer
  * @see VuforiaTrackableDefaultListener
  * see  ftc_app/doc/tutorial/FTC_FieldCoordinateSystemDefinition.pdf
- *
+ * <p>
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
- *
+ * <p>
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained in {@link ConceptVuforiaNavigationWebcam}.
  */
 
-@TeleOp(name="Concept: VuMark Id Webcam", group ="Concept")
+@TeleOp(name = "Concept: VuMark Id Webcam", group = "Concept")
 @Disabled
-public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
+public class ConceptVuMarkIdentificationWebcam extends LinearOpMode
+{
 
     public static final String TAG = "Vuforia VuMark Sample";
 
@@ -86,7 +87,9 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
      */
     WebcamName webcamName;
 
-    @Override public void runOpMode() {
+    @Override
+    public void runOpMode()
+    {
 
         /*
          * Retrieve the camera we are to use.
@@ -141,7 +144,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
 
         relicTrackables.activate();
 
-        while (opModeIsActive()) {
+        while (opModeIsActive())
+        {
 
             /**
              * See if any of the instances of {@link relicTemplate} are currently visible.
@@ -150,7 +154,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
              * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
              */
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN)
+            {
 
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
@@ -160,12 +165,13 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
-                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getFtcCameraFromTarget();
+                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getFtcCameraFromTarget();
                 telemetry.addData("Pose", format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
-                if (pose != null) {
+                if (pose != null)
+                {
                     VectorF trans = pose.getTranslation();
                     Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
@@ -179,8 +185,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
                     double rY = rot.secondAngle;
                     double rZ = rot.thirdAngle;
                 }
-            }
-            else {
+            } else
+            {
                 telemetry.addData("VuMark", "not visible");
             }
 
@@ -188,7 +194,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode {
         }
     }
 
-    String format(OpenGLMatrix transformationMatrix) {
+    String format(OpenGLMatrix transformationMatrix)
+    {
         return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
     }
 }

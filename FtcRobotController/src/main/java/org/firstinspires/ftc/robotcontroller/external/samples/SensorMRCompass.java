@@ -41,9 +41,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 /**
  * The {@link SensorMRCompass} op mode provides a demonstration of the
  * functionality provided by the Modern Robotics compass sensor.
- *
+ * <p>
  * The op mode assumes that the MR compass is configured with a name of "compass".
- *
+ * <p>
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  *
@@ -51,12 +51,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
  */
 @TeleOp(name = "Sensor: MR compass", group = "Sensor")
 @Disabled   // comment out or remove this line to enable this opmode
-public class SensorMRCompass extends LinearOpMode {
+public class SensorMRCompass extends LinearOpMode
+{
 
     ModernRoboticsI2cCompassSensor compass;
-    ElapsedTime                    timer = new ElapsedTime();
+    ElapsedTime timer = new ElapsedTime();
 
-    @Override public void runOpMode() {
+    @Override
+    public void runOpMode()
+    {
 
         // get a reference to our compass
         compass = hardwareMap.get(ModernRoboticsI2cCompassSensor.class, "compass");
@@ -76,10 +79,12 @@ public class SensorMRCompass extends LinearOpMode {
         waitForStart();
         telemetry.log().clear();
 
-        while (opModeIsActive()) {
+        while (opModeIsActive())
+        {
 
             // If the A button is pressed, start calibration and wait for the A button to rise
-            if (gamepad1.a && !compass.isCalibrating()) {
+            if (gamepad1.a && !compass.isCalibrating())
+            {
 
                 telemetry.log().clear();
                 telemetry.log().add("Calibration started");
@@ -88,25 +93,29 @@ public class SensorMRCompass extends LinearOpMode {
                 compass.setMode(CompassSensor.CompassMode.CALIBRATION_MODE);
                 timer.reset();
 
-                while (gamepad1.a && opModeIsActive()) {
+                while (gamepad1.a && opModeIsActive())
+                {
                     doTelemetry();
                     idle();
                 }
             }
 
             // If the B button is pressed, stop calibration and wait for the B button to rise
-            if (gamepad1.b && compass.isCalibrating()) {
+            if (gamepad1.b && compass.isCalibrating())
+            {
 
                 telemetry.log().clear();
                 telemetry.log().add("Calibration complete");
                 compass.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
 
-                if (compass.calibrationFailed()) {
+                if (compass.calibrationFailed())
+                {
                     telemetry.log().add("Calibration failed");
                     compass.writeCommand(ModernRoboticsI2cCompassSensor.Command.NORMAL);
                 }
 
-                while (gamepad1.a && opModeIsActive()) {
+                while (gamepad1.a && opModeIsActive())
+                {
                     doTelemetry();
                     idle();
                 }
@@ -116,13 +125,16 @@ public class SensorMRCompass extends LinearOpMode {
         }
     }
 
-    protected void doTelemetry() {
+    protected void doTelemetry()
+    {
 
-        if (compass.isCalibrating()) {
+        if (compass.isCalibrating())
+        {
 
-            telemetry.addData("compass", "calibrating %s", Math.round(timer.seconds())%2==0 ? "|.." : "..|");
+            telemetry.addData("compass", "calibrating %s", Math.round(timer.seconds()) % 2 == 0 ? "|.." : "..|");
 
-        } else {
+        } else
+        {
 
             // getDirection() returns a traditional compass heading in the range [0,360),
             // with values increasing in a CW direction
@@ -132,7 +144,7 @@ public class SensorMRCompass extends LinearOpMode {
             // the sensor. This is used internally to the sensor to compute its tilt and thence
             // to correct the magnetometer reading to produce tilt-corrected values in getDirection()
             Acceleration accel = compass.getAcceleration();
-            double accelMagnitude = Math.sqrt(accel.xAccel*accel.xAccel + accel.yAccel*accel.yAccel + accel.zAccel*accel.zAccel);
+            double accelMagnitude = Math.sqrt(accel.xAccel * accel.xAccel + accel.yAccel * accel.yAccel + accel.zAccel * accel.zAccel);
             telemetry.addData("accel", accel);
             telemetry.addData("accel magnitude", "%.3f", accelMagnitude);
 
