@@ -40,20 +40,20 @@ import java.text.NumberFormat;
  */
 public class Vector4fa
 {
-    private final float[] arr = new float[4];
+  private final float[] arr = new float[4];
 
-    public Vector4fa()
-    {
-        arr[3] = 1;
-    }
+  public Vector4fa()
+  {
+    arr[3] = 1;
+  }
 
-    public Vector4fa(float x, float y, float z, float w)
-    {
-        arr[0] = x;
-        arr[1] = y;
-        arr[2] = z;
-        arr[3] = w;
-    }
+  public Vector4fa(float x, float y, float z, float w)
+  {
+    arr[0] = x;
+    arr[1] = y;
+    arr[2] = z;
+    arr[3] = w;
+  }
 
     /*
     public Vector4fa add(Vector4fa v) {
@@ -64,67 +64,93 @@ public class Vector4fa
     }
      */
 
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(arr[0]);
-        result = prime * result + Float.floatToIntBits(arr[1]);
-        result = prime * result + Float.floatToIntBits(arr[2]);
-        result = prime * result + Float.floatToIntBits(arr[3]);
-        return result;
-    }
+  public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + Float.floatToIntBits(arr[0]);
+    result = prime * result + Float.floatToIntBits(arr[1]);
+    result = prime * result + Float.floatToIntBits(arr[2]);
+    result = prime * result + Float.floatToIntBits(arr[3]);
+    return result;
+  }
 
-    public boolean equals(Object obj)
+  public boolean equals(Object obj)
+  {
+    if (this == obj)
     {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vector4fa other = (Vector4fa) obj;
-        return equals(other.arr[0], other.arr[1], other.arr[2], other.arr[3]);
+      return true;
     }
+    if (obj == null)
+    {
+      return false;
+    }
+    if (getClass() != obj.getClass())
+    {
+      return false;
+    }
+    Vector4fa other = (Vector4fa) obj;
+    return equals(other.arr[0], other.arr[1], other.arr[2], other.arr[3]);
+  }
 
-    public boolean equals(Vector4fa v, float delta)
+  public boolean equals(Vector4fa v, float delta)
+  {
+    if (this == v)
     {
-        if (this == v)
-            return true;
-        if (v == null)
-            return false;
-        if (!Runtime.equals(arr[0], v.arr[0], delta))
-            return false;
-        if (!Runtime.equals(arr[1], v.arr[1], delta))
-            return false;
-        if (!Runtime.equals(arr[2], v.arr[2], delta))
-            return false;
-        if (!Runtime.equals(arr[3], v.arr[3], delta))
-            return false;
-        return true;
+      return true;
     }
+    if (v == null)
+    {
+      return false;
+    }
+    if (!Runtime.equals(arr[0], v.arr[0], delta))
+    {
+      return false;
+    }
+    if (!Runtime.equals(arr[1], v.arr[1], delta))
+    {
+      return false;
+    }
+    if (!Runtime.equals(arr[2], v.arr[2], delta))
+    {
+      return false;
+    }
+    if (!Runtime.equals(arr[3], v.arr[3], delta))
+    {
+      return false;
+    }
+    return true;
+  }
 
-    public boolean equals(float x, float y, float z, float w)
+  public boolean equals(float x, float y, float z, float w)
+  {
+    if (Float.floatToIntBits(arr[0]) != Float.floatToIntBits(x))
     {
-        if (Float.floatToIntBits(arr[0]) != Float.floatToIntBits(x))
-            return false;
-        if (Float.floatToIntBits(arr[1]) != Float.floatToIntBits(y))
-            return false;
-        if (Float.floatToIntBits(arr[2]) != Float.floatToIntBits(z))
-            return false;
-        if (Float.floatToIntBits(arr[3]) != Float.floatToIntBits(w))
-            return false;
-        return true;
+      return false;
     }
+    if (Float.floatToIntBits(arr[1]) != Float.floatToIntBits(y))
+    {
+      return false;
+    }
+    if (Float.floatToIntBits(arr[2]) != Float.floatToIntBits(z))
+    {
+      return false;
+    }
+    if (Float.floatToIntBits(arr[3]) != Float.floatToIntBits(w))
+    {
+      return false;
+    }
+    return true;
+  }
 
-    public String toString()
-    {
-        return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
-    }
+  public String toString()
+  {
+    return Runtime.formatNumbers(toString(Options.NUMBER_FORMAT));
+  }
 
-    public String toString(NumberFormat formatter)
-    {
-        return "(" + Runtime.format(arr[0], formatter) + " " + Runtime.format(arr[1], formatter) + " " + Runtime.format(arr[2], formatter) + " " + Runtime.format(arr[3], formatter) + ")";
-    }
+  public String toString(NumberFormat formatter)
+  {
+    return "(" + Runtime.format(arr[0], formatter) + " " + Runtime.format(arr[1], formatter) + " " + Runtime.format(arr[2], formatter) + " " + Runtime.format(arr[3], formatter) + ")";
+  }
 }
 //#endif

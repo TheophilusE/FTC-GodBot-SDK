@@ -38,41 +38,41 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @TeleOp(name = "Concept: Gamepad Touchpad", group = "Concept")
 public class ConceptGamepadTouchpad extends LinearOpMode
 {
-    @Override
-    public void runOpMode()
+  @Override
+  public void runOpMode()
+  {
+    telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE);
+
+    telemetry.addData(">", "Press Start");
+    telemetry.update();
+
+    waitForStart();
+
+    while (opModeIsActive())
     {
-        telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE);
+      boolean finger = false;
 
-        telemetry.addData(">", "Press Start");
-        telemetry.update();
+      // Display finger 1 x & y position if finger detected
+      if (gamepad1.touchpad_finger_1)
+      {
+        finger = true;
+        telemetry.addLine(String.format("Finger 1: x=%5.2f y=%5.2f\n", gamepad1.touchpad_finger_1_x, gamepad1.touchpad_finger_1_y));
+      }
 
-        waitForStart();
+      // Display finger 2 x & y position if finger detected
+      if (gamepad1.touchpad_finger_2)
+      {
+        finger = true;
+        telemetry.addLine(String.format("Finger 2: x=%5.2f y=%5.2f\n", gamepad1.touchpad_finger_2_x, gamepad1.touchpad_finger_2_y));
+      }
 
-        while (opModeIsActive())
-        {
-            boolean finger = false;
+      if (!finger)
+      {
+        telemetry.addLine("No fingers");
+      }
 
-            // Display finger 1 x & y position if finger detected
-            if (gamepad1.touchpad_finger_1)
-            {
-                finger = true;
-                telemetry.addLine(String.format("Finger 1: x=%5.2f y=%5.2f\n", gamepad1.touchpad_finger_1_x, gamepad1.touchpad_finger_1_y));
-            }
-
-            // Display finger 2 x & y position if finger detected
-            if (gamepad1.touchpad_finger_2)
-            {
-                finger = true;
-                telemetry.addLine(String.format("Finger 2: x=%5.2f y=%5.2f\n", gamepad1.touchpad_finger_2_x, gamepad1.touchpad_finger_2_y));
-            }
-
-            if (!finger)
-            {
-                telemetry.addLine("No fingers");
-            }
-
-            telemetry.update();
-            sleep(10);
-        }
+      telemetry.update();
+      sleep(10);
     }
+  }
 }

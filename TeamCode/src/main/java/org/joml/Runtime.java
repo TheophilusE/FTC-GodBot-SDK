@@ -35,166 +35,170 @@ import java.text.NumberFormat;
 public final class Runtime
 {
 
-    //#ifndef __GWT__
-    public static final boolean HAS_floatToRawIntBits = hasFloatToRawIntBits();
-    public static final boolean HAS_doubleToRawLongBits = hasDoubleToRawLongBits();
-    public static final boolean HAS_Long_rotateLeft = hasLongRotateLeft();
-    //#endif
+  //#ifndef __GWT__
+  public static final boolean HAS_floatToRawIntBits = hasFloatToRawIntBits();
+  public static final boolean HAS_doubleToRawLongBits = hasDoubleToRawLongBits();
+  public static final boolean HAS_Long_rotateLeft = hasLongRotateLeft();
+  //#endif
 //#ifdef __HAS_MATH_FMA__
-    public static final boolean HAS_Math_fma = Options.USE_MATH_FMA && hasMathFma();
+  public static final boolean HAS_Math_fma = Options.USE_MATH_FMA && hasMathFma();
 
-    private Runtime()
-    {
-    }
+  private Runtime()
+  {
+  }
 //#endif
 
-    private static boolean hasMathFma()
+  private static boolean hasMathFma()
+  {
+    try
     {
-        try
-        {
-            java.lang.Math.class.getDeclaredMethod("fma", new Class[]{float.class, float.class, float.class});
-            return true;
-        } catch (NoSuchMethodException e)
-        {
-            return false;
-        }
+      java.lang.Math.class.getDeclaredMethod("fma", new Class[]{float.class, float.class, float.class});
+      return true;
+    } catch (NoSuchMethodException e)
+    {
+      return false;
     }
+  }
 
-    //#ifndef __GWT__
-    private static boolean hasFloatToRawIntBits()
+  //#ifndef __GWT__
+  private static boolean hasFloatToRawIntBits()
+  {
+    try
     {
-        try
-        {
-            Float.class.getDeclaredMethod("floatToRawIntBits", new Class[]{float.class});
-            return true;
-        } catch (NoSuchMethodException e)
-        {
-            return false;
-        }
+      Float.class.getDeclaredMethod("floatToRawIntBits", new Class[]{float.class});
+      return true;
+    } catch (NoSuchMethodException e)
+    {
+      return false;
     }
+  }
 
-    private static boolean hasDoubleToRawLongBits()
+  private static boolean hasDoubleToRawLongBits()
+  {
+    try
     {
-        try
-        {
-            Double.class.getDeclaredMethod("doubleToRawLongBits", new Class[]{double.class});
-            return true;
-        } catch (NoSuchMethodException e)
-        {
-            return false;
-        }
+      Double.class.getDeclaredMethod("doubleToRawLongBits", new Class[]{double.class});
+      return true;
+    } catch (NoSuchMethodException e)
+    {
+      return false;
     }
+  }
 
-    private static boolean hasLongRotateLeft()
+  private static boolean hasLongRotateLeft()
+  {
+    try
     {
-        try
-        {
-            Long.class.getDeclaredMethod("rotateLeft", new Class[]{long.class, int.class});
-            return true;
-        } catch (NoSuchMethodException e)
-        {
-            return false;
-        }
+      Long.class.getDeclaredMethod("rotateLeft", new Class[]{long.class, int.class});
+      return true;
+    } catch (NoSuchMethodException e)
+    {
+      return false;
     }
+  }
 //#endif
 
-    public static int floatToIntBits(float flt)
-    {
+  public static int floatToIntBits(float flt)
+  {
 //#ifndef __GWT__
-        if (HAS_floatToRawIntBits)
-            return floatToIntBits1_3(flt);
+    if (HAS_floatToRawIntBits)
+    {
+      return floatToIntBits1_3(flt);
+    }
 //#endif
-        return floatToIntBits1_2(flt);
-    }
+    return floatToIntBits1_2(flt);
+  }
 
-    //#ifndef __GWT__
-    private static int floatToIntBits1_3(float flt)
-    {
-        return Float.floatToRawIntBits(flt);
-    }
+  //#ifndef __GWT__
+  private static int floatToIntBits1_3(float flt)
+  {
+    return Float.floatToRawIntBits(flt);
+  }
 
-    //#endif
-    private static int floatToIntBits1_2(float flt)
-    {
-        return Float.floatToIntBits(flt);
-    }
+  //#endif
+  private static int floatToIntBits1_2(float flt)
+  {
+    return Float.floatToIntBits(flt);
+  }
 
-    public static long doubleToLongBits(double dbl)
-    {
+  public static long doubleToLongBits(double dbl)
+  {
 //#ifndef __GWT__
-        if (HAS_doubleToRawLongBits)
-            return doubleToLongBits1_3(dbl);
+    if (HAS_doubleToRawLongBits)
+    {
+      return doubleToLongBits1_3(dbl);
+    }
 //#endif
-        return doubleToLongBits1_2(dbl);
-    }
+    return doubleToLongBits1_2(dbl);
+  }
 
-    //#ifndef __GWT__
-    private static long doubleToLongBits1_3(double dbl)
-    {
-        return Double.doubleToRawLongBits(dbl);
-    }
+  //#ifndef __GWT__
+  private static long doubleToLongBits1_3(double dbl)
+  {
+    return Double.doubleToRawLongBits(dbl);
+  }
 
-    //#endif
-    private static long doubleToLongBits1_2(double dbl)
-    {
-        return Double.doubleToLongBits(dbl);
-    }
+  //#endif
+  private static long doubleToLongBits1_2(double dbl)
+  {
+    return Double.doubleToLongBits(dbl);
+  }
 
-    public static String formatNumbers(String str)
+  public static String formatNumbers(String str)
+  {
+    StringBuffer res = new StringBuffer();
+    int eIndex = Integer.MIN_VALUE;
+    for (int i = 0; i < str.length(); i++)
     {
-        StringBuffer res = new StringBuffer();
-        int eIndex = Integer.MIN_VALUE;
-        for (int i = 0; i < str.length(); i++)
-        {
-            char c = str.charAt(i);
-            if (c == 'E')
-            {
-                eIndex = i;
-            } else if (c == ' ' && eIndex == i - 1)
-            {
-                // workaround Java 1.4 DecimalFormat bug
-                res.append('+');
-                continue;
-            } else if (Character.isDigit(c) && eIndex == i - 1)
-            {
-                res.append('+');
-            }
-            res.append(c);
-        }
-        return res.toString();
+      char c = str.charAt(i);
+      if (c == 'E')
+      {
+        eIndex = i;
+      } else if (c == ' ' && eIndex == i - 1)
+      {
+        // workaround Java 1.4 DecimalFormat bug
+        res.append('+');
+        continue;
+      } else if (Character.isDigit(c) && eIndex == i - 1)
+      {
+        res.append('+');
+      }
+      res.append(c);
     }
+    return res.toString();
+  }
 
-    public static String format(double number, NumberFormat format)
+  public static String format(double number, NumberFormat format)
+  {
+    if (Double.isNaN(number))
     {
-        if (Double.isNaN(number))
-        {
-            return padLeft(format, " NaN");
-        } else if (Double.isInfinite(number))
-        {
-            return padLeft(format, number > 0.0 ? " +Inf" : " -Inf");
-        }
-        return format.format(number);
+      return padLeft(format, " NaN");
+    } else if (Double.isInfinite(number))
+    {
+      return padLeft(format, number > 0.0 ? " +Inf" : " -Inf");
     }
+    return format.format(number);
+  }
 
-    private static String padLeft(NumberFormat format, String str)
+  private static String padLeft(NumberFormat format, String str)
+  {
+    int len = format.format(0.0).length();
+    StringBuffer sb = new StringBuffer();
+    for (int i = 0; i < len - str.length() + 1; i++)
     {
-        int len = format.format(0.0).length();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < len - str.length() + 1; i++)
-        {
-            sb.append(" ");
-        }
-        return sb.append(str).toString();
+      sb.append(" ");
     }
+    return sb.append(str).toString();
+  }
 
-    public static boolean equals(float a, float b, float delta)
-    {
-        return Float.floatToIntBits(a) == Float.floatToIntBits(b) || Math.abs(a - b) <= delta;
-    }
+  public static boolean equals(float a, float b, float delta)
+  {
+    return Float.floatToIntBits(a) == Float.floatToIntBits(b) || Math.abs(a - b) <= delta;
+  }
 
-    public static boolean equals(double a, double b, double delta)
-    {
-        return Double.doubleToLongBits(a) == Double.doubleToLongBits(b) || Math.abs(a - b) <= delta;
-    }
+  public static boolean equals(double a, double b, double delta)
+  {
+    return Double.doubleToLongBits(a) == Double.doubleToLongBits(b) || Math.abs(a - b) <= delta;
+  }
 
 }

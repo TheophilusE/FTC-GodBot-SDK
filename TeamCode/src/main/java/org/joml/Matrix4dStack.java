@@ -41,166 +41,174 @@ import java.io.ObjectOutput;
 public class Matrix4dStack extends Matrix4d
 {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix4dStack(int) constructor}.
-     */
-    private Matrix4d[] mats;
+  /**
+   * The matrix stack as a non-growable array. The size of the stack must be specified in the {@link #Matrix4dStack(int) constructor}.
+   */
+  private Matrix4d[] mats;
 
-    /**
-     * The index of the "current" matrix within {@link #mats}.
-     */
-    private int curr;
+  /**
+   * The index of the "current" matrix within {@link #mats}.
+   */
+  private int curr;
 
-    /**
-     * Create a new {@link Matrix4dStack} of the given size.
-     * <p>
-     * Initially the stack pointer is at zero and the current matrix is set to identity.
-     *
-     * @param stackSize the size of the stack. This must be at least 1, in which case the {@link Matrix4dStack} simply only consists of <code>this</code>
-     *                  {@link Matrix4d}
-     */
-    public Matrix4dStack(int stackSize)
+  /**
+   * Create a new {@link Matrix4dStack} of the given size.
+   * <p>
+   * Initially the stack pointer is at zero and the current matrix is set to identity.
+   *
+   * @param stackSize the size of the stack. This must be at least 1, in which case the {@link Matrix4dStack} simply only consists of <code>this</code>
+   *                  {@link Matrix4d}
+   */
+  public Matrix4dStack(int stackSize)
+  {
+    if (stackSize < 1)
     {
-        if (stackSize < 1)
+      throw new IllegalArgumentException("stackSize must be >= 1"); //$NON-NLS-1$
+    }
+    mats = new Matrix4d[stackSize - 1];
+    // Allocate all matrices up front to keep the promise of being "allocation-free"
+    for (int i = 0; i < mats.length; i++)
+    {
+      mats[i] = new Matrix4d();
+    }
+  }
+
+  /**
+   * Do not invoke manually! Only meant for serialization.
+   * <p>
+   * Invoking this constructor from client code will result in an inconsistent state of the
+   * created {@link Matrix4dStack} instance.
+   */
+  public Matrix4dStack()
+  {
+    /* Empty! */
+  }
+
+  /**
+   * Set the stack pointer to zero and set the current/bottom matrix to {@link #identity() identity}.
+   *
+   * @return this
+   */
+  public Matrix4dStack clear()
+  {
+    curr = 0;
+    identity();
+    return this;
+  }
+
+  /**
+   * Increment the stack pointer by one and set the values of the new current matrix to the one directly below it.
+   *
+   * @return this
+   */
+  public Matrix4dStack pushMatrix()
+  {
+    if (curr == mats.length)
+    {
+      throw new IllegalStateException("max stack size of " + (curr + 1) + " reached"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+    mats[curr++].set(this);
+    return this;
+  }
+
+  /**
+   * Decrement the stack pointer by one.
+   * <p>
+   * This will effectively dispose of the current matrix.
+   *
+   * @return this
+   */
+  public Matrix4dStack popMatrix()
+  {
+    if (curr == 0)
+    {
+      throw new IllegalStateException("already at the bottom of the stack"); //$NON-NLS-1$
+    }
+    set(mats[--curr]);
+    return this;
+  }
+
+  public int hashCode()
+  {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + curr;
+    for (int i = 0; i < curr; i++)
+    {
+      result = prime * result + mats[i].hashCode();
+    }
+    return result;
+  }
+
+  /*
+   * Contract between Matrix4d and Matrix4dStack:
+   *
+   * - Matrix4d.equals(Matrix4dStack) is true iff all the 16 matrix elements are equal
+   * - Matrix4dStack.equals(Matrix4d) is true iff all the 16 matrix elements are equal
+   * - Matrix4dStack.equals(Matrix4dStack) is true iff all 16 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
+   * - everything else is inequal
+   */
+  public boolean equals(Object obj)
+  {
+    if (this == obj)
+    {
+      return true;
+    }
+    if (!super.equals(obj))
+    {
+      return false;
+    }
+    if (obj instanceof Matrix4dStack)
+    {
+      Matrix4dStack other = (Matrix4dStack) obj;
+      if (curr != other.curr)
+      {
+        return false;
+      }
+      for (int i = 0; i < curr; i++)
+      {
+        if (!mats[i].equals(other.mats[i]))
         {
-            throw new IllegalArgumentException("stackSize must be >= 1"); //$NON-NLS-1$
+          return false;
         }
-        mats = new Matrix4d[stackSize - 1];
-        // Allocate all matrices up front to keep the promise of being "allocation-free"
-        for (int i = 0; i < mats.length; i++)
-        {
-            mats[i] = new Matrix4d();
-        }
+      }
     }
+    return true;
+  }
 
-    /**
-     * Do not invoke manually! Only meant for serialization.
-     * <p>
-     * Invoking this constructor from client code will result in an inconsistent state of the
-     * created {@link Matrix4dStack} instance.
-     */
-    public Matrix4dStack()
+  public void writeExternal(ObjectOutput out) throws IOException
+  {
+    super.writeExternal(out);
+    out.writeInt(curr);
+    for (int i = 0; i < curr; i++)
     {
-        /* Empty! */
+      out.writeObject(mats[i]);
     }
+  }
 
-    /**
-     * Set the stack pointer to zero and set the current/bottom matrix to {@link #identity() identity}.
-     *
-     * @return this
-     */
-    public Matrix4dStack clear()
+  public void readExternal(ObjectInput in) throws IOException
+  {
+    super.readExternal(in);
+    curr = in.readInt();
+    mats = new Matrix4dStack[curr];
+    for (int i = 0; i < curr; i++)
     {
-        curr = 0;
-        identity();
-        return this;
+      Matrix4d m = new Matrix4d();
+      m.readExternal(in);
+      mats[i] = m;
     }
+  }
 
-    /**
-     * Increment the stack pointer by one and set the values of the new current matrix to the one directly below it.
-     *
-     * @return this
-     */
-    public Matrix4dStack pushMatrix()
-    {
-        if (curr == mats.length)
-        {
-            throw new IllegalStateException("max stack size of " + (curr + 1) + " reached"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-        mats[curr++].set(this);
-        return this;
-    }
-
-    /**
-     * Decrement the stack pointer by one.
-     * <p>
-     * This will effectively dispose of the current matrix.
-     *
-     * @return this
-     */
-    public Matrix4dStack popMatrix()
-    {
-        if (curr == 0)
-        {
-            throw new IllegalStateException("already at the bottom of the stack"); //$NON-NLS-1$
-        }
-        set(mats[--curr]);
-        return this;
-    }
-
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + curr;
-        for (int i = 0; i < curr; i++)
-        {
-            result = prime * result + mats[i].hashCode();
-        }
-        return result;
-    }
-
-    /*
-     * Contract between Matrix4d and Matrix4dStack:
-     *
-     * - Matrix4d.equals(Matrix4dStack) is true iff all the 16 matrix elements are equal
-     * - Matrix4dStack.equals(Matrix4d) is true iff all the 16 matrix elements are equal
-     * - Matrix4dStack.equals(Matrix4dStack) is true iff all 16 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
-     * - everything else is inequal
-     */
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (obj instanceof Matrix4dStack)
-        {
-            Matrix4dStack other = (Matrix4dStack) obj;
-            if (curr != other.curr)
-                return false;
-            for (int i = 0; i < curr; i++)
-            {
-                if (!mats[i].equals(other.mats[i]))
-                    return false;
-            }
-        }
-        return true;
-    }
-
-    public void writeExternal(ObjectOutput out) throws IOException
-    {
-        super.writeExternal(out);
-        out.writeInt(curr);
-        for (int i = 0; i < curr; i++)
-        {
-            out.writeObject(mats[i]);
-        }
-    }
-
-    public void readExternal(ObjectInput in) throws IOException
-    {
-        super.readExternal(in);
-        curr = in.readInt();
-        mats = new Matrix4dStack[curr];
-        for (int i = 0; i < curr; i++)
-        {
-            Matrix4d m = new Matrix4d();
-            m.readExternal(in);
-            mats[i] = m;
-        }
-    }
-
-    public Object clone() throws CloneNotSupportedException
-    {
-        Matrix4dStack cloned = (Matrix4dStack) super.clone();
-        Matrix4d[] clonedMats = new Matrix4d[mats.length];
-        for (int i = 0; i < mats.length; i++)
-            clonedMats[i] = (Matrix4d) mats[i].clone();
-        cloned.mats = clonedMats;
-        return cloned;
-    }
+  public Object clone() throws CloneNotSupportedException
+  {
+    Matrix4dStack cloned = (Matrix4dStack) super.clone();
+    Matrix4d[] clonedMats = new Matrix4d[mats.length];
+    for (int i = 0; i < mats.length; i++)
+      clonedMats[i] = (Matrix4d) mats[i].clone();
+    cloned.mats = clonedMats;
+    return cloned;
+  }
 
 }
