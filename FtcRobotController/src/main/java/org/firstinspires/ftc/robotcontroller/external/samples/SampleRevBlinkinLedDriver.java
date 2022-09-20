@@ -73,6 +73,12 @@ public class SampleRevBlinkinLedDriver extends OpMode
   Deadline ledCycleDeadline;
   Deadline gamepadRateLimit;
 
+  protected enum DisplayKind
+  {
+    MANUAL,
+    AUTO
+  }
+
   @Override
   public void init()
   {
@@ -164,11 +170,5 @@ public class SampleRevBlinkinLedDriver extends OpMode
   {
     blinkinLedDriver.setPattern(pattern);
     patternName.setValue(pattern.toString());
-  }
-
-  protected enum DisplayKind
-  {
-    MANUAL,
-    AUTO
   }
 }

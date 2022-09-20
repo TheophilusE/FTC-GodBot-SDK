@@ -46,6 +46,11 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -57,10 +62,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.google.blocks.ftcrobotcontroller.ProgrammingWebHandlers;
 import com.google.blocks.ftcrobotcontroller.runtime.BlocksOpMode;
@@ -138,12 +139,20 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class FtcRobotControllerActivity extends Activity
 {
   public static final String TAG = "RCActivity";
+
+  public String getTag()
+  {
+    return TAG;
+  }
+
   private static final int REQUEST_CONFIG_WIFI_CHANNEL = 1;
   private static final int NUM_GAMEPADS = 2;
-  private static boolean permissionsValidated = false;
-  protected final SharedPreferencesListener sharedPreferencesListener = new SharedPreferencesListener();
+
   protected WifiManager.WifiLock wifiLock;
   protected RobotConfigFileManager cfgFileMgr;
+
+  private OnBotJavaHelper onBotJavaHelper;
+
   protected ProgrammingModeManager programmingModeManager;
 
   protected UpdateUI.Callback callback;
@@ -152,6 +161,8 @@ public class FtcRobotControllerActivity extends Activity
   protected StartResult prefRemoterStartResult = new StartResult();
   protected StartResult deviceNameStartResult = new StartResult();
   protected PreferencesHelper preferencesHelper;
+  protected final SharedPreferencesListener sharedPreferencesListener = new SharedPreferencesListener();
+
   protected ImageButton buttonMenu;
   protected TextView textDeviceName;
   protected TextView textNetworkConnectionStatus;
@@ -160,17 +171,35 @@ public class FtcRobotControllerActivity extends Activity
   protected TextView textOpMode;
   protected TextView textErrorMessage;
   protected ImmersiveMode immersion;
+
   protected UpdateUI updateUI;
   protected Dimmer dimmer;
   protected LinearLayout entireScreenLayout;
+
   protected FtcRobotControllerService controllerService;
   protected NetworkType networkType;
+
   protected FtcEventLoop eventLoop;
   protected Queue<UsbDevice> receivedUsbAttachmentNotifications;
+
   protected WifiMuteStateMachine wifiMuteStateMachine;
   protected MotionDetection motionDetection;
+
+  private static boolean permissionsValidated = false;
+
+  private WifiDirectChannelChanger wifiDirectChannelChanger;
+
+  protected class RobotRestarter implements Restarter
+  {
+
+    public void requestRestart()
+    {
+      requestRobotRestart();
+    }
+
+  }
+
   protected boolean serviceShouldUnbind = false;
-  private OnBotJavaHelper onBotJavaHelper;
   protected ServiceConnection connection = new ServiceConnection()
   {
     @Override
@@ -187,17 +216,6 @@ public class FtcRobotControllerActivity extends Activity
       controllerService = null;
     }
   };
-  private WifiDirectChannelChanger wifiDirectChannelChanger;
-
-  public static void setPermissionsValidated()
-  {
-    permissionsValidated = true;
-  }
-
-  public String getTag()
-  {
-    return TAG;
-  }
 
   @Override
   protected void onNewIntent(Intent intent)
@@ -267,6 +285,11 @@ public class FtcRobotControllerActivity extends Activity
     }
   }
 
+  public static void setPermissionsValidated()
+  {
+    permissionsValidated = true;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -311,9 +334,9 @@ public class FtcRobotControllerActivity extends Activity
     preferencesHelper.writeBooleanPrefIfDifferent(context.getString(R.string.pref_rc_connected), true);
     preferencesHelper.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener);
 
-    // Check if this RC app is from a later FTC season that what was installed previously
+    // Check if this RC app is from a later FTC season than what was installed previously
     int ftcSeasonYearOfPreviouslyInstalledRc = preferencesHelper.readInt(getString(R.string.pref_ftc_season_year_of_current_rc), 0);
-    int ftcSeasonYearOfCurrentlyInstalledRc = AppUtil.getInstance().getFtcSeasonYear(YearMonth.now()).getValue();
+    int ftcSeasonYearOfCurrentlyInstalledRc = AppUtil.getInstance().getFtcSeasonYear(AppUtil.getInstance().getLocalSdkBuildMonth()).getValue();
     if (ftcSeasonYearOfCurrentlyInstalledRc > ftcSeasonYearOfPreviouslyInstalledRc)
     {
       preferencesHelper.writeIntPrefIfDifferent(getString(R.string.pref_ftc_season_year_of_current_rc), ftcSeasonYearOfCurrentlyInstalledRc);
@@ -407,10 +430,9 @@ public class FtcRobotControllerActivity extends Activity
     readNetworkType();
     ServiceController.startService(FtcRobotControllerWatchdogService.class);
     bindToService();
-    logPackageVersions();
-    logDeviceSerialNumber();
-    AndroidBoard.getInstance().logAndroidBoardInfo();
+    RobotLog.logAppInfo();
     RobotLog.logDeviceInfo();
+    AndroidBoard.getInstance().logAndroidBoardInfo();
 
     if (preferencesHelper.readBoolean(getString(R.string.pref_wifi_automute), false))
     {
@@ -525,21 +547,6 @@ public class FtcRobotControllerActivity extends Activity
       unbindService(connection);
       serviceShouldUnbind = false;
     }
-  }
-
-  protected void logPackageVersions()
-  {
-    RobotLog.logBuildConfig(com.qualcomm.ftcrobotcontroller.BuildConfig.class);
-    RobotLog.logBuildConfig(com.qualcomm.robotcore.BuildConfig.class);
-    RobotLog.logBuildConfig(com.qualcomm.hardware.BuildConfig.class);
-    RobotLog.logBuildConfig(com.qualcomm.ftccommon.BuildConfig.class);
-    RobotLog.logBuildConfig(com.google.blocks.BuildConfig.class);
-    RobotLog.logBuildConfig(org.firstinspires.inspection.BuildConfig.class);
-  }
-
-  protected void logDeviceSerialNumber()
-  {
-    RobotLog.ii(TAG, "Android device serial number: " + Device.getSerialNumberOrUnknown());
   }
 
   protected void readNetworkType()
@@ -902,6 +909,27 @@ public class FtcRobotControllerActivity extends Activity
     }
   }
 
+  protected class SharedPreferencesListener implements SharedPreferences.OnSharedPreferenceChangeListener
+  {
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
+      if (key.equals(context.getString(R.string.pref_app_theme)))
+      {
+        ThemedActivity.restartForAppThemeChange(getTag(), getString(R.string.appThemeChangeRestartNotifyRC));
+      } else if (key.equals(context.getString(R.string.pref_wifi_automute)))
+      {
+        if (preferencesHelper.readBoolean(context.getString(R.string.pref_wifi_automute), false))
+        {
+          initWifiMute(true);
+        } else
+        {
+          initWifiMute(false);
+        }
+      }
+    }
+  }
+
   protected void initWifiMute(boolean enable)
   {
     if (enable)
@@ -936,37 +964,6 @@ public class FtcRobotControllerActivity extends Activity
     if (wifiMuteStateMachine != null)
     {
       wifiMuteStateMachine.consumeEvent(WifiMuteEvent.USER_ACTIVITY);
-    }
-  }
-
-  protected class RobotRestarter implements Restarter
-  {
-
-    public void requestRestart()
-    {
-      requestRobotRestart();
-    }
-
-  }
-
-  protected class SharedPreferencesListener implements SharedPreferences.OnSharedPreferenceChangeListener
-  {
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-    {
-      if (key.equals(context.getString(R.string.pref_app_theme)))
-      {
-        ThemedActivity.restartForAppThemeChange(getTag(), getString(R.string.appThemeChangeRestartNotifyRC));
-      } else if (key.equals(context.getString(R.string.pref_wifi_automute)))
-      {
-        if (preferencesHelper.readBoolean(context.getString(R.string.pref_wifi_automute), false))
-        {
-          initWifiMute(true);
-        } else
-        {
-          initWifiMute(false);
-        }
-      }
     }
   }
 }
