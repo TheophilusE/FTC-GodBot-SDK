@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math;
+package org.xii.sdk.foundation.math;
 
 /**
  * A simplex noise algorithm for 2D, 3D and 4D input.
@@ -31,7 +31,7 @@ package org.xii.sdk.foundation.math.math;
  * The original implementation can be found here: <a
  * href="http://staffwww.itn.liu.se/~stegu/simplexnoise/SimplexNoise.java">http://http://staffwww.itn.liu.se/</a>.
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public class SimplexNoise
 {

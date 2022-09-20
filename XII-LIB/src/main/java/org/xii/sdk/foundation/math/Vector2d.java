@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math;
+package org.xii.sdk.foundation.math;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -42,7 +42,7 @@ import java.text.NumberFormat;
  * @author Kai Burjack
  * @author F. Neurath
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public class Vector2d implements Externalizable, Cloneable, Vector2dc
 {

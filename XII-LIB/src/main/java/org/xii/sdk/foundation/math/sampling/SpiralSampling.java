@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math.sampling;
+package org.xii.sdk.foundation.math.sampling;
 
-import org.xii.sdk.foundation.math.math.Random;
+import org.xii.sdk.foundation.math.Random;
 
 /**
  * Creates samples on a spiral around a center point.
  *
  * @author Kai Burjack
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public class SpiralSampling
 {

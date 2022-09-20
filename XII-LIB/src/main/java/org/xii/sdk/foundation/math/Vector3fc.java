@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math;
+package org.xii.sdk.foundation.math;
 
 //#ifdef __HAS_NIO__
 
@@ -38,7 +38,7 @@ import java.util.HashSet;
  *
  * @author Kai Burjack
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public interface Vector3fc
 {

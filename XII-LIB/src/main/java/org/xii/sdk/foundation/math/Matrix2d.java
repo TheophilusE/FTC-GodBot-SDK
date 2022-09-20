@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math;
+package org.xii.sdk.foundation.math;
 
 //#ifdef __GWT__
 //import com.google.gwt.typedarrays.shared.Float64Array;
@@ -48,7 +48,7 @@ import java.text.NumberFormat;
  *
  * @author Joseph Burton
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
 {

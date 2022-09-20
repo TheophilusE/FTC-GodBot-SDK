@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 //#ifdef __HAS_VECTOR_API__
-package org.xii.sdk.foundation.math.math.experimental;
+package org.xii.sdk.foundation.math.experimental;
 
-import org.xii.sdk.foundation.math.math.Options;
-import org.xii.sdk.foundation.math.math.Runtime;
+import org.xii.sdk.foundation.math.Options;
+import org.xii.sdk.foundation.math.Runtime;
 
 import java.text.NumberFormat;
 
@@ -36,7 +36,7 @@ import java.text.NumberFormat;
  *
  * @author Kai Burjack
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
 public class Vector4fa
 {

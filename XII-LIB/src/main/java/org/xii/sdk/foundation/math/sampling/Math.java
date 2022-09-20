@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.xii.sdk.foundation.math.math.sampling;
+package org.xii.sdk.foundation.math.sampling;
 
 /**
  * Internal Math class used by the sampling package.
  *
  * @author Kai Burjack
  * <p>
- * Modified by Theophilus Eriata for the 15259 GodBot SDK.
+ * Modified by Theophilus Eriata for the GodBot SDK.
  */
-class Math extends org.xii.sdk.foundation.math.math.Math
+class Math extends org.xii.sdk.foundation.math.Math
 {
 
   static final double PI = java.lang.Math.PI;

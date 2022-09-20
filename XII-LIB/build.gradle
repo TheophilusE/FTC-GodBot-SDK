@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk 29
@@ -27,4 +28,9 @@ android {
 
 dependencies {
     implementation project(':FtcRobotController')
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
