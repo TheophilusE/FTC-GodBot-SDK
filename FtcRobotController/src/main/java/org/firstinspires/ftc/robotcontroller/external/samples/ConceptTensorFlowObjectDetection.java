@@ -146,9 +146,9 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode
             // Note: "Image number" refers to the randomized image orientation/number
             for (Recognition recognition : updatedRecognitions)
             {
-              double col = (recognition.getLeft() + recognition.getRight()) / 2;
-              double row = (recognition.getTop() + recognition.getBottom()) / 2;
-              double width = Math.abs(recognition.getRight() - recognition.getLeft());
+              double col    = (recognition.getLeft() + recognition.getRight()) / 2;
+              double row    = (recognition.getTop() + recognition.getBottom()) / 2;
+              double width  = Math.abs(recognition.getRight() - recognition.getLeft());
               double height = Math.abs(recognition.getTop() - recognition.getBottom());
 
               telemetry.addData("", " ");
@@ -174,7 +174,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode
     VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
     parameters.vuforiaLicenseKey = VUFORIA_KEY;
-    parameters.cameraDirection = CameraDirection.BACK;
+    parameters.cameraDirection   = CameraDirection.BACK;
 
     //  Instantiate the Vuforia engine
     vuforia = ClassFactory.getInstance().createVuforia(parameters);
@@ -189,9 +189,9 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode
         "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
     TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
     tfodParameters.minResultConfidence = 0.75f;
-    tfodParameters.isModelTensorFlow2 = true;
-    tfodParameters.inputSize = 300;
-    tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+    tfodParameters.isModelTensorFlow2  = true;
+    tfodParameters.inputSize           = 300;
+    tfod                               = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
 
     // Use loadModelFromAsset() if the TF Model is built in as an asset by Android Studio
     // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.

@@ -56,13 +56,13 @@ public class ConceptCompassCalibration extends LinearOpMode
 {
 
   /* Declare OpMode members. */
-  public DcMotor leftDrive = null;
-  public DcMotor rightDrive = null;
-  private ElapsedTime runtime = new ElapsedTime();
+  public  DcMotor     leftDrive  = null;
+  public  DcMotor     rightDrive = null;
+  private ElapsedTime runtime    = new ElapsedTime();
   CompassSensor compass;
 
-  final static double MOTOR_POWER = 0.2; // scale from 0 to 1
-  static final long HOLD_TIME_MS = 3000;
+  final static double MOTOR_POWER  = 0.2; // scale from 0 to 1
+  static final long   HOLD_TIME_MS = 3000;
   static final double CAL_TIME_SEC = 20;
 
   @Override
@@ -70,7 +70,7 @@ public class ConceptCompassCalibration extends LinearOpMode
   {
 
     // Initialize the drive system variables.
-    leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+    leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
     rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.

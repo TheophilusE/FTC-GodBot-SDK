@@ -62,11 +62,11 @@ public class UniformSampling
     {
       for (int i = 0; i < numSamples; i++)
       {
-        float r = rnd.nextFloat();
-        float a = rnd.nextFloat() * 2.0f * (float) Math.PI;
+        float r     = rnd.nextFloat();
+        float a     = rnd.nextFloat() * 2.0f * (float) Math.PI;
         float sqrtR = (float) Math.sqrt(r);
-        float x = sqrtR * (float) Math.sin_roquen_9(a + 0.5 * Math.PI);
-        float y = sqrtR * (float) Math.sin_roquen_9(a);
+        float x     = sqrtR * (float) Math.sin_roquen_9(a + 0.5 * Math.PI);
+        float y     = sqrtR * (float) Math.sin_roquen_9(a);
         callback.onNewSample(x, y);
       }
     }
@@ -114,9 +114,9 @@ public class UniformSampling
           continue;
         }
         float sqrt = (float) Math.sqrt(1.0 - x1 * x1 - x2 * x2);
-        float x = 2 * x1 * sqrt;
-        float y = 2 * x2 * sqrt;
-        float z = 1.0f - 2.0f * (x1 * x1 + x2 * x2);
+        float x    = 2 * x1 * sqrt;
+        float y    = 2 * x2 * sqrt;
+        float z    = 1.0f - 2.0f * (x1 * x1 + x2 * x2);
         callback.onNewSample(x, y, z);
         i++;
       }

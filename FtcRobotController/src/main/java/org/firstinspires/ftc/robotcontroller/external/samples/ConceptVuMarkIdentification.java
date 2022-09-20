@@ -87,8 +87,8 @@ public class ConceptVuMarkIdentification extends LinearOpMode
     /*
      * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
      */
-    int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    int                         cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+    VuforiaLocalizer.Parameters parameters          = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
     // OR...  Do Not Activate the Camera Monitor View, to save power
     // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
@@ -127,7 +127,7 @@ public class ConceptVuMarkIdentification extends LinearOpMode
      * @see VuMarkInstanceId
      */
     VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
-    VuforiaTrackable relicTemplate = relicTrackables.get(0);
+    VuforiaTrackable  relicTemplate   = relicTrackables.get(0);
     relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
     telemetry.addData(">", "Press Play to start");
@@ -164,8 +164,8 @@ public class ConceptVuMarkIdentification extends LinearOpMode
          * translational components */
         if (pose != null)
         {
-          VectorF trans = pose.getTranslation();
-          Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
+          VectorF     trans = pose.getTranslation();
+          Orientation rot   = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
           // Extract the X, Y, and Z components of the offset of the target relative to the robot
           double tX = trans.get(0);

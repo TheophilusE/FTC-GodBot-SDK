@@ -473,7 +473,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
 
   public Matrix2f invert(Matrix2f dest)
   {
-    float s = 1.0f / determinant();
+    float s    = 1.0f / determinant();
     float nm00 = m11 * s;
     float nm01 = -m01 * s;
     float nm10 = -m10 * s;
@@ -498,7 +498,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public Matrix2f transpose(Matrix2f dest)
   {
     dest.set(m00, m10,
-        m01, m11);
+             m01, m11);
     return dest;
   }
 
@@ -511,9 +511,9 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -543,7 +543,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
   }
 
   /**
@@ -944,7 +944,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public Vector2f transform(float x, float y, Vector2f dest)
   {
     dest.set(m00 * x + m10 * y,
-        m01 * x + m11 * y);
+             m01 * x + m11 * y);
     return dest;
   }
 
@@ -962,7 +962,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public Vector2f transformTranspose(float x, float y, Vector2f dest)
   {
     dest.set(m00 * x + m01 * y,
-        m10 * x + m11 * y);
+             m10 * x + m11 * y);
     return dest;
   }
 
@@ -1281,7 +1281,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public Matrix2f normal(Matrix2f dest)
   {
     float det = m00 * m11 - m10 * m01;
-    float s = 1.0f / det;
+    float s   = 1.0f / det;
     /* Invert and transpose in one go */
     float nm00 = m11 * s;
     float nm01 = -m10 * s;
@@ -1359,8 +1359,8 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + Float.floatToIntBits(m00);
     result = prime * result + Float.floatToIntBits(m01);
     result = prime * result + Float.floatToIntBits(m10);
@@ -1535,7 +1535,7 @@ public class Matrix2f implements Externalizable, Cloneable, Matrix2fc
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) &&
-        Math.isFinite(m10) && Math.isFinite(m11);
+           Math.isFinite(m10) && Math.isFinite(m11);
   }
 
   public Object clone() throws CloneNotSupportedException

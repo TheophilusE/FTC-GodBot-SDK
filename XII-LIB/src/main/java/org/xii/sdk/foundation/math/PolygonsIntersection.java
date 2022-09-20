@@ -50,9 +50,9 @@ public class PolygonsIntersection
 {
 
   private static final ByStartComparator byStartComparator = new ByStartComparator();
-  private static final ByEndComparator byEndComparator = new ByEndComparator();
-  protected final float[] verticesXY;
-  private float minX, minY, maxX, maxY;
+  private static final ByEndComparator   byEndComparator   = new ByEndComparator();
+  protected final      float[]           verticesXY;
+  private              float             minX, minY, maxX, maxY;
   private float centerX, centerY, radiusSquared;
   private IntervalTreeNode tree;
 
@@ -76,10 +76,10 @@ public class PolygonsIntersection
 
   private IntervalTreeNode buildNode(List intervals, float center)
   {
-    List left = null;
-    List right = null;
-    List byStart = null;
-    List byEnd = null;
+    List  left    = null;
+    List  right   = null;
+    List  byStart = null;
+    List  byEnd   = null;
     float leftMin = 1E38f, leftMax = -1E38f, rightMin = 1E38f, rightMax = -1E38f;
     float thisMin = 1E38f, thisMax = -1E38f;
     for (int i = 0; i < intervals.size(); i++)
@@ -108,7 +108,7 @@ public class PolygonsIntersection
         if (byStart == null || byEnd == null)
         {
           byStart = new ArrayList();
-          byEnd = new ArrayList();
+          byEnd   = new ArrayList();
         }
         thisMin = ival.start < thisMin ? ival.start : thisMin;
         thisMax = ival.end > thisMax ? ival.end : thisMax;
@@ -123,16 +123,16 @@ public class PolygonsIntersection
     }
     IntervalTreeNode tree = new IntervalTreeNode();
     tree.byBeginning = byStart;
-    tree.byEnding = byEnd;
-    tree.center = center;
+    tree.byEnding    = byEnd;
+    tree.center      = center;
     if (left != null)
     {
-      tree.left = buildNode(left, (leftMin + leftMax) / 2.0f);
+      tree.left                = buildNode(left, (leftMin + leftMax) / 2.0f);
       tree.left.childrenMinMax = leftMax;
     }
     if (right != null)
     {
-      tree.right = buildNode(right, (rightMin + rightMax) / 2.0f);
+      tree.right                = buildNode(right, (rightMin + rightMax) / 2.0f);
       tree.right.childrenMinMax = rightMin;
     }
     return tree;
@@ -144,20 +144,20 @@ public class PolygonsIntersection
     minX = minY = 1E38f;
     maxX = maxY = -1E38f;
     List intervals = new ArrayList(count);
-    int first = 0;
-    int currPoly = 0;
+    int  first     = 0;
+    int  currPoly  = 0;
     for (i = 1; i < count; i++)
     {
       if (polygons != null && polygons.length > currPoly && polygons[currPoly] == i)
       {
         /* New polygon starts. End the current. */
-        float prevy = verticesXY[2 * (i - 1) + 1];
-        float firsty = verticesXY[2 * first + 1];
-        Interval ival = new Interval();
-        ival.start = prevy < firsty ? prevy : firsty;
-        ival.end = firsty > prevy ? firsty : prevy;
-        ival.i = i - 1;
-        ival.j = first;
+        float    prevy  = verticesXY[2 * (i - 1) + 1];
+        float    firsty = verticesXY[2 * first + 1];
+        Interval ival   = new Interval();
+        ival.start     = prevy < firsty ? prevy : firsty;
+        ival.end       = firsty > prevy ? firsty : prevy;
+        ival.i         = i - 1;
+        ival.j         = first;
         ival.polyIndex = currPoly;
         intervals.add(ival);
         first = i;
@@ -173,10 +173,10 @@ public class PolygonsIntersection
       maxX = xi > maxX ? xi : maxX;
       maxY = yi > maxY ? yi : maxY;
       Interval ival = new Interval();
-      ival.start = yi < yj ? yi : yj;
-      ival.end = yj > yi ? yj : yi;
-      ival.i = i;
-      ival.j = j;
+      ival.start     = yi < yj ? yi : yj;
+      ival.end       = yj > yi ? yj : yi;
+      ival.i         = i;
+      ival.j         = j;
       ival.polyIndex = currPoly;
       intervals.add(ival);
       j = i;
@@ -190,10 +190,10 @@ public class PolygonsIntersection
     maxX = xi > maxX ? xi : maxX;
     maxY = yi > maxY ? yi : maxY;
     Interval ival = new Interval();
-    ival.start = yi < yj ? yi : yj;
-    ival.end = yj > yi ? yj : yi;
-    ival.i = i - 1;
-    ival.j = first;
+    ival.start     = yi < yj ? yi : yj;
+    ival.end       = yj > yi ? yj : yi;
+    ival.i         = i - 1;
+    ival.j         = first;
     ival.polyIndex = currPoly;
     intervals.add(ival);
     // compute bounding sphere and rectangle
@@ -287,8 +287,8 @@ public class PolygonsIntersection
 
   static class IntervalTreeNode
   {
-    float center;
-    float childrenMinMax;
+    float            center;
+    float            childrenMinMax;
     IntervalTreeNode left;
     IntervalTreeNode right;
     List/* <Interval> */ byBeginning;
@@ -297,12 +297,12 @@ public class PolygonsIntersection
     static boolean computeEvenOdd(float[] verticesXY, Interval ival, float x, float y, boolean evenOdd, BitSet inPolys)
     {
       boolean newEvenOdd = evenOdd;
-      int i = ival.i;
-      int j = ival.j;
-      float yi = verticesXY[2 * i + 1];
-      float yj = verticesXY[2 * j + 1];
-      float xi = verticesXY[2 * i + 0];
-      float xj = verticesXY[2 * j + 0];
+      int     i          = ival.i;
+      int     j          = ival.j;
+      float   yi         = verticesXY[2 * i + 1];
+      float   yj         = verticesXY[2 * j + 1];
+      float   xi         = verticesXY[2 * i + 0];
+      float   xj         = verticesXY[2 * j + 0];
       if ((yi < y && yj >= y || yj < y && yi >= y) && (xi <= x || xj <= x))
       {
         float xDist = xi + (y - yi) / (yj - yi) * (xj - xi) - x;

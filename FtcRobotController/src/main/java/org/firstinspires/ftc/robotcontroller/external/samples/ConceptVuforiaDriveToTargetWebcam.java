@@ -48,8 +48,8 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
   //  The GAIN constants set the relationship between the measured position error,
   //  and how much power is applied to the drive motors.  Drive = Error * Gain
   //  Make these values smaller for smoother control.
-  final double SPEED_GAIN = 0.02;   //  Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
-  final double TURN_GAIN = 0.01;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
+  final double SPEED_GAIN       = 0.02;   //  Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
+  final double TURN_GAIN        = 0.01;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
 
   final double MM_PER_INCH = 25.40;   //  Metric conversion
 
@@ -68,11 +68,11 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
   private static final String VUFORIA_KEY =
       " --- YOUR NEW VUFORIA KEY GOES HERE  --- ";
 
-  VuforiaLocalizer vuforia = null;
-  OpenGLMatrix targetPose = null;
-  String targetName = "";
+  VuforiaLocalizer vuforia    = null;
+  OpenGLMatrix     targetPose = null;
+  String           targetName = "";
 
-  private DcMotor leftDrive = null;
+  private DcMotor leftDrive  = null;
   private DcMotor rightDrive = null;
 
   @Override
@@ -83,8 +83,8 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
      * To get an on-phone camera preview, use the code below.
      * If no camera preview is desired, use the parameter-less constructor instead (commented out below).
      */
-    int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    int                         cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+    VuforiaLocalizer.Parameters parameters          = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
     // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
     parameters.vuforiaLicenseKey = VUFORIA_KEY;
@@ -94,7 +94,7 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
 
     // Connect to the camera we are to use.  This name must match what is set up in Robot Configuration
     parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
-    this.vuforia = ClassFactory.getInstance().createVuforia(parameters);
+    this.vuforia          = ClassFactory.getInstance().createVuforia(parameters);
 
     // Load the trackable objects from the Assets file, and give them meaningful names
     VuforiaTrackables targetsPowerPlay = this.vuforia.loadTrackablesFromAsset("PowerPlay");
@@ -109,7 +109,7 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
     // Initialize the hardware variables. Note that the strings used here as parameters
     // to 'get' must correspond to the names assigned during the robot configuration
     // step (using the FTC Robot Controller app on the phone).
-    leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+    leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
     rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -123,11 +123,11 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
 
     waitForStart();
 
-    boolean targetFound = false;    // Set to true when a target is detected by Vuforia
-    double targetRange = 0;        // Distance from camera to target in Inches
-    double targetBearing = 0;        // Robot Heading, relative to target.  Positive degrees means target is to the right.
-    double drive = 0;        // Desired forward power (-1 to +1)
-    double turn = 0;        // Desired turning power (-1 to +1)
+    boolean targetFound   = false;    // Set to true when a target is detected by Vuforia
+    double  targetRange   = 0;        // Distance from camera to target in Inches
+    double  targetBearing = 0;        // Robot Heading, relative to target.  Positive degrees means target is to the right.
+    double  drive         = 0;        // Desired forward power (-1 to +1)
+    double  turn          = 0;        // Desired turning power (-1 to +1)
 
     while (opModeIsActive())
     {
@@ -143,7 +143,7 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
           if (targetPose != null)
           {
             targetFound = true;
-            targetName = trackable.getName();
+            targetName  = trackable.getName();
             VectorF trans = targetPose.getTranslation();
 
             // Extract the X & Y components of the offset of the target relative to the robot
@@ -178,12 +178,12 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
       {
 
         // Determine heading and range error so we can use them to control the robot automatically.
-        double rangeError = (targetRange - DESIRED_DISTANCE);
+        double rangeError   = (targetRange - DESIRED_DISTANCE);
         double headingError = targetBearing;
 
         // Use the speed and turn "gains" to calculate how we want the robot to move.
         drive = rangeError * SPEED_GAIN;
-        turn = headingError * TURN_GAIN;
+        turn  = headingError * TURN_GAIN;
 
         telemetry.addData("Auto", "Drive %5.2f, Turn %5.2f", drive, turn);
       } else
@@ -191,13 +191,13 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
 
         // drive using manual POV Joystick mode.
         drive = -gamepad1.left_stick_y / 2.0;  // Reduce drive rate to 50%.
-        turn = gamepad1.right_stick_x / 4.0;  // Reduce turn rate to 25%.
+        turn  = gamepad1.right_stick_x / 4.0;  // Reduce turn rate to 25%.
         telemetry.addData("Manual", "Drive %5.2f, Turn %5.2f", drive, turn);
       }
       telemetry.update();
 
       // Calculate left and right wheel powers and send to them to the motors.
-      double leftPower = Range.clip(drive + turn, -1.0, 1.0);
+      double leftPower  = Range.clip(drive + turn, -1.0, 1.0);
       double rightPower = Range.clip(drive - turn, -1.0, 1.0);
       leftDrive.setPower(leftPower);
       rightDrive.setPower(rightPower);

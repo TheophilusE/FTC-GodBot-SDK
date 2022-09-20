@@ -55,17 +55,17 @@ public class RobotTeleopTank_Iterative extends OpMode
 {
 
   /* Declare OpMode members. */
-  public DcMotor leftDrive = null;
+  public DcMotor leftDrive  = null;
   public DcMotor rightDrive = null;
-  public DcMotor leftArm = null;
-  public Servo leftClaw = null;
-  public Servo rightClaw = null;
+  public DcMotor leftArm    = null;
+  public Servo   leftClaw   = null;
+  public Servo   rightClaw  = null;
 
   double clawOffset = 0;
 
-  public static final double MID_SERVO = 0.5;
-  public static final double CLAW_SPEED = 0.02;        // sets rate to move servo
-  public static final double ARM_UP_POWER = 0.50;   // Run arm motor up at 50% power
+  public static final double MID_SERVO      = 0.5;
+  public static final double CLAW_SPEED     = 0.02;        // sets rate to move servo
+  public static final double ARM_UP_POWER   = 0.50;   // Run arm motor up at 50% power
   public static final double ARM_DOWN_POWER = -0.25;   // Run arm motor down at -25% power
 
   /*
@@ -75,9 +75,9 @@ public class RobotTeleopTank_Iterative extends OpMode
   public void init()
   {
     // Define and Initialize Motors
-    leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+    leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
     rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-    leftArm = hardwareMap.get(DcMotor.class, "left_arm");
+    leftArm    = hardwareMap.get(DcMotor.class, "left_arm");
 
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
     // Pushing the left and right sticks forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -90,7 +90,7 @@ public class RobotTeleopTank_Iterative extends OpMode
     // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     // Define and initialize ALL installed servos.
-    leftClaw = hardwareMap.get(Servo.class, "left_hand");
+    leftClaw  = hardwareMap.get(Servo.class, "left_hand");
     rightClaw = hardwareMap.get(Servo.class, "right_hand");
     leftClaw.setPosition(MID_SERVO);
     rightClaw.setPosition(MID_SERVO);
@@ -125,7 +125,7 @@ public class RobotTeleopTank_Iterative extends OpMode
     double right;
 
     // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
-    left = -gamepad1.left_stick_y;
+    left  = -gamepad1.left_stick_y;
     right = -gamepad1.right_stick_y;
 
     leftDrive.setPower(left);

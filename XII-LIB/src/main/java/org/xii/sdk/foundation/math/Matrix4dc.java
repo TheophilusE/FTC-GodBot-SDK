@@ -48,32 +48,32 @@ public interface Matrix4dc
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>x=-1</code> when using the identity matrix.
    */
-  int PLANE_NX = 0;
+  int PLANE_NX      = 0;
   /**
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>x=1</code> when using the identity matrix.
    */
-  int PLANE_PX = 1;
+  int PLANE_PX      = 1;
   /**
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>y=-1</code> when using the identity matrix.
    */
-  int PLANE_NY = 2;
+  int PLANE_NY      = 2;
   /**
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>y=1</code> when using the identity matrix.
    */
-  int PLANE_PY = 3;
+  int PLANE_PY      = 3;
   /**
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>z=-1</code> when using the identity matrix.
    */
-  int PLANE_NZ = 4;
+  int PLANE_NZ      = 4;
   /**
    * Argument to the first parameter of {@link #frustumPlane(int, Vector4d)}
    * identifying the plane with equation <code>z=1</code> when using the identity matrix.
    */
-  int PLANE_PZ = 5;
+  int PLANE_PZ      = 5;
   /**
    * Argument to the first parameter of {@link #frustumCorner(int, Vector3d)}
    * identifying the corner <code>(-1, -1, -1)</code> when using the identity matrix.
@@ -122,11 +122,11 @@ public interface Matrix4dc
   /**
    * Bit returned by {@link #properties()} to indicate that the matrix represents an affine transformation.
    */
-  byte PROPERTY_AFFINE = 1 << 1;
+  byte PROPERTY_AFFINE      = 1 << 1;
   /**
    * Bit returned by {@link #properties()} to indicate that the matrix represents the identity transformation.
    */
-  byte PROPERTY_IDENTITY = 1 << 2;
+  byte PROPERTY_IDENTITY    = 1 << 2;
   /**
    * Bit returned by {@link #properties()} to indicate that the matrix represents a pure translation transformation.
    */

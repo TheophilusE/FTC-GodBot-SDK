@@ -81,7 +81,7 @@ public interface Matrix4x3fc
   /**
    * Bit returned by {@link #properties()} to indicate that the matrix represents the identity transformation.
    */
-  byte PROPERTY_IDENTITY = 1 << 2;
+  byte PROPERTY_IDENTITY    = 1 << 2;
   /**
    * Bit returned by {@link #properties()} to indicate that the matrix represents a pure translation transformation.
    */

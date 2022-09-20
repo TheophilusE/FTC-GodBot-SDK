@@ -68,7 +68,7 @@ public class RobotAutoDriveToLine_Linear extends LinearOpMode
 {
 
   /* Declare OpMode members. */
-  private DcMotor leftDrive = null;
+  private DcMotor leftDrive  = null;
   private DcMotor rightDrive = null;
 
   /**
@@ -77,14 +77,14 @@ public class RobotAutoDriveToLine_Linear extends LinearOpMode
   NormalizedColorSensor colorSensor;
 
   static final double WHITE_THRESHOLD = 0.5;  // spans between 0.0 - 1.0 from dark to light
-  static final double APPROACH_SPEED = 0.25;
+  static final double APPROACH_SPEED  = 0.25;
 
   @Override
   public void runOpMode()
   {
 
     // Initialize the drive system variables.
-    leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+    leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
     rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.

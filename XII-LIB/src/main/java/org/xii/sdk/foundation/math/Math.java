@@ -51,40 +51,40 @@ public class Math
    * The code for linear interpolation was gratefully donated by theagentd
    * from the same site.
    */
-  public static final double PI = java.lang.Math.PI;
-  static final double PI2 = PI * 2.0;
-  static final float PI_f = (float) java.lang.Math.PI;
-  static final float PI2_f = PI_f * 2.0f;
-  static final double PIHalf = PI * 0.5;
-  static final float PIHalf_f = (float) (PI * 0.5);
-  static final double PI_4 = PI * 0.25;
-  static final double PI_INV = 1.0 / PI;
-  private static final int lookupBits = Options.SIN_LOOKUP_BITS;
-  private static final int lookupTableSize = 1 << lookupBits;
-  private static final int lookupTableSizeMinus1 = lookupTableSize - 1;
-  private static final int lookupTableSizeWithMargin = lookupTableSize + 1;
-  private static final float pi2OverLookupSize = PI2_f / lookupTableSize;
-  private static final float lookupSizeOverPi2 = lookupTableSize / PI2_f;
-  private static final float sinTable[];
-  private static final double c1 = Double.longBitsToDouble(-4628199217061079772L);
-  private static final double c2 = Double.longBitsToDouble(4575957461383582011L);
-  private static final double c3 = Double.longBitsToDouble(-4671919876300759001L);
-  private static final double c4 = Double.longBitsToDouble(4523617214285661942L);
-  private static final double c5 = Double.longBitsToDouble(-4730215272828025532L);
-  private static final double c6 = Double.longBitsToDouble(4460272573143870633L);
-  private static final double c7 = Double.longBitsToDouble(-4797767418267846529L);
-  private static final double s5 = Double.longBitsToDouble(4523227044276562163L);
-  private static final double s4 = Double.longBitsToDouble(-4671934770969572232L);
-  private static final double s3 = Double.longBitsToDouble(4575957211482072852L);
-  private static final double s2 = Double.longBitsToDouble(-4628199223918090387L);
-  private static final double s1 = Double.longBitsToDouble(4607182418589157889L);
-  private static final double k1 = Double.longBitsToDouble(-4628199217061079959L);
-  private static final double k2 = Double.longBitsToDouble(4575957461383549981L);
-  private static final double k3 = Double.longBitsToDouble(-4671919876307284301L);
-  private static final double k4 = Double.longBitsToDouble(4523617213632129738L);
-  private static final double k5 = Double.longBitsToDouble(-4730215344060517252L);
-  private static final double k6 = Double.longBitsToDouble(4460268259291226124L);
-  private static final double k7 = Double.longBitsToDouble(-4798040743777455072L);
+  public static final  double PI                        = java.lang.Math.PI;
+  static final         double PI2                       = PI * 2.0;
+  static final         float  PI_f                      = (float) java.lang.Math.PI;
+  static final         float  PI2_f                     = PI_f * 2.0f;
+  static final         double PIHalf                    = PI * 0.5;
+  static final         float  PIHalf_f                  = (float) (PI * 0.5);
+  static final         double PI_4                      = PI * 0.25;
+  static final         double PI_INV                    = 1.0 / PI;
+  private static final int    lookupBits                = Options.SIN_LOOKUP_BITS;
+  private static final int    lookupTableSize           = 1 << lookupBits;
+  private static final int    lookupTableSizeMinus1     = lookupTableSize - 1;
+  private static final int    lookupTableSizeWithMargin = lookupTableSize + 1;
+  private static final float  pi2OverLookupSize         = PI2_f / lookupTableSize;
+  private static final float  lookupSizeOverPi2         = lookupTableSize / PI2_f;
+  private static final float  sinTable[];
+  private static final double c1                        = Double.longBitsToDouble(-4628199217061079772L);
+  private static final double c2                        = Double.longBitsToDouble(4575957461383582011L);
+  private static final double c3                        = Double.longBitsToDouble(-4671919876300759001L);
+  private static final double c4                        = Double.longBitsToDouble(4523617214285661942L);
+  private static final double c5                        = Double.longBitsToDouble(-4730215272828025532L);
+  private static final double c6                        = Double.longBitsToDouble(4460272573143870633L);
+  private static final double c7                        = Double.longBitsToDouble(-4797767418267846529L);
+  private static final double s5                        = Double.longBitsToDouble(4523227044276562163L);
+  private static final double s4                        = Double.longBitsToDouble(-4671934770969572232L);
+  private static final double s3                        = Double.longBitsToDouble(4575957211482072852L);
+  private static final double s2                        = Double.longBitsToDouble(-4628199223918090387L);
+  private static final double s1                        = Double.longBitsToDouble(4607182418589157889L);
+  private static final double k1                        = Double.longBitsToDouble(-4628199217061079959L);
+  private static final double k2                        = Double.longBitsToDouble(4575957461383549981L);
+  private static final double k3                        = Double.longBitsToDouble(-4671919876307284301L);
+  private static final double k4                        = Double.longBitsToDouble(4523617213632129738L);
+  private static final double k5                        = Double.longBitsToDouble(-4730215344060517252L);
+  private static final double k6                        = Double.longBitsToDouble(4460268259291226124L);
+  private static final double k7                        = Double.longBitsToDouble(-4798040743777455072L);
 
   static
   {
@@ -107,12 +107,12 @@ public class Math
    */
   static double sin_theagentd_arith(double x)
   {
-    double xi = floor((x + PI_4) * PI_INV);
-    double x_ = x - xi * PI;
+    double xi   = floor((x + PI_4) * PI_INV);
+    double x_   = x - xi * PI;
     double sign = ((int) xi & 1) * -2 + 1;
-    double x2 = x_ * x_;
-    double sin = x_;
-    double tx = x_ * x2;
+    double x2   = x_ * x_;
+    double sin  = x_;
+    double tx   = x_ * x2;
     sin += tx * c1;
     tx *= x2;
     sin += tx * c2;
@@ -134,10 +134,10 @@ public class Math
    */
   static double sin_roquen_arith(double x)
   {
-    double xi = Math.floor((x + PI_4) * PI_INV);
-    double x_ = x - xi * PI;
+    double xi   = Math.floor((x + PI_4) * PI_INV);
+    double x_   = x - xi * PI;
     double sign = ((int) xi & 1) * -2 + 1;
-    double x2 = x_ * x_;
+    double x2   = x_ * x_;
 
     // code from sin_theagentd_arith:
     // double sin = x_;
@@ -152,7 +152,7 @@ public class Math
     // return sign * sin;
 
     double sin;
-    x_ = sign * x_;
+    x_  = sign * x_;
     sin = c7;
     sin = sin * x2 + c6;
     sin = sin * x2 + c5;
@@ -168,8 +168,8 @@ public class Math
    */
   static double sin_roquen_9(double v)
   {
-    double i = java.lang.Math.rint(v * PI_INV);
-    double x = v - i * Math.PI;
+    double i  = java.lang.Math.rint(v * PI_INV);
+    double x  = v - i * Math.PI;
     double qs = 1 - 2 * ((int) i & 1);
     double x2 = x * x;
     double r;
@@ -187,8 +187,8 @@ public class Math
    */
   static double sin_roquen_newk(double v)
   {
-    double i = java.lang.Math.rint(v * PI_INV);
-    double x = v - i * Math.PI;
+    double i  = java.lang.Math.rint(v * PI_INV);
+    double x  = v - i * Math.PI;
     double qs = 1 - 2 * ((int) i & 1);
     double x2 = x * x;
     double r;
@@ -209,11 +209,11 @@ public class Math
   static float sin_theagentd_lookup(float rad)
   {
     float index = rad * lookupSizeOverPi2;
-    int ii = (int) java.lang.Math.floor(index);
+    int   ii    = (int) java.lang.Math.floor(index);
     float alpha = index - ii;
-    int i = ii & lookupTableSizeMinus1;
-    float sin1 = sinTable[i];
-    float sin2 = sinTable[i + 1];
+    int   i     = ii & lookupTableSizeMinus1;
+    float sin1  = sinTable[i];
+    float sin2  = sinTable[i + 1];
     return sin1 + (sin2 - sin1) * alpha;
   }
 
@@ -274,8 +274,8 @@ public class Math
   {
     // sin(x)^2 + cos(x)^2 = 1
     float cos = sqrt(1.0f - sin * sin);
-    float a = angle + PIHalf_f;
-    float b = a - (int) (a / PI2_f) * PI2_f;
+    float a   = angle + PIHalf_f;
+    float b   = a - (int) (a / PI2_f) * PI2_f;
     if (b < 0.0)
     {
       b = PI2_f + b;
@@ -295,8 +295,8 @@ public class Math
     }
     // sin(x)^2 + cos(x)^2 = 1
     double cos = sqrt(1.0 - sin * sin);
-    double a = angle + PIHalf;
-    double b = a - (int) (a / PI2) * PI2;
+    double a   = angle + PIHalf;
+    double b   = a - (int) (a / PI2) * PI2;
     if (b < 0.0)
     {
       b = PI2 + b;
@@ -384,9 +384,9 @@ public class Math
   private static double fastAtan2(double y, double x)
   {
     double ax = x >= 0.0 ? x : -x, ay = y >= 0.0 ? y : -y;
-    double a = min(ax, ay) / max(ax, ay);
-    double s = a * a;
-    double r = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
+    double a  = min(ax, ay) / max(ax, ay);
+    double s  = a * a;
+    double r  = ((-0.0464964749 * s + 0.15931422) * s - 0.327622764) * s * a + a;
     if (ay > ax)
     {
       r = 1.57079637 - r;
@@ -644,8 +644,8 @@ public class Math
     float x10 = lerp(q010, q110, tx);
     float x01 = lerp(q001, q101, tx);
     float x11 = lerp(q011, q111, tx);
-    float y0 = lerp(x00, x10, ty);
-    float y1 = lerp(x01, x11, ty);
+    float y0  = lerp(x00, x10, ty);
+    float y1  = lerp(x01, x11, ty);
     return lerp(y0, y1, tz);
   }
 
@@ -655,8 +655,8 @@ public class Math
     double x10 = lerp(q010, q110, tx);
     double x01 = lerp(q001, q101, tx);
     double x11 = lerp(q011, q111, tx);
-    double y0 = lerp(x00, x10, ty);
-    double y1 = lerp(x01, x11, ty);
+    double y0  = lerp(x00, x10, ty);
+    double y1  = lerp(x01, x11, ty);
     return lerp(y0, y1, tz);
   }
 

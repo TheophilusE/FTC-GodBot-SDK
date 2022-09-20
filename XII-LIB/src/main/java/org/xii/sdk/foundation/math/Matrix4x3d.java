@@ -66,9 +66,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d()
   {
-    m00 = 1.0;
-    m11 = 1.0;
-    m22 = 1.0;
+    m00        = 1.0;
+    m11        = 1.0;
+    m22        = 1.0;
     properties = PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
   }
 
@@ -655,18 +655,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     {
       return this;
     }
-    m00 = 1.0;
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 1.0;
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = 1.0;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m00        = 1.0;
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 1.0;
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = 1.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -679,18 +679,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set(Matrix4x3dc m)
   {
-    m00 = m.m00();
-    m01 = m.m01();
-    m02 = m.m02();
-    m10 = m.m10();
-    m11 = m.m11();
-    m12 = m.m12();
-    m20 = m.m20();
-    m21 = m.m21();
-    m22 = m.m22();
-    m30 = m.m30();
-    m31 = m.m31();
-    m32 = m.m32();
+    m00        = m.m00();
+    m01        = m.m01();
+    m02        = m.m02();
+    m10        = m.m10();
+    m11        = m.m11();
+    m12        = m.m12();
+    m20        = m.m20();
+    m21        = m.m21();
+    m22        = m.m22();
+    m30        = m.m30();
+    m31        = m.m31();
+    m32        = m.m32();
     properties = m.properties();
     return this;
   }
@@ -703,18 +703,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set(Matrix4x3fc m)
   {
-    m00 = m.m00();
-    m01 = m.m01();
-    m02 = m.m02();
-    m10 = m.m10();
-    m11 = m.m11();
-    m12 = m.m12();
-    m20 = m.m20();
-    m21 = m.m21();
-    m22 = m.m22();
-    m30 = m.m30();
-    m31 = m.m31();
-    m32 = m.m32();
+    m00        = m.m00();
+    m01        = m.m01();
+    m02        = m.m02();
+    m10        = m.m10();
+    m11        = m.m11();
+    m12        = m.m12();
+    m20        = m.m20();
+    m21        = m.m21();
+    m22        = m.m22();
+    m30        = m.m30();
+    m31        = m.m31();
+    m32        = m.m32();
     properties = m.properties();
     return this;
   }
@@ -728,18 +728,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set(Matrix4dc m)
   {
-    m00 = m.m00();
-    m01 = m.m01();
-    m02 = m.m02();
-    m10 = m.m10();
-    m11 = m.m11();
-    m12 = m.m12();
-    m20 = m.m20();
-    m21 = m.m21();
-    m22 = m.m22();
-    m30 = m.m30();
-    m31 = m.m31();
-    m32 = m.m32();
+    m00        = m.m00();
+    m01        = m.m01();
+    m02        = m.m02();
+    m10        = m.m10();
+    m11        = m.m11();
+    m12        = m.m12();
+    m20        = m.m20();
+    m21        = m.m21();
+    m22        = m.m22();
+    m30        = m.m30();
+    m31        = m.m31();
+    m32        = m.m32();
     properties = m.properties() & (PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
     return this;
   }
@@ -858,35 +858,35 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set(AxisAngle4f axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
-    double angle = axisAngle.angle;
+    double x         = axisAngle.x;
+    double y         = axisAngle.y;
+    double z         = axisAngle.z;
+    double angle     = axisAngle.angle;
     double invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0 - c;
     m00 = c + x * x * omc;
     m11 = c + y * y * omc;
     m22 = c + z * z * omc;
     double tmp1 = x * y * omc;
     double tmp2 = z * s;
-    m10 = tmp1 - tmp2;
-    m01 = tmp1 + tmp2;
-    tmp1 = x * z * omc;
-    tmp2 = y * s;
-    m20 = tmp1 + tmp2;
-    m02 = tmp1 - tmp2;
-    tmp1 = y * z * omc;
-    tmp2 = x * s;
-    m21 = tmp1 - tmp2;
-    m12 = tmp1 + tmp2;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m10        = tmp1 - tmp2;
+    m01        = tmp1 + tmp2;
+    tmp1       = x * z * omc;
+    tmp2       = y * s;
+    m20        = tmp1 + tmp2;
+    m02        = tmp1 - tmp2;
+    tmp1       = y * z * omc;
+    tmp2       = x * s;
+    m21        = tmp1 - tmp2;
+    m12        = tmp1 + tmp2;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -899,35 +899,35 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set(AxisAngle4d axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
-    double angle = axisAngle.angle;
+    double x         = axisAngle.x;
+    double y         = axisAngle.y;
+    double z         = axisAngle.z;
+    double angle     = axisAngle.angle;
     double invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0 - c;
     m00 = c + x * x * omc;
     m11 = c + y * y * omc;
     m22 = c + z * z * omc;
     double tmp1 = x * y * omc;
     double tmp2 = z * s;
-    m10 = tmp1 - tmp2;
-    m01 = tmp1 + tmp2;
-    tmp1 = x * z * omc;
-    tmp2 = y * s;
-    m20 = tmp1 + tmp2;
-    m02 = tmp1 - tmp2;
-    tmp1 = y * z * omc;
-    tmp2 = x * s;
-    m21 = tmp1 - tmp2;
-    m12 = tmp1 + tmp2;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m10        = tmp1 - tmp2;
+    m01        = tmp1 + tmp2;
+    tmp1       = x * z * omc;
+    tmp2       = y * s;
+    m20        = tmp1 + tmp2;
+    m02        = tmp1 - tmp2;
+    tmp1       = y * z * omc;
+    tmp2       = x * s;
+    m21        = tmp1 - tmp2;
+    m12        = tmp1 + tmp2;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -992,9 +992,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d mulGeneric(Matrix4x3dc right, Matrix4x3d dest)
   {
-    double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-    double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-    double m20 = this.m20, m21 = this.m21, m22 = this.m22;
+    double m00  = this.m00, m01 = this.m01, m02 = this.m02;
+    double m10  = this.m10, m11 = this.m11, m12 = this.m12;
+    double m20  = this.m20, m21 = this.m21, m22 = this.m22;
     double rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
     double rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
     double rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
@@ -1048,9 +1048,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d mulGeneric(Matrix4x3fc right, Matrix4x3d dest)
   {
-    double m00 = this.m00, m01 = this.m01, m02 = this.m02;
-    double m10 = this.m10, m11 = this.m11, m12 = this.m12;
-    double m20 = this.m20, m21 = this.m21, m22 = this.m22;
+    double m00  = this.m00, m01 = this.m01, m02 = this.m02;
+    double m10  = this.m10, m11 = this.m11, m12 = this.m12;
+    double m20  = this.m20, m21 = this.m21, m22 = this.m22;
     double rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
     double rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
     double rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
@@ -1137,18 +1137,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = m00 * view.m30() + m30;
     double nm31 = m11 * view.m31() + m31;
     double nm32 = m22 * view.m32() + m32;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = (this.properties & view.properties() & PROPERTY_ORTHONORMAL);
     return dest;
   }
@@ -1289,18 +1289,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d add(Matrix4x3dc other, Matrix4x3d dest)
   {
-    dest.m00 = m00 + other.m00();
-    dest.m01 = m01 + other.m01();
-    dest.m02 = m02 + other.m02();
-    dest.m10 = m10 + other.m10();
-    dest.m11 = m11 + other.m11();
-    dest.m12 = m12 + other.m12();
-    dest.m20 = m20 + other.m20();
-    dest.m21 = m21 + other.m21();
-    dest.m22 = m22 + other.m22();
-    dest.m30 = m30 + other.m30();
-    dest.m31 = m31 + other.m31();
-    dest.m32 = m32 + other.m32();
+    dest.m00        = m00 + other.m00();
+    dest.m01        = m01 + other.m01();
+    dest.m02        = m02 + other.m02();
+    dest.m10        = m10 + other.m10();
+    dest.m11        = m11 + other.m11();
+    dest.m12        = m12 + other.m12();
+    dest.m20        = m20 + other.m20();
+    dest.m21        = m21 + other.m21();
+    dest.m22        = m22 + other.m22();
+    dest.m30        = m30 + other.m30();
+    dest.m31        = m31 + other.m31();
+    dest.m32        = m32 + other.m32();
     dest.properties = 0;
     return dest;
   }
@@ -1318,18 +1318,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d add(Matrix4x3fc other, Matrix4x3d dest)
   {
-    dest.m00 = m00 + other.m00();
-    dest.m01 = m01 + other.m01();
-    dest.m02 = m02 + other.m02();
-    dest.m10 = m10 + other.m10();
-    dest.m11 = m11 + other.m11();
-    dest.m12 = m12 + other.m12();
-    dest.m20 = m20 + other.m20();
-    dest.m21 = m21 + other.m21();
-    dest.m22 = m22 + other.m22();
-    dest.m30 = m30 + other.m30();
-    dest.m31 = m31 + other.m31();
-    dest.m32 = m32 + other.m32();
+    dest.m00        = m00 + other.m00();
+    dest.m01        = m01 + other.m01();
+    dest.m02        = m02 + other.m02();
+    dest.m10        = m10 + other.m10();
+    dest.m11        = m11 + other.m11();
+    dest.m12        = m12 + other.m12();
+    dest.m20        = m20 + other.m20();
+    dest.m21        = m21 + other.m21();
+    dest.m22        = m22 + other.m22();
+    dest.m30        = m30 + other.m30();
+    dest.m31        = m31 + other.m31();
+    dest.m32        = m32 + other.m32();
     dest.properties = 0;
     return dest;
   }
@@ -1347,18 +1347,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d sub(Matrix4x3dc subtrahend, Matrix4x3d dest)
   {
-    dest.m00 = m00 - subtrahend.m00();
-    dest.m01 = m01 - subtrahend.m01();
-    dest.m02 = m02 - subtrahend.m02();
-    dest.m10 = m10 - subtrahend.m10();
-    dest.m11 = m11 - subtrahend.m11();
-    dest.m12 = m12 - subtrahend.m12();
-    dest.m20 = m20 - subtrahend.m20();
-    dest.m21 = m21 - subtrahend.m21();
-    dest.m22 = m22 - subtrahend.m22();
-    dest.m30 = m30 - subtrahend.m30();
-    dest.m31 = m31 - subtrahend.m31();
-    dest.m32 = m32 - subtrahend.m32();
+    dest.m00        = m00 - subtrahend.m00();
+    dest.m01        = m01 - subtrahend.m01();
+    dest.m02        = m02 - subtrahend.m02();
+    dest.m10        = m10 - subtrahend.m10();
+    dest.m11        = m11 - subtrahend.m11();
+    dest.m12        = m12 - subtrahend.m12();
+    dest.m20        = m20 - subtrahend.m20();
+    dest.m21        = m21 - subtrahend.m21();
+    dest.m22        = m22 - subtrahend.m22();
+    dest.m30        = m30 - subtrahend.m30();
+    dest.m31        = m31 - subtrahend.m31();
+    dest.m32        = m32 - subtrahend.m32();
     dest.properties = 0;
     return dest;
   }
@@ -1376,18 +1376,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d sub(Matrix4x3fc subtrahend, Matrix4x3d dest)
   {
-    dest.m00 = m00 - subtrahend.m00();
-    dest.m01 = m01 - subtrahend.m01();
-    dest.m02 = m02 - subtrahend.m02();
-    dest.m10 = m10 - subtrahend.m10();
-    dest.m11 = m11 - subtrahend.m11();
-    dest.m12 = m12 - subtrahend.m12();
-    dest.m20 = m20 - subtrahend.m20();
-    dest.m21 = m21 - subtrahend.m21();
-    dest.m22 = m22 - subtrahend.m22();
-    dest.m30 = m30 - subtrahend.m30();
-    dest.m31 = m31 - subtrahend.m31();
-    dest.m32 = m32 - subtrahend.m32();
+    dest.m00        = m00 - subtrahend.m00();
+    dest.m01        = m01 - subtrahend.m01();
+    dest.m02        = m02 - subtrahend.m02();
+    dest.m10        = m10 - subtrahend.m10();
+    dest.m11        = m11 - subtrahend.m11();
+    dest.m12        = m12 - subtrahend.m12();
+    dest.m20        = m20 - subtrahend.m20();
+    dest.m21        = m21 - subtrahend.m21();
+    dest.m22        = m22 - subtrahend.m22();
+    dest.m30        = m30 - subtrahend.m30();
+    dest.m31        = m31 - subtrahend.m31();
+    dest.m32        = m32 - subtrahend.m32();
     dest.properties = 0;
     return dest;
   }
@@ -1405,18 +1405,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d mulComponentWise(Matrix4x3dc other, Matrix4x3d dest)
   {
-    dest.m00 = m00 * other.m00();
-    dest.m01 = m01 * other.m01();
-    dest.m02 = m02 * other.m02();
-    dest.m10 = m10 * other.m10();
-    dest.m11 = m11 * other.m11();
-    dest.m12 = m12 * other.m12();
-    dest.m20 = m20 * other.m20();
-    dest.m21 = m21 * other.m21();
-    dest.m22 = m22 * other.m22();
-    dest.m30 = m30 * other.m30();
-    dest.m31 = m31 * other.m31();
-    dest.m32 = m32 * other.m32();
+    dest.m00        = m00 * other.m00();
+    dest.m01        = m01 * other.m01();
+    dest.m02        = m02 * other.m02();
+    dest.m10        = m10 * other.m10();
+    dest.m11        = m11 * other.m11();
+    dest.m12        = m12 * other.m12();
+    dest.m20        = m20 * other.m20();
+    dest.m21        = m21 * other.m21();
+    dest.m22        = m22 * other.m22();
+    dest.m30        = m30 * other.m30();
+    dest.m31        = m31 * other.m31();
+    dest.m32        = m32 * other.m32();
     dest.properties = 0;
     return dest;
   }
@@ -1706,8 +1706,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public double determinant()
   {
     return (m00 * m11 - m01 * m10) * m22
-        + (m02 * m10 - m00 * m12) * m21
-        + (m01 * m12 - m02 * m11) * m20;
+           + (m02 * m10 - m00 * m12) * m21
+           + (m01 * m12 - m02 * m11) * m20;
   }
 
   /**
@@ -1736,35 +1736,35 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     double m11m00 = m00 * m11, m10m01 = m01 * m10, m10m02 = m02 * m10;
     double m12m00 = m00 * m12, m12m01 = m01 * m12, m11m02 = m02 * m11;
-    double s = 1.0 / ((m11m00 - m10m01) * m22 + (m10m02 - m12m00) * m21 + (m12m01 - m11m02) * m20);
+    double s      = 1.0 / ((m11m00 - m10m01) * m22 + (m10m02 - m12m00) * m21 + (m12m01 - m11m02) * m20);
     double m10m22 = m10 * m22, m10m21 = m10 * m21, m11m22 = m11 * m22;
     double m11m20 = m11 * m20, m12m21 = m12 * m21, m12m20 = m12 * m20;
     double m20m02 = m20 * m02, m20m01 = m20 * m01, m21m02 = m21 * m02;
     double m21m00 = m21 * m00, m22m01 = m22 * m01, m22m00 = m22 * m00;
-    double nm00 = (m11m22 - m12m21) * s;
-    double nm01 = (m21m02 - m22m01) * s;
-    double nm02 = (m12m01 - m11m02) * s;
-    double nm10 = (m12m20 - m10m22) * s;
-    double nm11 = (m22m00 - m20m02) * s;
-    double nm12 = (m10m02 - m12m00) * s;
-    double nm20 = (m10m21 - m11m20) * s;
-    double nm21 = (m20m01 - m21m00) * s;
-    double nm22 = (m11m00 - m10m01) * s;
-    double nm30 = (m10m22 * m31 - m10m21 * m32 + m11m20 * m32 - m11m22 * m30 + m12m21 * m30 - m12m20 * m31) * s;
-    double nm31 = (m20m02 * m31 - m20m01 * m32 + m21m00 * m32 - m21m02 * m30 + m22m01 * m30 - m22m00 * m31) * s;
-    double nm32 = (m11m02 * m30 - m12m01 * m30 + m12m00 * m31 - m10m02 * m31 + m10m01 * m32 - m11m00 * m32) * s;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    double nm00   = (m11m22 - m12m21) * s;
+    double nm01   = (m21m02 - m22m01) * s;
+    double nm02   = (m12m01 - m11m02) * s;
+    double nm10   = (m12m20 - m10m22) * s;
+    double nm11   = (m22m00 - m20m02) * s;
+    double nm12   = (m10m02 - m12m00) * s;
+    double nm20   = (m10m21 - m11m20) * s;
+    double nm21   = (m20m01 - m21m00) * s;
+    double nm22   = (m11m00 - m10m01) * s;
+    double nm30   = (m10m22 * m31 - m10m21 * m32 + m11m20 * m32 - m11m22 * m30 + m12m21 * m30 - m12m20 * m31) * s;
+    double nm31   = (m20m02 * m31 - m20m01 * m32 + m21m00 * m32 - m21m02 * m30 + m22m01 * m30 - m22m00 * m31) * s;
+    double nm32   = (m11m02 * m30 - m12m01 * m30 + m12m00 * m31 - m10m02 * m31 + m10m01 * m32 - m11m00 * m32) * s;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = 0;
     return dest;
   }
@@ -1774,21 +1774,21 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = -(m00 * m30 + m01 * m31 + m02 * m32);
     double nm31 = -(m10 * m30 + m11 * m31 + m12 * m32);
     double nm32 = -(m20 * m30 + m21 * m31 + m22 * m32);
-    double m01 = this.m01;
-    double m02 = this.m02;
-    double m12 = this.m12;
-    dest.m00 = m00;
-    dest.m01 = m10;
-    dest.m02 = m20;
-    dest.m10 = m01;
-    dest.m11 = m11;
-    dest.m12 = m21;
-    dest.m20 = m02;
-    dest.m21 = m12;
-    dest.m22 = m22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    double m01  = this.m01;
+    double m02  = this.m02;
+    double m12  = this.m12;
+    dest.m00        = m00;
+    dest.m01        = m10;
+    dest.m02        = m20;
+    dest.m10        = m01;
+    dest.m11        = m11;
+    dest.m12        = m21;
+    dest.m20        = m02;
+    dest.m21        = m12;
+    dest.m22        = m22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = PROPERTY_ORTHONORMAL;
     return dest;
   }
@@ -1799,9 +1799,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double invM11 = 1.0 / m11;
     double invM22 = 1.0 / m22;
     dest.set(invM00, 0, 0,
-        0, invM11, 0,
-        0, 0, invM22,
-        -m30 * invM00, -m31 * invM11, -m32 * invM22);
+             0, invM11, 0,
+             0, 0, invM22,
+             -m30 * invM00, -m31 * invM11, -m32 * invM22);
     dest.properties = 0;
     return dest;
   }
@@ -1839,15 +1839,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = m02;
     double nm21 = m12;
     double nm22 = m22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
     dest.properties = properties;
     return dest;
   }
@@ -1883,9 +1883,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     {
       this.identity();
     }
-    m30 = x;
-    m31 = y;
-    m32 = z;
+    m30        = x;
+    m31        = y;
+    m32        = z;
     properties = PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -1981,9 +1981,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -2013,8 +2013,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + " " + Runtime.format(m30, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + " " + Runtime.format(m31, formatter) + "\n"
-        + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + " " + Runtime.format(m32, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + " " + Runtime.format(m31, formatter) + "\n"
+           + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + " " + Runtime.format(m32, formatter) + "\n";
   }
 
   /**
@@ -2102,16 +2102,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public double[] get(double[] arr, int offset)
   {
-    arr[offset + 0] = m00;
-    arr[offset + 1] = m01;
-    arr[offset + 2] = m02;
-    arr[offset + 3] = m10;
-    arr[offset + 4] = m11;
-    arr[offset + 5] = m12;
-    arr[offset + 6] = m20;
-    arr[offset + 7] = m21;
-    arr[offset + 8] = m22;
-    arr[offset + 9] = m30;
+    arr[offset + 0]  = m00;
+    arr[offset + 1]  = m01;
+    arr[offset + 2]  = m02;
+    arr[offset + 3]  = m10;
+    arr[offset + 4]  = m11;
+    arr[offset + 5]  = m12;
+    arr[offset + 6]  = m20;
+    arr[offset + 7]  = m21;
+    arr[offset + 8]  = m22;
+    arr[offset + 9]  = m30;
     arr[offset + 10] = m31;
     arr[offset + 11] = m32;
     return arr;
@@ -2124,16 +2124,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public float[] get(float[] arr, int offset)
   {
-    arr[offset + 0] = (float) m00;
-    arr[offset + 1] = (float) m01;
-    arr[offset + 2] = (float) m02;
-    arr[offset + 3] = (float) m10;
-    arr[offset + 4] = (float) m11;
-    arr[offset + 5] = (float) m12;
-    arr[offset + 6] = (float) m20;
-    arr[offset + 7] = (float) m21;
-    arr[offset + 8] = (float) m22;
-    arr[offset + 9] = (float) m30;
+    arr[offset + 0]  = (float) m00;
+    arr[offset + 1]  = (float) m01;
+    arr[offset + 2]  = (float) m02;
+    arr[offset + 3]  = (float) m10;
+    arr[offset + 4]  = (float) m11;
+    arr[offset + 5]  = (float) m12;
+    arr[offset + 6]  = (float) m20;
+    arr[offset + 7]  = (float) m21;
+    arr[offset + 8]  = (float) m22;
+    arr[offset + 9]  = (float) m30;
     arr[offset + 10] = (float) m31;
     arr[offset + 11] = (float) m32;
     return arr;
@@ -2236,16 +2236,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public double[] getTransposed(double[] arr, int offset)
   {
-    arr[offset + 0] = m00;
-    arr[offset + 1] = m10;
-    arr[offset + 2] = m20;
-    arr[offset + 3] = m30;
-    arr[offset + 4] = m01;
-    arr[offset + 5] = m11;
-    arr[offset + 6] = m21;
-    arr[offset + 7] = m31;
-    arr[offset + 8] = m02;
-    arr[offset + 9] = m12;
+    arr[offset + 0]  = m00;
+    arr[offset + 1]  = m10;
+    arr[offset + 2]  = m20;
+    arr[offset + 3]  = m30;
+    arr[offset + 4]  = m01;
+    arr[offset + 5]  = m11;
+    arr[offset + 6]  = m21;
+    arr[offset + 7]  = m31;
+    arr[offset + 8]  = m02;
+    arr[offset + 9]  = m12;
     arr[offset + 10] = m22;
     arr[offset + 11] = m32;
     return arr;
@@ -2263,18 +2263,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d zero()
   {
-    m00 = 0.0;
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 0.0;
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = 0.0;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m00        = 0.0;
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 0.0;
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = 0.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = 0;
     return this;
   }
@@ -2372,20 +2372,20 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     double sin = Math.sin(angle);
     double cos = Math.cosFromSin(sin, angle);
-    double C = 1.0 - cos;
-    double xy = x * y, xz = x * z, yz = y * z;
-    m00 = cos + x * x * C;
-    m01 = xy * C + z * sin;
-    m02 = xz * C - y * sin;
-    m10 = xy * C - z * sin;
-    m11 = cos + y * y * C;
-    m12 = yz * C + x * sin;
-    m20 = xz * C + y * sin;
-    m21 = yz * C - x * sin;
-    m22 = cos + z * z * C;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    double C   = 1.0 - cos;
+    double xy  = x * y, xz = x * z, yz = y * z;
+    m00        = cos + x * x * C;
+    m01        = xy * C + z * sin;
+    m02        = xz * C - y * sin;
+    m10        = xy * C - z * sin;
+    m11        = cos + y * y * C;
+    m12        = yz * C + x * sin;
+    m20        = xz * C + y * sin;
+    m21        = yz * C - x * sin;
+    m22        = cos + z * z * C;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2405,20 +2405,20 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d rotationX(double ang)
   {
     double sin, cos;
-    sin = Math.sin(ang);
-    cos = Math.cosFromSin(sin, ang);
-    m00 = 1.0;
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = cos;
-    m12 = sin;
-    m20 = 0.0;
-    m21 = -sin;
-    m22 = cos;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    sin        = Math.sin(ang);
+    cos        = Math.cosFromSin(sin, ang);
+    m00        = 1.0;
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = cos;
+    m12        = sin;
+    m20        = 0.0;
+    m21        = -sin;
+    m22        = cos;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2438,20 +2438,20 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d rotationY(double ang)
   {
     double sin, cos;
-    sin = Math.sin(ang);
-    cos = Math.cosFromSin(sin, ang);
-    m00 = cos;
-    m01 = 0.0;
-    m02 = -sin;
-    m10 = 0.0;
-    m11 = 1.0;
-    m12 = 0.0;
-    m20 = sin;
-    m21 = 0.0;
-    m22 = cos;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    sin        = Math.sin(ang);
+    cos        = Math.cosFromSin(sin, ang);
+    m00        = cos;
+    m01        = 0.0;
+    m02        = -sin;
+    m10        = 0.0;
+    m11        = 1.0;
+    m12        = 0.0;
+    m20        = sin;
+    m21        = 0.0;
+    m22        = cos;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2471,20 +2471,20 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d rotationZ(double ang)
   {
     double sin, cos;
-    sin = Math.sin(ang);
-    cos = Math.cosFromSin(sin, ang);
-    m00 = cos;
-    m01 = sin;
-    m02 = 0.0;
-    m10 = -sin;
-    m11 = cos;
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = 1.0;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    sin        = Math.sin(ang);
+    cos        = Math.cosFromSin(sin, ang);
+    m00        = cos;
+    m01        = sin;
+    m02        = 0.0;
+    m10        = -sin;
+    m11        = cos;
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = 1.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2506,12 +2506,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotationXYZ(double angleX, double angleY, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinX = -sinX;
     double m_sinY = -sinY;
     double m_sinZ = -sinZ;
@@ -2536,9 +2536,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     m11 = nm01 * m_sinZ + nm11 * cosZ;
     m12 = nm02 * m_sinZ + nm12 * cosZ;
     // set last column to identity
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2560,12 +2560,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotationZYX(double angleZ, double angleY, double angleX)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinZ = -sinZ;
     double m_sinY = -sinY;
     double m_sinX = -sinX;
@@ -2590,9 +2590,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     m21 = nm11 * m_sinX + nm21 * cosX;
     m22 = nm22 * cosX;
     // set last column to identity
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2614,12 +2614,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotationYXZ(double angleY, double angleX, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinY = -sinY;
     double m_sinX = -sinX;
     double m_sinZ = -sinZ;
@@ -2644,9 +2644,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     m11 = nm11 * cosZ;
     m12 = nm02 * m_sinZ + nm12 * cosZ;
     // set last column to identity
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -2666,12 +2666,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setRotationXYZ(double angleX, double angleY, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinX = -sinX;
     double m_sinY = -sinY;
     double m_sinZ = -sinZ;
@@ -2714,12 +2714,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setRotationZYX(double angleZ, double angleY, double angleX)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinZ = -sinZ;
     double m_sinY = -sinY;
     double m_sinX = -sinX;
@@ -2762,12 +2762,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setRotationYXZ(double angleY, double angleX, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinY = -sinY;
     double m_sinX = -sinX;
     double m_sinZ = -sinZ;
@@ -2844,32 +2844,32 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Vector3d transformPosition(Vector3d v)
   {
     v.set(m00 * v.x + m10 * v.y + m20 * v.z + m30,
-        m01 * v.x + m11 * v.y + m21 * v.z + m31,
-        m02 * v.x + m12 * v.y + m22 * v.z + m32);
+          m01 * v.x + m11 * v.y + m21 * v.z + m31,
+          m02 * v.x + m12 * v.y + m22 * v.z + m32);
     return v;
   }
 
   public Vector3d transformPosition(Vector3dc v, Vector3d dest)
   {
     dest.set(m00 * v.x() + m10 * v.y() + m20 * v.z() + m30,
-        m01 * v.x() + m11 * v.y() + m21 * v.z() + m31,
-        m02 * v.x() + m12 * v.y() + m22 * v.z() + m32);
+             m01 * v.x() + m11 * v.y() + m21 * v.z() + m31,
+             m02 * v.x() + m12 * v.y() + m22 * v.z() + m32);
     return dest;
   }
 
   public Vector3d transformDirection(Vector3d v)
   {
     v.set(m00 * v.x + m10 * v.y + m20 * v.z,
-        m01 * v.x + m11 * v.y + m21 * v.z,
-        m02 * v.x + m12 * v.y + m22 * v.z);
+          m01 * v.x + m11 * v.y + m21 * v.z,
+          m02 * v.x + m12 * v.y + m22 * v.z);
     return v;
   }
 
   public Vector3d transformDirection(Vector3dc v, Vector3d dest)
   {
     dest.set(m00 * v.x() + m10 * v.y() + m20 * v.z(),
-        m01 * v.x() + m11 * v.y() + m21 * v.z(),
-        m02 * v.x() + m12 * v.y() + m22 * v.z());
+             m01 * v.x() + m11 * v.y() + m21 * v.z(),
+             m02 * v.x() + m12 * v.y() + m22 * v.z());
     return dest;
   }
 
@@ -2881,15 +2881,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set3x3(Matrix3dc mat)
   {
-    m00 = mat.m00();
-    m01 = mat.m01();
-    m02 = mat.m02();
-    m10 = mat.m10();
-    m11 = mat.m11();
-    m12 = mat.m12();
-    m20 = mat.m20();
-    m21 = mat.m21();
-    m22 = mat.m22();
+    m00        = mat.m00();
+    m01        = mat.m01();
+    m02        = mat.m02();
+    m10        = mat.m10();
+    m11        = mat.m11();
+    m12        = mat.m12();
+    m20        = mat.m20();
+    m21        = mat.m21();
+    m22        = mat.m22();
     properties = 0;
     return this;
   }
@@ -2902,15 +2902,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d set3x3(Matrix3fc mat)
   {
-    m00 = mat.m00();
-    m01 = mat.m01();
-    m02 = mat.m02();
-    m10 = mat.m10();
-    m11 = mat.m11();
-    m12 = mat.m12();
-    m20 = mat.m20();
-    m21 = mat.m21();
-    m22 = mat.m22();
+    m00        = mat.m00();
+    m01        = mat.m01();
+    m02        = mat.m02();
+    m10        = mat.m10();
+    m11        = mat.m11();
+    m12        = mat.m12();
+    m20        = mat.m20();
+    m21        = mat.m21();
+    m22        = mat.m22();
     properties = 0;
     return this;
   }
@@ -2948,18 +2948,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d scaleGeneric(double x, double y, double z, Matrix4x3d dest)
   {
-    dest.m00 = m00 * x;
-    dest.m01 = m01 * x;
-    dest.m02 = m02 * x;
-    dest.m10 = m10 * y;
-    dest.m11 = m11 * y;
-    dest.m12 = m12 * y;
-    dest.m20 = m20 * z;
-    dest.m21 = m21 * z;
-    dest.m22 = m22 * z;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = m00 * x;
+    dest.m01        = m01 * x;
+    dest.m02        = m02 * x;
+    dest.m10        = m10 * y;
+    dest.m11        = m11 * y;
+    dest.m12        = m12 * y;
+    dest.m20        = m20 * z;
+    dest.m21        = m21 * z;
+    dest.m22        = m22 * z;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
     return dest;
   }
@@ -3029,10 +3029,10 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d scaleAround(double sx, double sy, double sz, double ox, double oy, double oz, Matrix4x3d dest)
   {
-    double nm30 = m00 * ox + m10 * oy + m20 * oz + m30;
-    double nm31 = m01 * ox + m11 * oy + m21 * oz + m31;
-    double nm32 = m02 * ox + m12 * oy + m22 * oz + m32;
-    boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+    double  nm30 = m00 * ox + m10 * oy + m20 * oz + m30;
+    double  nm31 = m01 * ox + m11 * oy + m21 * oz + m31;
+    double  nm32 = m02 * ox + m12 * oy + m22 * oz + m32;
+    boolean one  = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
     return dest
         ._m00(m00 * sx)
         ._m01(m01 * sx)
@@ -3119,18 +3119,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = x * m30;
     double nm31 = y * m31;
     double nm32 = z * m32;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
     return dest;
   }
@@ -3183,12 +3183,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateGenericInternal(double ang, double x, double y, double z, Matrix4x3d dest)
   {
-    double s = Math.sin(ang);
-    double c = Math.cosFromSin(s, ang);
-    double C = 1.0 - c;
-    double xx = x * x, xy = x * y, xz = x * z;
-    double yy = y * y, yz = y * z;
-    double zz = z * z;
+    double s    = Math.sin(ang);
+    double c    = Math.cosFromSin(s, ang);
+    double C    = 1.0 - c;
+    double xx   = x * x, xy = x * y, xz = x * z;
+    double yy   = y * y, yz = y * z;
+    double zz   = z * z;
     double rm00 = xx * C + c;
     double rm01 = xy * C + z * s;
     double rm02 = xz * C - y * s;
@@ -3210,15 +3210,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
     dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
     // set other values
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3299,12 +3299,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateTranslationInternal(double ang, double x, double y, double z, Matrix4x3d dest)
   {
-    double s = Math.sin(ang);
-    double c = Math.cosFromSin(s, ang);
-    double C = 1.0 - c;
-    double xx = x * x, xy = x * y, xz = x * z;
-    double yy = y * y, yz = y * z;
-    double zz = z * z;
+    double s    = Math.sin(ang);
+    double c    = Math.cosFromSin(s, ang);
+    double C    = 1.0 - c;
+    double xx   = x * x, xy = x * y, xz = x * z;
+    double yy   = y * y, yz = y * z;
+    double zz   = z * z;
     double rm00 = xx * C + c;
     double rm01 = xy * C + z * s;
     double rm02 = xz * C - y * s;
@@ -3314,18 +3314,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double rm20 = xz * C + y * s;
     double rm21 = yz * C - x * s;
     double rm22 = zz * C + c;
-    dest.m20 = rm20;
-    dest.m21 = rm21;
-    dest.m22 = rm22;
-    dest.m00 = rm00;
-    dest.m01 = rm01;
-    dest.m02 = rm02;
-    dest.m10 = rm10;
-    dest.m11 = rm11;
-    dest.m12 = rm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m20        = rm20;
+    dest.m21        = rm21;
+    dest.m22        = rm22;
+    dest.m00        = rm00;
+    dest.m01        = rm01;
+    dest.m02        = rm02;
+    dest.m10        = rm10;
+    dest.m11        = rm11;
+    dest.m12        = rm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3359,11 +3359,11 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateAroundAffine(Quaterniondc quat, double ox, double oy, double oz, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = dxy + dzw;
     double rm02 = dxz - dyw;
@@ -3493,12 +3493,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateLocalInternal(double ang, double x, double y, double z, Matrix4x3d dest)
   {
-    double s = Math.sin(ang);
-    double c = Math.cosFromSin(s, ang);
-    double C = 1.0 - c;
-    double xx = x * x, xy = x * y, xz = x * z;
-    double yy = y * y, yz = y * z;
-    double zz = z * z;
+    double s    = Math.sin(ang);
+    double c    = Math.cosFromSin(s, ang);
+    double C    = 1.0 - c;
+    double xx   = x * x, xy = x * y, xz = x * z;
+    double yy   = y * y, yz = y * z;
+    double zz   = z * z;
     double lm00 = xx * C + c;
     double lm01 = xy * C + z * s;
     double lm02 = xz * C - y * s;
@@ -3520,18 +3520,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = lm00 * m30 + lm10 * m31 + lm20 * m32;
     double nm31 = lm01 * m30 + lm11 * m31 + lm21 * m32;
     double nm32 = lm02 * m30 + lm12 * m31 + lm22 * m32;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3593,8 +3593,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateLocalX(double ang, Matrix4x3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm01 = cos * m01 - sin * m02;
     double nm02 = sin * m01 + cos * m02;
     double nm11 = cos * m11 - sin * m12;
@@ -3603,18 +3603,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm22 = sin * m21 + cos * m22;
     double nm31 = cos * m31 - sin * m32;
     double nm32 = sin * m31 + cos * m32;
-    dest.m00 = m00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = m10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = m20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = m30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = m00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = m10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = m20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = m30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3670,8 +3670,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateLocalY(double ang, Matrix4x3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm00 = cos * m00 + sin * m02;
     double nm02 = -sin * m00 + cos * m02;
     double nm10 = cos * m10 + sin * m12;
@@ -3680,18 +3680,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm22 = -sin * m20 + cos * m22;
     double nm30 = cos * m30 + sin * m32;
     double nm32 = -sin * m30 + cos * m32;
-    dest.m00 = nm00;
-    dest.m01 = m01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = m11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = m21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = m31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = m01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = m11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = m21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = m31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3747,8 +3747,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateLocalZ(double ang, Matrix4x3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm00 = cos * m00 - sin * m01;
     double nm01 = sin * m00 + cos * m01;
     double nm10 = cos * m10 - sin * m11;
@@ -3757,18 +3757,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm21 = sin * m20 + cos * m21;
     double nm30 = cos * m30 - sin * m31;
     double nm31 = sin * m30 + cos * m31;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = m02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = m12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = m22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = m32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = m02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = m12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = m22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -3915,18 +3915,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d translateGeneric(double x, double y, double z, Matrix4x3d dest)
   {
-    dest.m00 = m00;
-    dest.m01 = m01;
-    dest.m02 = m02;
-    dest.m10 = m10;
-    dest.m11 = m11;
-    dest.m12 = m12;
-    dest.m20 = m20;
-    dest.m21 = m21;
-    dest.m22 = m22;
-    dest.m30 = m00 * x + m10 * y + m20 * z + m30;
-    dest.m31 = m01 * x + m11 * y + m21 * z + m31;
-    dest.m32 = m02 * x + m12 * y + m22 * z + m32;
+    dest.m00        = m00;
+    dest.m01        = m01;
+    dest.m02        = m02;
+    dest.m10        = m10;
+    dest.m11        = m11;
+    dest.m12        = m12;
+    dest.m20        = m20;
+    dest.m21        = m21;
+    dest.m22        = m22;
+    dest.m30        = m00 * x + m10 * y + m20 * z + m30;
+    dest.m31        = m01 * x + m11 * y + m21 * z + m31;
+    dest.m32        = m02 * x + m12 * y + m22 * z + m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY);
     return dest;
   }
@@ -4070,18 +4070,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d translateLocal(double x, double y, double z, Matrix4x3d dest)
   {
-    dest.m00 = m00;
-    dest.m01 = m01;
-    dest.m02 = m02;
-    dest.m10 = m10;
-    dest.m11 = m11;
-    dest.m12 = m12;
-    dest.m20 = m20;
-    dest.m21 = m21;
-    dest.m22 = m22;
-    dest.m30 = m30 + x;
-    dest.m31 = m31 + y;
-    dest.m32 = m32 + z;
+    dest.m00        = m00;
+    dest.m01        = m01;
+    dest.m02        = m02;
+    dest.m10        = m10;
+    dest.m11        = m11;
+    dest.m12        = m12;
+    dest.m20        = m20;
+    dest.m21        = m21;
+    dest.m22        = m22;
+    dest.m30        = m30 + x;
+    dest.m31        = m31 + y;
+    dest.m32        = m32 + z;
     dest.properties = properties & ~(PROPERTY_IDENTITY);
     return dest;
   }
@@ -4174,15 +4174,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m11 * rm21 + m21 * rm22;
     dest.m22 = m12 * rm21 + m22 * rm22;
     // set other values
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m00 = m00;
-    dest.m01 = m01;
-    dest.m02 = m02;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m00        = m00;
+    dest.m01        = m01;
+    dest.m02        = m02;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4241,15 +4241,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m01 * rm20 + m21 * rm22;
     dest.m22 = m02 * rm20 + m22 * rm22;
     // set other values
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = m10;
-    dest.m11 = m11;
-    dest.m12 = m12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = m10;
+    dest.m11        = m11;
+    dest.m12        = m12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4308,15 +4308,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m11 = m01 * rm10 + m11 * rm11;
     dest.m12 = m02 * rm10 + m12 * rm11;
     // set other values
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m20 = m20;
-    dest.m21 = m21;
-    dest.m22 = m22;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m20        = m20;
+    dest.m21        = m21;
+    dest.m22        = m22;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4406,12 +4406,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateXYZInternal(double angleX, double angleY, double angleZ, Matrix4x3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinX = -sinX;
     double m_sinY = -sinY;
     double m_sinZ = -sinZ;
@@ -4438,9 +4438,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m11 = nm01 * m_sinZ + nm11 * cosZ;
     dest.m12 = nm02 * m_sinZ + nm12 * cosZ;
     // copy last column from 'this'
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4508,12 +4508,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateZYXInternal(double angleZ, double angleY, double angleX, Matrix4x3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinZ = -sinZ;
     double m_sinY = -sinY;
     double m_sinX = -sinX;
@@ -4540,9 +4540,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = nm11 * m_sinX + nm21 * cosX;
     dest.m22 = nm12 * m_sinX + nm22 * cosX;
     // copy last column from 'this'
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4610,12 +4610,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateYXZInternal(double angleY, double angleX, double angleZ, Matrix4x3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinY = -sinY;
     double m_sinX = -sinX;
     double m_sinZ = -sinZ;
@@ -4642,9 +4642,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m11 = nm01 * m_sinZ + nm11 * cosZ;
     dest.m12 = nm02 * m_sinZ + nm12 * cosZ;
     // copy last column from 'this'
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -4834,18 +4834,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double q12 = dqy * qz;
     double q13 = dqy * qw;
     double q23 = dqz * qw;
-    m00 = sx - (q11 + q22) * sx;
-    m01 = (q01 + q23) * sx;
-    m02 = (q02 - q13) * sx;
-    m10 = (q01 - q23) * sy;
-    m11 = sy - (q22 + q00) * sy;
-    m12 = (q12 + q03) * sy;
-    m20 = (q02 + q13) * sz;
-    m21 = (q12 - q03) * sz;
-    m22 = sz - (q11 + q00) * sz;
-    m30 = tx;
-    m31 = ty;
-    m32 = tz;
+    m00        = sx - (q11 + q22) * sx;
+    m01        = (q01 + q23) * sx;
+    m02        = (q02 - q13) * sx;
+    m10        = (q01 - q23) * sy;
+    m11        = sy - (q22 + q00) * sy;
+    m12        = (q12 + q03) * sy;
+    m20        = (q02 + q13) * sz;
+    m21        = (q12 - q03) * sz;
+    m22        = sz - (q11 + q00) * sz;
+    m30        = tx;
+    m31        = ty;
+    m32        = tz;
     properties = 0;
     return this;
   }
@@ -4943,18 +4943,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
       double sx, double sy, double sz,
       Matrix4x3dc m)
   {
-    double dqx = qx + qx;
-    double dqy = qy + qy;
-    double dqz = qz + qz;
-    double q00 = dqx * qx;
-    double q11 = dqy * qy;
-    double q22 = dqz * qz;
-    double q01 = dqx * qy;
-    double q02 = dqx * qz;
-    double q03 = dqx * qw;
-    double q12 = dqy * qz;
-    double q13 = dqy * qw;
-    double q23 = dqz * qw;
+    double dqx  = qx + qx;
+    double dqy  = qy + qy;
+    double dqz  = qz + qz;
+    double q00  = dqx * qx;
+    double q11  = dqy * qy;
+    double q22  = dqz * qz;
+    double q01  = dqx * qy;
+    double q02  = dqx * qz;
+    double q03  = dqx * qw;
+    double q12  = dqy * qz;
+    double q13  = dqy * qw;
+    double q23  = dqz * qw;
     double nm00 = sx - (q11 + q22) * sx;
     double nm01 = (q01 + q23) * sx;
     double nm02 = (q02 - q13) * sx;
@@ -4964,26 +4964,26 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = (q02 + q13) * sz;
     double nm21 = (q12 - q03) * sz;
     double nm22 = sz - (q11 + q00) * sz;
-    double m00 = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
-    double m01 = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
-    m02 = nm02 * m.m00() + nm12 * m.m01() + nm22 * m.m02();
+    double m00  = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
+    double m01  = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
+    m02      = nm02 * m.m00() + nm12 * m.m01() + nm22 * m.m02();
     this.m00 = m00;
     this.m01 = m01;
     double m10 = nm00 * m.m10() + nm10 * m.m11() + nm20 * m.m12();
     double m11 = nm01 * m.m10() + nm11 * m.m11() + nm21 * m.m12();
-    m12 = nm02 * m.m10() + nm12 * m.m11() + nm22 * m.m12();
+    m12      = nm02 * m.m10() + nm12 * m.m11() + nm22 * m.m12();
     this.m10 = m10;
     this.m11 = m11;
     double m20 = nm00 * m.m20() + nm10 * m.m21() + nm20 * m.m22();
     double m21 = nm01 * m.m20() + nm11 * m.m21() + nm21 * m.m22();
-    m22 = nm02 * m.m20() + nm12 * m.m21() + nm22 * m.m22();
+    m22      = nm02 * m.m20() + nm12 * m.m21() + nm22 * m.m22();
     this.m20 = m20;
     this.m21 = m21;
     double m30 = nm00 * m.m30() + nm10 * m.m31() + nm20 * m.m32() + tx;
     double m31 = nm01 * m.m30() + nm11 * m.m31() + nm21 * m.m32() + ty;
-    m32 = nm02 * m.m30() + nm12 * m.m31() + nm22 * m.m32() + tz;
-    this.m30 = m30;
-    this.m31 = m31;
+    m32        = nm02 * m.m30() + nm12 * m.m31() + nm22 * m.m32() + tz;
+    this.m30   = m30;
+    this.m31   = m31;
     properties = 0;
     return this;
   }
@@ -5048,18 +5048,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double q12 = dqy * quat.z();
     double q13 = dqy * quat.w();
     double q23 = dqz * quat.w();
-    m00 = 1.0 - (q11 + q22);
-    m01 = q01 + q23;
-    m02 = q02 - q13;
-    m10 = q01 - q23;
-    m11 = 1.0 - (q22 + q00);
-    m12 = q12 + q03;
-    m20 = q02 + q13;
-    m21 = q12 - q03;
-    m22 = 1.0 - (q11 + q00);
-    m30 = tx;
-    m31 = ty;
-    m32 = tz;
+    m00        = 1.0 - (q11 + q22);
+    m01        = q01 + q23;
+    m02        = q02 - q13;
+    m10        = q01 - q23;
+    m11        = 1.0 - (q22 + q00);
+    m12        = q12 + q03;
+    m20        = q02 + q13;
+    m21        = q12 - q03;
+    m22        = 1.0 - (q11 + q00);
+    m30        = tx;
+    m31        = ty;
+    m32        = tz;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -5099,18 +5099,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double yw = qy * qw;
     double yz = qy * qz;
     double xw = qx * qw;
-    this.m00 = w2 + x2 - z2 - y2;
-    this.m01 = xy + zw + zw + xy;
-    this.m02 = xz - yw + xz - yw;
-    this.m10 = -zw + xy - zw + xy;
-    this.m11 = y2 - z2 + w2 - x2;
-    this.m12 = yz + yz + xw + xw;
-    this.m20 = yw + xz + xz + yw;
-    this.m21 = yz + yz - xw - xw;
-    this.m22 = z2 - y2 - x2 + w2;
-    this.m30 = tx;
-    this.m31 = ty;
-    this.m32 = tz;
+    this.m00        = w2 + x2 - z2 - y2;
+    this.m01        = xy + zw + zw + xy;
+    this.m02        = xz - yw + xz - yw;
+    this.m10        = -zw + xy - zw + xy;
+    this.m11        = y2 - z2 + w2 - x2;
+    this.m12        = yz + yz + xw + xw;
+    this.m20        = yw + xz + xz + yw;
+    this.m21        = yz + yz - xw - xw;
+    this.m22        = z2 - y2 - x2 + w2;
+    this.m30        = tx;
+    this.m31        = ty;
+    this.m32        = tz;
     this.properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -5196,16 +5196,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d translationRotateMul(double tx, double ty, double tz, double qx, double qy, double qz, double qw, Matrix4x3dc mat)
   {
-    double w2 = qw * qw;
-    double x2 = qx * qx;
-    double y2 = qy * qy;
-    double z2 = qz * qz;
-    double zw = qz * qw;
-    double xy = qx * qy;
-    double xz = qx * qz;
-    double yw = qy * qw;
-    double yz = qy * qz;
-    double xw = qx * qw;
+    double w2   = qw * qw;
+    double x2   = qx * qx;
+    double y2   = qy * qy;
+    double z2   = qz * qz;
+    double zw   = qz * qw;
+    double xy   = qx * qy;
+    double xz   = qx * qz;
+    double yw   = qy * qw;
+    double yz   = qy * qz;
+    double xw   = qx * qw;
     double nm00 = w2 + x2 - z2 - y2;
     double nm01 = xy + zw + zw + xy;
     double nm02 = xz - yw + xz - yw;
@@ -5215,18 +5215,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = yw + xz + xz + yw;
     double nm21 = yz + yz - xw - xw;
     double nm22 = z2 - y2 - x2 + w2;
-    m00 = nm00 * mat.m00() + nm10 * mat.m01() + nm20 * mat.m02();
-    m01 = nm01 * mat.m00() + nm11 * mat.m01() + nm21 * mat.m02();
-    m02 = nm02 * mat.m00() + nm12 * mat.m01() + nm22 * mat.m02();
-    m10 = nm00 * mat.m10() + nm10 * mat.m11() + nm20 * mat.m12();
-    m11 = nm01 * mat.m10() + nm11 * mat.m11() + nm21 * mat.m12();
-    m12 = nm02 * mat.m10() + nm12 * mat.m11() + nm22 * mat.m12();
-    m20 = nm00 * mat.m20() + nm10 * mat.m21() + nm20 * mat.m22();
-    m21 = nm01 * mat.m20() + nm11 * mat.m21() + nm21 * mat.m22();
-    m22 = nm02 * mat.m20() + nm12 * mat.m21() + nm22 * mat.m22();
-    m30 = nm00 * mat.m30() + nm10 * mat.m31() + nm20 * mat.m32() + tx;
-    m31 = nm01 * mat.m30() + nm11 * mat.m31() + nm21 * mat.m32() + ty;
-    m32 = nm02 * mat.m30() + nm12 * mat.m31() + nm22 * mat.m32() + tz;
+    m00             = nm00 * mat.m00() + nm10 * mat.m01() + nm20 * mat.m02();
+    m01             = nm01 * mat.m00() + nm11 * mat.m01() + nm21 * mat.m02();
+    m02             = nm02 * mat.m00() + nm12 * mat.m01() + nm22 * mat.m02();
+    m10             = nm00 * mat.m10() + nm10 * mat.m11() + nm20 * mat.m12();
+    m11             = nm01 * mat.m10() + nm11 * mat.m11() + nm21 * mat.m12();
+    m12             = nm02 * mat.m10() + nm12 * mat.m11() + nm22 * mat.m12();
+    m20             = nm00 * mat.m20() + nm10 * mat.m21() + nm20 * mat.m22();
+    m21             = nm01 * mat.m20() + nm11 * mat.m21() + nm21 * mat.m22();
+    m22             = nm02 * mat.m20() + nm12 * mat.m21() + nm22 * mat.m22();
+    m30             = nm00 * mat.m30() + nm10 * mat.m31() + nm20 * mat.m32() + tx;
+    m31             = nm01 * mat.m30() + nm11 * mat.m31() + nm21 * mat.m32() + ty;
+    m32             = nm02 * mat.m30() + nm12 * mat.m31() + nm22 * mat.m32() + tz;
     this.properties = 0;
     return this;
   }
@@ -5334,11 +5334,11 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateGeneric(Quaterniondc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = dxy + dzw;
     double rm02 = dxz - dyw;
@@ -5354,18 +5354,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
     double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
     double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-    dest.m20 = m00 * rm20 + m10 * rm21 + m20 * rm22;
-    dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
-    dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m20        = m00 * rm20 + m10 * rm21 + m20 * rm22;
+    dest.m21        = m01 * rm20 + m11 * rm21 + m21 * rm22;
+    dest.m22        = m02 * rm20 + m12 * rm21 + m22 * rm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -5407,16 +5407,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   private Matrix4x3d rotateGeneric(Quaternionfc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w();
-    double x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y();
-    double z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w();
-    double xy = quat.x() * quat.y();
-    double xz = quat.x() * quat.z();
-    double yw = quat.y() * quat.w();
-    double yz = quat.y() * quat.z();
-    double xw = quat.x() * quat.w();
+    double w2   = quat.w() * quat.w();
+    double x2   = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y();
+    double z2   = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w();
+    double xy   = quat.x() * quat.y();
+    double xz   = quat.x() * quat.z();
+    double yw   = quat.y() * quat.w();
+    double yz   = quat.y() * quat.z();
+    double xw   = quat.x() * quat.w();
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = xy + zw + zw + xy;
     double rm02 = xz - yw + xz - yw;
@@ -5432,18 +5432,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
     double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
     double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-    dest.m20 = m00 * rm20 + m10 * rm21 + m20 * rm22;
-    dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
-    dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m20        = m00 * rm20 + m10 * rm21 + m20 * rm22;
+    dest.m21        = m01 * rm20 + m11 * rm21 + m21 * rm22;
+    dest.m22        = m02 * rm20 + m12 * rm21 + m22 * rm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -5527,11 +5527,11 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateTranslation(Quaterniondc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = dxy + dzw;
     double rm02 = dxz - dyw;
@@ -5541,18 +5541,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double rm20 = dyw + dxz;
     double rm21 = dyz - dxw;
     double rm22 = z2 - y2 - x2 + w2;
-    dest.m20 = rm20;
-    dest.m21 = rm21;
-    dest.m22 = rm22;
-    dest.m00 = rm00;
-    dest.m01 = rm01;
-    dest.m02 = rm02;
-    dest.m10 = rm10;
-    dest.m11 = rm11;
-    dest.m12 = rm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m20        = rm20;
+    dest.m21        = rm21;
+    dest.m22        = rm22;
+    dest.m00        = rm00;
+    dest.m01        = rm01;
+    dest.m02        = rm02;
+    dest.m10        = rm10;
+    dest.m11        = rm11;
+    dest.m12        = rm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -5584,16 +5584,16 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateTranslation(Quaternionfc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w();
-    double x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y();
-    double z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w();
-    double xy = quat.x() * quat.y();
-    double xz = quat.x() * quat.z();
-    double yw = quat.y() * quat.w();
-    double yz = quat.y() * quat.z();
-    double xw = quat.x() * quat.w();
+    double w2   = quat.w() * quat.w();
+    double x2   = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y();
+    double z2   = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w();
+    double xy   = quat.x() * quat.y();
+    double xz   = quat.x() * quat.z();
+    double yw   = quat.y() * quat.w();
+    double yz   = quat.y() * quat.z();
+    double xw   = quat.x() * quat.w();
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = xy + zw + zw + xy;
     double rm02 = xz - yw + xz - yw;
@@ -5609,18 +5609,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm10 = rm10;
     double nm11 = rm11;
     double nm12 = rm12;
-    dest.m20 = rm20;
-    dest.m21 = rm21;
-    dest.m22 = rm22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m20        = rm20;
+    dest.m21        = rm21;
+    dest.m22        = rm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -5650,11 +5650,11 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateLocal(Quaterniondc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double lm00 = w2 + x2 - z2 - y2;
     double lm01 = dxy + dzw;
     double lm02 = dxz - dyw;
@@ -5676,18 +5676,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = lm00 * m30 + lm10 * m31 + lm20 * m32;
     double nm31 = lm01 * m30 + lm11 * m31 + lm21 * m32;
     double nm32 = lm02 * m30 + lm12 * m31 + lm22 * m32;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -5743,11 +5743,11 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d rotateLocal(Quaternionfc quat, Matrix4x3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double lm00 = w2 + x2 - z2 - y2;
     double lm01 = dxy + dzw;
     double lm02 = dxz - dyw;
@@ -5769,18 +5769,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm30 = lm00 * m30 + lm10 * m31 + lm20 * m32;
     double nm31 = lm01 * m30 + lm11 * m31 + lm21 * m32;
     double nm32 = lm02 * m30 + lm12 * m31 + lm22 * m32;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = nm30;
-    dest.m31 = nm31;
-    dest.m32 = nm32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = nm30;
+    dest.m31        = nm31;
+    dest.m32        = nm32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -6238,8 +6238,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double m00m12 = m00 * m12;
     double m01m12 = m01 * m12;
     double m02m11 = m02 * m11;
-    double det = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
-    double s = 1.0 / det;
+    double det    = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
+    double s      = 1.0 / det;
     /* Invert and transpose in one go */
     double nm00 = (m11 * m22 - m21 * m12) * s;
     double nm01 = (m20 * m12 - m10 * m22) * s;
@@ -6250,18 +6250,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = (m01m12 - m02m11) * s;
     double nm21 = (m02m10 - m00m12) * s;
     double nm22 = (m00m11 - m01m10) * s;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = 0.0;
-    dest.m31 = 0.0;
-    dest.m32 = 0.0;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = 0.0;
+    dest.m31        = 0.0;
+    dest.m32        = 0.0;
     dest.properties = properties & ~PROPERTY_TRANSLATION;
     return dest;
   }
@@ -6288,8 +6288,8 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double m00m12 = m00 * m12;
     double m01m12 = m01 * m12;
     double m02m11 = m02 * m11;
-    double det = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
-    double s = 1.0 / det;
+    double det    = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
+    double s      = 1.0 / det;
     /* Invert and transpose in one go */
     dest.m00((m11 * m22 - m21 * m12) * s);
     dest.m01((m20 * m12 - m10 * m22) * s);
@@ -6362,18 +6362,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = m01 * m12 - m11 * m02;
     double nm21 = m02 * m10 - m12 * m00;
     double nm22 = m00 * m11 - m10 * m01;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m30 = 0.0;
-    dest.m31 = 0.0;
-    dest.m32 = 0.0;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m30        = 0.0;
+    dest.m31        = 0.0;
+    dest.m32        = 0.0;
     dest.properties = properties & ~PROPERTY_TRANSLATION;
     return dest;
   }
@@ -6433,7 +6433,7 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
       return dest.reflection(a, b, c, d);
     }
 
-    double da = a + a, db = b + b, dc = c + c, dd = d + d;
+    double da   = a + a, db = b + b, dc = c + c, dd = d + d;
     double rm00 = 1.0 - da * a;
     double rm01 = -da * b;
     double rm02 = -da * c;
@@ -6457,15 +6457,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
     double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
     double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-    dest.m20 = m00 * rm20 + m10 * rm21 + m20 * rm22;
-    dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
-    dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
+    dest.m20        = m00 * rm20 + m10 * rm21 + m20 * rm22;
+    dest.m21        = m01 * rm20 + m11 * rm21 + m21 * rm22;
+    dest.m22        = m02 * rm20 + m12 * rm21 + m22 * rm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
 
     return dest;
@@ -6520,9 +6520,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d reflect(double nx, double ny, double nz, double px, double py, double pz, Matrix4x3d dest)
   {
     double invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
-    double nnx = nx * invLength;
-    double nny = ny * invLength;
-    double nnz = nz * invLength;
+    double nnx       = nx * invLength;
+    double nny       = ny * invLength;
+    double nnz       = nz * invLength;
     /* See: http://mathworld.wolfram.com/Plane.html */
     return reflect(nnx, nny, nnz, -nnx * px - nny * py - nnz * pz, dest);
   }
@@ -6569,9 +6569,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d reflect(Quaterniondc orientation, Vector3dc point, Matrix4x3d dest)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
     double normalX = orientation.x() * num3 + orientation.w() * num2;
     double normalY = orientation.y() * num3 - orientation.w() * num1;
     double normalZ = 1.0 - (orientation.x() * num1 + orientation.y() * num2);
@@ -6600,18 +6600,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d reflection(double a, double b, double c, double d)
   {
     double da = a + a, db = b + b, dc = c + c, dd = d + d;
-    m00 = 1.0 - da * a;
-    m01 = -da * b;
-    m02 = -da * c;
-    m10 = -db * a;
-    m11 = 1.0 - db * b;
-    m12 = -db * c;
-    m20 = -dc * a;
-    m21 = -dc * b;
-    m22 = 1.0 - dc * c;
-    m30 = -dd * a;
-    m31 = -dd * b;
-    m32 = -dd * c;
+    m00        = 1.0 - da * a;
+    m01        = -da * b;
+    m02        = -da * c;
+    m10        = -db * a;
+    m11        = 1.0 - db * b;
+    m12        = -db * c;
+    m20        = -dc * a;
+    m21        = -dc * b;
+    m22        = 1.0 - dc * c;
+    m30        = -dd * a;
+    m31        = -dd * b;
+    m32        = -dd * c;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -6631,9 +6631,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d reflection(double nx, double ny, double nz, double px, double py, double pz)
   {
     double invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
-    double nnx = nx * invLength;
-    double nny = ny * invLength;
-    double nnz = nz * invLength;
+    double nnx       = nx * invLength;
+    double nny       = ny * invLength;
+    double nnz       = nz * invLength;
     /* See: http://mathworld.wolfram.com/Plane.html */
     return reflection(nnx, nny, nnz, -nnx * px - nny * py - nnz * pz);
   }
@@ -6665,9 +6665,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d reflection(Quaterniondc orientation, Vector3dc point)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
     double normalX = orientation.x() * num3 + orientation.w() * num2;
     double normalY = orientation.y() * num3 - orientation.w() * num1;
     double normalZ = 1.0 - (orientation.x() * num1 + orientation.y() * num2);
@@ -6712,18 +6712,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30;
-    dest.m31 = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31;
-    dest.m32 = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = m20 * rm22;
-    dest.m21 = m21 * rm22;
-    dest.m22 = m22 * rm22;
+    dest.m30        = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30;
+    dest.m31        = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31;
+    dest.m32        = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = m20 * rm22;
+    dest.m21        = m21 * rm22;
+    dest.m22        = m22 * rm22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -6854,18 +6854,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30;
-    dest.m31 = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31;
-    dest.m32 = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = m20 * rm22;
-    dest.m21 = m21 * rm22;
-    dest.m22 = m22 * rm22;
+    dest.m30        = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30;
+    dest.m31        = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31;
+    dest.m32        = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = m20 * rm22;
+    dest.m21        = m21 * rm22;
+    dest.m22        = m22 * rm22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -6980,18 +6980,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrtho(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne)
   {
-    m00 = 2.0 / (right - left);
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / (top - bottom);
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = (zZeroToOne ? 1.0 : 2.0) / (zNear - zFar);
-    m30 = (right + left) / (left - right);
-    m31 = (top + bottom) / (bottom - top);
-    m32 = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
+    m00        = 2.0 / (right - left);
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / (top - bottom);
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = (zZeroToOne ? 1.0 : 2.0) / (zNear - zFar);
+    m30        = (right + left) / (left - right);
+    m31        = (top + bottom) / (bottom - top);
+    m32        = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
     properties = 0;
     return this;
   }
@@ -7041,18 +7041,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrthoLH(double left, double right, double bottom, double top, double zNear, double zFar, boolean zZeroToOne)
   {
-    m00 = 2.0 / (right - left);
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / (top - bottom);
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = (zZeroToOne ? 1.0 : 2.0) / (zFar - zNear);
-    m30 = (right + left) / (left - right);
-    m31 = (top + bottom) / (bottom - top);
-    m32 = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
+    m00        = 2.0 / (right - left);
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / (top - bottom);
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = (zZeroToOne ? 1.0 : 2.0) / (zFar - zNear);
+    m30        = (right + left) / (left - right);
+    m31        = (top + bottom) / (bottom - top);
+    m32        = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
     properties = 0;
     return this;
   }
@@ -7117,18 +7117,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m20 * rm32 + m30;
-    dest.m31 = m21 * rm32 + m31;
-    dest.m32 = m22 * rm32 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = m20 * rm22;
-    dest.m21 = m21 * rm22;
-    dest.m22 = m22 * rm22;
+    dest.m30        = m20 * rm32 + m30;
+    dest.m31        = m21 * rm32 + m31;
+    dest.m32        = m22 * rm32 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = m20 * rm22;
+    dest.m21        = m21 * rm22;
+    dest.m22        = m22 * rm22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -7261,18 +7261,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m20 * rm32 + m30;
-    dest.m31 = m21 * rm32 + m31;
-    dest.m32 = m22 * rm32 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = m20 * rm22;
-    dest.m21 = m21 * rm22;
-    dest.m22 = m22 * rm22;
+    dest.m30        = m20 * rm32 + m30;
+    dest.m31        = m21 * rm32 + m31;
+    dest.m32        = m22 * rm32 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = m20 * rm22;
+    dest.m21        = m21 * rm22;
+    dest.m22        = m22 * rm22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -7391,18 +7391,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrthoSymmetric(double width, double height, double zNear, double zFar, boolean zZeroToOne)
   {
-    m00 = 2.0 / width;
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / height;
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = (zZeroToOne ? 1.0 : 2.0) / (zNear - zFar);
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
+    m00        = 2.0 / width;
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / height;
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = (zZeroToOne ? 1.0 : 2.0) / (zNear - zFar);
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
     properties = 0;
     return this;
   }
@@ -7453,18 +7453,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrthoSymmetricLH(double width, double height, double zNear, double zFar, boolean zZeroToOne)
   {
-    m00 = 2.0 / width;
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / height;
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = (zZeroToOne ? 1.0 : 2.0) / (zFar - zNear);
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
+    m00        = 2.0 / width;
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / height;
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = (zZeroToOne ? 1.0 : 2.0) / (zFar - zNear);
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = (zZeroToOne ? zNear : (zFar + zNear)) / (zNear - zFar);
     properties = 0;
     return this;
   }
@@ -7529,18 +7529,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m00 * rm30 + m10 * rm31 + m30;
-    dest.m31 = m01 * rm30 + m11 * rm31 + m31;
-    dest.m32 = m02 * rm30 + m12 * rm31 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = -m20;
-    dest.m21 = -m21;
-    dest.m22 = -m22;
+    dest.m30        = m00 * rm30 + m10 * rm31 + m30;
+    dest.m31        = m01 * rm30 + m11 * rm31 + m31;
+    dest.m32        = m02 * rm30 + m12 * rm31 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = -m20;
+    dest.m21        = -m21;
+    dest.m22        = -m22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -7610,18 +7610,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
     // perform optimized multiplication
     // compute the last column first, because other columns do not depend on it
-    dest.m30 = m00 * rm30 + m10 * rm31 + m30;
-    dest.m31 = m01 * rm30 + m11 * rm31 + m31;
-    dest.m32 = m02 * rm30 + m12 * rm31 + m32;
-    dest.m00 = m00 * rm00;
-    dest.m01 = m01 * rm00;
-    dest.m02 = m02 * rm00;
-    dest.m10 = m10 * rm11;
-    dest.m11 = m11 * rm11;
-    dest.m12 = m12 * rm11;
-    dest.m20 = m20;
-    dest.m21 = m21;
-    dest.m22 = m22;
+    dest.m30        = m00 * rm30 + m10 * rm31 + m30;
+    dest.m31        = m01 * rm30 + m11 * rm31 + m31;
+    dest.m32        = m02 * rm30 + m12 * rm31 + m32;
+    dest.m00        = m00 * rm00;
+    dest.m01        = m01 * rm00;
+    dest.m02        = m02 * rm00;
+    dest.m10        = m10 * rm11;
+    dest.m11        = m11 * rm11;
+    dest.m12        = m12 * rm11;
+    dest.m20        = m20;
+    dest.m21        = m21;
+    dest.m22        = m22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -7677,18 +7677,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrtho2D(double left, double right, double bottom, double top)
   {
-    m00 = 2.0 / (right - left);
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / (top - bottom);
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = -1.0;
-    m30 = -(right + left) / (right - left);
-    m31 = -(top + bottom) / (top - bottom);
-    m32 = 0.0;
+    m00        = 2.0 / (right - left);
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / (top - bottom);
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = -1.0;
+    m30        = -(right + left) / (right - left);
+    m31        = -(top + bottom) / (top - bottom);
+    m32        = 0.0;
     properties = 0;
     return this;
   }
@@ -7714,18 +7714,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d setOrtho2DLH(double left, double right, double bottom, double top)
   {
-    m00 = 2.0 / (right - left);
-    m01 = 0.0;
-    m02 = 0.0;
-    m10 = 0.0;
-    m11 = 2.0 / (top - bottom);
-    m12 = 0.0;
-    m20 = 0.0;
-    m21 = 0.0;
-    m22 = 1.0;
-    m30 = -(right + left) / (right - left);
-    m31 = -(top + bottom) / (top - bottom);
-    m32 = 0.0;
+    m00        = 2.0 / (right - left);
+    m01        = 0.0;
+    m02        = 0.0;
+    m10        = 0.0;
+    m11        = 2.0 / (top - bottom);
+    m12        = 0.0;
+    m20        = 0.0;
+    m21        = 0.0;
+    m22        = 1.0;
+    m30        = -(right + left) / (right - left);
+    m31        = -(top + bottom) / (top - bottom);
+    m32        = 0.0;
     properties = 0;
     return this;
   }
@@ -7864,15 +7864,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
     dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
     // set the rest of the matrix elements
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
 
     return dest;
@@ -7975,18 +7975,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upnY = dirZ * leftX - dirX * leftZ;
     double upnZ = dirX * leftY - dirY * leftX;
 
-    m00 = leftX;
-    m01 = upnX;
-    m02 = dirX;
-    m10 = leftY;
-    m11 = upnY;
-    m12 = dirY;
-    m20 = leftZ;
-    m21 = upnZ;
-    m22 = dirZ;
-    m30 = 0.0;
-    m31 = 0.0;
-    m32 = 0.0;
+    m00        = leftX;
+    m01        = upnX;
+    m02        = dirX;
+    m10        = leftY;
+    m11        = upnY;
+    m12        = dirY;
+    m20        = leftZ;
+    m21        = upnZ;
+    m22        = dirZ;
+    m30        = 0.0;
+    m31        = 0.0;
+    m32        = 0.0;
     properties = PROPERTY_ORTHONORMAL;
 
     return this;
@@ -8064,18 +8064,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upnY = dirZ * leftX - dirX * leftZ;
     double upnZ = dirX * leftY - dirY * leftX;
 
-    m00 = leftX;
-    m01 = upnX;
-    m02 = dirX;
-    m10 = leftY;
-    m11 = upnY;
-    m12 = dirY;
-    m20 = leftZ;
-    m21 = upnZ;
-    m22 = dirZ;
-    m30 = -(leftX * eyeX + leftY * eyeY + leftZ * eyeZ);
-    m31 = -(upnX * eyeX + upnY * eyeY + upnZ * eyeZ);
-    m32 = -(dirX * eyeX + dirY * eyeY + dirZ * eyeZ);
+    m00        = leftX;
+    m01        = upnX;
+    m02        = dirX;
+    m10        = leftY;
+    m11        = upnY;
+    m12        = dirY;
+    m20        = leftZ;
+    m21        = upnZ;
+    m22        = dirZ;
+    m30        = -(leftX * eyeX + leftY * eyeY + leftZ * eyeZ);
+    m31        = -(upnX * eyeX + upnY * eyeY + upnZ * eyeZ);
+    m32        = -(dirX * eyeX + dirY * eyeY + dirZ * eyeZ);
     properties = PROPERTY_ORTHONORMAL;
 
     return this;
@@ -8226,12 +8226,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
     dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
     // set the rest of the matrix elements
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
 
     return dest;
@@ -8341,18 +8341,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upnY = dirZ * leftX - dirX * leftZ;
     double upnZ = dirX * leftY - dirY * leftX;
 
-    m00 = leftX;
-    m01 = upnX;
-    m02 = dirX;
-    m10 = leftY;
-    m11 = upnY;
-    m12 = dirY;
-    m20 = leftZ;
-    m21 = upnZ;
-    m22 = dirZ;
-    m30 = -(leftX * eyeX + leftY * eyeY + leftZ * eyeZ);
-    m31 = -(upnX * eyeX + upnY * eyeY + upnZ * eyeZ);
-    m32 = -(dirX * eyeX + dirY * eyeY + dirZ * eyeZ);
+    m00        = leftX;
+    m01        = upnX;
+    m02        = dirX;
+    m10        = leftY;
+    m11        = upnY;
+    m12        = dirY;
+    m20        = leftZ;
+    m21        = upnZ;
+    m22        = dirZ;
+    m30        = -(leftX * eyeX + leftY * eyeY + leftZ * eyeZ);
+    m31        = -(upnX * eyeX + upnY * eyeY + upnZ * eyeZ);
+    m32        = -(dirX * eyeX + dirY * eyeY + dirZ * eyeZ);
     properties = PROPERTY_ORTHONORMAL;
 
     return this;
@@ -8501,12 +8501,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
     dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
     // set the rest of the matrix elements
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
 
     return dest;
@@ -8696,10 +8696,10 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     // normalize plane
     double invPlaneLen = Math.invsqrt(a * a + b * b + c * c);
-    double an = a * invPlaneLen;
-    double bn = b * invPlaneLen;
-    double cn = c * invPlaneLen;
-    double dn = d * invPlaneLen;
+    double an          = a * invPlaneLen;
+    double bn          = b * invPlaneLen;
+    double cn          = c * invPlaneLen;
+    double dn          = d * invPlaneLen;
 
     double dot = an * lightX + bn * lightY + cn * lightZ + dn * lightW;
 
@@ -8731,18 +8731,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = m00 * rm20 + m10 * rm21 + m20 * rm22 + m30 * rm23;
     double nm21 = m01 * rm20 + m11 * rm21 + m21 * rm22 + m31 * rm23;
     double nm22 = m02 * rm20 + m12 * rm21 + m22 * rm22 + m32 * rm23;
-    dest.m30 = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30 * rm33;
-    dest.m31 = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31 * rm33;
-    dest.m32 = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32 * rm33;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
+    dest.m30        = m00 * rm30 + m10 * rm31 + m20 * rm32 + m30 * rm33;
+    dest.m31        = m01 * rm30 + m11 * rm31 + m21 * rm32 + m31 * rm33;
+    dest.m32        = m02 * rm30 + m12 * rm31 + m22 * rm32 + m32 * rm33;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION | PROPERTY_ORTHONORMAL);
 
     return dest;
@@ -8852,18 +8852,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     dirY *= invDirLen;
     dirZ *= invDirLen;
     // set matrix elements
-    m00 = leftX;
-    m01 = leftY;
-    m02 = leftZ;
-    m10 = up.x();
-    m11 = up.y();
-    m12 = up.z();
-    m20 = dirX;
-    m21 = dirY;
-    m22 = dirZ;
-    m30 = objPos.x();
-    m31 = objPos.y();
-    m32 = objPos.z();
+    m00        = leftX;
+    m01        = leftY;
+    m02        = leftZ;
+    m10        = up.x();
+    m11        = up.y();
+    m12        = up.z();
+    m20        = dirX;
+    m21        = dirY;
+    m22        = dirZ;
+    m30        = objPos.x();
+    m31        = objPos.y();
+    m32        = objPos.z();
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -8908,18 +8908,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upY = dirZ * leftX - dirX * leftZ;
     double upZ = dirX * leftY - dirY * leftX;
     // set matrix elements
-    m00 = leftX;
-    m01 = leftY;
-    m02 = leftZ;
-    m10 = upX;
-    m11 = upY;
-    m12 = upZ;
-    m20 = dirX;
-    m21 = dirY;
-    m22 = dirZ;
-    m30 = objPos.x();
-    m31 = objPos.y();
-    m32 = objPos.z();
+    m00        = leftX;
+    m01        = leftY;
+    m02        = leftZ;
+    m10        = upX;
+    m11        = upY;
+    m12        = upZ;
+    m20        = dirX;
+    m21        = dirY;
+    m22        = dirZ;
+    m30        = objPos.x();
+    m31        = objPos.y();
+    m32        = objPos.z();
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -8941,12 +8941,12 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d billboardSpherical(Vector3dc objPos, Vector3dc targetPos)
   {
-    double toDirX = targetPos.x() - objPos.x();
-    double toDirY = targetPos.y() - objPos.y();
-    double toDirZ = targetPos.z() - objPos.z();
-    double x = -toDirY;
-    double y = toDirX;
-    double w = Math.sqrt(toDirX * toDirX + toDirY * toDirY + toDirZ * toDirZ) + toDirZ;
+    double toDirX  = targetPos.x() - objPos.x();
+    double toDirY  = targetPos.y() - objPos.y();
+    double toDirZ  = targetPos.z() - objPos.z();
+    double x       = -toDirY;
+    double y       = toDirX;
+    double w       = Math.sqrt(toDirX * toDirX + toDirY * toDirY + toDirZ * toDirZ) + toDirZ;
     double invNorm = Math.invsqrt(x * x + y * y + w * w);
     x *= invNorm;
     y *= invNorm;
@@ -8956,50 +8956,50 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double q01 = (x + x) * y;
     double q03 = (x + x) * w;
     double q13 = (y + y) * w;
-    m00 = 1.0 - q11;
-    m01 = q01;
-    m02 = -q13;
-    m10 = q01;
-    m11 = 1.0 - q00;
-    m12 = q03;
-    m20 = q13;
-    m21 = -q03;
-    m22 = 1.0 - q11 - q00;
-    m30 = objPos.x();
-    m31 = objPos.y();
-    m32 = objPos.z();
+    m00        = 1.0 - q11;
+    m01        = q01;
+    m02        = -q13;
+    m10        = q01;
+    m11        = 1.0 - q00;
+    m12        = q03;
+    m20        = q13;
+    m21        = -q03;
+    m22        = 1.0 - q11 - q00;
+    m30        = objPos.x();
+    m31        = objPos.y();
+    m32        = objPos.z();
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(m00);
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits(m00);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m01);
+    temp   = Double.doubleToLongBits(m01);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m02);
+    temp   = Double.doubleToLongBits(m02);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m10);
+    temp   = Double.doubleToLongBits(m10);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m11);
+    temp   = Double.doubleToLongBits(m11);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m12);
+    temp   = Double.doubleToLongBits(m12);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m20);
+    temp   = Double.doubleToLongBits(m20);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m21);
+    temp   = Double.doubleToLongBits(m21);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m22);
+    temp   = Double.doubleToLongBits(m22);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m30);
+    temp   = Double.doubleToLongBits(m30);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m31);
+    temp   = Double.doubleToLongBits(m31);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m32);
+    temp   = Double.doubleToLongBits(m32);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
   }
@@ -9141,15 +9141,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double sy = viewport[3] / height;
     double tx = (viewport[2] + 2.0 * (viewport[0] - x)) / width;
     double ty = (viewport[3] + 2.0 * (viewport[1] - y)) / height;
-    dest.m30 = m00 * tx + m10 * ty + m30;
-    dest.m31 = m01 * tx + m11 * ty + m31;
-    dest.m32 = m02 * tx + m12 * ty + m32;
-    dest.m00 = m00 * sx;
-    dest.m01 = m01 * sx;
-    dest.m02 = m02 * sx;
-    dest.m10 = m10 * sy;
-    dest.m11 = m11 * sy;
-    dest.m12 = m12 * sy;
+    dest.m30        = m00 * tx + m10 * ty + m30;
+    dest.m31        = m01 * tx + m11 * ty + m31;
+    dest.m32        = m02 * tx + m12 * ty + m32;
+    dest.m00        = m00 * sx;
+    dest.m01        = m01 * sx;
+    dest.m02        = m02 * sx;
+    dest.m10        = m10 * sy;
+    dest.m11        = m11 * sy;
+    dest.m12        = m12 * sy;
     dest.properties = 0;
     return dest;
   }
@@ -9179,61 +9179,61 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public Matrix4x3d swap(Matrix4x3d other)
   {
     double tmp;
-    tmp = m00;
-    m00 = other.m00;
+    tmp       = m00;
+    m00       = other.m00;
     other.m00 = tmp;
-    tmp = m01;
-    m01 = other.m01;
+    tmp       = m01;
+    m01       = other.m01;
     other.m01 = tmp;
-    tmp = m02;
-    m02 = other.m02;
+    tmp       = m02;
+    m02       = other.m02;
     other.m02 = tmp;
-    tmp = m10;
-    m10 = other.m10;
+    tmp       = m10;
+    m10       = other.m10;
     other.m10 = tmp;
-    tmp = m11;
-    m11 = other.m11;
+    tmp       = m11;
+    m11       = other.m11;
     other.m11 = tmp;
-    tmp = m12;
-    m12 = other.m12;
+    tmp       = m12;
+    m12       = other.m12;
     other.m12 = tmp;
-    tmp = m20;
-    m20 = other.m20;
+    tmp       = m20;
+    m20       = other.m20;
     other.m20 = tmp;
-    tmp = m21;
-    m21 = other.m21;
+    tmp       = m21;
+    m21       = other.m21;
     other.m21 = tmp;
-    tmp = m22;
-    m22 = other.m22;
+    tmp       = m22;
+    m22       = other.m22;
     other.m22 = tmp;
-    tmp = m30;
-    m30 = other.m30;
+    tmp       = m30;
+    m30       = other.m30;
     other.m30 = tmp;
-    tmp = m31;
-    m31 = other.m31;
+    tmp       = m31;
+    m31       = other.m31;
     other.m31 = tmp;
-    tmp = m32;
-    m32 = other.m32;
+    tmp       = m32;
+    m32       = other.m32;
     other.m32 = tmp;
     int props = properties;
-    this.properties = other.properties;
+    this.properties  = other.properties;
     other.properties = props;
     return this;
   }
 
   public Matrix4x3d arcball(double radius, double centerX, double centerY, double centerZ, double angleX, double angleY, Matrix4x3d dest)
   {
-    double m30 = m20 * -radius + this.m30;
-    double m31 = m21 * -radius + this.m31;
-    double m32 = m22 * -radius + this.m32;
-    double sin = Math.sin(angleX);
-    double cos = Math.cosFromSin(sin, angleX);
+    double m30  = m20 * -radius + this.m30;
+    double m31  = m21 * -radius + this.m31;
+    double m32  = m22 * -radius + this.m32;
+    double sin  = Math.sin(angleX);
+    double cos  = Math.cosFromSin(sin, angleX);
     double nm10 = m10 * cos + m20 * sin;
     double nm11 = m11 * cos + m21 * sin;
     double nm12 = m12 * cos + m22 * sin;
-    double m20 = this.m20 * cos - m10 * sin;
-    double m21 = this.m21 * cos - m11 * sin;
-    double m22 = this.m22 * cos - m12 * sin;
+    double m20  = this.m20 * cos - m10 * sin;
+    double m21  = this.m21 * cos - m11 * sin;
+    double m22  = this.m22 * cos - m12 * sin;
     sin = Math.sin(angleY);
     cos = Math.cosFromSin(sin, angleY);
     double nm00 = m00 * cos - m20 * sin;
@@ -9242,18 +9242,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm20 = m00 * sin + m20 * cos;
     double nm21 = m01 * sin + m21 * cos;
     double nm22 = m02 * sin + m22 * cos;
-    dest.m30 = -nm00 * centerX - nm10 * centerY - nm20 * centerZ + m30;
-    dest.m31 = -nm01 * centerX - nm11 * centerY - nm21 * centerZ + m31;
-    dest.m32 = -nm02 * centerX - nm12 * centerY - nm22 * centerZ + m32;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
+    dest.m30        = -nm00 * centerX - nm10 * centerY - nm20 * centerZ + m30;
+    dest.m31        = -nm01 * centerX - nm11 * centerY - nm21 * centerZ + m31;
+    dest.m32        = -nm02 * centerX - nm12 * centerY - nm22 * centerZ + m32;
+    dest.m20        = nm20;
+    dest.m21        = nm21;
+    dest.m22        = nm22;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -9422,18 +9422,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
 
   public Matrix4x3d lerp(Matrix4x3dc other, double t, Matrix4x3d dest)
   {
-    dest.m00 = Math.fma(other.m00() - m00, t, m00);
-    dest.m01 = Math.fma(other.m01() - m01, t, m01);
-    dest.m02 = Math.fma(other.m02() - m02, t, m02);
-    dest.m10 = Math.fma(other.m10() - m10, t, m10);
-    dest.m11 = Math.fma(other.m11() - m11, t, m11);
-    dest.m12 = Math.fma(other.m12() - m12, t, m12);
-    dest.m20 = Math.fma(other.m20() - m20, t, m20);
-    dest.m21 = Math.fma(other.m21() - m21, t, m21);
-    dest.m22 = Math.fma(other.m22() - m22, t, m22);
-    dest.m30 = Math.fma(other.m30() - m30, t, m30);
-    dest.m31 = Math.fma(other.m31() - m31, t, m31);
-    dest.m32 = Math.fma(other.m32() - m32, t, m32);
+    dest.m00        = Math.fma(other.m00() - m00, t, m00);
+    dest.m01        = Math.fma(other.m01() - m01, t, m01);
+    dest.m02        = Math.fma(other.m02() - m02, t, m02);
+    dest.m10        = Math.fma(other.m10() - m10, t, m10);
+    dest.m11        = Math.fma(other.m11() - m11, t, m11);
+    dest.m12        = Math.fma(other.m12() - m12, t, m12);
+    dest.m20        = Math.fma(other.m20() - m20, t, m20);
+    dest.m21        = Math.fma(other.m21() - m21, t, m21);
+    dest.m22        = Math.fma(other.m22() - m22, t, m22);
+    dest.m30        = Math.fma(other.m30() - m30, t, m30);
+    dest.m31        = Math.fma(other.m31() - m31, t, m31);
+    dest.m32        = Math.fma(other.m32() - m32, t, m32);
     dest.properties = properties & other.properties();
     return dest;
   }
@@ -9549,9 +9549,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     // Normalize direction
     double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    double ndirX = dirX * invDirLength;
-    double ndirY = dirY * invDirLength;
-    double ndirZ = dirZ * invDirLength;
+    double ndirX        = dirX * invDirLength;
+    double ndirY        = dirY * invDirLength;
+    double ndirZ        = dirZ * invDirLength;
     // left = up x direction
     double leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -9584,15 +9584,15 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double nm10 = m00 * rm10 + m10 * rm11 + m20 * rm12;
     double nm11 = m01 * rm10 + m11 * rm11 + m21 * rm12;
     double nm12 = m02 * rm10 + m12 * rm11 + m22 * rm12;
-    dest.m20 = m00 * rm20 + m10 * rm21 + m20 * rm22;
-    dest.m21 = m01 * rm20 + m11 * rm21 + m21 * rm22;
-    dest.m22 = m02 * rm20 + m12 * rm21 + m22 * rm22;
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
+    dest.m20        = m00 * rm20 + m10 * rm21 + m20 * rm22;
+    dest.m21        = m01 * rm20 + m11 * rm21 + m21 * rm22;
+    dest.m22        = m02 * rm20 + m12 * rm21 + m22 * rm22;
+    dest.m00        = nm00;
+    dest.m01        = nm01;
+    dest.m02        = nm02;
+    dest.m10        = nm10;
+    dest.m11        = nm11;
+    dest.m12        = nm12;
     dest.properties = properties & ~(PROPERTY_IDENTITY | PROPERTY_TRANSLATION);
     return dest;
   }
@@ -9640,9 +9640,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     // Normalize direction
     double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    double ndirX = dirX * invDirLength;
-    double ndirY = dirY * invDirLength;
-    double ndirZ = dirZ * invDirLength;
+    double ndirX        = dirX * invDirLength;
+    double ndirY        = dirY * invDirLength;
+    double ndirZ        = dirZ * invDirLength;
     // left = up x direction
     double leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -9657,18 +9657,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upnX = ndirY * leftZ - ndirZ * leftY;
     double upnY = ndirZ * leftX - ndirX * leftZ;
     double upnZ = ndirX * leftY - ndirY * leftX;
-    this.m00 = leftX;
-    this.m01 = leftY;
-    this.m02 = leftZ;
-    this.m10 = upnX;
-    this.m11 = upnY;
-    this.m12 = upnZ;
-    this.m20 = ndirX;
-    this.m21 = ndirY;
-    this.m22 = ndirZ;
-    this.m30 = 0.0;
-    this.m31 = 0.0;
-    this.m32 = 0.0;
+    this.m00   = leftX;
+    this.m01   = leftY;
+    this.m02   = leftZ;
+    this.m10   = upnX;
+    this.m11   = upnY;
+    this.m12   = upnZ;
+    this.m20   = ndirX;
+    this.m21   = ndirY;
+    this.m22   = ndirZ;
+    this.m30   = 0.0;
+    this.m31   = 0.0;
+    this.m32   = 0.0;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -9716,9 +9716,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   {
     // Normalize direction
     double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    double ndirX = dirX * invDirLength;
-    double ndirY = dirY * invDirLength;
-    double ndirZ = dirZ * invDirLength;
+    double ndirX        = dirX * invDirLength;
+    double ndirY        = dirY * invDirLength;
+    double ndirZ        = dirZ * invDirLength;
     // left = up x direction
     double leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -9733,18 +9733,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
     double upnX = ndirY * leftZ - ndirZ * leftY;
     double upnY = ndirZ * leftX - ndirX * leftZ;
     double upnZ = ndirX * leftY - ndirY * leftX;
-    this.m00 = leftX;
-    this.m01 = leftY;
-    this.m02 = leftZ;
-    this.m10 = upnX;
-    this.m11 = upnY;
-    this.m12 = upnZ;
-    this.m20 = ndirX;
-    this.m21 = ndirY;
-    this.m22 = ndirZ;
-    this.m30 = posX;
-    this.m31 = posY;
-    this.m32 = posZ;
+    this.m00   = leftX;
+    this.m01   = leftY;
+    this.m02   = leftZ;
+    this.m10   = upnX;
+    this.m11   = upnY;
+    this.m12   = upnZ;
+    this.m20   = ndirX;
+    this.m21   = ndirY;
+    this.m22   = ndirZ;
+    this.m30   = posX;
+    this.m31   = posY;
+    this.m32   = posZ;
     properties = PROPERTY_ORTHONORMAL;
     return this;
   }
@@ -9793,9 +9793,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d obliqueZ(double a, double b)
   {
-    this.m20 = m00 * a + m10 * b + m20;
-    this.m21 = m01 * a + m11 * b + m21;
-    this.m22 = m02 * a + m12 * b + m22;
+    this.m20        = m00 * a + m10 * b + m20;
+    this.m21        = m01 * a + m11 * b + m21;
+    this.m22        = m02 * a + m12 * b + m22;
     this.properties = 0;
     return this;
   }
@@ -9829,18 +9829,18 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
    */
   public Matrix4x3d obliqueZ(double a, double b, Matrix4x3d dest)
   {
-    dest.m00 = m00;
-    dest.m01 = m01;
-    dest.m02 = m02;
-    dest.m10 = m10;
-    dest.m11 = m11;
-    dest.m12 = m12;
-    dest.m20 = m00 * a + m10 * b + m20;
-    dest.m21 = m01 * a + m11 * b + m21;
-    dest.m22 = m02 * a + m12 * b + m22;
-    dest.m30 = m30;
-    dest.m31 = m31;
-    dest.m32 = m32;
+    dest.m00        = m00;
+    dest.m01        = m01;
+    dest.m02        = m02;
+    dest.m10        = m10;
+    dest.m11        = m11;
+    dest.m12        = m12;
+    dest.m20        = m00 * a + m10 * b + m20;
+    dest.m21        = m01 * a + m11 * b + m21;
+    dest.m22        = m02 * a + m12 * b + m22;
+    dest.m30        = m30;
+    dest.m31        = m31;
+    dest.m32        = m32;
     dest.properties = 0;
     return dest;
   }
@@ -10836,9 +10836,9 @@ public class Matrix4x3d implements Externalizable, Cloneable, Matrix4x3dc
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) &&
-        Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
-        Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22) &&
-        Math.isFinite(m30) && Math.isFinite(m31) && Math.isFinite(m32);
+           Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
+           Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22) &&
+           Math.isFinite(m30) && Math.isFinite(m31) && Math.isFinite(m32);
   }
 
   public Object clone() throws CloneNotSupportedException

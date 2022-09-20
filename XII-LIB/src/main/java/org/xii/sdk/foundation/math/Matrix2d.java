@@ -573,7 +573,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
 
   public Matrix2d invert(Matrix2d dest)
   {
-    double s = 1.0 / determinant();
+    double s    = 1.0 / determinant();
     double nm00 = m11 * s;
     double nm01 = -m01 * s;
     double nm10 = -m10 * s;
@@ -598,7 +598,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public Matrix2d transpose(Matrix2d dest)
   {
     dest.set(m00, m10,
-        m01, m11);
+             m01, m11);
     return dest;
   }
 
@@ -611,9 +611,9 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -643,7 +643,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + "\n";
   }
 
   /**
@@ -1046,7 +1046,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public Vector2d transform(double x, double y, Vector2d dest)
   {
     dest.set(m00 * x + m10 * y,
-        m01 * x + m11 * y);
+             m01 * x + m11 * y);
     return dest;
   }
 
@@ -1064,7 +1064,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public Vector2d transformTranspose(double x, double y, Vector2d dest)
   {
     dest.set(m00 * x + m01 * y,
-        m10 * x + m11 * y);
+             m10 * x + m11 * y);
     return dest;
   }
 
@@ -1383,7 +1383,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public Matrix2d normal(Matrix2d dest)
   {
     double det = m00 * m11 - m10 * m01;
-    double s = 1.0 / det;
+    double s   = 1.0 / det;
     /* Invert and transpose in one go */
     double nm00 = m11 * s;
     double nm01 = -m10 * s;
@@ -1461,16 +1461,16 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(m00);
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits(m00);
     result = prime * result + (int) ((temp >>> 32) ^ temp);
-    temp = Double.doubleToLongBits(m01);
+    temp   = Double.doubleToLongBits(m01);
     result = prime * result + (int) ((temp >>> 32) ^ temp);
-    temp = Double.doubleToLongBits(m10);
+    temp   = Double.doubleToLongBits(m10);
     result = prime * result + (int) ((temp >>> 32) ^ temp);
-    temp = Double.doubleToLongBits(m11);
+    temp   = Double.doubleToLongBits(m11);
     result = prime * result + (int) ((temp >>> 32) ^ temp);
     return result;
   }
@@ -1642,7 +1642,7 @@ public class Matrix2d implements Externalizable, Cloneable, Matrix2dc
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) &&
-        Math.isFinite(m10) && Math.isFinite(m11);
+           Math.isFinite(m10) && Math.isFinite(m11);
   }
 
   public Object clone() throws CloneNotSupportedException

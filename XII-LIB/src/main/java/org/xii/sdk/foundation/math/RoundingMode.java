@@ -35,15 +35,15 @@ public class RoundingMode
   /**
    * Discards the fractional part.
    */
-  public static final int TRUNCATE = 0;
+  public static final int TRUNCATE  = 0;
   /**
    * Round towards positive infinity.
    */
-  public static final int CEILING = 1;
+  public static final int CEILING   = 1;
   /**
    * Round towards negative infinity.
    */
-  public static final int FLOOR = 2;
+  public static final int FLOOR     = 2;
   /**
    * Round towards the nearest neighbor. If both neighbors are equidistant, round
    * towards the even neighbor.
@@ -58,7 +58,7 @@ public class RoundingMode
    * Round towards the nearest neighbor. If both neighbors are equidistant, round
    * up.
    */
-  public static final int HALF_UP = 5;
+  public static final int HALF_UP   = 5;
 
   private RoundingMode()
   {

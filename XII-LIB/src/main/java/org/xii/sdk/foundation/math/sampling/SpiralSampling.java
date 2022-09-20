@@ -62,9 +62,9 @@ public class SpiralSampling
     for (int sample = 0; sample < numSamples; sample++)
     {
       float angle = 2.0f * (float) Math.PI * (sample * numRotations) / numSamples;
-      float r = radius * sample / (numSamples - 1);
-      float x = (float) Math.sin_roquen_9(angle + 0.5f * (float) Math.PI) * r;
-      float y = (float) Math.sin_roquen_9(angle) * r;
+      float r     = radius * sample / (numSamples - 1);
+      float x     = (float) Math.sin_roquen_9(angle + 0.5f * (float) Math.PI) * r;
+      float y     = (float) Math.sin_roquen_9(angle) * r;
       callback.onNewSample(x, y);
     }
   }
@@ -89,9 +89,9 @@ public class SpiralSampling
     for (int sample = 0; sample < numSamples; sample++)
     {
       float angle = 2.0f * (float) Math.PI * (sample * numRotations) / numSamples;
-      float r = radius * sample / (numSamples - 1) + (rnd.nextFloat() * 2.0f - 1.0f) * spacing * jitter;
-      float x = (float) Math.sin_roquen_9(angle + 0.5f * (float) Math.PI) * r;
-      float y = (float) Math.sin_roquen_9(angle) * r;
+      float r     = radius * sample / (numSamples - 1) + (rnd.nextFloat() * 2.0f - 1.0f) * spacing * jitter;
+      float x     = (float) Math.sin_roquen_9(angle + 0.5f * (float) Math.PI) * r;
+      float y     = (float) Math.sin_roquen_9(angle) * r;
       callback.onNewSample(x, y);
     }
   }

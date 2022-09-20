@@ -240,22 +240,22 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     zz *= zs;
     zd *= zs;
     viewDest.setLookAt(eye.x, eye.y, eye.z, eye.x + zx, eye.y + zy, eye.z + zz, y.x, y.y, y.z);
-    float px = viewDest.m00() * p.x + viewDest.m10() * p.y + viewDest.m20() * p.z + viewDest.m30();
-    float py = viewDest.m01() * p.x + viewDest.m11() * p.y + viewDest.m21() * p.z + viewDest.m31();
-    float tx = viewDest.m00() * x.x + viewDest.m10() * x.y + viewDest.m20() * x.z;
-    float ty = viewDest.m01() * y.x + viewDest.m11() * y.y + viewDest.m21() * y.z;
-    float len = Math.sqrt(zx * zx + zy * zy + zz * zz);
+    float px   = viewDest.m00() * p.x + viewDest.m10() * p.y + viewDest.m20() * p.z + viewDest.m30();
+    float py   = viewDest.m01() * p.x + viewDest.m11() * p.y + viewDest.m21() * p.z + viewDest.m31();
+    float tx   = viewDest.m00() * x.x + viewDest.m10() * x.y + viewDest.m20() * x.z;
+    float ty   = viewDest.m01() * y.x + viewDest.m11() * y.y + viewDest.m21() * y.z;
+    float len  = Math.sqrt(zx * zx + zy * zy + zz * zz);
     float near = zd / len, far;
     if (Float.isInfinite(nearFarDist) && nearFarDist < 0.0f)
     {
-      far = near;
+      far  = near;
       near = Float.POSITIVE_INFINITY;
     } else if (Float.isInfinite(nearFarDist) && nearFarDist > 0.0f)
     {
       far = Float.POSITIVE_INFINITY;
     } else if (nearFarDist < 0.0f)
     {
-      far = near;
+      far  = near;
       near = near + nearFarDist;
     } else
     {
@@ -314,7 +314,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
          * and is rather expensive (6 dot products) in the worst case.
          */
       } else if (m01() == 0.0f && m02() == 0.0f && m10() == 0.0f && m12() == 0.0f && m20() == 0.0f && m21() == 0.0f
-          && m30() == 0.0f && m31() == 0.0f && m33() == 0.0f)
+                 && m30() == 0.0f && m31() == 0.0f && m33() == 0.0f)
       {
         properties |= PROPERTY_PERSPECTIVE;
       }
@@ -1081,17 +1081,17 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f set(AxisAngle4f axisAngle)
   {
-    float x = axisAngle.x;
-    float y = axisAngle.y;
-    float z = axisAngle.z;
-    float angle = axisAngle.angle;
-    double n = Math.sqrt(x * x + y * y + z * z);
+    float  x     = axisAngle.x;
+    float  y     = axisAngle.y;
+    float  z     = axisAngle.z;
+    float  angle = axisAngle.angle;
+    double n     = Math.sqrt(x * x + y * y + z * z);
     n = 1 / n;
     x *= n;
     y *= n;
     z *= n;
-    float s = Math.sin(angle);
-    float c = Math.cosFromSin(s, angle);
+    float s   = Math.sin(angle);
+    float c   = Math.cosFromSin(s, angle);
     float omc = 1.0f - c;
     this._m00((float) (c + x * x * omc))
         ._m11((float) (c + y * y * omc))
@@ -1127,17 +1127,17 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f set(AxisAngle4d axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
+    double x     = axisAngle.x;
+    double y     = axisAngle.y;
+    double z     = axisAngle.z;
     double angle = axisAngle.angle;
-    double n = Math.sqrt(x * x + y * y + z * z);
+    double n     = Math.sqrt(x * x + y * y + z * z);
     n = 1 / n;
     x *= n;
     y *= n;
     z *= n;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0 - c;
     this._m00((float) (c + x * x * omc))
         ._m11((float) (c + y * y * omc))
@@ -1772,9 +1772,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f mulAffine(Matrix4x3fc right, Matrix4f dest)
   {
-    float m00 = this.m00(), m01 = this.m01(), m02 = this.m02();
-    float m10 = this.m10(), m11 = this.m11(), m12 = this.m12();
-    float m20 = this.m20(), m21 = this.m21(), m22 = this.m22();
+    float m00  = this.m00(), m01 = this.m01(), m02 = this.m02();
+    float m10  = this.m10(), m11 = this.m11(), m12 = this.m12();
+    float m20  = this.m20(), m21 = this.m21(), m22 = this.m22();
     float rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
     float rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
     float rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
@@ -2025,9 +2025,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f mulAffine(Matrix4fc right, Matrix4f dest)
   {
-    float m00 = this.m00(), m01 = this.m01(), m02 = this.m02();
-    float m10 = this.m10(), m11 = this.m11(), m12 = this.m12();
-    float m20 = this.m20(), m21 = this.m21(), m22 = this.m22();
+    float m00  = this.m00(), m01 = this.m01(), m02 = this.m02();
+    float m10  = this.m10(), m11 = this.m11(), m12 = this.m12();
+    float m20  = this.m20(), m21 = this.m21(), m22 = this.m22();
     float rm00 = right.m00(), rm01 = right.m01(), rm02 = right.m02();
     float rm10 = right.m10(), rm11 = right.m11(), rm12 = right.m12();
     float rm20 = right.m20(), rm21 = right.m21(), rm22 = right.m22();
@@ -2636,25 +2636,25 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
       return determinantAffine();
     }
     return (m00() * m11() - m01() * m10()) * (m22() * m33() - m23() * m32())
-        + (m02() * m10() - m00() * m12()) * (m21() * m33() - m23() * m31())
-        + (m00() * m13() - m03() * m10()) * (m21() * m32() - m22() * m31())
-        + (m01() * m12() - m02() * m11()) * (m20() * m33() - m23() * m30())
-        + (m03() * m11() - m01() * m13()) * (m20() * m32() - m22() * m30())
-        + (m02() * m13() - m03() * m12()) * (m20() * m31() - m21() * m30());
+           + (m02() * m10() - m00() * m12()) * (m21() * m33() - m23() * m31())
+           + (m00() * m13() - m03() * m10()) * (m21() * m32() - m22() * m31())
+           + (m01() * m12() - m02() * m11()) * (m20() * m33() - m23() * m30())
+           + (m03() * m11() - m01() * m13()) * (m20() * m32() - m22() * m30())
+           + (m02() * m13() - m03() * m12()) * (m20() * m31() - m21() * m30());
   }
 
   public float determinant3x3()
   {
     return (m00() * m11() - m01() * m10()) * m22()
-        + (m02() * m10() - m00() * m12()) * m21()
-        + (m01() * m12() - m02() * m11()) * m20();
+           + (m02() * m10() - m00() * m12()) * m21()
+           + (m01() * m12() - m02() * m11()) * m20();
   }
 
   public float determinantAffine()
   {
     return (m00() * m11() - m01() * m10()) * m22()
-        + (m02() * m10() - m00() * m12()) * m21()
-        + (m01() * m12() - m02() * m11()) * m20();
+           + (m02() * m10() - m00() * m12()) * m21()
+           + (m01() * m12() - m02() * m11()) * m20();
   }
 
   public Matrix4f invert(Matrix4f dest)
@@ -2692,9 +2692,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float nm30 = -(m00() * m30() + m01() * m31() + m02() * m32());
     float nm31 = -(m10() * m30() + m11() * m31() + m12() * m32());
     float nm32 = -(m20() * m30() + m21() * m31() + m22() * m32());
-    float m01 = this.m01();
-    float m02 = this.m02();
-    float m12 = this.m12();
+    float m01  = this.m01();
+    float m02  = this.m02();
+    float m12  = this.m12();
     return dest
         ._m00(m00())
         ._m01(m10())
@@ -2726,18 +2726,18 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f invertGenericNonThis(Matrix4f dest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
+    float a   = m00() * m11() - m01() * m10();
+    float b   = m00() * m12() - m02() * m10();
+    float c   = m00() * m13() - m03() * m10();
+    float d   = m01() * m12() - m02() * m11();
+    float e   = m01() * m13() - m03() * m11();
+    float f   = m02() * m13() - m03() * m12();
+    float g   = m20() * m31() - m21() * m30();
+    float h   = m20() * m32() - m22() * m30();
+    float i   = m20() * m33() - m23() * m30();
+    float j   = m21() * m32() - m22() * m31();
+    float k   = m21() * m33() - m23() * m31();
+    float l   = m22() * m33() - m23() * m32();
     float det = a * l - b * k + c * j + d * i - e * h + f * g;
     det = 1.0f / det;
     return dest
@@ -2762,18 +2762,18 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f invertGenericThis(Matrix4f dest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
+    float a   = m00() * m11() - m01() * m10();
+    float b   = m00() * m12() - m02() * m10();
+    float c   = m00() * m13() - m03() * m10();
+    float d   = m01() * m12() - m02() * m11();
+    float e   = m01() * m13() - m03() * m11();
+    float f   = m02() * m13() - m03() * m12();
+    float g   = m20() * m31() - m21() * m30();
+    float h   = m20() * m32() - m22() * m30();
+    float i   = m20() * m33() - m23() * m30();
+    float j   = m21() * m32() - m22() * m31();
+    float k   = m21() * m33() - m23() * m31();
+    float l   = m22() * m33() - m23() * m32();
     float det = a * l - b * k + c * j + d * i - e * h + f * g;
     det = 1.0f / det;
     float nm00 = Math.fma(m11(), l, Math.fma(-m12(), k, m13() * j)) * det;
@@ -2843,9 +2843,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float l = -1.0f / (m23() * m32());
     return dest
         .set(m11() * a, 0, 0, 0,
-            0, m00() * a, 0, 0,
-            0, 0, 0, -m23() * l,
-            0, 0, -m32() * l, m22() * l)
+             0, m00() * a, 0, 0,
+             0, 0, 0, -m23() * l,
+             0, 0, -m32() * l, m22() * l)
         ._properties(0);
   }
 
@@ -2887,9 +2887,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float invM32 = 1.0f / m32();
     return dest
         .set(invM00, 0, 0, 0,
-            0, invM11, 0, 0,
-            0, 0, 0, invM32,
-            -m20() * invM00 * invM23, -m21() * invM11 * invM23, invM23, -m22() * invM23 * invM32);
+             0, invM11, 0, 0,
+             0, 0, 0, invM32,
+             -m20() * invM00 * invM23, -m21() * invM11 * invM23, invM23, -m22() * invM23 * invM32);
   }
 
   /**
@@ -2918,9 +2918,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float invM22 = 1.0f / m22();
     return dest
         .set(invM00, 0, 0, 0,
-            0, invM11, 0, 0,
-            0, 0, invM22, 0,
-            -m30() * invM00, -m31() * invM11, -m32() * invM22, 1)
+             0, invM11, 0, 0,
+             0, 0, invM22, 0,
+             -m30() * invM00, -m31() * invM11, -m32() * invM22, 1)
         ._properties(PROPERTY_AFFINE | (this.properties & PROPERTY_ORTHONORMAL));
   }
 
@@ -2957,8 +2957,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f invertPerspectiveView(Matrix4fc view, Matrix4f dest)
   {
-    float a = 1.0f / (m00() * m11());
-    float l = -1.0f / (m23() * m32());
+    float a    = 1.0f / (m00() * m11());
+    float l    = -1.0f / (m23() * m32());
     float pm00 = m11() * a;
     float pm11 = m00() * a;
     float pm23 = -m23() * l;
@@ -3012,8 +3012,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f invertPerspectiveView(Matrix4x3fc view, Matrix4f dest)
   {
-    float a = 1.0f / (m00() * m11());
-    float l = -1.0f / (m23() * m32());
+    float a    = 1.0f / (m00() * m11());
+    float l    = -1.0f / (m23() * m32());
     float pm00 = m11() * a;
     float pm11 = m00() * a;
     float pm23 = -m23() * l;
@@ -3046,14 +3046,14 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     float m11m00 = m00() * m11(), m10m01 = m01() * m10(), m10m02 = m02() * m10();
     float m12m00 = m00() * m12(), m12m01 = m01() * m12(), m11m02 = m02() * m11();
-    float det = (m11m00 - m10m01) * m22() + (m10m02 - m12m00) * m21() + (m12m01 - m11m02) * m20();
-    float s = 1.0f / det;
+    float det    = (m11m00 - m10m01) * m22() + (m10m02 - m12m00) * m21() + (m12m01 - m11m02) * m20();
+    float s      = 1.0f / det;
     float m10m22 = m10() * m22(), m10m21 = m10() * m21(), m11m22 = m11() * m22();
     float m11m20 = m11() * m20(), m12m21 = m12() * m21(), m12m20 = m12() * m20();
     float m20m02 = m20() * m02(), m20m01 = m20() * m01(), m21m02 = m21() * m02();
     float m21m00 = m21() * m00(), m22m01 = m22() * m01(), m22m00 = m22() * m00();
-    float nm31 = (m20m02 * m31() - m20m01 * m32() + m21m00 * m32() - m21m02 * m30() + m22m01 * m30() - m22m00 * m31()) * s;
-    float nm32 = (m11m02 * m30() - m12m01 * m30() + m12m00 * m31() - m10m02 * m31() + m10m01 * m32() - m11m00 * m32()) * s;
+    float nm31   = (m20m02 * m31() - m20m01 * m32() + m21m00 * m32() - m21m02 * m30() + m22m01 * m30() - m22m00 * m31()) * s;
+    float nm32   = (m11m02 * m30() - m12m01 * m30() + m12m00 * m31() - m10m02 * m31() + m10m01 * m32() - m11m00 * m32()) * s;
     return dest
         ._m00((m11m22 - m12m21) * s)
         ._m01((m21m02 - m22m01) * s)
@@ -3299,9 +3299,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -3331,9 +3331,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00(), formatter) + " " + Runtime.format(m10(), formatter) + " " + Runtime.format(m20(), formatter) + " " + Runtime.format(m30(), formatter) + "\n"
-        + Runtime.format(m01(), formatter) + " " + Runtime.format(m11(), formatter) + " " + Runtime.format(m21(), formatter) + " " + Runtime.format(m31(), formatter) + "\n"
-        + Runtime.format(m02(), formatter) + " " + Runtime.format(m12(), formatter) + " " + Runtime.format(m22(), formatter) + " " + Runtime.format(m32(), formatter) + "\n"
-        + Runtime.format(m03(), formatter) + " " + Runtime.format(m13(), formatter) + " " + Runtime.format(m23(), formatter) + " " + Runtime.format(m33(), formatter) + "\n";
+           + Runtime.format(m01(), formatter) + " " + Runtime.format(m11(), formatter) + " " + Runtime.format(m21(), formatter) + " " + Runtime.format(m31(), formatter) + "\n"
+           + Runtime.format(m02(), formatter) + " " + Runtime.format(m12(), formatter) + " " + Runtime.format(m22(), formatter) + " " + Runtime.format(m32(), formatter) + "\n"
+           + Runtime.format(m03(), formatter) + " " + Runtime.format(m13(), formatter) + " " + Runtime.format(m23(), formatter) + " " + Runtime.format(m33(), formatter) + "\n";
   }
 
   /**
@@ -3757,7 +3757,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   private Matrix4f rotationInternal(float angle, float x, float y, float z)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float C = 1.0f - cos, xy = x * y, xz = x * z, yz = y * z;
+    float C   = 1.0f - cos, xy = x * y, xz = x * z, yz = y * z;
     if ((properties & PROPERTY_IDENTITY) == 0)
     {
       MemUtil.INSTANCE.identity(this);
@@ -4178,18 +4178,18 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
                                          float qx, float qy, float qz, float qw,
                                          float sx, float sy, float sz)
   {
-    float dqx = qx + qx;
-    float dqy = qy + qy;
-    float dqz = qz + qz;
-    float q00 = dqx * qx;
-    float q11 = dqy * qy;
-    float q22 = dqz * qz;
-    float q01 = dqx * qy;
-    float q02 = dqx * qz;
-    float q03 = dqx * qw;
-    float q12 = dqy * qz;
-    float q13 = dqy * qw;
-    float q23 = dqz * qw;
+    float   dqx = qx + qx;
+    float   dqy = qy + qy;
+    float   dqz = qz + qz;
+    float   q00 = dqx * qx;
+    float   q11 = dqy * qy;
+    float   q22 = dqz * qz;
+    float   q01 = dqx * qy;
+    float   q02 = dqx * qz;
+    float   q03 = dqx * qw;
+    float   q12 = dqy * qz;
+    float   q13 = dqy * qw;
+    float   q23 = dqz * qw;
     boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
     return this
         ._m00(sx - (q11 + q22) * sx)
@@ -4445,16 +4445,16 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
                                                   float sx, float sy, float sz,
                                                   Matrix4f m)
   {
-    float w2 = qw * qw;
-    float x2 = qx * qx;
-    float y2 = qy * qy;
-    float z2 = qz * qz;
-    float zw = qz * qw;
-    float xy = qx * qy;
-    float xz = qx * qz;
-    float yw = qy * qw;
-    float yz = qy * qz;
-    float xw = qx * qw;
+    float w2   = qw * qw;
+    float x2   = qx * qx;
+    float y2   = qy * qy;
+    float z2   = qz * qz;
+    float zw   = qz * qw;
+    float xy   = qx * qy;
+    float xz   = qx * qz;
+    float yw   = qy * qw;
+    float yz   = qy * qz;
+    float xw   = qx * qw;
     float nm00 = w2 + x2 - z2 - y2;
     float nm01 = xy + zw + zw + xy;
     float nm02 = xz - yw + xz - yw;
@@ -4464,8 +4464,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float nm20 = yw + xz + xz + yw;
     float nm21 = yz + yz - xw - xw;
     float nm22 = z2 - y2 - x2 + w2;
-    float m00 = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
-    float m01 = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
+    float m00  = nm00 * m.m00() + nm10 * m.m01() + nm20 * m.m02();
+    float m01  = nm01 * m.m00() + nm11 * m.m01() + nm21 * m.m02();
     this._m02(nm02 * m.m00() + nm12 * m.m01() + nm22 * m.m02())
         ._m00(m00)
         ._m01(m01)
@@ -4935,7 +4935,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m32(m32())
         ._m33(m33())
         ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION
-            | (one ? 0 : PROPERTY_ORTHONORMAL)));
+                                    | (one ? 0 : PROPERTY_ORTHONORMAL)));
   }
 
   /**
@@ -4959,11 +4959,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f scaleAround(float sx, float sy, float sz, float ox, float oy, float oz, Matrix4f dest)
   {
-    float nm30 = m00() * ox + m10() * oy + m20() * oz + m30();
-    float nm31 = m01() * ox + m11() * oy + m21() * oz + m31();
-    float nm32 = m02() * ox + m12() * oy + m22() * oz + m32();
-    float nm33 = m03() * ox + m13() * oy + m23() * oz + m33();
-    boolean one = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
+    float   nm30 = m00() * ox + m10() * oy + m20() * oz + m30();
+    float   nm31 = m01() * ox + m11() * oy + m21() * oz + m31();
+    float   nm32 = m02() * ox + m12() * oy + m22() * oz + m32();
+    float   nm33 = m03() * ox + m13() * oy + m23() * oz + m33();
+    boolean one  = Math.absEqualsOne(sx) && Math.absEqualsOne(sy) && Math.absEqualsOne(sz);
     return dest
         ._m00(m00() * sx)
         ._m01(m01() * sx)
@@ -4982,7 +4982,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m32(-dest.m02() * ox - dest.m12() * oy - dest.m22() * oz + nm32)
         ._m33(-dest.m03() * ox - dest.m13() * oy - dest.m23() * oz + nm33)
         ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION
-            | (one ? 0 : PROPERTY_ORTHONORMAL)));
+                                    | (one ? 0 : PROPERTY_ORTHONORMAL)));
   }
 
   /**
@@ -5047,19 +5047,19 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f scaleLocalGeneric(float x, float y, float z, Matrix4f dest)
   {
-    float nm00 = x * m00();
-    float nm01 = y * m01();
-    float nm02 = z * m02();
-    float nm10 = x * m10();
-    float nm11 = y * m11();
-    float nm12 = z * m12();
-    float nm20 = x * m20();
-    float nm21 = y * m21();
-    float nm22 = z * m22();
-    float nm30 = x * m30();
-    float nm31 = y * m31();
-    float nm32 = z * m32();
-    boolean one = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
+    float   nm00 = x * m00();
+    float   nm01 = y * m01();
+    float   nm02 = z * m02();
+    float   nm10 = x * m10();
+    float   nm11 = y * m11();
+    float   nm12 = z * m12();
+    float   nm20 = x * m20();
+    float   nm21 = y * m21();
+    float   nm22 = z * m22();
+    float   nm30 = x * m30();
+    float   nm31 = y * m31();
+    float   nm32 = z * m32();
+    boolean one  = Math.absEqualsOne(x) && Math.absEqualsOne(y) && Math.absEqualsOne(z);
     return dest
         ._m00(nm00)
         ._m01(nm01)
@@ -5078,7 +5078,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m32(nm32)
         ._m33(m33())
         ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION
-            | (one ? 0 : PROPERTY_ORTHONORMAL)));
+                                    | (one ? 0 : PROPERTY_ORTHONORMAL)));
   }
 
   public Matrix4f scaleLocal(float xyz, Matrix4f dest)
@@ -5142,7 +5142,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m32(sz * (m32() - oz * m33()) + oz * m33())
         ._m33(m33())
         ._properties(properties & ~(PROPERTY_PERSPECTIVE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION
-            | (one ? 0 : PROPERTY_ORTHONORMAL)));
+                                    | (one ? 0 : PROPERTY_ORTHONORMAL)));
   }
 
   /**
@@ -5211,7 +5211,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateXInternal(float ang, Matrix4f dest)
   {
-    float sin = Math.sin(ang), cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang), cos = Math.cosFromSin(sin, ang);
     float lm10 = m10(), lm11 = m11(), lm12 = m12(), lm13 = m13(), lm20 = m20(), lm21 = m21(), lm22 = m22(), lm23 = m23();
     return dest
         ._m20(Math.fma(lm10, -sin, lm20 * cos))
@@ -5478,12 +5478,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateXYZInternal(float angleX, float angleY, float angleZ, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinX = -sinX;
     float m_sinY = -sinY;
     float m_sinZ = -sinZ;
@@ -5567,12 +5567,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateAffineXYZInternal(float angleX, float angleY, float angleZ, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinX = -sinX;
     float m_sinY = -sinY;
     float m_sinZ = -sinZ;
@@ -5676,12 +5676,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateZYXInternal(float angleZ, float angleY, float angleX, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinZ = -sinZ;
     float m_sinY = -sinY;
     float m_sinX = -sinX;
@@ -5748,12 +5748,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f rotateAffineZYX(float angleZ, float angleY, float angleX, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinZ = -sinZ;
     float m_sinY = -sinY;
     float m_sinX = -sinX;
@@ -5855,12 +5855,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateYXZInternal(float angleY, float angleX, float angleZ, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinY = -sinY;
     float m_sinX = -sinX;
     float m_sinZ = -sinZ;
@@ -5927,12 +5927,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f rotateAffineYXZ(float angleY, float angleX, float angleZ, Matrix4f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinY = -sinY;
     float m_sinX = -sinX;
     float m_sinZ = -sinZ;
@@ -6028,12 +6028,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateGenericInternal(float ang, float x, float y, float z, Matrix4f dest)
   {
-    float s = Math.sin(ang);
-    float c = Math.cosFromSin(s, ang);
-    float C = 1.0f - c;
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float s    = Math.sin(ang);
+    float c    = Math.cosFromSin(s, ang);
+    float C    = 1.0f - c;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float rm00 = xx * C + c;
     float rm01 = xy * C + z * s;
     float rm02 = xz * C - y * s;
@@ -6151,12 +6151,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateTranslationInternal(float ang, float x, float y, float z, Matrix4f dest)
   {
-    float s = Math.sin(ang);
-    float c = Math.cosFromSin(s, ang);
-    float C = 1.0f - c;
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float s    = Math.sin(ang);
+    float c    = Math.cosFromSin(s, ang);
+    float C    = 1.0f - c;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float rm00 = xx * C + c;
     float rm01 = xy * C + z * s;
     float rm02 = xz * C - y * s;
@@ -6233,12 +6233,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateAffineInternal(float ang, float x, float y, float z, Matrix4f dest)
   {
-    float s = Math.sin(ang);
-    float c = Math.cosFromSin(s, ang);
-    float C = 1.0f - c;
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float s    = Math.sin(ang);
+    float c    = Math.cosFromSin(s, ang);
+    float C    = 1.0f - c;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float rm00 = xx * C + c;
     float rm01 = xy * C + z * s;
     float rm02 = xz * C - y * s;
@@ -6365,12 +6365,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateLocalGenericInternal(float ang, float x, float y, float z, Matrix4f dest)
   {
-    float s = Math.sin(ang);
-    float c = Math.cosFromSin(s, ang);
-    float C = 1.0f - c;
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float s    = Math.sin(ang);
+    float c    = Math.cosFromSin(s, ang);
+    float C    = 1.0f - c;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float lm00 = xx * C + c;
     float lm01 = xy * C + z * s;
     float lm02 = xz * C - y * s;
@@ -6469,8 +6469,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateLocalX(float ang, Matrix4f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm02 = sin * m01() + cos * m02();
     float nm12 = sin * m11() + cos * m12();
     float nm22 = sin * m21() + cos * m22();
@@ -6546,8 +6546,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateLocalY(float ang, Matrix4f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm02 = -sin * m00() + cos * m02();
     float nm12 = -sin * m10() + cos * m12();
     float nm22 = -sin * m20() + cos * m22();
@@ -6623,8 +6623,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateLocalZ(float ang, Matrix4f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm01 = sin * m00() + cos * m01();
     float nm11 = sin * m10() + cos * m11();
     float nm21 = sin * m20() + cos * m21();
@@ -9140,11 +9140,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     float h = Math.tan(fovy * 0.5f);
     // calculate right matrix elements
-    float rm00 = 1.0f / (h * aspect);
-    float rm11 = 1.0f / h;
-    float rm22;
-    float rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   rm00    = 1.0f / (h * aspect);
+    float   rm11    = 1.0f / h;
+    float   rm22;
+    float   rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -9311,10 +9311,10 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f perspectiveRectGeneric(float width, float height, float zNear, float zFar, boolean zZeroToOne, Matrix4f dest)
   {
-    float rm00 = (zNear + zNear) / width;
-    float rm11 = (zNear + zNear) / height;
-    float rm22, rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   rm00    = (zNear + zNear) / width;
+    float   rm11    = (zNear + zNear) / height;
+    float   rm22, rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -9490,14 +9490,14 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     float h = Math.tan(fovy * 0.5f);
     // calculate right matrix elements
-    float xScale = 1.0f / (h * aspect);
-    float yScale = 1.0f / h;
-    float offX = Math.tan(offAngleX), offY = Math.tan(offAngleY);
-    float rm20 = offX * xScale;
-    float rm21 = offY * yScale;
-    float rm22;
-    float rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   xScale  = 1.0f / (h * aspect);
+    float   yScale  = 1.0f / h;
+    float   offX    = Math.tan(offAngleX), offY = Math.tan(offAngleY);
+    float   rm20    = offX * xScale;
+    float   rm21    = offY * yScale;
+    float   rm22;
+    float   rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -9537,7 +9537,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m22(nm22)
         ._m23(nm23)
         ._properties(properties & ~(PROPERTY_AFFINE | PROPERTY_IDENTITY | PROPERTY_TRANSLATION
-            | PROPERTY_ORTHONORMAL | (rm20 == 0.0f && rm21 == 0.0f ? 0 : PROPERTY_PERSPECTIVE)));
+                                    | PROPERTY_ORTHONORMAL | (rm20 == 0.0f && rm21 == 0.0f ? 0 : PROPERTY_PERSPECTIVE)));
     return dest;
   }
 
@@ -9847,7 +9847,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float h = Math.tan(fovy * 0.5f);
     this._m00(1.0f / (h * aspect))
         ._m11(1.0f / h);
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -9918,7 +9918,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     MemUtil.INSTANCE.zero(this);
     this._m00((zNear + zNear) / width)
         ._m11((zNear + zNear) / height);
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10026,14 +10026,14 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
                                           float aspect, float zNear, float zFar, boolean zZeroToOne)
   {
     MemUtil.INSTANCE.zero(this);
-    float h = Math.tan(fovy * 0.5f);
+    float h      = Math.tan(fovy * 0.5f);
     float xScale = 1.0f / (h * aspect), yScale = 1.0f / h;
-    float offX = Math.tan(offAngleX), offY = Math.tan(offAngleY);
+    float offX   = Math.tan(offAngleX), offY = Math.tan(offAngleY);
     this._m00(xScale)
         ._m11(yScale)
         ._m20(offX * xScale)
         ._m21(offY * yScale);
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10227,11 +10227,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     float h = Math.tan(fovy * 0.5f);
     // calculate right matrix elements
-    float rm00 = 1.0f / (h * aspect);
-    float rm11 = 1.0f / h;
-    float rm22;
-    float rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   rm00    = 1.0f / (h * aspect);
+    float   rm11    = 1.0f / h;
+    float   rm22;
+    float   rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10387,7 +10387,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float h = Math.tan(fovy * 0.5f);
     this._m00(1.0f / (h * aspect))
         ._m11(1.0f / h);
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10475,13 +10475,13 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   private Matrix4f frustumGeneric(float left, float right, float bottom, float top, float zNear, float zFar, boolean zZeroToOne, Matrix4f dest)
   {
     // calculate right matrix elements
-    float rm00 = (zNear + zNear) / (right - left);
-    float rm11 = (zNear + zNear) / (top - bottom);
-    float rm20 = (right + left) / (right - left);
-    float rm21 = (top + bottom) / (top - bottom);
-    float rm22;
-    float rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   rm00    = (zNear + zNear) / (right - left);
+    float   rm11    = (zNear + zNear) / (top - bottom);
+    float   rm20    = (right + left) / (right - left);
+    float   rm21    = (top + bottom) / (top - bottom);
+    float   rm22;
+    float   rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10657,7 +10657,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m11((zNear + zNear) / (top - bottom))
         ._m20((right + left) / (right - left))
         ._m21((top + bottom) / (top - bottom));
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10750,13 +10750,13 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   private Matrix4f frustumLHGeneric(float left, float right, float bottom, float top, float zNear, float zFar, boolean zZeroToOne, Matrix4f dest)
   {
     // calculate right matrix elements
-    float rm00 = (zNear + zNear) / (right - left);
-    float rm11 = (zNear + zNear) / (top - bottom);
-    float rm20 = (right + left) / (right - left);
-    float rm21 = (top + bottom) / (top - bottom);
-    float rm22;
-    float rm32;
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    float   rm00    = (zNear + zNear) / (right - left);
+    float   rm11    = (zNear + zNear) / (top - bottom);
+    float   rm20    = (right + left) / (right - left);
+    float   rm21    = (top + bottom) / (top - bottom);
+    float   rm22;
+    float   rm32;
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -10932,7 +10932,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
         ._m11((zNear + zNear) / (top - bottom))
         ._m20((right + left) / (right - left))
         ._m21((top + bottom) / (top - bottom));
-    boolean farInf = zFar > 0 && Float.isInfinite(zFar);
+    boolean farInf  = zFar > 0 && Float.isInfinite(zFar);
     boolean nearInf = zNear > 0 && Float.isInfinite(zNear);
     if (farInf)
     {
@@ -11067,11 +11067,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateGeneric(Quaternionfc quat, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -11162,11 +11162,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateAffine(Quaternionfc quat, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -11257,11 +11257,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateTranslation(Quaternionfc quat, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -11320,11 +11320,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f rotateAroundAffine(Quaternionfc quat, float ox, float oy, float oz, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -11377,11 +11377,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f rotateAroundGeneric(Quaternionfc quat, float ox, float oy, float oz, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -11491,11 +11491,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f rotateLocal(Quaternionfc quat, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float lm00 = w2 + x2 - z2 - y2;
     float lm01 = dxy + dzw;
     float lm02 = dxz - dyw;
@@ -11565,16 +11565,16 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f rotateAroundLocal(Quaternionfc quat, float ox, float oy, float oz, Matrix4f dest)
   {
-    float w2 = quat.w() * quat.w();
-    float x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y();
-    float z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w();
-    float xy = quat.x() * quat.y();
-    float xz = quat.x() * quat.z();
-    float yw = quat.y() * quat.w();
-    float yz = quat.y() * quat.z();
-    float xw = quat.x() * quat.w();
+    float w2   = quat.w() * quat.w();
+    float x2   = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y();
+    float z2   = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w();
+    float xy   = quat.x() * quat.y();
+    float xz   = quat.x() * quat.z();
+    float yw   = quat.y() * quat.w();
+    float yz   = quat.y() * quat.z();
+    float xw   = quat.x() * quat.w();
     float lm00 = w2 + x2 - z2 - y2;
     float lm01 = xy + zw + zw + xy;
     float lm02 = xz - yw + xz - yw;
@@ -11762,18 +11762,18 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Vector4f unproject(float winX, float winY, float winZ, int[] viewport, Vector4f dest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
+    float a   = m00() * m11() - m01() * m10();
+    float b   = m00() * m12() - m02() * m10();
+    float c   = m00() * m13() - m03() * m10();
+    float d   = m01() * m12() - m02() * m11();
+    float e   = m01() * m13() - m03() * m11();
+    float f   = m02() * m13() - m03() * m12();
+    float g   = m20() * m31() - m21() * m30();
+    float h   = m20() * m32() - m22() * m30();
+    float i   = m20() * m33() - m23() * m30();
+    float j   = m21() * m32() - m22() * m31();
+    float k   = m21() * m33() - m23() * m31();
+    float l   = m22() * m33() - m23() * m32();
     float det = a * l - b * k + c * j + d * i - e * h + f * g;
     det = 1.0f / det;
     float im00 = (m11() * l - m12() * k + m13() * j) * det;
@@ -11797,25 +11797,25 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float ndcZ = winZ + winZ - 1.0f;
     float invW = 1.0f / (im03 * ndcX + im13 * ndcY + im23 * ndcZ + im33);
     return dest.set((im00 * ndcX + im10 * ndcY + im20 * ndcZ + im30) * invW,
-        (im01 * ndcX + im11 * ndcY + im21 * ndcZ + im31) * invW,
-        (im02 * ndcX + im12 * ndcY + im22 * ndcZ + im32) * invW,
-        1.0f);
+                    (im01 * ndcX + im11 * ndcY + im21 * ndcZ + im31) * invW,
+                    (im02 * ndcX + im12 * ndcY + im22 * ndcZ + im32) * invW,
+                    1.0f);
   }
 
   public Vector3f unproject(float winX, float winY, float winZ, int[] viewport, Vector3f dest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
+    float a   = m00() * m11() - m01() * m10();
+    float b   = m00() * m12() - m02() * m10();
+    float c   = m00() * m13() - m03() * m10();
+    float d   = m01() * m12() - m02() * m11();
+    float e   = m01() * m13() - m03() * m11();
+    float f   = m02() * m13() - m03() * m12();
+    float g   = m20() * m31() - m21() * m30();
+    float h   = m20() * m32() - m22() * m30();
+    float i   = m20() * m33() - m23() * m30();
+    float j   = m21() * m32() - m22() * m31();
+    float k   = m21() * m33() - m23() * m31();
+    float l   = m22() * m33() - m23() * m32();
     float det = a * l - b * k + c * j + d * i - e * h + f * g;
     det = 1.0f / det;
     float im00 = (m11() * l - m12() * k + m13() * j) * det;
@@ -11839,8 +11839,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float ndcZ = winZ + winZ - 1.0f;
     float invW = 1.0f / (im03 * ndcX + im13 * ndcY + im23 * ndcZ + im33);
     return dest.set((im00 * ndcX + im10 * ndcY + im20 * ndcZ + im30) * invW,
-        (im01 * ndcX + im11 * ndcY + im21 * ndcZ + im31) * invW,
-        (im02 * ndcX + im12 * ndcY + im22 * ndcZ + im32) * invW);
+                    (im01 * ndcX + im11 * ndcY + im21 * ndcZ + im31) * invW,
+                    (im02 * ndcX + im12 * ndcY + im22 * ndcZ + im32) * invW);
   }
 
   public Vector4f unproject(Vector3fc winCoords, int[] viewport, Vector4f dest)
@@ -11855,55 +11855,55 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f unprojectRay(float winX, float winY, int[] viewport, Vector3f originDest, Vector3f dirDest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
+    float a   = m00() * m11() - m01() * m10();
+    float b   = m00() * m12() - m02() * m10();
+    float c   = m00() * m13() - m03() * m10();
+    float d   = m01() * m12() - m02() * m11();
+    float e   = m01() * m13() - m03() * m11();
+    float f   = m02() * m13() - m03() * m12();
+    float g   = m20() * m31() - m21() * m30();
+    float h   = m20() * m32() - m22() * m30();
+    float i   = m20() * m33() - m23() * m30();
+    float j   = m21() * m32() - m22() * m31();
+    float k   = m21() * m33() - m23() * m31();
+    float l   = m22() * m33() - m23() * m32();
     float det = a * l - b * k + c * j + d * i - e * h + f * g;
     det = 1.0f / det;
-    float im00 = (m11() * l - m12() * k + m13() * j) * det;
-    float im01 = (-m01() * l + m02() * k - m03() * j) * det;
-    float im02 = (m31() * f - m32() * e + m33() * d) * det;
-    float im03 = (-m21() * f + m22() * e - m23() * d) * det;
-    float im10 = (-m10() * l + m12() * i - m13() * h) * det;
-    float im11 = (m00() * l - m02() * i + m03() * h) * det;
-    float im12 = (-m30() * f + m32() * c - m33() * b) * det;
-    float im13 = (m20() * f - m22() * c + m23() * b) * det;
-    float im20 = (m10() * k - m11() * i + m13() * g) * det;
-    float im21 = (-m00() * k + m01() * i - m03() * g) * det;
-    float im22 = (m30() * e - m31() * c + m33() * a) * det;
-    float im23 = (-m20() * e + m21() * c - m23() * a) * det;
-    float im30 = (-m10() * j + m11() * h - m12() * g) * det;
-    float im31 = (m00() * j - m01() * h + m02() * g) * det;
-    float im32 = (-m30() * d + m31() * b - m32() * a) * det;
-    float im33 = (m20() * d - m21() * b + m22() * a) * det;
-    float ndcX = (winX - viewport[0]) / viewport[2] * 2.0f - 1.0f;
-    float ndcY = (winY - viewport[1]) / viewport[3] * 2.0f - 1.0f;
-    float px = im00 * ndcX + im10 * ndcY + im30;
-    float py = im01 * ndcX + im11 * ndcY + im31;
-    float pz = im02 * ndcX + im12 * ndcY + im32;
+    float im00     = (m11() * l - m12() * k + m13() * j) * det;
+    float im01     = (-m01() * l + m02() * k - m03() * j) * det;
+    float im02     = (m31() * f - m32() * e + m33() * d) * det;
+    float im03     = (-m21() * f + m22() * e - m23() * d) * det;
+    float im10     = (-m10() * l + m12() * i - m13() * h) * det;
+    float im11     = (m00() * l - m02() * i + m03() * h) * det;
+    float im12     = (-m30() * f + m32() * c - m33() * b) * det;
+    float im13     = (m20() * f - m22() * c + m23() * b) * det;
+    float im20     = (m10() * k - m11() * i + m13() * g) * det;
+    float im21     = (-m00() * k + m01() * i - m03() * g) * det;
+    float im22     = (m30() * e - m31() * c + m33() * a) * det;
+    float im23     = (-m20() * e + m21() * c - m23() * a) * det;
+    float im30     = (-m10() * j + m11() * h - m12() * g) * det;
+    float im31     = (m00() * j - m01() * h + m02() * g) * det;
+    float im32     = (-m30() * d + m31() * b - m32() * a) * det;
+    float im33     = (m20() * d - m21() * b + m22() * a) * det;
+    float ndcX     = (winX - viewport[0]) / viewport[2] * 2.0f - 1.0f;
+    float ndcY     = (winY - viewport[1]) / viewport[3] * 2.0f - 1.0f;
+    float px       = im00 * ndcX + im10 * ndcY + im30;
+    float py       = im01 * ndcX + im11 * ndcY + im31;
+    float pz       = im02 * ndcX + im12 * ndcY + im32;
     float invNearW = 1.0f / (im03 * ndcX + im13 * ndcY - im23 + im33);
-    float nearX = (px - im20) * invNearW;
-    float nearY = (py - im21) * invNearW;
-    float nearZ = (pz - im22) * invNearW;
-    float invW0 = 1.0f / (im03 * ndcX + im13 * ndcY + im33);
-    float x0 = px * invW0;
-    float y0 = py * invW0;
-    float z0 = pz * invW0;
+    float nearX    = (px - im20) * invNearW;
+    float nearY    = (py - im21) * invNearW;
+    float nearZ    = (pz - im22) * invNearW;
+    float invW0    = 1.0f / (im03 * ndcX + im13 * ndcY + im33);
+    float x0       = px * invW0;
+    float y0       = py * invW0;
+    float z0       = pz * invW0;
     originDest.x = nearX;
     originDest.y = nearY;
     originDest.z = nearZ;
-    dirDest.x = x0 - nearX;
-    dirDest.y = y0 - nearY;
-    dirDest.z = z0 - nearZ;
+    dirDest.x    = x0 - nearX;
+    dirDest.y    = y0 - nearY;
+    dirDest.z    = z0 - nearZ;
     return this;
   }
 
@@ -11924,9 +11924,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float ndcZ = winZ + winZ - 1.0f;
     float invW = 1.0f / (m03() * ndcX + m13() * ndcY + m23() * ndcZ + m33());
     return dest.set((m00() * ndcX + m10() * ndcY + m20() * ndcZ + m30()) * invW,
-        (m01() * ndcX + m11() * ndcY + m21() * ndcZ + m31()) * invW,
-        (m02() * ndcX + m12() * ndcY + m22() * ndcZ + m32()) * invW,
-        1.0f);
+                    (m01() * ndcX + m11() * ndcY + m21() * ndcZ + m31()) * invW,
+                    (m02() * ndcX + m12() * ndcY + m22() * ndcZ + m32()) * invW,
+                    1.0f);
   }
 
   public Matrix4f unprojectInvRay(Vector2fc winCoords, int[] viewport, Vector3f originDest, Vector3f dirDest)
@@ -11936,25 +11936,25 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f unprojectInvRay(float winX, float winY, int[] viewport, Vector3f originDest, Vector3f dirDest)
   {
-    float ndcX = (winX - viewport[0]) / viewport[2] * 2.0f - 1.0f;
-    float ndcY = (winY - viewport[1]) / viewport[3] * 2.0f - 1.0f;
-    float px = m00() * ndcX + m10() * ndcY + m30();
-    float py = m01() * ndcX + m11() * ndcY + m31();
-    float pz = m02() * ndcX + m12() * ndcY + m32();
+    float ndcX     = (winX - viewport[0]) / viewport[2] * 2.0f - 1.0f;
+    float ndcY     = (winY - viewport[1]) / viewport[3] * 2.0f - 1.0f;
+    float px       = m00() * ndcX + m10() * ndcY + m30();
+    float py       = m01() * ndcX + m11() * ndcY + m31();
+    float pz       = m02() * ndcX + m12() * ndcY + m32();
     float invNearW = 1.0f / (m03() * ndcX + m13() * ndcY - m23() + m33());
-    float nearX = (px - m20()) * invNearW;
-    float nearY = (py - m21()) * invNearW;
-    float nearZ = (pz - m22()) * invNearW;
-    float invW0 = 1.0f / (m03() * ndcX + m13() * ndcY + m33());
-    float x0 = px * invW0;
-    float y0 = py * invW0;
-    float z0 = pz * invW0;
+    float nearX    = (px - m20()) * invNearW;
+    float nearY    = (py - m21()) * invNearW;
+    float nearZ    = (pz - m22()) * invNearW;
+    float invW0    = 1.0f / (m03() * ndcX + m13() * ndcY + m33());
+    float x0       = px * invW0;
+    float y0       = py * invW0;
+    float z0       = pz * invW0;
     originDest.x = nearX;
     originDest.y = nearY;
     originDest.z = nearZ;
-    dirDest.x = x0 - nearX;
-    dirDest.y = y0 - nearY;
-    dirDest.z = z0 - nearZ;
+    dirDest.x    = x0 - nearX;
+    dirDest.y    = y0 - nearY;
+    dirDest.z    = z0 - nearZ;
     return this;
   }
 
@@ -11970,28 +11970,28 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float ndcZ = winZ + winZ - 1.0f;
     float invW = 1.0f / (m03() * ndcX + m13() * ndcY + m23() * ndcZ + m33());
     return dest.set((m00() * ndcX + m10() * ndcY + m20() * ndcZ + m30()) * invW,
-        (m01() * ndcX + m11() * ndcY + m21() * ndcZ + m31()) * invW,
-        (m02() * ndcX + m12() * ndcY + m22() * ndcZ + m32()) * invW);
+                    (m01() * ndcX + m11() * ndcY + m21() * ndcZ + m31()) * invW,
+                    (m02() * ndcX + m12() * ndcY + m22() * ndcZ + m32()) * invW);
   }
 
   public Vector4f project(float x, float y, float z, int[] viewport, Vector4f winCoordsDest)
   {
     float invW = 1.0f / Math.fma(m03(), x, Math.fma(m13(), y, Math.fma(m23(), z, m33())));
-    float nx = Math.fma(m00(), x, Math.fma(m10(), y, Math.fma(m20(), z, m30()))) * invW;
-    float ny = Math.fma(m01(), x, Math.fma(m11(), y, Math.fma(m21(), z, m31()))) * invW;
-    float nz = Math.fma(m02(), x, Math.fma(m12(), y, Math.fma(m22(), z, m32()))) * invW;
+    float nx   = Math.fma(m00(), x, Math.fma(m10(), y, Math.fma(m20(), z, m30()))) * invW;
+    float ny   = Math.fma(m01(), x, Math.fma(m11(), y, Math.fma(m21(), z, m31()))) * invW;
+    float nz   = Math.fma(m02(), x, Math.fma(m12(), y, Math.fma(m22(), z, m32()))) * invW;
     return winCoordsDest.set(Math.fma(Math.fma(nx, 0.5f, 0.5f), viewport[2], viewport[0]),
-        Math.fma(Math.fma(ny, 0.5f, 0.5f), viewport[3], viewport[1]),
-        Math.fma(0.5f, nz, 0.5f),
-        1.0f);
+                             Math.fma(Math.fma(ny, 0.5f, 0.5f), viewport[3], viewport[1]),
+                             Math.fma(0.5f, nz, 0.5f),
+                             1.0f);
   }
 
   public Vector3f project(float x, float y, float z, int[] viewport, Vector3f winCoordsDest)
   {
     float invW = 1.0f / Math.fma(m03(), x, Math.fma(m13(), y, Math.fma(m23(), z, m33())));
-    float nx = Math.fma(m00(), x, Math.fma(m10(), y, Math.fma(m20(), z, m30()))) * invW;
-    float ny = Math.fma(m01(), x, Math.fma(m11(), y, Math.fma(m21(), z, m31()))) * invW;
-    float nz = Math.fma(m02(), x, Math.fma(m12(), y, Math.fma(m22(), z, m32()))) * invW;
+    float nx   = Math.fma(m00(), x, Math.fma(m10(), y, Math.fma(m20(), z, m30()))) * invW;
+    float ny   = Math.fma(m01(), x, Math.fma(m11(), y, Math.fma(m21(), z, m31()))) * invW;
+    float nz   = Math.fma(m02(), x, Math.fma(m12(), y, Math.fma(m22(), z, m32()))) * invW;
     winCoordsDest.x = Math.fma(Math.fma(nx, 0.5f, 0.5f), viewport[2], viewport[0]);
     winCoordsDest.y = Math.fma(Math.fma(ny, 0.5f, 0.5f), viewport[3], viewport[1]);
     winCoordsDest.z = Math.fma(0.5f, nz, 0.5f);
@@ -12022,7 +12022,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f reflectAffine(float a, float b, float c, float d, Matrix4f dest)
   {
-    float da = a + a, db = b + b, dc = c + c, dd = d + d;
+    float da   = a + a, db = b + b, dc = c + c, dd = d + d;
     float rm00 = 1.0f - da * a;
     float rm01 = -da * b;
     float rm02 = -da * c;
@@ -12064,7 +12064,7 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Matrix4f reflectGeneric(float a, float b, float c, float d, Matrix4f dest)
   {
-    float da = a + a, db = b + b, dc = c + c, dd = d + d;
+    float da   = a + a, db = b + b, dc = c + c, dd = d + d;
     float rm00 = 1.0f - da * a;
     float rm01 = -da * b;
     float rm02 = -da * c;
@@ -12155,9 +12155,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public Matrix4f reflect(float nx, float ny, float nz, float px, float py, float pz, Matrix4f dest)
   {
     float invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
-    float nnx = nx * invLength;
-    float nny = ny * invLength;
-    float nnz = nz * invLength;
+    float nnx       = nx * invLength;
+    float nny       = ny * invLength;
+    float nnz       = nz * invLength;
     /* See: http://mathworld.wolfram.com/Plane.html */
     return reflect(nnx, nny, nnz, -nnx * px - nny * py - nnz * pz, dest);
   }
@@ -12204,12 +12204,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public Matrix4f reflect(Quaternionfc orientation, Vector3fc point, Matrix4f dest)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
-    float normalX = (float) (orientation.x() * num3 + orientation.w() * num2);
-    float normalY = (float) (orientation.y() * num3 - orientation.w() * num1);
-    float normalZ = (float) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
+    float  normalX = (float) (orientation.x() * num3 + orientation.w() * num2);
+    float  normalY = (float) (orientation.y() * num3 - orientation.w() * num1);
+    float  normalZ = (float) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
     return reflect(normalX, normalY, normalZ, point.x(), point.y(), point.z(), dest);
   }
 
@@ -12270,9 +12270,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public Matrix4f reflection(float nx, float ny, float nz, float px, float py, float pz)
   {
     float invLength = Math.invsqrt(nx * nx + ny * ny + nz * nz);
-    float nnx = nx * invLength;
-    float nny = ny * invLength;
-    float nnz = nz * invLength;
+    float nnx       = nx * invLength;
+    float nny       = ny * invLength;
+    float nnz       = nz * invLength;
     /* See: http://mathworld.wolfram.com/Plane.html */
     return reflection(nnx, nny, nnz, -nnx * px - nny * py - nnz * pz);
   }
@@ -12304,12 +12304,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f reflection(Quaternionfc orientation, Vector3fc point)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
-    float normalX = (float) (orientation.x() * num3 + orientation.w() * num2);
-    float normalY = (float) (orientation.y() * num3 - orientation.w() * num1);
-    float normalZ = (float) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
+    float  normalX = (float) (orientation.x() * num3 + orientation.w() * num2);
+    float  normalY = (float) (orientation.y() * num3 - orientation.w() * num1);
+    float  normalZ = (float) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
     return reflection(normalX, normalY, normalZ, point.x(), point.y(), point.z());
   }
 
@@ -12512,8 +12512,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float m00m12 = m00() * m12();
     float m01m12 = m01() * m12();
     float m02m11 = m02() * m11();
-    float det = (m00m11 - m01m10) * m22() + (m02m10 - m00m12) * m21() + (m01m12 - m02m11) * m20();
-    float s = 1.0f / det;
+    float det    = (m00m11 - m01m10) * m22() + (m02m10 - m00m12) * m21() + (m01m12 - m02m11) * m20();
+    float s      = 1.0f / det;
     /* Invert and transpose in one go */
     float nm00 = (m11() * m22() - m21() * m12()) * s;
     float nm01 = (m20() * m12() - m10() * m22()) * s;
@@ -12578,8 +12578,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   private Matrix3f normalGeneric(Matrix3f dest)
   {
     float det = (m00() * m11() - (m01() * m10())) * m22()
-        + (m02() * m10() - (m00() * m12())) * m21()
-        + (m01() * m12() - (m02() * m11())) * m20();
+                + (m02() * m10() - (m00() * m12())) * m21()
+                + (m01() * m12() - (m02() * m11())) * m20();
     float s = 1.0f / det;
     /* Invert and transpose in one go */
     return dest._m00((m11() * m22() - m21() * m12()) * s)
@@ -12911,15 +12911,15 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     n1x = m03() + m00();
     n1y = m13() + m10();
     n1z = m23() + m20();
-    d1 = m33() + m30(); // left
+    d1  = m33() + m30(); // left
     n2x = m03() - m00();
     n2y = m13() - m10();
     n2z = m23() - m20();
-    d2 = m33() - m30(); // right
+    d2  = m33() - m30(); // right
     n3x = m03() - m01();
     n3y = m13() - m11();
     n3z = m23() - m21();
-    d3 = m33() - m31(); // top
+    d3  = m33() - m31(); // top
     float c23x, c23y, c23z;
     c23x = n2y * n3z - n2z * n3y;
     c23y = n2z * n3x - n2x * n3z;
@@ -13036,9 +13036,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     m1y = (j + k + l - g - h - i) * (1.0f - y) + (g - h - i + j - k + l) * y;
     m1z = (p + q + r - m - n - o) * (1.0f - y) + (m - n - o + p - q + r) * y;
     float m2x, m2y, m2z;
-    m2x = (b - c - d + e + f - a) * (1.0f - y) + (a + b - c - d - e + f) * y;
-    m2y = (h - i - j + k + l - g) * (1.0f - y) + (g + h - i - j - k + l) * y;
-    m2z = (n - o - p + q + r - m) * (1.0f - y) + (m + n - o - p - q + r) * y;
+    m2x   = (b - c - d + e + f - a) * (1.0f - y) + (a + b - c - d - e + f) * y;
+    m2y   = (h - i - j + k + l - g) * (1.0f - y) + (g + h - i - j - k + l) * y;
+    m2z   = (n - o - p + q + r - m) * (1.0f - y) + (m + n - o - p - q + r) * y;
     dir.x = m1x + (m2x - m1x) * x;
     dir.y = m1y + (m2y - m1y) * x;
     dir.z = m1z + (m2z - m1z) * x;
@@ -13124,24 +13124,24 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   private Vector3f originGeneric(Vector3f dest)
   {
-    float a = m00() * m11() - m01() * m10();
-    float b = m00() * m12() - m02() * m10();
-    float c = m00() * m13() - m03() * m10();
-    float d = m01() * m12() - m02() * m11();
-    float e = m01() * m13() - m03() * m11();
-    float f = m02() * m13() - m03() * m12();
-    float g = m20() * m31() - m21() * m30();
-    float h = m20() * m32() - m22() * m30();
-    float i = m20() * m33() - m23() * m30();
-    float j = m21() * m32() - m22() * m31();
-    float k = m21() * m33() - m23() * m31();
-    float l = m22() * m33() - m23() * m32();
-    float det = a * l - b * k + c * j + d * i - e * h + f * g;
+    float a      = m00() * m11() - m01() * m10();
+    float b      = m00() * m12() - m02() * m10();
+    float c      = m00() * m13() - m03() * m10();
+    float d      = m01() * m12() - m02() * m11();
+    float e      = m01() * m13() - m03() * m11();
+    float f      = m02() * m13() - m03() * m12();
+    float g      = m20() * m31() - m21() * m30();
+    float h      = m20() * m32() - m22() * m30();
+    float i      = m20() * m33() - m23() * m30();
+    float j      = m21() * m32() - m22() * m31();
+    float k      = m21() * m33() - m23() * m31();
+    float l      = m22() * m33() - m23() * m32();
+    float det    = a * l - b * k + c * j + d * i - e * h + f * g;
     float invDet = 1.0f / det;
-    float nm30 = (-m10() * j + m11() * h - m12() * g) * invDet;
-    float nm31 = (m00() * j - m01() * h + m02() * g) * invDet;
-    float nm32 = (-m30() * d + m31() * b - m32() * a) * invDet;
-    float nm33 = det / (m20() * d - m21() * b + m22() * a);
+    float nm30   = (-m10() * j + m11() * h - m12() * g) * invDet;
+    float nm31   = (m00() * j - m01() * h + m02() * g) * invDet;
+    float nm32   = (-m30() * d + m31() * b - m32() * a) * invDet;
+    float nm33   = det / (m20() * d - m21() * b + m22() * a);
     return dest.set(nm30 * nm33, nm31 * nm33, nm32 * nm33);
   }
 
@@ -13207,10 +13207,10 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     // normalize plane
     float invPlaneLen = Math.invsqrt(a * a + b * b + c * c);
-    float an = a * invPlaneLen;
-    float bn = b * invPlaneLen;
-    float cn = c * invPlaneLen;
-    float dn = d * invPlaneLen;
+    float an          = a * invPlaneLen;
+    float bn          = b * invPlaneLen;
+    float cn          = c * invPlaneLen;
+    float dn          = d * invPlaneLen;
 
     float dot = an * lightX + bn * lightY + cn * lightZ + dn * lightW;
 
@@ -13466,12 +13466,12 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f billboardSpherical(Vector3fc objPos, Vector3fc targetPos)
   {
-    float toDirX = targetPos.x() - objPos.x();
-    float toDirY = targetPos.y() - objPos.y();
-    float toDirZ = targetPos.z() - objPos.z();
-    float x = -toDirY;
-    float y = toDirX;
-    float w = Math.sqrt(toDirX * toDirX + toDirY * toDirY + toDirZ * toDirZ) + toDirZ;
+    float toDirX  = targetPos.x() - objPos.x();
+    float toDirY  = targetPos.y() - objPos.y();
+    float toDirZ  = targetPos.z() - objPos.z();
+    float x       = -toDirY;
+    float y       = toDirX;
+    float w       = Math.sqrt(toDirX * toDirX + toDirY * toDirY + toDirZ * toDirZ) + toDirZ;
     float invNorm = Math.invsqrt(x * x + y * y + w * w);
     x *= invNorm;
     y *= invNorm;
@@ -13503,8 +13503,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + Float.floatToIntBits(m00());
     result = prime * result + Float.floatToIntBits(m01());
     result = prime * result + Float.floatToIntBits(m02());
@@ -13740,27 +13740,27 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     MemUtil.INSTANCE.swap(this, other);
     int props = properties;
-    this.properties = other.properties();
+    this.properties  = other.properties();
     other.properties = props;
     return this;
   }
 
   public Matrix4f arcball(float radius, float centerX, float centerY, float centerZ, float angleX, float angleY, Matrix4f dest)
   {
-    float m30 = m20() * -radius + this.m30();
-    float m31 = m21() * -radius + this.m31();
-    float m32 = m22() * -radius + this.m32();
-    float m33 = m23() * -radius + this.m33();
-    float sin = Math.sin(angleX);
-    float cos = Math.cosFromSin(sin, angleX);
+    float m30  = m20() * -radius + this.m30();
+    float m31  = m21() * -radius + this.m31();
+    float m32  = m22() * -radius + this.m32();
+    float m33  = m23() * -radius + this.m33();
+    float sin  = Math.sin(angleX);
+    float cos  = Math.cosFromSin(sin, angleX);
     float nm10 = m10() * cos + m20() * sin;
     float nm11 = m11() * cos + m21() * sin;
     float nm12 = m12() * cos + m22() * sin;
     float nm13 = m13() * cos + m23() * sin;
-    float m20 = this.m20() * cos - m10() * sin;
-    float m21 = this.m21() * cos - m11() * sin;
-    float m22 = this.m22() * cos - m12() * sin;
-    float m23 = this.m23() * cos - m13() * sin;
+    float m20  = this.m20() * cos - m10() * sin;
+    float m21  = this.m21() * cos - m11() * sin;
+    float m22  = this.m22() * cos - m12() * sin;
+    float m23  = this.m23() * cos - m13() * sin;
     sin = Math.sin(angleY);
     cos = Math.cosFromSin(sin, angleY);
     float nm00 = m00() * cos - m20 * sin;
@@ -13855,13 +13855,13 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float maxZ = Float.NEGATIVE_INFINITY;
     for (int t = 0; t < 8; t++)
     {
-      float x = ((t & 1) << 1) - 1.0f;
-      float y = (((t >>> 1) & 1) << 1) - 1.0f;
-      float z = (((t >>> 2) & 1) << 1) - 1.0f;
+      float x    = ((t & 1) << 1) - 1.0f;
+      float y    = (((t >>> 1) & 1) << 1) - 1.0f;
+      float z    = (((t >>> 2) & 1) << 1) - 1.0f;
       float invW = 1.0f / (m03() * x + m13() * y + m23() * z + m33());
-      float nx = (m00() * x + m10() * y + m20() * z + m30()) * invW;
-      float ny = (m01() * x + m11() * y + m21() * z + m31()) * invW;
-      float nz = (m02() * x + m12() * y + m22() * z + m32()) * invW;
+      float nx   = (m00() * x + m10() * y + m20() * z + m30()) * invW;
+      float ny   = (m01() * x + m11() * y + m21() * z + m31()) * invW;
+      float nz   = (m02() * x + m12() * y + m22() * z + m32()) * invW;
       minX = minX < nx ? minX : nx;
       minY = minY < ny ? minY : ny;
       minZ = minZ < nz ? minZ : nz;
@@ -13881,8 +13881,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public Matrix4f projectedGridRange(Matrix4fc projector, float sLower, float sUpper, Matrix4f dest)
   {
     // Compute intersection with frustum edges and plane
-    float minX = Float.POSITIVE_INFINITY, minY = Float.POSITIVE_INFINITY;
-    float maxX = Float.NEGATIVE_INFINITY, maxY = Float.NEGATIVE_INFINITY;
+    float   minX         = Float.POSITIVE_INFINITY, minY = Float.POSITIVE_INFINITY;
+    float   maxX         = Float.NEGATIVE_INFINITY, maxY = Float.NEGATIVE_INFINITY;
     boolean intersection = false;
     for (int t = 0; t < 3 * 4; t++)
     {
@@ -13912,16 +13912,16 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
       }
       // unproject corners
       float invW = 1.0f / (m03() * c0X + m13() * c0Y + m23() * c0Z + m33());
-      float p0x = (m00() * c0X + m10() * c0Y + m20() * c0Z + m30()) * invW;
-      float p0y = (m01() * c0X + m11() * c0Y + m21() * c0Z + m31()) * invW;
-      float p0z = (m02() * c0X + m12() * c0Y + m22() * c0Z + m32()) * invW;
+      float p0x  = (m00() * c0X + m10() * c0Y + m20() * c0Z + m30()) * invW;
+      float p0y  = (m01() * c0X + m11() * c0Y + m21() * c0Z + m31()) * invW;
+      float p0z  = (m02() * c0X + m12() * c0Y + m22() * c0Z + m32()) * invW;
       invW = 1.0f / (m03() * c1X + m13() * c1Y + m23() * c1Z + m33());
-      float p1x = (m00() * c1X + m10() * c1Y + m20() * c1Z + m30()) * invW;
-      float p1y = (m01() * c1X + m11() * c1Y + m21() * c1Z + m31()) * invW;
-      float p1z = (m02() * c1X + m12() * c1Y + m22() * c1Z + m32()) * invW;
-      float dirX = p1x - p0x;
-      float dirY = p1y - p0y;
-      float dirZ = p1z - p0z;
+      float p1x      = (m00() * c1X + m10() * c1Y + m20() * c1Z + m30()) * invW;
+      float p1y      = (m01() * c1X + m11() * c1Y + m21() * c1Z + m31()) * invW;
+      float p1z      = (m02() * c1X + m12() * c1Y + m22() * c1Z + m32()) * invW;
+      float dirX     = p1x - p0x;
+      float dirY     = p1y - p0y;
+      float dirZ     = p1z - p0z;
       float invDenom = 1.0f / dirY;
       // test for intersection
       for (int s = 0; s < 2; s++)
@@ -14014,13 +14014,13 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float minZ = Float.POSITIVE_INFINITY, maxZ = Float.NEGATIVE_INFINITY;
     for (int t = 0; t < 8; t++)
     {
-      float x = ((t & 1) << 1) - 1.0f;
-      float y = (((t >>> 1) & 1) << 1) - 1.0f;
-      float z = (((t >>> 2) & 1) << 1) - 1.0f;
+      float x    = ((t & 1) << 1) - 1.0f;
+      float y    = (((t >>> 1) & 1) << 1) - 1.0f;
+      float z    = (((t >>> 2) & 1) << 1) - 1.0f;
       float invW = 1.0f / (m03() * x + m13() * y + m23() * z + m33());
-      float wx = (m00() * x + m10() * y + m20() * z + m30()) * invW;
-      float wy = (m01() * x + m11() * y + m21() * z + m31()) * invW;
-      float wz = (m02() * x + m12() * y + m22() * z + m32()) * invW;
+      float wx   = (m00() * x + m10() * y + m20() * z + m30()) * invW;
+      float wy   = (m01() * x + m11() * y + m21() * z + m31()) * invW;
+      float wz   = (m02() * x + m12() * y + m22() * z + m32()) * invW;
       invW = 1.0f / (view.m03() * wx + view.m13() * wy + view.m23() * wz + view.m33());
       float vx = view.m00() * wx + view.m10() * wy + view.m20() * wz + view.m30();
       float vy = view.m01() * wx + view.m11() * wy + view.m21() * wz + view.m31();
@@ -14057,26 +14057,26 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f trapezoidCrop(float p0x, float p0y, float p1x, float p1y, float p2x, float p2y, float p3x, float p3y)
   {
-    float aX = p1y - p0y, aY = p0x - p1x;
+    float aX   = p1y - p0y, aY = p0x - p1x;
     float nm00 = aY;
     float nm10 = -aX;
     float nm30 = aX * p0y - aY * p0x;
     float nm01 = aX;
     float nm11 = aY;
     float nm31 = -(aX * p0x + aY * p0y);
-    float c3x = nm00 * p3x + nm10 * p3y + nm30;
-    float c3y = nm01 * p3x + nm11 * p3y + nm31;
-    float s = -c3x / c3y;
+    float c3x  = nm00 * p3x + nm10 * p3y + nm30;
+    float c3y  = nm01 * p3x + nm11 * p3y + nm31;
+    float s    = -c3x / c3y;
     nm00 += s * nm01;
     nm10 += s * nm11;
     nm30 += s * nm31;
     float d1x = nm00 * p1x + nm10 * p1y + nm30;
     float d2x = nm00 * p2x + nm10 * p2y + nm30;
-    float d = d1x * c3y / (d2x - d1x);
+    float d   = d1x * c3y / (d2x - d1x);
     nm31 += d;
-    float sx = 2.0f / d2x;
-    float sy = 1.0f / (c3y + d);
-    float u = (sy + sy) * d / (1.0f - sy * d);
+    float sx  = 2.0f / d2x;
+    float sy  = 1.0f / (c3y + d);
+    float u   = (sy + sy) * d / (1.0f - sy * d);
     float m03 = nm01 * sy;
     float m13 = nm11 * sy;
     float m33 = nm31 * sy;
@@ -14348,9 +14348,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     // Normalize direction
     float invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    float ndirX = dirX * invDirLength;
-    float ndirY = dirY * invDirLength;
-    float ndirZ = dirZ * invDirLength;
+    float ndirX        = dirX * invDirLength;
+    float ndirY        = dirY * invDirLength;
+    float ndirZ        = dirZ * invDirLength;
     // left = up x direction
     float leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -14445,9 +14445,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     // Normalize direction
     float invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    float ndirX = dirX * invDirLength;
-    float ndirY = dirY * invDirLength;
-    float ndirZ = dirZ * invDirLength;
+    float ndirX        = dirX * invDirLength;
+    float ndirY        = dirY * invDirLength;
+    float ndirZ        = dirZ * invDirLength;
     // left = up x direction
     float leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -14522,9 +14522,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   {
     // Normalize direction
     float invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    float ndirX = dirX * invDirLength;
-    float ndirY = dirY * invDirLength;
-    float ndirZ = dirZ * invDirLength;
+    float ndirX        = dirX * invDirLength;
+    float ndirY        = dirY * invDirLength;
+    float ndirZ        = dirZ * invDirLength;
     // left = up x direction
     float leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -14595,27 +14595,27 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
    */
   public Matrix4f affineSpan(Vector3f corner, Vector3f xDir, Vector3f yDir, Vector3f zDir)
   {
-    float a = m10() * m22(), b = m10() * m21(), c = m10() * m02(), d = m10() * m01();
-    float e = m11() * m22(), f = m11() * m20(), g = m11() * m02(), h = m11() * m00();
-    float i = m12() * m21(), j = m12() * m20(), k = m12() * m01(), l = m12() * m00();
-    float m = m20() * m02(), n = m20() * m01(), o = m21() * m02(), p = m21() * m00();
-    float q = m22() * m01(), r = m22() * m00();
-    float s = 1.0f / (m00() * m11() - m01() * m10()) * m22() + (m02() * m10() - m00() * m12()) * m21() + (m01() * m12() - m02() * m11()) * m20();
+    float a    = m10() * m22(), b = m10() * m21(), c = m10() * m02(), d = m10() * m01();
+    float e    = m11() * m22(), f = m11() * m20(), g = m11() * m02(), h = m11() * m00();
+    float i    = m12() * m21(), j = m12() * m20(), k = m12() * m01(), l = m12() * m00();
+    float m    = m20() * m02(), n = m20() * m01(), o = m21() * m02(), p = m21() * m00();
+    float q    = m22() * m01(), r = m22() * m00();
+    float s    = 1.0f / (m00() * m11() - m01() * m10()) * m22() + (m02() * m10() - m00() * m12()) * m21() + (m01() * m12() - m02() * m11()) * m20();
     float nm00 = (e - i) * s, nm01 = (o - q) * s, nm02 = (k - g) * s;
     float nm10 = (j - a) * s, nm11 = (r - m) * s, nm12 = (c - l) * s;
     float nm20 = (b - f) * s, nm21 = (n - p) * s, nm22 = (h - d) * s;
     corner.x = -nm00 - nm10 - nm20 + (a * m31() - b * m32() + f * m32() - e * m30() + i * m30() - j * m31()) * s;
     corner.y = -nm01 - nm11 - nm21 + (m * m31() - n * m32() + p * m32() - o * m30() + q * m30() - r * m31()) * s;
     corner.z = -nm02 - nm12 - nm22 + (g * m30() - k * m30() + l * m31() - c * m31() + d * m32() - h * m32()) * s;
-    xDir.x = 2.0f * nm00;
-    xDir.y = 2.0f * nm01;
-    xDir.z = 2.0f * nm02;
-    yDir.x = 2.0f * nm10;
-    yDir.y = 2.0f * nm11;
-    yDir.z = 2.0f * nm12;
-    zDir.x = 2.0f * nm20;
-    zDir.y = 2.0f * nm21;
-    zDir.z = 2.0f * nm22;
+    xDir.x   = 2.0f * nm00;
+    xDir.y   = 2.0f * nm01;
+    xDir.z   = 2.0f * nm02;
+    yDir.x   = 2.0f * nm10;
+    yDir.y   = 2.0f * nm11;
+    yDir.z   = 2.0f * nm12;
+    zDir.x   = 2.0f * nm20;
+    zDir.y   = 2.0f * nm21;
+    zDir.z   = 2.0f * nm22;
     return this;
   }
 
@@ -14628,8 +14628,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     float nzX = m03() + m02(), nzY = m13() + m12(), nzZ = m23() + m22(), nzW = m33() + m32();
     float pzX = m03() - m02(), pzY = m13() - m12(), pzZ = m23() - m22(), pzW = m33() - m32();
     return nxX * x + nxY * y + nxZ * z + nxW >= 0 && pxX * x + pxY * y + pxZ * z + pxW >= 0 &&
-        nyX * x + nyY * y + nyZ * z + nyW >= 0 && pyX * x + pyY * y + pyZ * z + pyW >= 0 &&
-        nzX * x + nzY * y + nzZ * z + nzW >= 0 && pzX * x + pzY * y + pzZ * z + pzW >= 0;
+           nyX * x + nyY * y + nyZ * z + nyW >= 0 && pyX * x + pyY * y + pyZ * z + pyW >= 0 &&
+           nzX * x + nzY * y + nzZ * z + nzW >= 0 && pzX * x + pzY * y + pzZ * z + pzW >= 0;
   }
 
   public boolean testSphere(float x, float y, float z, float r)
@@ -14672,8 +14672,8 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
     pzZ *= invl;
     pzW *= invl;
     return nxX * x + nxY * y + nxZ * z + nxW >= -r && pxX * x + pxY * y + pxZ * z + pxW >= -r &&
-        nyX * x + nyY * y + nyZ * z + nyW >= -r && pyX * x + pyY * y + pyZ * z + pyW >= -r &&
-        nzX * x + nzY * y + nzZ * z + nzW >= -r && pzX * x + pzY * y + pzZ * z + pzW >= -r;
+           nyX * x + nyY * y + nyZ * z + nyW >= -r && pyX * x + pyY * y + pyZ * z + pyW >= -r &&
+           nzX * x + nzY * y + nzZ * z + nzW >= -r && pzX * x + pzY * y + pzZ * z + pzW >= -r;
   }
 
   public boolean testAab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
@@ -14689,11 +14689,11 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
      * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
      */
     return nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) + nxZ * (nxZ < 0 ? minZ : maxZ) >= -nxW &&
-        pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
-        nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
-        pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
-        nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
-        pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
+           pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
+           nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
+           pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
+           nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
+           pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
   }
 
   /**
@@ -14832,17 +14832,17 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public Matrix4f withLookAtUp(float upX, float upY, float upZ, Matrix4f dest)
   {
     float y = (upY * m21() - upZ * m11()) * m02() +
-        (upZ * m01() - upX * m21()) * m12() +
-        (upX * m11() - upY * m01()) * m22();
+              (upZ * m01() - upX * m21()) * m12() +
+              (upX * m11() - upY * m01()) * m22();
     float x = upX * m01() + upY * m11() + upZ * m21();
     if ((properties & PROPERTY_ORTHONORMAL) == 0)
     {
       x *= Math.sqrt(m01() * m01() + m11() * m11() + m21() * m21());
     }
     float invsqrt = Math.invsqrt(y * y + x * x);
-    float c = x * invsqrt, s = y * invsqrt;
-    float nm00 = c * m00() - s * m01(), nm10 = c * m10() - s * m11(), nm20 = c * m20() - s * m21(), nm31 = s * m30() + c * m31();
-    float nm01 = s * m00() + c * m01(), nm11 = s * m10() + c * m11(), nm21 = s * m20() + c * m21(), nm30 = c * m30() - s * m31();
+    float c       = x * invsqrt, s = y * invsqrt;
+    float nm00    = c * m00() - s * m01(), nm10 = c * m10() - s * m11(), nm20 = c * m20() - s * m21(), nm31 = s * m30() + c * m31();
+    float nm01    = s * m00() + c * m01(), nm11 = s * m10() + c * m11(), nm21 = s * m20() + c * m21(), nm30 = c * m30() - s * m31();
     dest._m00(nm00)._m10(nm10)._m20(nm20)._m30(nm30)
         ._m01(nm01)._m11(nm11)._m21(nm21)._m31(nm31);
     if (dest != this)
@@ -15892,9 +15892,9 @@ public class Matrix4f implements Externalizable, Cloneable, Matrix4fc
   public boolean isFinite()
   {
     return Math.isFinite(m00()) && Math.isFinite(m01()) && Math.isFinite(m02()) && Math.isFinite(m03()) &&
-        Math.isFinite(m10()) && Math.isFinite(m11()) && Math.isFinite(m12()) && Math.isFinite(m13()) &&
-        Math.isFinite(m20()) && Math.isFinite(m21()) && Math.isFinite(m22()) && Math.isFinite(m23()) &&
-        Math.isFinite(m30()) && Math.isFinite(m31()) && Math.isFinite(m32()) && Math.isFinite(m33());
+           Math.isFinite(m10()) && Math.isFinite(m11()) && Math.isFinite(m12()) && Math.isFinite(m13()) &&
+           Math.isFinite(m20()) && Math.isFinite(m21()) && Math.isFinite(m22()) && Math.isFinite(m23()) &&
+           Math.isFinite(m30()) && Math.isFinite(m31()) && Math.isFinite(m32()) && Math.isFinite(m33());
   }
 
   public Object clone() throws CloneNotSupportedException

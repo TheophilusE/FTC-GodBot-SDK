@@ -36,9 +36,9 @@ public class QuaterniondInterpolator
 {
 
   private final SvdDecomposition3d svdDecomposition3d = new SvdDecomposition3d();
-  private final double[] m = new double[9];
-  private final Matrix3d u = new Matrix3d();
-  private final Matrix3d v = new Matrix3d();
+  private final double[]           m                  = new double[9];
+  private final Matrix3d           u                  = new Matrix3d();
+  private final Matrix3d           v                  = new Matrix3d();
 
   /**
    * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
@@ -57,19 +57,19 @@ public class QuaterniondInterpolator
     // Sum the rotation matrices of qs
     for (int i = 0; i < qs.length; i++)
     {
-      Quaterniond q = qs[i];
-      double dx = q.x + q.x;
-      double dy = q.y + q.y;
-      double dz = q.z + q.z;
-      double q00 = dx * q.x;
-      double q11 = dy * q.y;
-      double q22 = dz * q.z;
-      double q01 = dx * q.y;
-      double q02 = dx * q.z;
-      double q03 = dx * q.w;
-      double q12 = dy * q.z;
-      double q13 = dy * q.w;
-      double q23 = dz * q.w;
+      Quaterniond q   = qs[i];
+      double      dx  = q.x + q.x;
+      double      dy  = q.y + q.y;
+      double      dz  = q.z + q.z;
+      double      q00 = dx * q.x;
+      double      q11 = dy * q.y;
+      double      q22 = dz * q.z;
+      double      q01 = dx * q.y;
+      double      q02 = dx * q.z;
+      double      q03 = dx * q.w;
+      double      q12 = dy * q.z;
+      double      q13 = dy * q.w;
+      double      q23 = dz * q.w;
       m00 += weights[i] * (1.0 - q11 - q22);
       m01 += weights[i] * (q01 + q23);
       m02 += weights[i] * (q02 - q13);
@@ -113,8 +113,8 @@ public class QuaterniondInterpolator
     SvdDecomposition3d()
     {
       this.rv1 = new double[3];
-      this.w = new double[3];
-      this.v = new double[9];
+      this.w   = new double[3];
+      this.v   = new double[9];
     }
 
     private static double PYTHAG(double a, double b)
@@ -122,11 +122,11 @@ public class QuaterniondInterpolator
       double at = Math.abs(a), bt = Math.abs(b), ct, result;
       if (at > bt)
       {
-        ct = bt / at;
+        ct     = bt / at;
         result = at * Math.sqrt(1.0 + ct * ct);
       } else if (bt > 0.0)
       {
-        ct = at / bt;
+        ct     = at / bt;
         result = bt * Math.sqrt(1.0 + ct * ct);
       } else
       {
@@ -142,18 +142,18 @@ public class QuaterniondInterpolator
 
     void svd(double[] a, int maxIterations, Matrix3d destU, Matrix3d destV)
     {
-      int flag, i, its, j, jj, k, l = 0, nm = 0;
+      int    flag, i, its, j, jj, k, l = 0, nm = 0;
       double c, f, h, s, x, y, z;
-      double anorm = 0.0, g = 0.0, scale = 0.0;
+      double anorm                     = 0.0, g = 0.0, scale = 0.0;
       /* Householder reduction to bidiagonal form */
       for (i = 0; i < 3; i++)
       {
         /* left-hand reduction */
-        l = i + 1;
+        l      = i + 1;
         rv1[i] = scale * g;
-        g = s = scale = 0.0;
+        g      = s = scale = 0.0;
         for (k = i; k < 3; k++)
-          scale += Math.abs(a[k + 3 * i]);
+             scale += Math.abs(a[k + 3 * i]);
         if (scale != 0.0)
         {
           for (k = i; k < 3; k++)
@@ -161,23 +161,23 @@ public class QuaterniondInterpolator
             a[k + 3 * i] = (a[k + 3 * i] / scale);
             s += (a[k + 3 * i] * a[k + 3 * i]);
           }
-          f = a[i + 3 * i];
-          g = -SIGN(Math.sqrt(s), f);
-          h = f * g - s;
+          f            = a[i + 3 * i];
+          g            = -SIGN(Math.sqrt(s), f);
+          h            = f * g - s;
           a[i + 3 * i] = f - g;
           if (i != 3 - 1)
           {
             for (j = l; j < 3; j++)
             {
               for (s = 0.0, k = i; k < 3; k++)
-                s += a[k + 3 * i] * a[k + 3 * j];
+                   s += a[k + 3 * i] * a[k + 3 * j];
               f = s / h;
               for (k = i; k < 3; k++)
-                a[k + 3 * j] += f * a[k + 3 * i];
+                   a[k + 3 * j] += f * a[k + 3 * i];
             }
           }
           for (k = i; k < 3; k++)
-            a[k + 3 * i] = a[k + 3 * i] * scale;
+               a[k + 3 * i] = a[k + 3 * i] * scale;
         }
         w[i] = (scale * g);
 
@@ -186,7 +186,7 @@ public class QuaterniondInterpolator
         if (i < 3 && i != 3 - 1)
         {
           for (k = l; k < 3; k++)
-            scale += Math.abs(a[i + 3 * k]);
+               scale += Math.abs(a[i + 3 * k]);
           if (scale != 0.0)
           {
             for (k = l; k < 3; k++)
@@ -194,24 +194,24 @@ public class QuaterniondInterpolator
               a[i + 3 * k] = a[i + 3 * k] / scale;
               s += a[i + 3 * k] * a[i + 3 * k];
             }
-            f = a[i + 3 * l];
-            g = -SIGN(Math.sqrt(s), f);
-            h = f * g - s;
+            f            = a[i + 3 * l];
+            g            = -SIGN(Math.sqrt(s), f);
+            h            = f * g - s;
             a[i + 3 * l] = f - g;
             for (k = l; k < 3; k++)
-              rv1[k] = a[i + 3 * k] / h;
+                 rv1[k] = a[i + 3 * k] / h;
             if (i != 3 - 1)
             {
               for (j = l; j < 3; j++)
               {
                 for (s = 0.0, k = l; k < 3; k++)
-                  s += a[j + 3 * k] * a[i + 3 * k];
+                     s += a[j + 3 * k] * a[i + 3 * k];
                 for (k = l; k < 3; k++)
-                  a[j + 3 * k] += s * rv1[k];
+                     a[j + 3 * k] += s * rv1[k];
               }
             }
             for (k = l; k < 3; k++)
-              a[i + 3 * k] = a[i + 3 * k] * scale;
+                 a[i + 3 * k] = a[i + 3 * k] * scale;
           }
         }
         anorm = Math.max(anorm, (Math.abs(w[i]) + Math.abs(rv1[i])));
@@ -225,22 +225,22 @@ public class QuaterniondInterpolator
           if (g != 0.0)
           {
             for (j = l; j < 3; j++)
-              v[j + 3 * i] = (a[i + 3 * j] / a[i + 3 * l]) / g;
+                 v[j + 3 * i] = (a[i + 3 * j] / a[i + 3 * l]) / g;
             /* double division to avoid underflow */
             for (j = l; j < 3; j++)
             {
               for (s = 0.0, k = l; k < 3; k++)
-                s += a[i + 3 * k] * v[k + 3 * j];
+                   s += a[i + 3 * k] * v[k + 3 * j];
               for (k = l; k < 3; k++)
-                v[k + 3 * j] += s * v[k + 3 * i];
+                   v[k + 3 * j] += s * v[k + 3 * i];
             }
           }
           for (j = l; j < 3; j++)
-            v[i + 3 * j] = v[j + 3 * i] = 0.0;
+               v[i + 3 * j] = v[j + 3 * i] = 0.0;
         }
         v[i + 3 * i] = 1.0;
-        g = rv1[i];
-        l = i;
+        g            = rv1[i];
+        l            = i;
       }
 
       /* accumulate the left-hand transformation */
@@ -251,7 +251,7 @@ public class QuaterniondInterpolator
         if (i < 3 - 1)
         {
           for (j = l; j < 3; j++)
-            a[i + 3 * j] = 0.0;
+               a[i + 3 * j] = 0.0;
         }
         if (g != 0.0)
         {
@@ -261,18 +261,18 @@ public class QuaterniondInterpolator
             for (j = l; j < 3; j++)
             {
               for (s = 0.0, k = l; k < 3; k++)
-                s += a[k + 3 * i] * a[k + 3 * j];
+                   s += a[k + 3 * i] * a[k + 3 * j];
               f = s / a[i + 3 * i] * g;
               for (k = i; k < 3; k++)
-                a[k + 3 * j] += f * a[k + 3 * i];
+                   a[k + 3 * j] += f * a[k + 3 * i];
             }
           }
           for (j = i; j < 3; j++)
-            a[j + 3 * i] = a[j + 3 * i] * g;
+               a[j + 3 * i] = a[j + 3 * i] * g;
         } else
         {
           for (j = i; j < 3; j++)
-            a[j + 3 * i] = 0.0;
+               a[j + 3 * i] = 0.0;
         }
         ++a[i + 3 * i];
       }
@@ -305,18 +305,18 @@ public class QuaterniondInterpolator
               f = s * rv1[i];
               if (Math.abs(f) + anorm != anorm)
               {
-                g = w[i];
-                h = PYTHAG(f, g);
+                g    = w[i];
+                h    = PYTHAG(f, g);
                 w[i] = h;
-                h = 1.0 / h;
-                c = g * h;
-                s = (-f * h);
+                h    = 1.0 / h;
+                c    = g * h;
+                s    = (-f * h);
                 for (j = 0; j < 3; j++)
                 {
-                  y = a[j + 3 * nm];
-                  z = a[j + 3 * i];
+                  y             = a[j + 3 * nm];
+                  z             = a[j + 3 * i];
                   a[j + 3 * nm] = y * c + z * s;
-                  a[j + 3 * i] = z * c - y * s;
+                  a[j + 3 * i]  = z * c - y * s;
                 }
               }
             }
@@ -328,7 +328,7 @@ public class QuaterniondInterpolator
             { /* make singular value nonnegative */
               w[k] = -z;
               for (j = 0; j < 3; j++)
-                v[j + 3 * k] = (-v[j + 3 * k]);
+                   v[j + 3 * k] = (-v[j + 3 * k]);
             }
             break;
           }
@@ -338,40 +338,40 @@ public class QuaterniondInterpolator
           }
 
           /* shift from bottom 2 x 2 minor */
-          x = w[l];
+          x  = w[l];
           nm = k - 1;
-          y = w[nm];
-          g = rv1[nm];
-          h = rv1[k];
-          f = ((y - z) * (y + z) + (g - h) * (g + h)) / (2.0 * h * y);
-          g = PYTHAG(f, 1.0);
-          f = ((x - z) * (x + z) + h * ((y / (f + SIGN(g, f))) - h)) / x;
+          y  = w[nm];
+          g  = rv1[nm];
+          h  = rv1[k];
+          f  = ((y - z) * (y + z) + (g - h) * (g + h)) / (2.0 * h * y);
+          g  = PYTHAG(f, 1.0);
+          f  = ((x - z) * (x + z) + h * ((y / (f + SIGN(g, f))) - h)) / x;
 
           /* next QR transformation */
           c = s = 1.0;
           for (j = l; j <= nm; j++)
           {
-            i = j + 1;
-            g = rv1[i];
-            y = w[i];
-            h = s * g;
-            g = c * g;
-            z = PYTHAG(f, h);
+            i      = j + 1;
+            g      = rv1[i];
+            y      = w[i];
+            h      = s * g;
+            g      = c * g;
+            z      = PYTHAG(f, h);
             rv1[j] = z;
-            c = f / z;
-            s = h / z;
-            f = x * c + g * s;
-            g = g * c - x * s;
-            h = y * s;
-            y = y * c;
+            c      = f / z;
+            s      = h / z;
+            f      = x * c + g * s;
+            g      = g * c - x * s;
+            h      = y * s;
+            y      = y * c;
             for (jj = 0; jj < 3; jj++)
             {
-              x = v[jj + 3 * j];
-              z = v[jj + 3 * i];
+              x             = v[jj + 3 * j];
+              z             = v[jj + 3 * i];
               v[jj + 3 * j] = x * c + z * s;
               v[jj + 3 * i] = z * c - x * s;
             }
-            z = PYTHAG(f, h);
+            z    = PYTHAG(f, h);
             w[j] = z;
             if (z != 0.0)
             {
@@ -383,15 +383,15 @@ public class QuaterniondInterpolator
             x = (c * y) - (s * g);
             for (jj = 0; jj < 3; jj++)
             {
-              y = a[jj + 3 * j];
-              z = a[jj + 3 * i];
+              y             = a[jj + 3 * j];
+              z             = a[jj + 3 * i];
               a[jj + 3 * j] = y * c + z * s;
               a[jj + 3 * i] = z * c - y * s;
             }
           }
           rv1[l] = 0.0;
           rv1[k] = f;
-          w[k] = x;
+          w[k]   = x;
         }
       }
       destU.set(a);

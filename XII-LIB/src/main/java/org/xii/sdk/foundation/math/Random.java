@@ -34,8 +34,8 @@ public class Random
 {
 
   //8020463840 is from "Case File n_221: Kabukicho"
-  private static long seedHalf = 8020463840L;
-  private final Xorshiro128 rnd;
+  private static long        seedHalf = 8020463840L;
+  private final  Xorshiro128 rnd;
 
   /**
    * Create a new instance of {@link Random} and initialize it with a random seed.
@@ -64,7 +64,7 @@ public class Random
     {
       oldSeedHalf = seedHalf;
       newSeedHalf = oldSeedHalf * 3512401965023503517L;
-      seedHalf = newSeedHalf;
+      seedHalf    = newSeedHalf;
     }
     return newSeedHalf;
   }
@@ -114,8 +114,8 @@ public class Random
     Xorshiro128(long seed)
     {
       this.state = seed;
-      this._s0 = nextSplitMix64();
-      this._s1 = nextSplitMix64();
+      this._s0   = nextSplitMix64();
+      this._s1   = nextSplitMix64();
     }
 
     //#ifndef __GWT__
@@ -163,8 +163,8 @@ public class Random
 
     private int nextInt()
     {
-      long s0 = _s0;
-      long s1 = _s1;
+      long s0     = _s0;
+      long s1     = _s1;
       long result = s0 + s1;
       s1 ^= s0;
       rotateLeft(s0, s1);

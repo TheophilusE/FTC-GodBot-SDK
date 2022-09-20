@@ -100,8 +100,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode
      * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
      * If no camera monitor is desired, use the parameterless constructor instead (commented out below).
      */
-    int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    int                         cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+    VuforiaLocalizer.Parameters parameters          = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
     // OR...  Do Not Activate the Camera Monitor View, to save power
     // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
@@ -126,7 +126,7 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode
      * we use the same logic as in {@link ConceptVuforiaNavigationWebcam}.
      */
     parameters.cameraName = webcamName;
-    this.vuforia = ClassFactory.getInstance().createVuforia(parameters);
+    this.vuforia          = ClassFactory.getInstance().createVuforia(parameters);
 
     /**
      * Load the data set containing the VuMarks for Relic Recovery. There's only one trackable
@@ -135,7 +135,7 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode
      * @see VuMarkInstanceId
      */
     VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
-    VuforiaTrackable relicTemplate = relicTrackables.get(0);
+    VuforiaTrackable  relicTemplate   = relicTrackables.get(0);
     relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
     telemetry.addData(">", "Press Play to start");
@@ -172,8 +172,8 @@ public class ConceptVuMarkIdentificationWebcam extends LinearOpMode
          * translational components */
         if (pose != null)
         {
-          VectorF trans = pose.getTranslation();
-          Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
+          VectorF     trans = pose.getTranslation();
+          Orientation rot   = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
           // Extract the X, Y, and Z components of the offset of the target relative to the robot
           double tX = trans.get(0);

@@ -64,14 +64,14 @@ public class SampleRevBlinkinLedDriver extends OpMode
    */
   private final static int GAMEPAD_LOCKOUT = 500;
 
-  RevBlinkinLedDriver blinkinLedDriver;
+  RevBlinkinLedDriver                blinkinLedDriver;
   RevBlinkinLedDriver.BlinkinPattern pattern;
 
   Telemetry.Item patternName;
   Telemetry.Item display;
-  DisplayKind displayKind;
-  Deadline ledCycleDeadline;
-  Deadline gamepadRateLimit;
+  DisplayKind    displayKind;
+  Deadline       ledCycleDeadline;
+  Deadline       gamepadRateLimit;
 
   protected enum DisplayKind
   {
@@ -85,10 +85,10 @@ public class SampleRevBlinkinLedDriver extends OpMode
     displayKind = DisplayKind.AUTO;
 
     blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
-    pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+    pattern          = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
     blinkinLedDriver.setPattern(pattern);
 
-    display = telemetry.addData("Display Kind: ", displayKind.toString());
+    display     = telemetry.addData("Display Kind: ", displayKind.toString());
     patternName = telemetry.addData("Pattern: ", pattern.toString());
 
     ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);

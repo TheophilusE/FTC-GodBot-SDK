@@ -3723,16 +3723,16 @@ abstract class MemUtil
 
     public void copy(Matrix4f src, float[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = src.m02();
-      dest[off + 3] = src.m03();
-      dest[off + 4] = src.m10();
-      dest[off + 5] = src.m11();
-      dest[off + 6] = src.m12();
-      dest[off + 7] = src.m13();
-      dest[off + 8] = src.m20();
-      dest[off + 9] = src.m21();
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = src.m02();
+      dest[off + 3]  = src.m03();
+      dest[off + 4]  = src.m10();
+      dest[off + 5]  = src.m11();
+      dest[off + 6]  = src.m12();
+      dest[off + 7]  = src.m13();
+      dest[off + 8]  = src.m20();
+      dest[off + 9]  = src.m21();
       dest[off + 10] = src.m22();
       dest[off + 11] = src.m23();
       dest[off + 12] = src.m30();
@@ -3756,16 +3756,16 @@ abstract class MemUtil
 
     public void copy(Matrix4x3f src, float[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = src.m02();
-      dest[off + 3] = src.m10();
-      dest[off + 4] = src.m11();
-      dest[off + 5] = src.m12();
-      dest[off + 6] = src.m20();
-      dest[off + 7] = src.m21();
-      dest[off + 8] = src.m22();
-      dest[off + 9] = src.m30();
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = src.m02();
+      dest[off + 3]  = src.m10();
+      dest[off + 4]  = src.m11();
+      dest[off + 5]  = src.m12();
+      dest[off + 6]  = src.m20();
+      dest[off + 7]  = src.m21();
+      dest[off + 8]  = src.m22();
+      dest[off + 9]  = src.m30();
       dest[off + 10] = src.m31();
       dest[off + 11] = src.m32();
     }
@@ -3808,16 +3808,16 @@ abstract class MemUtil
 
     public void copy4x4(Matrix4x3f src, float[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = src.m02();
-      dest[off + 3] = 0.0f;
-      dest[off + 4] = src.m10();
-      dest[off + 5] = src.m11();
-      dest[off + 6] = src.m12();
-      dest[off + 7] = 0.0f;
-      dest[off + 8] = src.m20();
-      dest[off + 9] = src.m21();
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = src.m02();
+      dest[off + 3]  = 0.0f;
+      dest[off + 4]  = src.m10();
+      dest[off + 5]  = src.m11();
+      dest[off + 6]  = src.m12();
+      dest[off + 7]  = 0.0f;
+      dest[off + 8]  = src.m20();
+      dest[off + 9]  = src.m21();
       dest[off + 10] = src.m22();
       dest[off + 11] = 0.0f;
       dest[off + 12] = src.m30();
@@ -3828,16 +3828,16 @@ abstract class MemUtil
 
     public void copy4x4(Matrix4x3d src, float[] dest, int off)
     {
-      dest[off + 0] = (float) src.m00();
-      dest[off + 1] = (float) src.m01();
-      dest[off + 2] = (float) src.m02();
-      dest[off + 3] = 0.0f;
-      dest[off + 4] = (float) src.m10();
-      dest[off + 5] = (float) src.m11();
-      dest[off + 6] = (float) src.m12();
-      dest[off + 7] = 0.0f;
-      dest[off + 8] = (float) src.m20();
-      dest[off + 9] = (float) src.m21();
+      dest[off + 0]  = (float) src.m00();
+      dest[off + 1]  = (float) src.m01();
+      dest[off + 2]  = (float) src.m02();
+      dest[off + 3]  = 0.0f;
+      dest[off + 4]  = (float) src.m10();
+      dest[off + 5]  = (float) src.m11();
+      dest[off + 6]  = (float) src.m12();
+      dest[off + 7]  = 0.0f;
+      dest[off + 8]  = (float) src.m20();
+      dest[off + 9]  = (float) src.m21();
       dest[off + 10] = (float) src.m22();
       dest[off + 11] = 0.0f;
       dest[off + 12] = (float) src.m30();
@@ -3848,16 +3848,16 @@ abstract class MemUtil
 
     public void copy4x4(Matrix4x3d src, double[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = src.m02();
-      dest[off + 3] = 0.0;
-      dest[off + 4] = src.m10();
-      dest[off + 5] = src.m11();
-      dest[off + 6] = src.m12();
-      dest[off + 7] = 0.0;
-      dest[off + 8] = src.m20();
-      dest[off + 9] = src.m21();
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = src.m02();
+      dest[off + 3]  = 0.0;
+      dest[off + 4]  = src.m10();
+      dest[off + 5]  = src.m11();
+      dest[off + 6]  = src.m12();
+      dest[off + 7]  = 0.0;
+      dest[off + 8]  = src.m20();
+      dest[off + 9]  = src.m21();
       dest[off + 10] = src.m22();
       dest[off + 11] = 0.0;
       dest[off + 12] = src.m30();
@@ -3894,16 +3894,16 @@ abstract class MemUtil
 
     public void copy4x4(Matrix3x2f src, float[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = 0.0f;
-      dest[off + 3] = 0.0f;
-      dest[off + 4] = src.m10();
-      dest[off + 5] = src.m11();
-      dest[off + 6] = 0.0f;
-      dest[off + 7] = 0.0f;
-      dest[off + 8] = 0.0f;
-      dest[off + 9] = 0.0f;
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = 0.0f;
+      dest[off + 3]  = 0.0f;
+      dest[off + 4]  = src.m10();
+      dest[off + 5]  = src.m11();
+      dest[off + 6]  = 0.0f;
+      dest[off + 7]  = 0.0f;
+      dest[off + 8]  = 0.0f;
+      dest[off + 9]  = 0.0f;
       dest[off + 10] = 1.0f;
       dest[off + 11] = 0.0f;
       dest[off + 12] = src.m20();
@@ -3914,16 +3914,16 @@ abstract class MemUtil
 
     public void copy4x4(Matrix3x2d src, double[] dest, int off)
     {
-      dest[off + 0] = src.m00();
-      dest[off + 1] = src.m01();
-      dest[off + 2] = 0.0;
-      dest[off + 3] = 0.0;
-      dest[off + 4] = src.m10();
-      dest[off + 5] = src.m11();
-      dest[off + 6] = 0.0;
-      dest[off + 7] = 0.0;
-      dest[off + 8] = 0.0;
-      dest[off + 9] = 0.0;
+      dest[off + 0]  = src.m00();
+      dest[off + 1]  = src.m01();
+      dest[off + 2]  = 0.0;
+      dest[off + 3]  = 0.0;
+      dest[off + 4]  = src.m10();
+      dest[off + 5]  = src.m11();
+      dest[off + 6]  = 0.0;
+      dest[off + 7]  = 0.0;
+      dest[off + 8]  = 0.0;
+      dest[off + 9]  = 0.0;
       dest[off + 10] = 1.0;
       dest[off + 11] = 0.0;
       dest[off + 12] = src.m20();

@@ -146,44 +146,44 @@ public class FtcRobotControllerActivity extends Activity
   }
 
   private static final int REQUEST_CONFIG_WIFI_CHANNEL = 1;
-  private static final int NUM_GAMEPADS = 2;
+  private static final int NUM_GAMEPADS                = 2;
 
-  protected WifiManager.WifiLock wifiLock;
+  protected WifiManager.WifiLock   wifiLock;
   protected RobotConfigFileManager cfgFileMgr;
 
   private OnBotJavaHelper onBotJavaHelper;
 
   protected ProgrammingModeManager programmingModeManager;
 
-  protected UpdateUI.Callback callback;
-  protected Context context;
-  protected Utility utility;
-  protected StartResult prefRemoterStartResult = new StartResult();
-  protected StartResult deviceNameStartResult = new StartResult();
-  protected PreferencesHelper preferencesHelper;
+  protected       UpdateUI.Callback         callback;
+  protected       Context                   context;
+  protected       Utility                   utility;
+  protected       StartResult               prefRemoterStartResult    = new StartResult();
+  protected       StartResult               deviceNameStartResult     = new StartResult();
+  protected       PreferencesHelper         preferencesHelper;
   protected final SharedPreferencesListener sharedPreferencesListener = new SharedPreferencesListener();
 
-  protected ImageButton buttonMenu;
-  protected TextView textDeviceName;
-  protected TextView textNetworkConnectionStatus;
-  protected TextView textRobotStatus;
-  protected TextView[] textGamepad = new TextView[NUM_GAMEPADS];
-  protected TextView textOpMode;
-  protected TextView textErrorMessage;
+  protected ImageButton   buttonMenu;
+  protected TextView      textDeviceName;
+  protected TextView      textNetworkConnectionStatus;
+  protected TextView      textRobotStatus;
+  protected TextView[]    textGamepad = new TextView[NUM_GAMEPADS];
+  protected TextView      textOpMode;
+  protected TextView      textErrorMessage;
   protected ImmersiveMode immersion;
 
-  protected UpdateUI updateUI;
-  protected Dimmer dimmer;
+  protected UpdateUI     updateUI;
+  protected Dimmer       dimmer;
   protected LinearLayout entireScreenLayout;
 
   protected FtcRobotControllerService controllerService;
-  protected NetworkType networkType;
+  protected NetworkType               networkType;
 
-  protected FtcEventLoop eventLoop;
+  protected FtcEventLoop     eventLoop;
   protected Queue<UsbDevice> receivedUsbAttachmentNotifications;
 
   protected WifiMuteStateMachine wifiMuteStateMachine;
-  protected MotionDetection motionDetection;
+  protected MotionDetection      motionDetection;
 
   private static boolean permissionsValidated = false;
 
@@ -199,8 +199,8 @@ public class FtcRobotControllerActivity extends Activity
 
   }
 
-  protected boolean serviceShouldUnbind = false;
-  protected ServiceConnection connection = new ServiceConnection()
+  protected boolean           serviceShouldUnbind = false;
+  protected ServiceConnection connection          = new ServiceConnection()
   {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service)
@@ -326,7 +326,7 @@ public class FtcRobotControllerActivity extends Activity
     PreferenceRemoterRC.getInstance().start(prefRemoterStartResult);
 
     receivedUsbAttachmentNotifications = new ConcurrentLinkedQueue<UsbDevice>();
-    eventLoop = null;
+    eventLoop                          = null;
 
     setContentView(R.layout.activity_ftc_controller);
 
@@ -336,7 +336,7 @@ public class FtcRobotControllerActivity extends Activity
 
     // Check if this RC app is from a later FTC season than what was installed previously
     int ftcSeasonYearOfPreviouslyInstalledRc = preferencesHelper.readInt(getString(R.string.pref_ftc_season_year_of_current_rc), 0);
-    int ftcSeasonYearOfCurrentlyInstalledRc = AppUtil.getInstance().getFtcSeasonYear(AppUtil.getInstance().getLocalSdkBuildMonth()).getValue();
+    int ftcSeasonYearOfCurrentlyInstalledRc  = AppUtil.getInstance().getFtcSeasonYear(AppUtil.getInstance().getLocalSdkBuildMonth()).getValue();
     if (ftcSeasonYearOfCurrentlyInstalledRc > ftcSeasonYearOfPreviouslyInstalledRc)
     {
       preferencesHelper.writeIntPrefIfDifferent(getString(R.string.pref_ftc_season_year_of_current_rc), ftcSeasonYearOfCurrentlyInstalledRc);
@@ -348,7 +348,7 @@ public class FtcRobotControllerActivity extends Activity
     }
 
     entireScreenLayout = (LinearLayout) findViewById(R.id.entire_screen);
-    buttonMenu = (ImageButton) findViewById(R.id.menu_buttons);
+    buttonMenu         = (ImageButton) findViewById(R.id.menu_buttons);
     buttonMenu.setOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -400,15 +400,15 @@ public class FtcRobotControllerActivity extends Activity
       cfgFileMgr.setActiveConfig(false, configFile);
     }
 
-    textDeviceName = (TextView) findViewById(R.id.textDeviceName);
+    textDeviceName              = (TextView) findViewById(R.id.textDeviceName);
     textNetworkConnectionStatus = (TextView) findViewById(R.id.textNetworkConnectionStatus);
-    textRobotStatus = (TextView) findViewById(R.id.textRobotStatus);
-    textOpMode = (TextView) findViewById(R.id.textOpMode);
-    textErrorMessage = (TextView) findViewById(R.id.textErrorMessage);
-    textGamepad[0] = (TextView) findViewById(R.id.textGamepad1);
-    textGamepad[1] = (TextView) findViewById(R.id.textGamepad2);
-    immersion = new ImmersiveMode(getWindow().getDecorView());
-    dimmer = new Dimmer(this);
+    textRobotStatus             = (TextView) findViewById(R.id.textRobotStatus);
+    textOpMode                  = (TextView) findViewById(R.id.textOpMode);
+    textErrorMessage            = (TextView) findViewById(R.id.textErrorMessage);
+    textGamepad[0]              = (TextView) findViewById(R.id.textGamepad1);
+    textGamepad[1]              = (TextView) findViewById(R.id.textGamepad2);
+    immersion                   = new ImmersiveMode(getWindow().getDecorView());
+    dimmer                      = new Dimmer(this);
     dimmer.longBright();
 
     programmingModeManager = new ProgrammingModeManager();
@@ -450,7 +450,7 @@ public class FtcRobotControllerActivity extends Activity
   protected UpdateUI createUpdateUI()
   {
     Restarter restarter = new RobotRestarter();
-    UpdateUI result = new UpdateUI(this, dimmer);
+    UpdateUI  result    = new UpdateUI(this, dimmer);
     result.setRestarter(restarter);
     result.setTextViews(textNetworkConnectionStatus, textRobotStatus, textGamepad, textOpMode, textErrorMessage, textDeviceName);
     return result;
@@ -619,8 +619,8 @@ public class FtcRobotControllerActivity extends Activity
     {
       if (isRobotRunning())
       {
-        Intent programmingModeIntent = new Intent(AppUtil.getDefContext(), ProgramAndManageActivity.class);
-        RobotControllerWebInfo webInfo = programmingModeManager.getWebServer().getConnectionInformation();
+        Intent                 programmingModeIntent = new Intent(AppUtil.getDefContext(), ProgramAndManageActivity.class);
+        RobotControllerWebInfo webInfo               = programmingModeManager.getWebServer().getConnectionInformation();
         programmingModeIntent.putExtra(LaunchActivityConstantsList.RC_WEB_INFO, webInfo.toJson());
         startActivity(programmingModeIntent);
       } else
@@ -640,8 +640,8 @@ public class FtcRobotControllerActivity extends Activity
       return true;
     } else if (id == R.id.action_configure_robot)
     {
-      EditParameters parameters = new EditParameters();
-      Intent intentConfigure = new Intent(AppUtil.getDefContext(), FtcLoadFileActivity.class);
+      EditParameters parameters      = new EditParameters();
+      Intent         intentConfigure = new Intent(AppUtil.getDefContext(), FtcLoadFileActivity.class);
       parameters.putIntent(intentConfigure);
       startActivityForResult(intentConfigure, RequestCode.CONFIGURE_ROBOT_CONTROLLER.ordinal());
     } else if (id == R.id.action_settings)
@@ -666,8 +666,8 @@ public class FtcRobotControllerActivity extends Activity
       //For lollipop and up, we can clear ourselves from the recents list too
       if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
       {
-        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        List<ActivityManager.AppTask> tasks = manager.getAppTasks();
+        ActivityManager               manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> tasks   = manager.getAppTasks();
 
         for (ActivityManager.AppTask task : tasks)
         {
@@ -777,7 +777,7 @@ public class FtcRobotControllerActivity extends Activity
     });
 
     AnnotatedHooksClassFilter.getInstance().callWebHandlerRegistrarMethods(this,
-        service.getWebServer().getWebHandlerManager());
+                                                                           service.getWebServer().getWebHandlerManager());
   }
 
   private void updateUIAndRequestRobotSetup()
@@ -788,7 +788,7 @@ public class FtcRobotControllerActivity extends Activity
       callback.updateRobotStatus(controllerService.getRobotStatus());
       // Only show this first-time toast on headless systems: what we have now on non-headless suffices
       requestRobotSetup(LynxConstants.isRevControlHub()
-          ? new Runnable()
+                        ? new Runnable()
       {
         @Override
         public void run()
@@ -796,7 +796,7 @@ public class FtcRobotControllerActivity extends Activity
           showRestartRobotCompleteToast(R.string.toastRobotSetupComplete);
         }
       }
-          : null);
+                        : null);
     }
   }
 
@@ -804,7 +804,7 @@ public class FtcRobotControllerActivity extends Activity
   {
     if (controllerService == null) return;
 
-    RobotConfigFile file = cfgFileMgr.getActiveConfigAndUpdateUI();
+    RobotConfigFile file            = cfgFileMgr.getActiveConfigAndUpdateUI();
     HardwareFactory hardwareFactory = new HardwareFactory(context);
     try
     {

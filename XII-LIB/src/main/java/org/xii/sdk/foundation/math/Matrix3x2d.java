@@ -481,7 +481,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Matrix3x2d invert(Matrix3x2d dest)
   {
     // client must make sure that matrix is invertible
-    double s = 1.0 / (m00 * m11 - m01 * m10);
+    double s    = 1.0 / (m00 * m11 - m01 * m10);
     double nm00 = m11 * s;
     double nm01 = -m01 * s;
     double nm10 = -m10 * s;
@@ -772,9 +772,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -804,7 +804,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n";
   }
 
   /**
@@ -1704,7 +1704,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d transformPosition(Vector2d v)
   {
     v.set(m00 * v.x + m10 * v.y + m20,
-        m01 * v.x + m11 * v.y + m21);
+          m01 * v.x + m11 * v.y + m21);
     return v;
   }
 
@@ -1726,7 +1726,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d transformPosition(Vector2dc v, Vector2d dest)
   {
     dest.set(m00 * v.x() + m10 * v.y() + m20,
-        m01 * v.x() + m11 * v.y() + m21);
+             m01 * v.x() + m11 * v.y() + m21);
     return dest;
   }
 
@@ -1768,7 +1768,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d transformDirection(Vector2d v)
   {
     v.set(m00 * v.x + m10 * v.y,
-        m01 * v.x + m11 * v.y);
+          m01 * v.x + m11 * v.y);
     return v;
   }
 
@@ -1790,7 +1790,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d transformDirection(Vector2dc v, Vector2d dest)
   {
     dest.set(m00 * v.x() + m10 * v.y(),
-        m01 * v.x() + m11 * v.y());
+             m01 * v.x() + m11 * v.y());
     return dest;
   }
 
@@ -1864,8 +1864,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public Matrix3x2d rotate(double ang, Matrix3x2d dest)
   {
-    double cos = Math.cos(ang);
-    double sin = Math.sin(ang);
+    double cos  = Math.cos(ang);
+    double sin  = Math.sin(ang);
     double rm00 = cos;
     double rm01 = sin;
     double rm10 = -sin;
@@ -1901,8 +1901,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public Matrix3x2d rotateLocal(double ang, Matrix3x2d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm00 = cos * m00 - sin * m01;
     double nm01 = sin * m00 + cos * m01;
     double nm10 = cos * m10 - sin * m11;
@@ -1984,8 +1984,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   {
     double tm20 = m00 * x + m10 * y + m20;
     double tm21 = m01 * x + m11 * y + m21;
-    double cos = Math.cos(ang);
-    double sin = Math.sin(ang);
+    double cos  = Math.cos(ang);
+    double sin  = Math.sin(ang);
     double nm00 = m00 * cos + m10 * sin;
     double nm01 = m01 * cos + m11 * sin;
     dest.m10 = m00 * -sin + m10 * cos;
@@ -2012,8 +2012,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public Matrix3x2d rotateTo(Vector2dc fromDir, Vector2dc toDir, Matrix3x2d dest)
   {
-    double dot = fromDir.x() * toDir.x() + fromDir.y() * toDir.y();
-    double det = fromDir.x() * toDir.y() - fromDir.y() * toDir.x();
+    double dot  = fromDir.x() * toDir.x() + fromDir.y() * toDir.y();
+    double det  = fromDir.x() * toDir.y() - fromDir.y() * toDir.x();
     double rm00 = dot;
     double rm01 = det;
     double rm10 = -det;
@@ -2151,13 +2151,13 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public double[] viewArea(double[] area)
   {
-    double s = 1.0 / (m00 * m11 - m01 * m10);
-    double rm00 = m11 * s;
-    double rm01 = -m01 * s;
-    double rm10 = -m10 * s;
-    double rm11 = m00 * s;
-    double rm20 = (m10 * m21 - m20 * m11) * s;
-    double rm21 = (m20 * m01 - m00 * m21) * s;
+    double s     = 1.0 / (m00 * m11 - m01 * m10);
+    double rm00  = m11 * s;
+    double rm01  = -m01 * s;
+    double rm10  = -m10 * s;
+    double rm11  = m00 * s;
+    double rm20  = (m10 * m21 - m20 * m11) * s;
+    double rm21  = (m20 * m01 - m00 * m21) * s;
     double nxnyX = -rm00 - rm10;
     double nxnyY = -rm01 - rm11;
     double pxnyX = rm00 - rm10;
@@ -2166,7 +2166,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
     double nxpyY = -rm01 + rm11;
     double pxpyX = rm00 + rm10;
     double pxpyY = rm01 + rm11;
-    double minX = nxnyX;
+    double minX  = nxnyX;
     minX = minX < nxpyX ? minX : nxpyX;
     minX = minX < pxnyX ? minX : pxnyX;
     minX = minX < pxpyX ? minX : pxpyX;
@@ -2179,9 +2179,9 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
     maxX = maxX > pxnyX ? maxX : pxnyX;
     maxX = maxX > pxpyX ? maxX : pxpyX;
     double maxY = nxnyY;
-    maxY = maxY > nxpyY ? maxY : nxpyY;
-    maxY = maxY > pxnyY ? maxY : pxnyY;
-    maxY = maxY > pxpyY ? maxY : pxpyY;
+    maxY    = maxY > nxpyY ? maxY : nxpyY;
+    maxY    = maxY > pxnyY ? maxY : pxnyY;
+    maxY    = maxY > pxpyY ? maxY : pxpyY;
     area[0] = minX + rm20;
     area[1] = minY + rm21;
     area[2] = maxX + rm20;
@@ -2192,7 +2192,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d positiveX(Vector2d dir)
   {
     double s = m00 * m11 - m01 * m10;
-    s = 1.0 / s;
+    s     = 1.0 / s;
     dir.x = m11 * s;
     dir.y = -m01 * s;
     return dir.normalize(dir);
@@ -2208,7 +2208,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public Vector2d positiveY(Vector2d dir)
   {
     double s = m00 * m11 - m01 * m10;
-    s = 1.0 / s;
+    s     = 1.0 / s;
     dir.x = -m10 * s;
     dir.y = m00 * s;
     return dir.normalize(dir);
@@ -2241,7 +2241,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public Vector2d unproject(double winX, double winY, int[] viewport, Vector2d dest)
   {
-    double s = 1.0 / (m00 * m11 - m01 * m10);
+    double s    = 1.0 / (m00 * m11 - m01 * m10);
     double im00 = m11 * s;
     double im01 = -m01 * s;
     double im10 = -m10 * s;
@@ -2293,14 +2293,14 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
    */
   public Matrix3x2d span(Vector2d corner, Vector2d xDir, Vector2d yDir)
   {
-    double s = 1.0 / (m00 * m11 - m01 * m10);
+    double s    = 1.0 / (m00 * m11 - m01 * m10);
     double nm00 = m11 * s, nm01 = -m01 * s, nm10 = -m10 * s, nm11 = m00 * s;
     corner.x = -nm00 - nm10 + (m10 * m21 - m20 * m11) * s;
     corner.y = -nm01 - nm11 + (m20 * m01 - m00 * m21) * s;
-    xDir.x = 2.0 * nm00;
-    xDir.y = 2.0 * nm01;
-    yDir.x = 2.0 * nm10;
-    yDir.y = 2.0 * nm11;
+    xDir.x   = 2.0 * nm00;
+    xDir.y   = 2.0 * nm01;
+    yDir.x   = 2.0 * nm10;
+    yDir.y   = 2.0 * nm11;
     return this;
   }
 
@@ -2311,7 +2311,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
     double nyX = +m01, nyY = +m11, nyW = 1.0f + m21;
     double pyX = -m01, pyY = -m11, pyW = 1.0f - m21;
     return nxX * x + nxY * y + nxW >= 0 && pxX * x + pxY * y + pxW >= 0 &&
-        nyX * x + nyY * y + nyW >= 0 && pyX * x + pyY * y + pyW >= 0;
+           nyX * x + nyY * y + nyW >= 0 && pyX * x + pyY * y + pyW >= 0;
   }
 
   public boolean testCircle(double x, double y, double r)
@@ -2338,7 +2338,7 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
     pyY *= invl;
     pyW *= invl;
     return nxX * x + nxY * y + nxW >= -r && pxX * x + pxY * y + pxW >= -r &&
-        nyX * x + nyY * y + nyW >= -r && pyX * x + pyY * y + pyW >= -r;
+           nyX * x + nyY * y + nyW >= -r && pyX * x + pyY * y + pyW >= -r;
   }
 
   public boolean testAar(double minX, double minY, double maxX, double maxY)
@@ -2352,27 +2352,27 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
      * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
      */
     return nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) >= -nxW &&
-        pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
-        nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
-        pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW;
+           pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
+           nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
+           pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW;
   }
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(m00);
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits(m00);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m01);
+    temp   = Double.doubleToLongBits(m01);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m10);
+    temp   = Double.doubleToLongBits(m10);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m11);
+    temp   = Double.doubleToLongBits(m11);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m20);
+    temp   = Double.doubleToLongBits(m20);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m21);
+    temp   = Double.doubleToLongBits(m21);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
   }
@@ -2463,8 +2463,8 @@ public class Matrix3x2d implements Matrix3x2dc, Cloneable, Externalizable
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) &&
-        Math.isFinite(m10) && Math.isFinite(m11) &&
-        Math.isFinite(m20) && Math.isFinite(m21);
+           Math.isFinite(m10) && Math.isFinite(m11) &&
+           Math.isFinite(m20) && Math.isFinite(m21);
   }
 
   public Object clone() throws CloneNotSupportedException

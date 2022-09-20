@@ -137,7 +137,7 @@ public class Intersectiond
    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
    * {@link #intersectLineSegmentAar(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)} to indicate that the line segment does not intersect the axis-aligned rectangle.
    */
-  public static final int OUTSIDE = -1;
+  public static final int OUTSIDE          = -1;
   /**
    * Return value of {@link #intersectLineSegmentAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)} and
    * {@link #intersectLineSegmentAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector2d)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
@@ -160,7 +160,7 @@ public class Intersectiond
    * or return value of {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)} and
    * {@link #intersectLineSegmentAar(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)} to indicate that the line segment lies completely inside of the axis-aligned rectangle.
    */
-  public static final int INSIDE = 3;
+  public static final int INSIDE           = 3;
 
   /**
    * Test whether the plane with the general plane equation <i>a*x + b*y + c*z + d = 0</i> intersects the sphere with center
@@ -183,7 +183,7 @@ public class Intersectiond
       double centerX, double centerY, double centerZ, double radius)
   {
     double denom = Math.sqrt(a * a + b * b + c * c);
-    double dist = (a * centerX + b * centerY + c * centerZ + d) / denom;
+    double dist  = (a * centerX + b * centerY + c * centerZ + d) / denom;
     return -radius <= dist && dist <= radius;
   }
 
@@ -211,7 +211,7 @@ public class Intersectiond
       Vector4d intersectionCenterAndRadius)
   {
     double invDenom = Math.invsqrt(a * a + b * b + c * c);
-    double dist = (a * centerX + b * centerY + c * centerZ + d) * invDenom;
+    double dist     = (a * centerX + b * centerY + c * centerZ + d) * invDenom;
     if (-radius <= dist && dist <= radius)
     {
       intersectionCenterAndRadius.x = centerX + dist * a * invDenom;
@@ -416,7 +416,7 @@ public class Intersectiond
       double maxXB, double maxYB, double maxZB)
   {
     return maxXA >= minXB && maxYA >= minYB && maxZA >= minZB &&
-        minXA <= maxXB && minYA <= maxYB && minZA <= maxZB;
+           minXA <= maxXB && minYA <= maxYB && minZA <= maxZB;
   }
 
   /**
@@ -524,15 +524,15 @@ public class Intersectiond
     // counteract arithmetic errors when two edges are parallel and
     // their cross product is (near) null (see text for details)
     double EPSILON = 1E-8;
-    double arm00 = Math.abs(rm00) + EPSILON;
-    double arm01 = Math.abs(rm01) + EPSILON;
-    double arm02 = Math.abs(rm02) + EPSILON;
-    double arm10 = Math.abs(rm10) + EPSILON;
-    double arm11 = Math.abs(rm11) + EPSILON;
-    double arm12 = Math.abs(rm12) + EPSILON;
-    double arm20 = Math.abs(rm20) + EPSILON;
-    double arm21 = Math.abs(rm21) + EPSILON;
-    double arm22 = Math.abs(rm22) + EPSILON;
+    double arm00   = Math.abs(rm00) + EPSILON;
+    double arm01   = Math.abs(rm01) + EPSILON;
+    double arm02   = Math.abs(rm02) + EPSILON;
+    double arm10   = Math.abs(rm10) + EPSILON;
+    double arm11   = Math.abs(rm11) + EPSILON;
+    double arm12   = Math.abs(rm12) + EPSILON;
+    double arm20   = Math.abs(rm20) + EPSILON;
+    double arm21   = Math.abs(rm21) + EPSILON;
+    double arm22   = Math.abs(rm22) + EPSILON;
     // Compute translation vector t
     double tx = b1cX - b0cX, ty = b1cY - b0cY, tz = b1cZ - b0cZ;
     // Bring translation into a's coordinate frame
@@ -624,10 +624,10 @@ public class Intersectiond
       double bX, double bY, double bZ, double radiusSquaredB,
       Vector4d centerAndRadiusOfIntersectionCircle)
   {
-    double dX = bX - aX, dY = bY - aY, dZ = bZ - aZ;
+    double dX          = bX - aX, dY = bY - aY, dZ = bZ - aZ;
     double distSquared = dX * dX + dY * dY + dZ * dZ;
-    double h = 0.5 + (radiusSquaredA - radiusSquaredB) / (2.0 * distSquared);
-    double r_i = radiusSquaredA - h * h * distSquared;
+    double h           = 0.5 + (radiusSquaredA - radiusSquaredB) / (2.0 * distSquared);
+    double r_i         = radiusSquaredA - h * h * distSquared;
     if (r_i >= 0.0)
     {
       centerAndRadiusOfIntersectionCircle.x = aX + h * dX;
@@ -693,9 +693,9 @@ public class Intersectiond
       double v2X, double v2Y, double v2Z,
       Vector3d result)
   {
-    int closest = findClosestPointOnTriangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, sX, sY, sZ, result);
-    double vX = result.x - sX, vY = result.y - sY, vZ = result.z - sZ;
-    double dot = vX * vX + vY * vY + vZ * vZ;
+    int    closest = findClosestPointOnTriangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, sX, sY, sZ, result);
+    double vX      = result.x - sX, vY = result.y - sY, vZ = result.z - sZ;
+    double dot     = vX * vX + vY * vY + vZ * vZ;
     if (dot <= sR * sR)
     {
       return closest;
@@ -723,10 +723,10 @@ public class Intersectiond
       double aX, double aY, double aZ, double radiusSquaredA,
       double bX, double bY, double bZ, double radiusSquaredB)
   {
-    double dX = bX - aX, dY = bY - aY, dZ = bZ - aZ;
+    double dX          = bX - aX, dY = bY - aY, dZ = bZ - aZ;
     double distSquared = dX * dX + dY * dY + dZ * dZ;
-    double h = 0.5 + (radiusSquaredA - radiusSquaredB) / (2.0 * distSquared);
-    double r_i = radiusSquaredA - h * h * distSquared;
+    double h           = 0.5 + (radiusSquaredA - radiusSquaredB) / (2.0 * distSquared);
+    double r_i         = radiusSquaredA - h * h * distSquared;
     return r_i >= 0.0;
   }
 
@@ -796,10 +796,10 @@ public class Intersectiond
     double v1Z0Z = v1Z - v0Z;
     double v2X0X = v2X - v0X;
     double v1X0X = v1X - v0X;
-    double a = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
-    double b = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
-    double c = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
-    double d = -(a * v0X + b * v0Y + c * v0Z);
+    double a     = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
+    double b     = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
+    double c     = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
+    double d     = -(a * v0X + b * v0Y + c * v0Z);
     return distancePointPlane(pointX, pointY, pointZ, a, b, c, d);
   }
 
@@ -1020,7 +1020,7 @@ public class Intersectiond
   public static Vector3d findClosestPointOnLineSegment(double aX, double aY, double aZ, double bX, double bY, double bZ, double pX, double pY, double pZ, Vector3d result)
   {
     double abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
-    double t = ((pX - aX) * abX + (pY - aY) * abY + (pZ - aZ) * abZ) / (abX * abX + abY * abY + abZ * abZ);
+    double t   = ((pX - aX) * abX + (pY - aY) * abY + (pZ - aZ) * abZ) / (abX * abX + abY * abY + abZ * abZ);
     if (t < 0.0) t = 0.0;
     if (t > 1.0) t = 1.0;
     result.x = aX + t * abX;
@@ -1056,12 +1056,12 @@ public class Intersectiond
       double b0X, double b0Y, double b0Z, double b1X, double b1Y, double b1Z,
       Vector3d resultA, Vector3d resultB)
   {
-    double d1x = a1X - a0X, d1y = a1Y - a0Y, d1z = a1Z - a0Z;
-    double d2x = b1X - b0X, d2y = b1Y - b0Y, d2z = b1Z - b0Z;
-    double rX = a0X - b0X, rY = a0Y - b0Y, rZ = a0Z - b0Z;
-    double a = d1x * d1x + d1y * d1y + d1z * d1z;
-    double e = d2x * d2x + d2y * d2y + d2z * d2z;
-    double f = d2x * rX + d2y * rY + d2z * rZ;
+    double d1x     = a1X - a0X, d1y = a1Y - a0Y, d1z = a1Z - a0Z;
+    double d2x     = b1X - b0X, d2y = b1Y - b0Y, d2z = b1Z - b0Z;
+    double rX      = a0X - b0X, rY = a0Y - b0Y, rZ = a0Z - b0Z;
+    double a       = d1x * d1x + d1y * d1y + d1z * d1z;
+    double e       = d2x * d2x + d2y * d2y + d2z * d2z;
+    double f       = d2x * rX + d2y * rY + d2z * rZ;
     double EPSILON = 1E-8;
     double s, t;
     if (a <= EPSILON && e <= EPSILON)
@@ -1088,7 +1088,7 @@ public class Intersectiond
       } else
       {
         // The general nondegenerate case starts here
-        double b = d1x * d2x + d1y * d2y + d1z * d2z;
+        double b     = d1x * d2x + d1y * d2y + d1z * d2z;
         double denom = a * e - b * b;
         // If segments not parallel, compute closest point on L1 to L2 and
         // clamp to segment S1. Else pick arbitrary s (here 0)
@@ -1154,41 +1154,41 @@ public class Intersectiond
     double min, d;
     double minlsX, minlsY, minlsZ, mintX, mintY, mintZ;
     // AB -> V0V1
-    d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, lineSegmentResult, triangleResult);
-    min = d;
+    d      = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, lineSegmentResult, triangleResult);
+    min    = d;
     minlsX = lineSegmentResult.x;
     minlsY = lineSegmentResult.y;
     minlsZ = lineSegmentResult.z;
-    mintX = triangleResult.x;
-    mintY = triangleResult.y;
-    mintZ = triangleResult.z;
+    mintX  = triangleResult.x;
+    mintY  = triangleResult.y;
+    mintZ  = triangleResult.z;
     // AB -> V1V2
     d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v1X, v1Y, v1Z, v2X, v2Y, v2Z, lineSegmentResult, triangleResult);
     if (d < min)
     {
-      min = d;
+      min    = d;
       minlsX = lineSegmentResult.x;
       minlsY = lineSegmentResult.y;
       minlsZ = lineSegmentResult.z;
-      mintX = triangleResult.x;
-      mintY = triangleResult.y;
-      mintZ = triangleResult.z;
+      mintX  = triangleResult.x;
+      mintY  = triangleResult.y;
+      mintZ  = triangleResult.z;
     }
     // AB -> V2V0
     d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v2X, v2Y, v2Z, v0X, v0Y, v0Z, lineSegmentResult, triangleResult);
     if (d < min)
     {
-      min = d;
+      min    = d;
       minlsX = lineSegmentResult.x;
       minlsY = lineSegmentResult.y;
       minlsZ = lineSegmentResult.z;
-      mintX = triangleResult.x;
-      mintY = triangleResult.y;
-      mintZ = triangleResult.z;
+      mintX  = triangleResult.x;
+      mintY  = triangleResult.y;
+      mintZ  = triangleResult.z;
     }
     // segment endpoint A and plane of triangle (when A projects inside V0V1V2)
     boolean computed = false;
-    double a = Double.NaN, b = Double.NaN, c = Double.NaN, nd = Double.NaN;
+    double  a        = Double.NaN, b = Double.NaN, c = Double.NaN, nd = Double.NaN;
     if (testPointInTriangle(aX, aY, aZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z))
     {
       double v1Y0Y = v1Y - v0Y;
@@ -1197,27 +1197,27 @@ public class Intersectiond
       double v1Z0Z = v1Z - v0Z;
       double v2X0X = v2X - v0X;
       double v1X0X = v1X - v0X;
-      a = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
-      b = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
-      c = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
+      a        = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
+      b        = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
+      c        = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
       computed = true;
       double invLen = Math.invsqrt(a * a + b * b + c * c);
       a *= invLen;
       b *= invLen;
       c *= invLen;
       nd = -(a * v0X + b * v0Y + c * v0Z);
-      d = (a * aX + b * aY + c * aZ + nd);
+      d  = (a * aX + b * aY + c * aZ + nd);
       double l = d;
       d *= d;
       if (d < min)
       {
-        min = d;
+        min    = d;
         minlsX = aX;
         minlsY = aY;
         minlsZ = aZ;
-        mintX = aX - a * l;
-        mintY = aY - b * l;
-        mintZ = aZ - c * l;
+        mintX  = aX - a * l;
+        mintY  = aY - b * l;
+        mintZ  = aZ - c * l;
       }
     }
     // segment endpoint B and plane of triangle (when B projects inside V0V1V2)
@@ -1245,13 +1245,13 @@ public class Intersectiond
       d *= d;
       if (d < min)
       {
-        min = d;
+        min    = d;
         minlsX = bX;
         minlsY = bY;
         minlsZ = bZ;
-        mintX = bX - a * l;
-        mintY = bY - b * l;
-        mintZ = bZ - c * l;
+        mintX  = bX - a * l;
+        mintY  = bY - b * l;
+        mintZ  = bZ - c * l;
       }
     }
     lineSegmentResult.set(minlsX, minlsY, minlsZ);
@@ -1296,8 +1296,8 @@ public class Intersectiond
     double abX = v1X - v0X, abY = v1Y - v0Y, abZ = v1Z - v0Z;
     double acX = v2X - v0X, acY = v2Y - v0Y, acZ = v2Z - v0Z;
     double apX = pX - v0X, apY = pY - v0Y, apZ = pZ - v0Z;
-    double d1 = abX * apX + abY * apY + abZ * apZ;
-    double d2 = acX * apX + acY * apY + acZ * apZ;
+    double d1  = abX * apX + abY * apY + abZ * apZ;
+    double d2  = acX * apX + acY * apY + acZ * apZ;
     if (d1 <= 0.0 && d2 <= 0.0)
     {
       result.x = v0X;
@@ -1306,8 +1306,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_VERTEX_0;
     }
     double bpX = pX - v1X, bpY = pY - v1Y, bpZ = pZ - v1Z;
-    double d3 = abX * bpX + abY * bpY + abZ * bpZ;
-    double d4 = acX * bpX + acY * bpY + acZ * bpZ;
+    double d3  = abX * bpX + abY * bpY + abZ * bpZ;
+    double d4  = acX * bpX + acY * bpY + acZ * bpZ;
     if (d3 >= 0.0 && d4 <= d3)
     {
       result.x = v1X;
@@ -1325,8 +1325,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_EDGE_01;
     }
     double cpX = pX - v2X, cpY = pY - v2Y, cpZ = pZ - v2Z;
-    double d5 = abX * cpX + abY * cpY + abZ * cpZ;
-    double d6 = acX * cpX + acY * cpY + acZ * cpZ;
+    double d5  = abX * cpX + abY * cpY + abZ * cpZ;
+    double d6  = acX * cpX + acY * cpY + acZ * cpZ;
     if (d6 >= 0.0 && d5 <= d6)
     {
       result.x = v2X;
@@ -1353,8 +1353,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_EDGE_12;
     }
     double denom = 1.0 / (va + vb + vc);
-    double v = vb * denom;
-    double w = vc * denom;
+    double v     = vb * denom;
+    double w     = vc * denom;
     result.x = v0X + abX * v + acX * w;
     result.y = v0Y + abY * v + acY * w;
     result.z = v0Z + abZ * v + acZ * w;
@@ -1412,11 +1412,11 @@ public class Intersectiond
       double cX, double cY, double cZ,
       double pX, double pY, double pZ, Vector3d res)
   {
-    double abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
-    double acX = cX - aX, acY = cY - aY, acZ = cZ - aZ;
-    double dX = pX - aX, dY = pY - aY, dZ = pZ - aZ;
-    double qX = aX, qY = aY, qZ = aZ;
-    double dist = dX * abX + dY * abY + dZ * abZ;
+    double abX     = bX - aX, abY = bY - aY, abZ = bZ - aZ;
+    double acX     = cX - aX, acY = cY - aY, acZ = cZ - aZ;
+    double dX      = pX - aX, dY = pY - aY, dZ = pZ - aZ;
+    double qX      = aX, qY = aY, qZ = aZ;
+    double dist    = dX * abX + dY * abY + dZ * abZ;
     double maxdist = abX * abX + abY * abY + abZ * abZ;
     if (dist >= maxdist)
     {
@@ -1429,7 +1429,7 @@ public class Intersectiond
       qY += (dist / maxdist) * abY;
       qZ += (dist / maxdist) * abZ;
     }
-    dist = dX * acX + dY * acY + dZ * acZ;
+    dist    = dX * acX + dY * acY + dZ * acZ;
     maxdist = acX * acX + acY * acY + acZ * acZ;
     if (dist >= maxdist)
     {
@@ -1495,13 +1495,13 @@ public class Intersectiond
     double v20Y = v2Y - v0Y;
     double v20Z = v2Z - v0Z;
     // build triangle plane
-    double a = v10Y * v20Z - v20Y * v10Z;
-    double b = v10Z * v20X - v20Z * v10X;
-    double c = v10X * v20Y - v20X * v10Y;
-    double d = -(a * v0X + b * v0Y + c * v0Z);
-    double invLen = Math.invsqrt(a * a + b * b + c * c);
+    double a          = v10Y * v20Z - v20Y * v10Z;
+    double b          = v10Z * v20X - v20Z * v10X;
+    double c          = v10X * v20Y - v20X * v10Y;
+    double d          = -(a * v0X + b * v0Y + c * v0Z);
+    double invLen     = Math.invsqrt(a * a + b * b + c * c);
     double signedDist = (a * centerX + b * centerY + c * centerZ + d) * invLen;
-    double dot = (a * velX + b * velY + c * velZ) * invLen;
+    double dot        = (a * velX + b * velY + c * velZ) * invLen;
     if (dot < epsilon && dot > -epsilon)
     {
       return 0;
@@ -1511,10 +1511,10 @@ public class Intersectiond
     {
       return 0;
     }
-    double pt1 = (-radius - signedDist) / dot;
-    double p0X = centerX - radius * a * invLen + velX * pt0;
-    double p0Y = centerY - radius * b * invLen + velY * pt0;
-    double p0Z = centerZ - radius * c * invLen + velZ * pt0;
+    double  pt1            = (-radius - signedDist) / dot;
+    double  p0X            = centerX - radius * a * invLen + velX * pt0;
+    double  p0Y            = centerY - radius * b * invLen + velY * pt0;
+    double  p0Z            = centerZ - radius * c * invLen + velZ * pt0;
     boolean insideTriangle = testPointInTriangle(p0X, p0Y, p0Z, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z);
     if (insideTriangle)
     {
@@ -1524,120 +1524,120 @@ public class Intersectiond
       pointAndTime.w = pt0;
       return POINT_ON_TRIANGLE_FACE;
     }
-    int isect = 0;
-    double t0 = maxT;
-    double A = velX * velX + velY * velY + velZ * velZ;
+    int    isect   = 0;
+    double t0      = maxT;
+    double A       = velX * velX + velY * velY + velZ * velZ;
     double radius2 = radius * radius;
     // test against v0
     double centerV0X = centerX - v0X;
     double centerV0Y = centerY - v0Y;
     double centerV0Z = centerZ - v0Z;
-    double B0 = 2.0 * (velX * centerV0X + velY * centerV0Y + velZ * centerV0Z);
-    double C0 = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z - radius2;
-    double root0 = computeLowestRoot(A, B0, C0, t0);
+    double B0        = 2.0 * (velX * centerV0X + velY * centerV0Y + velZ * centerV0Z);
+    double C0        = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z - radius2;
+    double root0     = computeLowestRoot(A, B0, C0, t0);
     if (root0 < t0)
     {
       pointAndTime.x = v0X;
       pointAndTime.y = v0Y;
       pointAndTime.z = v0Z;
       pointAndTime.w = root0;
-      t0 = root0;
-      isect = POINT_ON_TRIANGLE_VERTEX_0;
+      t0             = root0;
+      isect          = POINT_ON_TRIANGLE_VERTEX_0;
     }
     // test against v1
-    double centerV1X = centerX - v1X;
-    double centerV1Y = centerY - v1Y;
-    double centerV1Z = centerZ - v1Z;
+    double centerV1X   = centerX - v1X;
+    double centerV1Y   = centerY - v1Y;
+    double centerV1Z   = centerZ - v1Z;
     double centerV1Len = centerV1X * centerV1X + centerV1Y * centerV1Y + centerV1Z * centerV1Z;
-    double B1 = 2.0 * (velX * centerV1X + velY * centerV1Y + velZ * centerV1Z);
-    double C1 = centerV1Len - radius2;
-    double root1 = computeLowestRoot(A, B1, C1, t0);
+    double B1          = 2.0 * (velX * centerV1X + velY * centerV1Y + velZ * centerV1Z);
+    double C1          = centerV1Len - radius2;
+    double root1       = computeLowestRoot(A, B1, C1, t0);
     if (root1 < t0)
     {
       pointAndTime.x = v1X;
       pointAndTime.y = v1Y;
       pointAndTime.z = v1Z;
       pointAndTime.w = root1;
-      t0 = root1;
-      isect = POINT_ON_TRIANGLE_VERTEX_1;
+      t0             = root1;
+      isect          = POINT_ON_TRIANGLE_VERTEX_1;
     }
     // test against v2
     double centerV2X = centerX - v2X;
     double centerV2Y = centerY - v2Y;
     double centerV2Z = centerZ - v2Z;
-    double B2 = 2.0 * (velX * centerV2X + velY * centerV2Y + velZ * centerV2Z);
-    double C2 = centerV2X * centerV2X + centerV2Y * centerV2Y + centerV2Z * centerV2Z - radius2;
-    double root2 = computeLowestRoot(A, B2, C2, t0);
+    double B2        = 2.0 * (velX * centerV2X + velY * centerV2Y + velZ * centerV2Z);
+    double C2        = centerV2X * centerV2X + centerV2Y * centerV2Y + centerV2Z * centerV2Z - radius2;
+    double root2     = computeLowestRoot(A, B2, C2, t0);
     if (root2 < t0)
     {
       pointAndTime.x = v2X;
       pointAndTime.y = v2Y;
       pointAndTime.z = v2Z;
       pointAndTime.w = root2;
-      t0 = root2;
-      isect = POINT_ON_TRIANGLE_VERTEX_2;
+      t0             = root2;
+      isect          = POINT_ON_TRIANGLE_VERTEX_2;
     }
     double velLen = velX * velX + velY * velY + velZ * velZ;
     // test against edge10
-    double len10 = v10X * v10X + v10Y * v10Y + v10Z * v10Z;
+    double len10      = v10X * v10X + v10Y * v10Y + v10Z * v10Z;
     double baseTo0Len = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z;
-    double v10Vel = (v10X * velX + v10Y * velY + v10Z * velZ);
-    double A10 = len10 * -velLen + v10Vel * v10Vel;
+    double v10Vel     = (v10X * velX + v10Y * velY + v10Z * velZ);
+    double A10        = len10 * -velLen + v10Vel * v10Vel;
     double v10BaseTo0 = v10X * -centerV0X + v10Y * -centerV0Y + v10Z * -centerV0Z;
     double velBaseTo0 = velX * -centerV0X + velY * -centerV0Y + velZ * -centerV0Z;
-    double B10 = len10 * 2 * velBaseTo0 - 2 * v10Vel * v10BaseTo0;
-    double C10 = len10 * (radius2 - baseTo0Len) + v10BaseTo0 * v10BaseTo0;
-    double root10 = computeLowestRoot(A10, B10, C10, t0);
-    double f10 = (v10Vel * root10 - v10BaseTo0) / len10;
+    double B10        = len10 * 2 * velBaseTo0 - 2 * v10Vel * v10BaseTo0;
+    double C10        = len10 * (radius2 - baseTo0Len) + v10BaseTo0 * v10BaseTo0;
+    double root10     = computeLowestRoot(A10, B10, C10, t0);
+    double f10        = (v10Vel * root10 - v10BaseTo0) / len10;
     if (f10 >= 0.0 && f10 <= 1.0 && root10 < t0)
     {
       pointAndTime.x = v0X + f10 * v10X;
       pointAndTime.y = v0Y + f10 * v10Y;
       pointAndTime.z = v0Z + f10 * v10Z;
       pointAndTime.w = root10;
-      t0 = root10;
-      isect = POINT_ON_TRIANGLE_EDGE_01;
+      t0             = root10;
+      isect          = POINT_ON_TRIANGLE_EDGE_01;
     }
     // test against edge20
-    double len20 = v20X * v20X + v20Y * v20Y + v20Z * v20Z;
-    double v20Vel = (v20X * velX + v20Y * velY + v20Z * velZ);
-    double A20 = len20 * -velLen + v20Vel * v20Vel;
+    double len20      = v20X * v20X + v20Y * v20Y + v20Z * v20Z;
+    double v20Vel     = (v20X * velX + v20Y * velY + v20Z * velZ);
+    double A20        = len20 * -velLen + v20Vel * v20Vel;
     double v20BaseTo0 = v20X * -centerV0X + v20Y * -centerV0Y + v20Z * -centerV0Z;
-    double B20 = len20 * 2 * velBaseTo0 - 2 * v20Vel * v20BaseTo0;
-    double C20 = len20 * (radius2 - baseTo0Len) + v20BaseTo0 * v20BaseTo0;
-    double root20 = computeLowestRoot(A20, B20, C20, t0);
-    double f20 = (v20Vel * root20 - v20BaseTo0) / len20;
+    double B20        = len20 * 2 * velBaseTo0 - 2 * v20Vel * v20BaseTo0;
+    double C20        = len20 * (radius2 - baseTo0Len) + v20BaseTo0 * v20BaseTo0;
+    double root20     = computeLowestRoot(A20, B20, C20, t0);
+    double f20        = (v20Vel * root20 - v20BaseTo0) / len20;
     if (f20 >= 0.0 && f20 <= 1.0 && root20 < pt1)
     {
       pointAndTime.x = v0X + f20 * v20X;
       pointAndTime.y = v0Y + f20 * v20Y;
       pointAndTime.z = v0Z + f20 * v20Z;
       pointAndTime.w = root20;
-      t0 = root20;
-      isect = POINT_ON_TRIANGLE_EDGE_20;
+      t0             = root20;
+      isect          = POINT_ON_TRIANGLE_EDGE_20;
     }
     // test against edge21
-    double v21X = v2X - v1X;
-    double v21Y = v2Y - v1Y;
-    double v21Z = v2Z - v1Z;
-    double len21 = v21X * v21X + v21Y * v21Y + v21Z * v21Z;
+    double v21X       = v2X - v1X;
+    double v21Y       = v2Y - v1Y;
+    double v21Z       = v2Z - v1Z;
+    double len21      = v21X * v21X + v21Y * v21Y + v21Z * v21Z;
     double baseTo1Len = centerV1Len;
-    double v21Vel = (v21X * velX + v21Y * velY + v21Z * velZ);
-    double A21 = len21 * -velLen + v21Vel * v21Vel;
+    double v21Vel     = (v21X * velX + v21Y * velY + v21Z * velZ);
+    double A21        = len21 * -velLen + v21Vel * v21Vel;
     double v21BaseTo1 = v21X * -centerV1X + v21Y * -centerV1Y + v21Z * -centerV1Z;
     double velBaseTo1 = velX * -centerV1X + velY * -centerV1Y + velZ * -centerV1Z;
-    double B21 = len21 * 2 * velBaseTo1 - 2 * v21Vel * v21BaseTo1;
-    double C21 = len21 * (radius2 - baseTo1Len) + v21BaseTo1 * v21BaseTo1;
-    double root21 = computeLowestRoot(A21, B21, C21, t0);
-    double f21 = (v21Vel * root21 - v21BaseTo1) / len21;
+    double B21        = len21 * 2 * velBaseTo1 - 2 * v21Vel * v21BaseTo1;
+    double C21        = len21 * (radius2 - baseTo1Len) + v21BaseTo1 * v21BaseTo1;
+    double root21     = computeLowestRoot(A21, B21, C21, t0);
+    double f21        = (v21Vel * root21 - v21BaseTo1) / len21;
     if (f21 >= 0.0 && f21 <= 1.0 && root21 < t0)
     {
       pointAndTime.x = v1X + f21 * v21X;
       pointAndTime.y = v1Y + f21 * v21Y;
       pointAndTime.z = v1Z + f21 * v21Z;
       pointAndTime.w = root21;
-      t0 = root21;
-      isect = POINT_ON_TRIANGLE_EDGE_12;
+      t0             = root21;
+      isect          = POINT_ON_TRIANGLE_EDGE_12;
     }
     return isect;
   }
@@ -1661,8 +1661,8 @@ public class Intersectiond
       return Double.POSITIVE_INFINITY;
     }
     double sqrtD = Math.sqrt(determinant);
-    double r1 = (-b - sqrtD) / (2.0 * a);
-    double r2 = (-b + sqrtD) / (2.0 * a);
+    double r1    = (-b - sqrtD) / (2.0 * a);
+    double r2    = (-b + sqrtD) / (2.0 * a);
     if (r1 > r2)
     {
       double temp = r2;
@@ -1702,24 +1702,24 @@ public class Intersectiond
    */
   public static boolean testPointInTriangle(double pX, double pY, double pZ, double v0X, double v0Y, double v0Z, double v1X, double v1Y, double v1Z, double v2X, double v2Y, double v2Z)
   {
-    double e10X = v1X - v0X;
-    double e10Y = v1Y - v0Y;
-    double e10Z = v1Z - v0Z;
-    double e20X = v2X - v0X;
-    double e20Y = v2Y - v0Y;
-    double e20Z = v2Z - v0Z;
-    double a = e10X * e10X + e10Y * e10Y + e10Z * e10Z;
-    double b = e10X * e20X + e10Y * e20Y + e10Z * e20Z;
-    double c = e20X * e20X + e20Y * e20Y + e20Z * e20Z;
+    double e10X  = v1X - v0X;
+    double e10Y  = v1Y - v0Y;
+    double e10Z  = v1Z - v0Z;
+    double e20X  = v2X - v0X;
+    double e20Y  = v2Y - v0Y;
+    double e20Z  = v2Z - v0Z;
+    double a     = e10X * e10X + e10Y * e10Y + e10Z * e10Z;
+    double b     = e10X * e20X + e10Y * e20Y + e10Z * e20Z;
+    double c     = e20X * e20X + e20Y * e20Y + e20Z * e20Z;
     double ac_bb = a * c - b * b;
-    double vpX = pX - v0X;
-    double vpY = pY - v0Y;
-    double vpZ = pZ - v0Z;
-    double d = vpX * e10X + vpY * e10Y + vpZ * e10Z;
-    double e = vpX * e20X + vpY * e20Y + vpZ * e20Z;
-    double x = d * c - e * b;
-    double y = e * a - d * b;
-    double z = x + y - ac_bb;
+    double vpX   = pX - v0X;
+    double vpY   = pY - v0Y;
+    double vpZ   = pZ - v0Z;
+    double d     = vpX * e10X + vpY * e10Y + vpZ * e10Z;
+    double e     = vpX * e20X + vpY * e20Y + vpZ * e20Z;
+    double x     = d * c - e * b;
+    double y     = e * a - d * b;
+    double z     = x + y - ac_bb;
     return ((Runtime.doubleToLongBits(z) & ~(Runtime.doubleToLongBits(x) | Runtime.doubleToLongBits(y))) & 0x8000000000000000L) != 0L;
   }
 
@@ -1750,18 +1750,18 @@ public class Intersectiond
   public static boolean intersectRaySphere(double originX, double originY, double originZ, double dirX, double dirY, double dirZ,
                                            double centerX, double centerY, double centerZ, double radiusSquared, Vector2d result)
   {
-    double Lx = centerX - originX;
-    double Ly = centerY - originY;
-    double Lz = centerZ - originZ;
+    double Lx  = centerX - originX;
+    double Ly  = centerY - originY;
+    double Lz  = centerZ - originZ;
     double tca = Lx * dirX + Ly * dirY + Lz * dirZ;
-    double d2 = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
+    double d2  = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     double thc = Math.sqrt(radiusSquared - d2);
-    double t0 = tca - thc;
-    double t1 = tca + thc;
+    double t0  = tca - thc;
+    double t1  = tca + thc;
     if (t0 < t1 && t1 >= 0.0)
     {
       result.x = t0;
@@ -1817,18 +1817,18 @@ public class Intersectiond
   public static boolean testRaySphere(double originX, double originY, double originZ, double dirX, double dirY, double dirZ,
                                       double centerX, double centerY, double centerZ, double radiusSquared)
   {
-    double Lx = centerX - originX;
-    double Ly = centerY - originY;
-    double Lz = centerZ - originZ;
+    double Lx  = centerX - originX;
+    double Ly  = centerY - originY;
+    double Lz  = centerZ - originZ;
     double tca = Lx * dirX + Ly * dirY + Lz * dirZ;
-    double d2 = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
+    double d2  = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     double thc = Math.sqrt(radiusSquared - d2);
-    double t0 = tca - thc;
-    double t1 = tca + thc;
+    double t0  = tca - thc;
+    double t1  = tca + thc;
     return t0 < t1 && t1 >= 0.0;
   }
 
@@ -1872,12 +1872,12 @@ public class Intersectiond
   public static boolean testLineSegmentSphere(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
                                               double centerX, double centerY, double centerZ, double radiusSquared)
   {
-    double dX = p1X - p0X;
-    double dY = p1Y - p0Y;
-    double dZ = p1Z - p0Z;
+    double dX  = p1X - p0X;
+    double dY  = p1Y - p0Y;
+    double dZ  = p1Z - p0Z;
     double nom = (centerX - p0X) * dX + (centerY - p0Y) * dY + (centerZ - p0Z) * dZ;
     double den = dX * dX + dY * dY + dZ * dZ;
-    double u = nom / den;
+    double u   = nom / den;
     if (u < 0.0)
     {
       dX = p0X - centerX;
@@ -1956,11 +1956,11 @@ public class Intersectiond
     if (invDirX >= 0.0)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -1989,9 +1989,9 @@ public class Intersectiond
       return false;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     if (tNear < tFar && tFar >= 0.0)
     {
       result.x = tNear;
@@ -2062,17 +2062,17 @@ public class Intersectiond
   public static int intersectLineSegmentAab(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
                                             double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Vector2d result)
   {
-    double dirX = p1X - p0X, dirY = p1Y - p0Y, dirZ = p1Z - p0Z;
+    double dirX    = p1X - p0X, dirY = p1Y - p0Y, dirZ = p1Z - p0Z;
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY, invDirZ = 1.0 / dirZ;
     double tNear, tFar, tymin, tymax, tzmin, tzmax;
     if (invDirX >= 0.0)
     {
       tNear = (minX - p0X) * invDirX;
-      tFar = (maxX - p0X) * invDirX;
+      tFar  = (maxX - p0X) * invDirX;
     } else
     {
       tNear = (maxX - p0X) * invDirX;
-      tFar = (minX - p0X) * invDirX;
+      tFar  = (minX - p0X) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -2101,9 +2101,9 @@ public class Intersectiond
       return OUTSIDE;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     int type = OUTSIDE;
     if (tNear <= tFar && tNear <= 1.0f && tFar >= 0.0f)
     {
@@ -2114,7 +2114,7 @@ public class Intersectiond
       } else if (tNear < 0.0f && tFar <= 1.0f)
       {
         tNear = tFar;
-        type = ONE_INTERSECTION;
+        type  = ONE_INTERSECTION;
       } else if (tNear < 0.0f && tFar > 1.0f)
       {
         type = INSIDE;
@@ -2190,11 +2190,11 @@ public class Intersectiond
     if (invDirX >= 0.0)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -2223,9 +2223,9 @@ public class Intersectiond
       return false;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     return tNear < tFar && tFar >= 0.0;
   }
 
@@ -2292,10 +2292,10 @@ public class Intersectiond
     double edge2X = v2X - v0X;
     double edge2Y = v2Y - v0Y;
     double edge2Z = v2Z - v0Z;
-    double pvecX = dirY * edge2Z - dirZ * edge2Y;
-    double pvecY = dirZ * edge2X - dirX * edge2Z;
-    double pvecZ = dirX * edge2Y - dirY * edge2X;
-    double det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    double pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    double pvecY  = dirZ * edge2X - dirX * edge2Z;
+    double pvecZ  = dirX * edge2Y - dirY * edge2X;
+    double det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det < epsilon)
     {
       return false;
@@ -2303,7 +2303,7 @@ public class Intersectiond
     double tvecX = originX - v0X;
     double tvecY = originY - v0Y;
     double tvecZ = originZ - v0Z;
-    double u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ);
+    double u     = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ);
     if (u < 0.0 || u > det)
     {
       return false;
@@ -2311,13 +2311,13 @@ public class Intersectiond
     double qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     double qvecY = tvecZ * edge1X - tvecX * edge1Z;
     double qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    double v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ);
+    double v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ);
     if (v < 0.0 || u + v > det)
     {
       return false;
     }
     double invDet = 1.0 / det;
-    double t = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
+    double t      = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
     return t >= epsilon;
   }
 
@@ -2384,19 +2384,19 @@ public class Intersectiond
     double edge2X = v2X - v0X;
     double edge2Y = v2Y - v0Y;
     double edge2Z = v2Z - v0Z;
-    double pvecX = dirY * edge2Z - dirZ * edge2Y;
-    double pvecY = dirZ * edge2X - dirX * edge2Z;
-    double pvecZ = dirX * edge2Y - dirY * edge2X;
-    double det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    double pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    double pvecY  = dirZ * edge2X - dirX * edge2Z;
+    double pvecZ  = dirX * edge2Y - dirY * edge2X;
+    double det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det > -epsilon && det < epsilon)
     {
       return false;
     }
-    double tvecX = originX - v0X;
-    double tvecY = originY - v0Y;
-    double tvecZ = originZ - v0Z;
+    double tvecX  = originX - v0X;
+    double tvecY  = originY - v0Y;
+    double tvecZ  = originZ - v0Z;
     double invDet = 1.0 / det;
-    double u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
+    double u      = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
     if (u < 0.0 || u > 1.0)
     {
       return false;
@@ -2404,7 +2404,7 @@ public class Intersectiond
     double qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     double qvecY = tvecZ * edge1X - tvecX * edge1Z;
     double qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    double v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
+    double v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
     if (v < 0.0 || u + v > 1.0)
     {
       return false;
@@ -2478,10 +2478,10 @@ public class Intersectiond
     double edge2X = v2X - v0X;
     double edge2Y = v2Y - v0Y;
     double edge2Z = v2Z - v0Z;
-    double pvecX = dirY * edge2Z - dirZ * edge2Y;
-    double pvecY = dirZ * edge2X - dirX * edge2Z;
-    double pvecZ = dirX * edge2Y - dirY * edge2X;
-    double det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    double pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    double pvecY  = dirZ * edge2X - dirX * edge2Z;
+    double pvecZ  = dirX * edge2Y - dirY * edge2X;
+    double det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det <= epsilon)
     {
       return -1.0;
@@ -2489,7 +2489,7 @@ public class Intersectiond
     double tvecX = originX - v0X;
     double tvecY = originY - v0Y;
     double tvecZ = originZ - v0Z;
-    double u = tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ;
+    double u     = tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ;
     if (u < 0.0 || u > det)
     {
       return -1.0;
@@ -2497,13 +2497,13 @@ public class Intersectiond
     double qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     double qvecY = tvecZ * edge1X - tvecX * edge1Z;
     double qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    double v = dirX * qvecX + dirY * qvecY + dirZ * qvecZ;
+    double v     = dirX * qvecX + dirY * qvecY + dirZ * qvecZ;
     if (v < 0.0 || u + v > det)
     {
       return -1.0;
     }
     double invDet = 1.0 / det;
-    double t = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
+    double t      = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
     return t;
   }
 
@@ -2573,19 +2573,19 @@ public class Intersectiond
     double edge2X = v2X - v0X;
     double edge2Y = v2Y - v0Y;
     double edge2Z = v2Z - v0Z;
-    double pvecX = dirY * edge2Z - dirZ * edge2Y;
-    double pvecY = dirZ * edge2X - dirX * edge2Z;
-    double pvecZ = dirX * edge2Y - dirY * edge2X;
-    double det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    double pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    double pvecY  = dirZ * edge2X - dirX * edge2Z;
+    double pvecZ  = dirX * edge2Y - dirY * edge2X;
+    double det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det > -epsilon && det < epsilon)
     {
       return -1.0;
     }
-    double tvecX = originX - v0X;
-    double tvecY = originY - v0Y;
-    double tvecZ = originZ - v0Z;
+    double tvecX  = originX - v0X;
+    double tvecY  = originY - v0Y;
+    double tvecZ  = originZ - v0Z;
     double invDet = 1.0 / det;
-    double u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
+    double u      = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
     if (u < 0.0 || u > 1.0)
     {
       return -1.0;
@@ -2593,7 +2593,7 @@ public class Intersectiond
     double qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     double qvecY = tvecZ * edge1X - tvecX * edge1Z;
     double qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    double v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
+    double v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
     if (v < 0.0 || u + v > 1.0)
     {
       return -1.0;
@@ -2660,7 +2660,7 @@ public class Intersectiond
     double dirX = p1X - p0X;
     double dirY = p1Y - p0Y;
     double dirZ = p1Z - p0Z;
-    double t = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
+    double t    = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
     return t >= 0.0 && t <= 1.0;
   }
 
@@ -2722,7 +2722,7 @@ public class Intersectiond
     double dirX = p1X - p0X;
     double dirY = p1Y - p0Y;
     double dirZ = p1Z - p0Z;
-    double t = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
+    double t    = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
     if (t >= 0.0 && t <= 1.0)
     {
       intersectionPoint.x = p0X + dirX * t;
@@ -2778,11 +2778,11 @@ public class Intersectiond
   public static boolean intersectLineSegmentPlane(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z,
                                                   double a, double b, double c, double d, Vector3d intersectionPoint)
   {
-    double dirX = p1X - p0X;
-    double dirY = p1Y - p0Y;
-    double dirZ = p1Z - p0Z;
+    double dirX  = p1X - p0X;
+    double dirY  = p1Y - p0Y;
+    double dirZ  = p1Z - p0Z;
     double denom = a * dirX + b * dirY + c * dirZ;
-    double t = -(a * p0X + b * p0Y + c * p0Z + d) / denom;
+    double t     = -(a * p0X + b * p0Y + c * p0Z + d) / denom;
     if (t >= 0.0 && t <= 1.0)
     {
       intersectionPoint.x = p0X + t * dirX;
@@ -2810,7 +2810,7 @@ public class Intersectiond
   public static boolean testLineCircle(double a, double b, double c, double centerX, double centerY, double radius)
   {
     double denom = Math.sqrt(a * a + b * b);
-    double dist = (a * centerX + b * centerY + c) / denom;
+    double dist  = (a * centerX + b * centerY + c) / denom;
     return -radius <= dist && dist <= radius;
   }
 
@@ -2833,7 +2833,7 @@ public class Intersectiond
   public static boolean intersectLineCircle(double a, double b, double c, double centerX, double centerY, double radius, Vector3d intersectionCenterAndHL)
   {
     double invDenom = Math.invsqrt(a * a + b * b);
-    double dist = (a * centerX + b * centerY + c) * invDenom;
+    double dist     = (a * centerX + b * centerY + c) * invDenom;
     if (-radius <= dist && dist <= radius)
     {
       intersectionCenterAndHL.x = centerX + dist * a * invDenom;
@@ -3013,18 +3013,18 @@ public class Intersectiond
       return false;
     }
     double invMLen = 1.0 / mLen;
-    double nX = maX * invMLen;
-    double nY = maY * invMLen;
-    double cX = bX - aX;
-    double cY = bY - aY;
-    double nDotC = nX * cX + nY * cY;
+    double nX      = maX * invMLen;
+    double nY      = maY * invMLen;
+    double cX      = bX - aX;
+    double cY      = bY - aY;
+    double nDotC   = nX * cX + nY * cY;
     if (nDotC <= 0.0)
     {
       return false;
     }
-    double cLen = Math.sqrt(cX * cX + cY * cY);
+    double cLen      = Math.sqrt(cX * cX + cY * cY);
     double cLenNdotC = cLen * cLen - nDotC * nDotC;
-    double aRbR2 = aRbR * aRbR;
+    double aRbR2     = aRbR * aRbR;
     if (cLenNdotC >= aRbR2)
     {
       return false;
@@ -3035,7 +3035,7 @@ public class Intersectiond
       return false;
     }
     double distance = nDotC - Math.sqrt(t);
-    double mag = mLen;
+    double mag      = mLen;
     if (mag < distance)
     {
       return false;
@@ -3084,10 +3084,10 @@ public class Intersectiond
    */
   public static boolean intersectCircleCircle(double aX, double aY, double radiusSquaredA, double bX, double bY, double radiusSquaredB, Vector3d intersectionCenterAndHL)
   {
-    double dX = bX - aX, dY = bY - aY;
+    double dX          = bX - aX, dY = bY - aY;
     double distSquared = dX * dX + dY * dY;
-    double h = 0.5 + (radiusSquaredA - radiusSquaredB) / distSquared;
-    double r_i = Math.sqrt(radiusSquaredA - h * h * distSquared);
+    double h           = 0.5 + (radiusSquaredA - radiusSquaredB) / distSquared;
+    double r_i         = Math.sqrt(radiusSquaredA - h * h * distSquared);
     if (r_i >= 0.0)
     {
       intersectionCenterAndHL.x = aX + h * dX;
@@ -3193,8 +3193,8 @@ public class Intersectiond
    */
   public static double distancePointLine(double pointX, double pointY, double x0, double y0, double x1, double y1)
   {
-    double dx = x1 - x0;
-    double dy = y1 - y0;
+    double dx    = x1 - x0;
+    double dy    = y1 - y0;
     double denom = Math.sqrt(dx * dx + dy * dy);
     return (dx * (y0 - pointY) - (x0 - pointX) * dy) / denom;
   }
@@ -3220,7 +3220,7 @@ public class Intersectiond
   {
     double d21x = x1 - x0, d21y = y1 - y0, d21z = z1 - z0;
     double d10x = x0 - pX, d10y = y0 - pY, d10z = z0 - pZ;
-    double cx = d21y * d10z - d21z * d10y, cy = d21z * d10x - d21x * d10z, cz = d21x * d10y - d21y * d10x;
+    double cx   = d21y * d10z - d21z * d10y, cy = d21z * d10x - d21x * d10z, cz = d21x * d10y - d21y * d10x;
     return Math.sqrt((cx * cx + cy * cy + cz * cz) / (d21x * d21x + d21y * d21y + d21z * d21z));
   }
 
@@ -3300,13 +3300,13 @@ public class Intersectiond
    */
   public static double intersectRayLineSegment(double originX, double originY, double dirX, double dirY, double aX, double aY, double bX, double bY)
   {
-    double v1X = originX - aX;
-    double v1Y = originY - aY;
-    double v2X = bX - aX;
-    double v2Y = bY - aY;
+    double v1X    = originX - aX;
+    double v1Y    = originY - aY;
+    double v2X    = bX - aX;
+    double v2Y    = bY - aY;
     double invV23 = 1.0 / (v2Y * dirX - v2X * dirY);
-    double t1 = (v2X * v1Y - v2Y * v1X) * invV23;
-    double t2 = (v1Y * dirX - v1X * dirY) * invV23;
+    double t1     = (v2X * v1Y - v2Y * v1X) * invV23;
+    double t2     = (v1Y * dirX - v1X * dirY) * invV23;
     if (t1 >= 0.0 && t2 >= 0.0 && t2 <= 1.0)
     {
       return t1;
@@ -3418,8 +3418,8 @@ public class Intersectiond
     double abX = v1X - v0X, abY = v1Y - v0Y;
     double acX = v2X - v0X, acY = v2Y - v0Y;
     double apX = pX - v0X, apY = pY - v0Y;
-    double d1 = abX * apX + abY * apY;
-    double d2 = acX * apX + acY * apY;
+    double d1  = abX * apX + abY * apY;
+    double d2  = acX * apX + acY * apY;
     if (d1 <= 0.0 && d2 <= 0.0)
     {
       result.x = v0X;
@@ -3427,8 +3427,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_VERTEX_0;
     }
     double bpX = pX - v1X, bpY = pY - v1Y;
-    double d3 = abX * bpX + abY * bpY;
-    double d4 = acX * bpX + acY * bpY;
+    double d3  = abX * bpX + abY * bpY;
+    double d4  = acX * bpX + acY * bpY;
     if (d3 >= 0.0 && d4 <= d3)
     {
       result.x = v1X;
@@ -3444,8 +3444,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_EDGE_01;
     }
     double cpX = pX - v2X, cpY = pY - v2Y;
-    double d5 = abX * cpX + abY * cpY;
-    double d6 = acX * cpX + acY * cpY;
+    double d5  = abX * cpX + abY * cpY;
+    double d6  = acX * cpX + acY * cpY;
     if (d6 >= 0.0 && d5 <= d6)
     {
       result.x = v2X;
@@ -3469,8 +3469,8 @@ public class Intersectiond
       return POINT_ON_TRIANGLE_EDGE_12;
     }
     double denom = 1.0 / (va + vb + vc);
-    double v = vb * denom;
-    double w = vc * denom;
+    double v     = vb * denom;
+    double w     = vc * denom;
     result.x = v0X + abX * v + acX * w;
     result.y = v0Y + abY * v + acY * w;
     return POINT_ON_TRIANGLE_FACE;
@@ -3524,17 +3524,17 @@ public class Intersectiond
   public static boolean intersectRayCircle(double originX, double originY, double dirX, double dirY,
                                            double centerX, double centerY, double radiusSquared, Vector2d result)
   {
-    double Lx = centerX - originX;
-    double Ly = centerY - originY;
+    double Lx  = centerX - originX;
+    double Ly  = centerY - originY;
     double tca = Lx * dirX + Ly * dirY;
-    double d2 = Lx * Lx + Ly * Ly - tca * tca;
+    double d2  = Lx * Lx + Ly * Ly - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     double thc = Math.sqrt(radiusSquared - d2);
-    double t0 = tca - thc;
-    double t1 = tca + thc;
+    double t0  = tca - thc;
+    double t1  = tca + thc;
     if (t0 < t1 && t1 >= 0.0)
     {
       result.x = t0;
@@ -3587,17 +3587,17 @@ public class Intersectiond
   public static boolean testRayCircle(double originX, double originY, double dirX, double dirY,
                                       double centerX, double centerY, double radiusSquared)
   {
-    double Lx = centerX - originX;
-    double Ly = centerY - originY;
+    double Lx  = centerX - originX;
+    double Ly  = centerY - originY;
     double tca = Lx * dirX + Ly * dirY;
-    double d2 = Lx * Lx + Ly * Ly - tca * tca;
+    double d2  = Lx * Lx + Ly * Ly - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     double thc = Math.sqrt(radiusSquared - d2);
-    double t0 = tca - thc;
-    double t1 = tca + thc;
+    double t0  = tca - thc;
+    double t1  = tca + thc;
     return t0 < t1 && t1 >= 0.0;
   }
 
@@ -3653,11 +3653,11 @@ public class Intersectiond
     if (invDirX >= 0.0)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -3673,7 +3673,7 @@ public class Intersectiond
       return OUTSIDE;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     int side = -1; // no intersection side
     if (tNear < tFar && tFar >= 0.0)
     {
@@ -3689,12 +3689,12 @@ public class Intersectiond
       double min = daX;
       if (daY < min)
       {
-        min = daY;
+        min  = daY;
         side = 1; // min y coordinate
       }
       if (dbX < min)
       {
-        min = dbX;
+        min  = dbX;
         side = 2; // max xcoordinate
       }
       if (dbY < min)
@@ -3760,17 +3760,17 @@ public class Intersectiond
   public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, double p1Y,
                                             double minX, double minY, double maxX, double maxY, Vector2d result)
   {
-    double dirX = p1X - p0X, dirY = p1Y - p0Y;
+    double dirX    = p1X - p0X, dirY = p1Y - p0Y;
     double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY;
     double tNear, tFar, tymin, tymax;
     if (invDirX >= 0.0)
     {
       tNear = (minX - p0X) * invDirX;
-      tFar = (maxX - p0X) * invDirX;
+      tFar  = (maxX - p0X) * invDirX;
     } else
     {
       tNear = (maxX - p0X) * invDirX;
-      tFar = (minX - p0X) * invDirX;
+      tFar  = (minX - p0X) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -3786,7 +3786,7 @@ public class Intersectiond
       return OUTSIDE;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     int type = OUTSIDE;
     if (tNear <= tFar && tNear <= 1.0f && tFar >= 0.0f)
     {
@@ -3797,7 +3797,7 @@ public class Intersectiond
       } else if (tNear < 0.0f && tFar <= 1.0f)
       {
         tNear = tFar;
-        type = ONE_INTERSECTION;
+        type  = ONE_INTERSECTION;
       } else if (tNear < 0.0f && tFar > 1.0f)
       {
         type = INSIDE;
@@ -3865,11 +3865,11 @@ public class Intersectiond
     if (invDirX >= 0.0)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0)
     {
@@ -3885,7 +3885,7 @@ public class Intersectiond
       return false;
     }
     tNear = tymin > tNear || Double.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Double.isNaN(tFar) ? tymax : tFar;
     return tNear < tFar && tFar >= 0.0;
   }
 
@@ -3977,8 +3977,8 @@ public class Intersectiond
    */
   public static boolean testPointCircle(double pX, double pY, double centerX, double centerY, double radiusSquared)
   {
-    double dx = pX - centerX;
-    double dy = pY - centerY;
+    double dx  = pX - centerX;
+    double dy  = pY - centerY;
     double dx2 = dx * dx;
     double dy2 = dy * dy;
     return dx2 + dy2 <= radiusSquared;
@@ -4005,19 +4005,19 @@ public class Intersectiond
    */
   public static boolean testCircleTriangle(double centerX, double centerY, double radiusSquared, double v0X, double v0Y, double v1X, double v1Y, double v2X, double v2Y)
   {
-    double c1x = centerX - v0X, c1y = centerY - v0Y;
+    double c1x   = centerX - v0X, c1y = centerY - v0Y;
     double c1sqr = c1x * c1x + c1y * c1y - radiusSquared;
     if (c1sqr <= 0.0)
     {
       return true;
     }
-    double c2x = centerX - v1X, c2y = centerY - v1Y;
+    double c2x   = centerX - v1X, c2y = centerY - v1Y;
     double c2sqr = c2x * c2x + c2y * c2y - radiusSquared;
     if (c2sqr <= 0.0)
     {
       return true;
     }
-    double c3x = centerX - v2X, c3y = centerY - v2Y;
+    double c3x   = centerX - v2X, c3y = centerY - v2Y;
     double c3sqr = c3x * c3x + c3y * c3y - radiusSquared;
     if (c3sqr <= 0.0)
     {
@@ -4107,26 +4107,26 @@ public class Intersectiond
    */
   public static int intersectPolygonRay(double[] verticesXY, double originX, double originY, double dirX, double dirY, Vector2d p)
   {
-    double nearestT = Double.POSITIVE_INFINITY;
-    int count = verticesXY.length >> 1;
-    int edgeIndex = -1;
-    double aX = verticesXY[(count - 1) << 1], aY = verticesXY[((count - 1) << 1) + 1];
+    double nearestT  = Double.POSITIVE_INFINITY;
+    int    count     = verticesXY.length >> 1;
+    int    edgeIndex = -1;
+    double aX        = verticesXY[(count - 1) << 1], aY = verticesXY[((count - 1) << 1) + 1];
     for (int i = 0; i < count; i++)
     {
-      double bX = verticesXY[i << 1], bY = verticesXY[(i << 1) + 1];
-      double doaX = originX - aX, doaY = originY - aY;
-      double dbaX = bX - aX, dbaY = bY - aY;
+      double bX        = verticesXY[i << 1], bY = verticesXY[(i << 1) + 1];
+      double doaX      = originX - aX, doaY = originY - aY;
+      double dbaX      = bX - aX, dbaY = bY - aY;
       double invDbaDir = 1.0 / (dbaY * dirX - dbaX * dirY);
-      double t = (dbaX * doaY - dbaY * doaX) * invDbaDir;
+      double t         = (dbaX * doaY - dbaY * doaX) * invDbaDir;
       if (t >= 0.0 && t < nearestT)
       {
         double t2 = (doaY * dirX - doaX * dirY) * invDbaDir;
         if (t2 >= 0.0 && t2 <= 1.0)
         {
           edgeIndex = (i - 1 + count) % count;
-          nearestT = t;
-          p.x = originX + t * dirX;
-          p.y = originY + t * dirY;
+          nearestT  = t;
+          p.x       = originX + t * dirX;
+          p.y       = originY + t * dirY;
         }
       }
       aX = bX;
@@ -4153,27 +4153,27 @@ public class Intersectiond
    */
   public static int intersectPolygonRay(Vector2dc[] vertices, double originX, double originY, double dirX, double dirY, Vector2d p)
   {
-    double nearestT = Double.POSITIVE_INFINITY;
-    int count = vertices.length;
-    int edgeIndex = -1;
-    double aX = vertices[count - 1].x(), aY = vertices[count - 1].y();
+    double nearestT  = Double.POSITIVE_INFINITY;
+    int    count     = vertices.length;
+    int    edgeIndex = -1;
+    double aX        = vertices[count - 1].x(), aY = vertices[count - 1].y();
     for (int i = 0; i < count; i++)
     {
-      Vector2dc b = vertices[i];
-      double bX = b.x(), bY = b.y();
-      double doaX = originX - aX, doaY = originY - aY;
-      double dbaX = bX - aX, dbaY = bY - aY;
-      double invDbaDir = 1.0 / (dbaY * dirX - dbaX * dirY);
-      double t = (dbaX * doaY - dbaY * doaX) * invDbaDir;
+      Vector2dc b         = vertices[i];
+      double    bX        = b.x(), bY = b.y();
+      double    doaX      = originX - aX, doaY = originY - aY;
+      double    dbaX      = bX - aX, dbaY = bY - aY;
+      double    invDbaDir = 1.0 / (dbaY * dirX - dbaX * dirY);
+      double    t         = (dbaX * doaY - dbaY * doaX) * invDbaDir;
       if (t >= 0.0 && t < nearestT)
       {
         double t2 = (doaY * dirX - doaX * dirY) * invDbaDir;
         if (t2 >= 0.0 && t2 <= 1.0)
         {
           edgeIndex = (i - 1 + count) % count;
-          nearestT = t;
-          p.x = originX + t * dirX;
-          p.y = originY + t * dirY;
+          nearestT  = t;
+          p.x       = originX + t * dirX;
+          p.y       = originY + t * dirY;
         }
       }
       aX = bX;
@@ -4199,13 +4199,13 @@ public class Intersectiond
    */
   public static boolean intersectLineLine(double ps1x, double ps1y, double pe1x, double pe1y, double ps2x, double ps2y, double pe2x, double pe2y, Vector2d p)
   {
-    double d1x = ps1x - pe1x;
-    double d1y = pe1y - ps1y;
+    double d1x   = ps1x - pe1x;
+    double d1y   = pe1y - ps1y;
     double d1ps1 = d1y * ps1x + d1x * ps1y;
-    double d2x = ps2x - pe2x;
-    double d2y = pe2y - ps2y;
+    double d2x   = ps2x - pe2x;
+    double d2y   = pe2y - ps2y;
     double d2ps2 = d2y * ps2x + d2x * ps2y;
-    double det = d1y * d2x - d2y * d1x;
+    double det   = d1y * d2x - d2y * d1x;
     if (det == 0.0)
     {
       return false;
@@ -4217,23 +4217,23 @@ public class Intersectiond
 
   private static boolean separatingAxis(Vector2d[] v1s, Vector2d[] v2s, double aX, double aY)
   {
-    double minA = Double.POSITIVE_INFINITY, maxA = Double.NEGATIVE_INFINITY;
-    double minB = Double.POSITIVE_INFINITY, maxB = Double.NEGATIVE_INFINITY;
-    int maxLen = Math.max(v1s.length, v2s.length);
+    double minA   = Double.POSITIVE_INFINITY, maxA = Double.NEGATIVE_INFINITY;
+    double minB   = Double.POSITIVE_INFINITY, maxB = Double.NEGATIVE_INFINITY;
+    int    maxLen = Math.max(v1s.length, v2s.length);
     /* Project both polygons on axis */
     for (int k = 0; k < maxLen; k++)
     {
       if (k < v1s.length)
       {
         Vector2d v1 = v1s[k];
-        double d = v1.x * aX + v1.y * aY;
+        double   d  = v1.x * aX + v1.y * aY;
         if (d < minA) minA = d;
         if (d > maxA) maxA = d;
       }
       if (k < v2s.length)
       {
         Vector2d v2 = v2s[k];
-        double d = v2.x * aX + v2.y * aY;
+        double   d  = v2.x * aX + v2.y * aY;
         if (d < minB) minB = d;
         if (d > maxB) maxB = d;
       }

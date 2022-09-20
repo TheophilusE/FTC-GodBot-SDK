@@ -58,19 +58,19 @@ public class GeometryUtils
       dest1.x = 0;
       dest1.y = z;
       dest1.z = -y;
-      mag = magX;
+      mag     = magX;
     } else if (magY > magZ)
     {
       dest1.x = -z;
       dest1.y = 0;
       dest1.z = x;
-      mag = magY;
+      mag     = magY;
     } else
     {
       dest1.x = y;
       dest1.y = -x;
       dest1.z = 0;
-      mag = magZ;
+      mag     = magZ;
     }
     float len = Math.invsqrt(mag);
     dest1.x *= len;

@@ -54,9 +54,9 @@ public class ConceptSoundsSKYSTONE extends LinearOpMode
 {
 
   // List of available sound resources
-  String sounds[] = {"ss_alarm", "ss_bb8_down", "ss_bb8_up", "ss_darth_vader", "ss_fly_by",
-      "ss_mf_fail", "ss_laser", "ss_laser_burst", "ss_light_saber", "ss_light_saber_long", "ss_light_saber_short",
-      "ss_light_speed", "ss_mine", "ss_power_up", "ss_r2d2_up", "ss_roger_roger", "ss_siren", "ss_wookie"};
+  String  sounds[]     = {"ss_alarm", "ss_bb8_down", "ss_bb8_up", "ss_darth_vader", "ss_fly_by",
+                          "ss_mf_fail", "ss_laser", "ss_laser_burst", "ss_light_saber", "ss_light_saber_long", "ss_light_saber_short",
+                          "ss_light_speed", "ss_mine", "ss_power_up", "ss_r2d2_up", "ss_roger_roger", "ss_siren", "ss_wookie"};
   boolean soundPlaying = false;
 
   @Override
@@ -64,16 +64,16 @@ public class ConceptSoundsSKYSTONE extends LinearOpMode
   {
 
     // Variables for choosing from the available sounds
-    int soundIndex = 0;
-    int soundID = -1;
-    boolean was_dpad_up = false;
+    int     soundIndex    = 0;
+    int     soundID       = -1;
+    boolean was_dpad_up   = false;
     boolean was_dpad_down = false;
 
     Context myApp = hardwareMap.appContext;
 
     // create a sound parameter that holds the desired player parameters.
     SoundPlayer.PlaySoundParams params = new SoundPlayer.PlaySoundParams();
-    params.loopControl = 0;
+    params.loopControl                     = 0;
     params.waitForNonLoopingSoundsToFinish = true;
 
     // In this sample, we will skip waiting for the user to press play, and start displaying sound choices right away
@@ -107,18 +107,18 @@ public class ConceptSoundsSKYSTONE extends LinearOpMode
 
           // Start playing, and also Create a callback that will clear the playing flag when the sound is complete.
           SoundPlayer.getInstance().startPlaying(myApp, soundID, params, null,
-              new Runnable()
-              {
-                public void run()
-                {
-                  soundPlaying = false;
-                }
-              });
+                                                 new Runnable()
+                                                 {
+                                                   public void run()
+                                                   {
+                                                     soundPlaying = false;
+                                                   }
+                                                 });
         }
       }
 
       // Remember the last state of the dpad to detect changes.
-      was_dpad_up = gamepad1.dpad_up;
+      was_dpad_up   = gamepad1.dpad_up;
       was_dpad_down = gamepad1.dpad_down;
 
       // Display the current sound choice, and the playing status.

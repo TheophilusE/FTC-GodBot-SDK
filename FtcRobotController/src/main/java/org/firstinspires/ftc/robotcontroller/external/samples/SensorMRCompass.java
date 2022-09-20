@@ -55,7 +55,7 @@ public class SensorMRCompass extends LinearOpMode
 {
 
   ModernRoboticsI2cCompassSensor compass;
-  ElapsedTime timer = new ElapsedTime();
+  ElapsedTime                    timer = new ElapsedTime();
 
   @Override
   public void runOpMode()
@@ -143,8 +143,8 @@ public class SensorMRCompass extends LinearOpMode
       // getAcceleration() returns the current 3D acceleration experienced by
       // the sensor. This is used internally to the sensor to compute its tilt and thence
       // to correct the magnetometer reading to produce tilt-corrected values in getDirection()
-      Acceleration accel = compass.getAcceleration();
-      double accelMagnitude = Math.sqrt(accel.xAccel * accel.xAccel + accel.yAccel * accel.yAccel + accel.zAccel * accel.zAccel);
+      Acceleration accel          = compass.getAcceleration();
+      double       accelMagnitude = Math.sqrt(accel.xAccel * accel.xAccel + accel.yAccel * accel.yAccel + accel.zAccel * accel.zAccel);
       telemetry.addData("accel", accel);
       telemetry.addData("accel magnitude", "%.3f", accelMagnitude);
 

@@ -137,7 +137,7 @@ public class Intersectionf
    * or return value of {@link #intersectLineSegmentAar(float, float, float, float, float, float, float, float, Vector2f)} and
    * {@link #intersectLineSegmentAar(Vector2fc, Vector2fc, Vector2fc, Vector2fc, Vector2f)} to indicate that the line segment does not intersect the axis-aligned rectangle.
    */
-  public static final int OUTSIDE = -1;
+  public static final int OUTSIDE          = -1;
   /**
    * Return value of {@link #intersectLineSegmentAab(float, float, float, float, float, float, float, float, float, float, float, float, Vector2f)} and
    * {@link #intersectLineSegmentAab(Vector3fc, Vector3fc, Vector3fc, Vector3fc, Vector2f)} to indicate that one end point of the line segment lies inside of the axis-aligned box;
@@ -160,7 +160,7 @@ public class Intersectionf
    * or return value of {@link #intersectLineSegmentAar(float, float, float, float, float, float, float, float, Vector2f)} and
    * {@link #intersectLineSegmentAar(Vector2fc, Vector2fc, Vector2fc, Vector2fc, Vector2f)} to indicate that the line segment lies completely inside of the axis-aligned rectangle.
    */
-  public static final int INSIDE = 3;
+  public static final int INSIDE           = 3;
 
   /**
    * Test whether the plane with the general plane equation <i>a*x + b*y + c*z + d = 0</i> intersects the sphere with center
@@ -183,7 +183,7 @@ public class Intersectionf
       float centerX, float centerY, float centerZ, float radius)
   {
     float denom = (float) Math.sqrt(a * a + b * b + c * c);
-    float dist = (a * centerX + b * centerY + c * centerZ + d) / denom;
+    float dist  = (a * centerX + b * centerY + c * centerZ + d) / denom;
     return -radius <= dist && dist <= radius;
   }
 
@@ -211,7 +211,7 @@ public class Intersectionf
       Vector4f intersectionCenterAndRadius)
   {
     float invDenom = Math.invsqrt(a * a + b * b + c * c);
-    float dist = (a * centerX + b * centerY + c * centerZ + d) * invDenom;
+    float dist     = (a * centerX + b * centerY + c * centerZ + d) * invDenom;
     if (-radius <= dist && dist <= radius)
     {
       intersectionCenterAndRadius.x = centerX + dist * a * invDenom;
@@ -416,7 +416,7 @@ public class Intersectionf
       float maxXB, float maxYB, float maxZB)
   {
     return maxXA >= minXB && maxYA >= minYB && maxZA >= minZB &&
-        minXA <= maxXB && minYA <= maxYB && minZA <= maxZB;
+           minXA <= maxXB && minYA <= maxYB && minZA <= maxZB;
   }
 
   /**
@@ -524,15 +524,15 @@ public class Intersectionf
     // counteract arithmetic errors when two edges are parallel and
     // their cross product is (near) null (see text for details)
     float EPSILON = 1E-5f;
-    float arm00 = Math.abs(rm00) + EPSILON;
-    float arm01 = Math.abs(rm01) + EPSILON;
-    float arm02 = Math.abs(rm02) + EPSILON;
-    float arm10 = Math.abs(rm10) + EPSILON;
-    float arm11 = Math.abs(rm11) + EPSILON;
-    float arm12 = Math.abs(rm12) + EPSILON;
-    float arm20 = Math.abs(rm20) + EPSILON;
-    float arm21 = Math.abs(rm21) + EPSILON;
-    float arm22 = Math.abs(rm22) + EPSILON;
+    float arm00   = Math.abs(rm00) + EPSILON;
+    float arm01   = Math.abs(rm01) + EPSILON;
+    float arm02   = Math.abs(rm02) + EPSILON;
+    float arm10   = Math.abs(rm10) + EPSILON;
+    float arm11   = Math.abs(rm11) + EPSILON;
+    float arm12   = Math.abs(rm12) + EPSILON;
+    float arm20   = Math.abs(rm20) + EPSILON;
+    float arm21   = Math.abs(rm21) + EPSILON;
+    float arm22   = Math.abs(rm22) + EPSILON;
     // Compute translation vector t
     float tx = b1cX - b0cX, ty = b1cY - b0cY, tz = b1cZ - b0cZ;
     // Bring translation into a's coordinate frame
@@ -624,10 +624,10 @@ public class Intersectionf
       float bX, float bY, float bZ, float radiusSquaredB,
       Vector4f centerAndRadiusOfIntersectionCircle)
   {
-    float dX = bX - aX, dY = bY - aY, dZ = bZ - aZ;
+    float dX          = bX - aX, dY = bY - aY, dZ = bZ - aZ;
     float distSquared = dX * dX + dY * dY + dZ * dZ;
-    float h = 0.5f + (radiusSquaredA - radiusSquaredB) / (2.0f * distSquared);
-    float r_i = radiusSquaredA - h * h * distSquared;
+    float h           = 0.5f + (radiusSquaredA - radiusSquaredB) / (2.0f * distSquared);
+    float r_i         = radiusSquaredA - h * h * distSquared;
     if (r_i >= 0.0f)
     {
       centerAndRadiusOfIntersectionCircle.x = aX + h * dX;
@@ -693,9 +693,9 @@ public class Intersectionf
       float v2X, float v2Y, float v2Z,
       Vector3f result)
   {
-    int closest = findClosestPointOnTriangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, sX, sY, sZ, result);
-    float vX = result.x - sX, vY = result.y - sY, vZ = result.z - sZ;
-    float dot = vX * vX + vY * vY + vZ * vZ;
+    int   closest = findClosestPointOnTriangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, sX, sY, sZ, result);
+    float vX      = result.x - sX, vY = result.y - sY, vZ = result.z - sZ;
+    float dot     = vX * vX + vY * vY + vZ * vZ;
     if (dot <= sR * sR)
     {
       return closest;
@@ -723,10 +723,10 @@ public class Intersectionf
       float aX, float aY, float aZ, float radiusSquaredA,
       float bX, float bY, float bZ, float radiusSquaredB)
   {
-    float dX = bX - aX, dY = bY - aY, dZ = bZ - aZ;
+    float dX          = bX - aX, dY = bY - aY, dZ = bZ - aZ;
     float distSquared = dX * dX + dY * dY + dZ * dZ;
-    float h = 0.5f + (radiusSquaredA - radiusSquaredB) / (2.0f * distSquared);
-    float r_i = radiusSquaredA - h * h * distSquared;
+    float h           = 0.5f + (radiusSquaredA - radiusSquaredB) / (2.0f * distSquared);
+    float r_i         = radiusSquaredA - h * h * distSquared;
     return r_i >= 0.0f;
   }
 
@@ -796,10 +796,10 @@ public class Intersectionf
     float v1Z0Z = v1Z - v0Z;
     float v2X0X = v2X - v0X;
     float v1X0X = v1X - v0X;
-    float a = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
-    float b = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
-    float c = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
-    float d = -(a * v0X + b * v0Y + c * v0Z);
+    float a     = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
+    float b     = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
+    float c     = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
+    float d     = -(a * v0X + b * v0Y + c * v0Z);
     return distancePointPlane(pointX, pointY, pointZ, a, b, c, d);
   }
 
@@ -1020,7 +1020,7 @@ public class Intersectionf
   public static Vector3f findClosestPointOnLineSegment(float aX, float aY, float aZ, float bX, float bY, float bZ, float pX, float pY, float pZ, Vector3f result)
   {
     float abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
-    float t = ((pX - aX) * abX + (pY - aY) * abY + (pZ - aZ) * abZ) / (abX * abX + abY * abY + abZ * abZ);
+    float t   = ((pX - aX) * abX + (pY - aY) * abY + (pZ - aZ) * abZ) / (abX * abX + abY * abY + abZ * abZ);
     if (t < 0.0f) t = 0.0f;
     if (t > 1.0f) t = 1.0f;
     result.x = aX + t * abX;
@@ -1056,12 +1056,12 @@ public class Intersectionf
       float b0X, float b0Y, float b0Z, float b1X, float b1Y, float b1Z,
       Vector3f resultA, Vector3f resultB)
   {
-    float d1x = a1X - a0X, d1y = a1Y - a0Y, d1z = a1Z - a0Z;
-    float d2x = b1X - b0X, d2y = b1Y - b0Y, d2z = b1Z - b0Z;
-    float rX = a0X - b0X, rY = a0Y - b0Y, rZ = a0Z - b0Z;
-    float a = d1x * d1x + d1y * d1y + d1z * d1z;
-    float e = d2x * d2x + d2y * d2y + d2z * d2z;
-    float f = d2x * rX + d2y * rY + d2z * rZ;
+    float d1x     = a1X - a0X, d1y = a1Y - a0Y, d1z = a1Z - a0Z;
+    float d2x     = b1X - b0X, d2y = b1Y - b0Y, d2z = b1Z - b0Z;
+    float rX      = a0X - b0X, rY = a0Y - b0Y, rZ = a0Z - b0Z;
+    float a       = d1x * d1x + d1y * d1y + d1z * d1z;
+    float e       = d2x * d2x + d2y * d2y + d2z * d2z;
+    float f       = d2x * rX + d2y * rY + d2z * rZ;
     float EPSILON = 1E-5f;
     float s, t;
     if (a <= EPSILON && e <= EPSILON)
@@ -1088,7 +1088,7 @@ public class Intersectionf
       } else
       {
         // The general nondegenerate case starts here
-        float b = d1x * d2x + d1y * d2y + d1z * d2z;
+        float b     = d1x * d2x + d1y * d2y + d1z * d2z;
         float denom = a * e - b * b;
         // If segments not parallel, compute closest point on L1 to L2 and
         // clamp to segment S1. Else pick arbitrary s (here 0)
@@ -1154,41 +1154,41 @@ public class Intersectionf
     float min, d;
     float minlsX, minlsY, minlsZ, mintX, mintY, mintZ;
     // AB -> V0V1
-    d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, lineSegmentResult, triangleResult);
-    min = d;
+    d      = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, lineSegmentResult, triangleResult);
+    min    = d;
     minlsX = lineSegmentResult.x;
     minlsY = lineSegmentResult.y;
     minlsZ = lineSegmentResult.z;
-    mintX = triangleResult.x;
-    mintY = triangleResult.y;
-    mintZ = triangleResult.z;
+    mintX  = triangleResult.x;
+    mintY  = triangleResult.y;
+    mintZ  = triangleResult.z;
     // AB -> V1V2
     d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v1X, v1Y, v1Z, v2X, v2Y, v2Z, lineSegmentResult, triangleResult);
     if (d < min)
     {
-      min = d;
+      min    = d;
       minlsX = lineSegmentResult.x;
       minlsY = lineSegmentResult.y;
       minlsZ = lineSegmentResult.z;
-      mintX = triangleResult.x;
-      mintY = triangleResult.y;
-      mintZ = triangleResult.z;
+      mintX  = triangleResult.x;
+      mintY  = triangleResult.y;
+      mintZ  = triangleResult.z;
     }
     // AB -> V2V0
     d = findClosestPointsLineSegments(aX, aY, aZ, bX, bY, bZ, v2X, v2Y, v2Z, v0X, v0Y, v0Z, lineSegmentResult, triangleResult);
     if (d < min)
     {
-      min = d;
+      min    = d;
       minlsX = lineSegmentResult.x;
       minlsY = lineSegmentResult.y;
       minlsZ = lineSegmentResult.z;
-      mintX = triangleResult.x;
-      mintY = triangleResult.y;
-      mintZ = triangleResult.z;
+      mintX  = triangleResult.x;
+      mintY  = triangleResult.y;
+      mintZ  = triangleResult.z;
     }
     // segment endpoint A and plane of triangle (when A projects inside V0V1V2)
     boolean computed = false;
-    float a = Float.NaN, b = Float.NaN, c = Float.NaN, nd = Float.NaN;
+    float   a        = Float.NaN, b = Float.NaN, c = Float.NaN, nd = Float.NaN;
     if (testPointInTriangle(aX, aY, aZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z))
     {
       float v1Y0Y = v1Y - v0Y;
@@ -1197,27 +1197,27 @@ public class Intersectionf
       float v1Z0Z = v1Z - v0Z;
       float v2X0X = v2X - v0X;
       float v1X0X = v1X - v0X;
-      a = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
-      b = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
-      c = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
+      a        = v1Y0Y * v2Z0Z - v2Y0Y * v1Z0Z;
+      b        = v1Z0Z * v2X0X - v2Z0Z * v1X0X;
+      c        = v1X0X * v2Y0Y - v2X0X * v1Y0Y;
       computed = true;
       float invLen = Math.invsqrt(a * a + b * b + c * c);
       a *= invLen;
       b *= invLen;
       c *= invLen;
       nd = -(a * v0X + b * v0Y + c * v0Z);
-      d = (a * aX + b * aY + c * aZ + nd);
+      d  = (a * aX + b * aY + c * aZ + nd);
       float l = d;
       d *= d;
       if (d < min)
       {
-        min = d;
+        min    = d;
         minlsX = aX;
         minlsY = aY;
         minlsZ = aZ;
-        mintX = aX - a * l;
-        mintY = aY - b * l;
-        mintZ = aZ - c * l;
+        mintX  = aX - a * l;
+        mintY  = aY - b * l;
+        mintZ  = aZ - c * l;
       }
     }
     // segment endpoint B and plane of triangle (when B projects inside V0V1V2)
@@ -1245,13 +1245,13 @@ public class Intersectionf
       d *= d;
       if (d < min)
       {
-        min = d;
+        min    = d;
         minlsX = bX;
         minlsY = bY;
         minlsZ = bZ;
-        mintX = bX - a * l;
-        mintY = bY - b * l;
-        mintZ = bZ - c * l;
+        mintX  = bX - a * l;
+        mintY  = bY - b * l;
+        mintZ  = bZ - c * l;
       }
     }
     lineSegmentResult.set(minlsX, minlsY, minlsZ);
@@ -1296,8 +1296,8 @@ public class Intersectionf
     float abX = v1X - v0X, abY = v1Y - v0Y, abZ = v1Z - v0Z;
     float acX = v2X - v0X, acY = v2Y - v0Y, acZ = v2Z - v0Z;
     float apX = pX - v0X, apY = pY - v0Y, apZ = pZ - v0Z;
-    float d1 = abX * apX + abY * apY + abZ * apZ;
-    float d2 = acX * apX + acY * apY + acZ * apZ;
+    float d1  = abX * apX + abY * apY + abZ * apZ;
+    float d2  = acX * apX + acY * apY + acZ * apZ;
     if (d1 <= 0.0f && d2 <= 0.0f)
     {
       result.x = v0X;
@@ -1306,8 +1306,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_VERTEX_0;
     }
     float bpX = pX - v1X, bpY = pY - v1Y, bpZ = pZ - v1Z;
-    float d3 = abX * bpX + abY * bpY + abZ * bpZ;
-    float d4 = acX * bpX + acY * bpY + acZ * bpZ;
+    float d3  = abX * bpX + abY * bpY + abZ * bpZ;
+    float d4  = acX * bpX + acY * bpY + acZ * bpZ;
     if (d3 >= 0.0f && d4 <= d3)
     {
       result.x = v1X;
@@ -1325,8 +1325,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_EDGE_01;
     }
     float cpX = pX - v2X, cpY = pY - v2Y, cpZ = pZ - v2Z;
-    float d5 = abX * cpX + abY * cpY + abZ * cpZ;
-    float d6 = acX * cpX + acY * cpY + acZ * cpZ;
+    float d5  = abX * cpX + abY * cpY + abZ * cpZ;
+    float d6  = acX * cpX + acY * cpY + acZ * cpZ;
     if (d6 >= 0.0f && d5 <= d6)
     {
       result.x = v2X;
@@ -1353,8 +1353,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_EDGE_12;
     }
     float denom = 1.0f / (va + vb + vc);
-    float v = vb * denom;
-    float w = vc * denom;
+    float v     = vb * denom;
+    float w     = vc * denom;
     result.x = v0X + abX * v + acX * w;
     result.y = v0Y + abY * v + acY * w;
     result.z = v0Z + abZ * v + acZ * w;
@@ -1412,11 +1412,11 @@ public class Intersectionf
       float cX, float cY, float cZ,
       float pX, float pY, float pZ, Vector3f res)
   {
-    float abX = bX - aX, abY = bY - aY, abZ = bZ - aZ;
-    float acX = cX - aX, acY = cY - aY, acZ = cZ - aZ;
-    float dX = pX - aX, dY = pY - aY, dZ = pZ - aZ;
-    float qX = aX, qY = aY, qZ = aZ;
-    float dist = dX * abX + dY * abY + dZ * abZ;
+    float abX     = bX - aX, abY = bY - aY, abZ = bZ - aZ;
+    float acX     = cX - aX, acY = cY - aY, acZ = cZ - aZ;
+    float dX      = pX - aX, dY = pY - aY, dZ = pZ - aZ;
+    float qX      = aX, qY = aY, qZ = aZ;
+    float dist    = dX * abX + dY * abY + dZ * abZ;
     float maxdist = abX * abX + abY * abY + abZ * abZ;
     if (dist >= maxdist)
     {
@@ -1429,7 +1429,7 @@ public class Intersectionf
       qY += (dist / maxdist) * abY;
       qZ += (dist / maxdist) * abZ;
     }
-    dist = dX * acX + dY * acY + dZ * acZ;
+    dist    = dX * acX + dY * acY + dZ * acZ;
     maxdist = acX * acX + acY * acY + acZ * acZ;
     if (dist >= maxdist)
     {
@@ -1495,13 +1495,13 @@ public class Intersectionf
     float v20Y = v2Y - v0Y;
     float v20Z = v2Z - v0Z;
     // build triangle plane
-    float a = v10Y * v20Z - v20Y * v10Z;
-    float b = v10Z * v20X - v20Z * v10X;
-    float c = v10X * v20Y - v20X * v10Y;
-    float d = -(a * v0X + b * v0Y + c * v0Z);
-    float invLen = Math.invsqrt(a * a + b * b + c * c);
+    float a          = v10Y * v20Z - v20Y * v10Z;
+    float b          = v10Z * v20X - v20Z * v10X;
+    float c          = v10X * v20Y - v20X * v10Y;
+    float d          = -(a * v0X + b * v0Y + c * v0Z);
+    float invLen     = Math.invsqrt(a * a + b * b + c * c);
     float signedDist = (a * centerX + b * centerY + c * centerZ + d) * invLen;
-    float dot = (a * velX + b * velY + c * velZ) * invLen;
+    float dot        = (a * velX + b * velY + c * velZ) * invLen;
     if (dot < epsilon && dot > -epsilon)
     {
       return 0;
@@ -1511,10 +1511,10 @@ public class Intersectionf
     {
       return 0;
     }
-    float pt1 = (-radius - signedDist) / dot;
-    float p0X = centerX - radius * a * invLen + velX * pt0;
-    float p0Y = centerY - radius * b * invLen + velY * pt0;
-    float p0Z = centerZ - radius * c * invLen + velZ * pt0;
+    float   pt1            = (-radius - signedDist) / dot;
+    float   p0X            = centerX - radius * a * invLen + velX * pt0;
+    float   p0Y            = centerY - radius * b * invLen + velY * pt0;
+    float   p0Z            = centerZ - radius * c * invLen + velZ * pt0;
     boolean insideTriangle = testPointInTriangle(p0X, p0Y, p0Z, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z);
     if (insideTriangle)
     {
@@ -1524,120 +1524,120 @@ public class Intersectionf
       pointAndTime.w = pt0;
       return POINT_ON_TRIANGLE_FACE;
     }
-    int isect = 0;
-    float t0 = maxT;
-    float A = velX * velX + velY * velY + velZ * velZ;
+    int   isect   = 0;
+    float t0      = maxT;
+    float A       = velX * velX + velY * velY + velZ * velZ;
     float radius2 = radius * radius;
     // test against v0
     float centerV0X = centerX - v0X;
     float centerV0Y = centerY - v0Y;
     float centerV0Z = centerZ - v0Z;
-    float B0 = 2.0f * (velX * centerV0X + velY * centerV0Y + velZ * centerV0Z);
-    float C0 = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z - radius2;
-    float root0 = computeLowestRoot(A, B0, C0, t0);
+    float B0        = 2.0f * (velX * centerV0X + velY * centerV0Y + velZ * centerV0Z);
+    float C0        = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z - radius2;
+    float root0     = computeLowestRoot(A, B0, C0, t0);
     if (root0 < t0)
     {
       pointAndTime.x = v0X;
       pointAndTime.y = v0Y;
       pointAndTime.z = v0Z;
       pointAndTime.w = root0;
-      t0 = root0;
-      isect = POINT_ON_TRIANGLE_VERTEX_0;
+      t0             = root0;
+      isect          = POINT_ON_TRIANGLE_VERTEX_0;
     }
     // test against v1
-    float centerV1X = centerX - v1X;
-    float centerV1Y = centerY - v1Y;
-    float centerV1Z = centerZ - v1Z;
+    float centerV1X   = centerX - v1X;
+    float centerV1Y   = centerY - v1Y;
+    float centerV1Z   = centerZ - v1Z;
     float centerV1Len = centerV1X * centerV1X + centerV1Y * centerV1Y + centerV1Z * centerV1Z;
-    float B1 = 2.0f * (velX * centerV1X + velY * centerV1Y + velZ * centerV1Z);
-    float C1 = centerV1Len - radius2;
-    float root1 = computeLowestRoot(A, B1, C1, t0);
+    float B1          = 2.0f * (velX * centerV1X + velY * centerV1Y + velZ * centerV1Z);
+    float C1          = centerV1Len - radius2;
+    float root1       = computeLowestRoot(A, B1, C1, t0);
     if (root1 < t0)
     {
       pointAndTime.x = v1X;
       pointAndTime.y = v1Y;
       pointAndTime.z = v1Z;
       pointAndTime.w = root1;
-      t0 = root1;
-      isect = POINT_ON_TRIANGLE_VERTEX_1;
+      t0             = root1;
+      isect          = POINT_ON_TRIANGLE_VERTEX_1;
     }
     // test against v2
     float centerV2X = centerX - v2X;
     float centerV2Y = centerY - v2Y;
     float centerV2Z = centerZ - v2Z;
-    float B2 = 2.0f * (velX * centerV2X + velY * centerV2Y + velZ * centerV2Z);
-    float C2 = centerV2X * centerV2X + centerV2Y * centerV2Y + centerV2Z * centerV2Z - radius2;
-    float root2 = computeLowestRoot(A, B2, C2, t0);
+    float B2        = 2.0f * (velX * centerV2X + velY * centerV2Y + velZ * centerV2Z);
+    float C2        = centerV2X * centerV2X + centerV2Y * centerV2Y + centerV2Z * centerV2Z - radius2;
+    float root2     = computeLowestRoot(A, B2, C2, t0);
     if (root2 < t0)
     {
       pointAndTime.x = v2X;
       pointAndTime.y = v2Y;
       pointAndTime.z = v2Z;
       pointAndTime.w = root2;
-      t0 = root2;
-      isect = POINT_ON_TRIANGLE_VERTEX_2;
+      t0             = root2;
+      isect          = POINT_ON_TRIANGLE_VERTEX_2;
     }
     float velLen = velX * velX + velY * velY + velZ * velZ;
     // test against edge10
-    float len10 = v10X * v10X + v10Y * v10Y + v10Z * v10Z;
+    float len10      = v10X * v10X + v10Y * v10Y + v10Z * v10Z;
     float baseTo0Len = centerV0X * centerV0X + centerV0Y * centerV0Y + centerV0Z * centerV0Z;
-    float v10Vel = (v10X * velX + v10Y * velY + v10Z * velZ);
-    float A10 = len10 * -velLen + v10Vel * v10Vel;
+    float v10Vel     = (v10X * velX + v10Y * velY + v10Z * velZ);
+    float A10        = len10 * -velLen + v10Vel * v10Vel;
     float v10BaseTo0 = v10X * -centerV0X + v10Y * -centerV0Y + v10Z * -centerV0Z;
     float velBaseTo0 = velX * -centerV0X + velY * -centerV0Y + velZ * -centerV0Z;
-    float B10 = len10 * 2 * velBaseTo0 - 2 * v10Vel * v10BaseTo0;
-    float C10 = len10 * (radius2 - baseTo0Len) + v10BaseTo0 * v10BaseTo0;
-    float root10 = computeLowestRoot(A10, B10, C10, t0);
-    float f10 = (v10Vel * root10 - v10BaseTo0) / len10;
+    float B10        = len10 * 2 * velBaseTo0 - 2 * v10Vel * v10BaseTo0;
+    float C10        = len10 * (radius2 - baseTo0Len) + v10BaseTo0 * v10BaseTo0;
+    float root10     = computeLowestRoot(A10, B10, C10, t0);
+    float f10        = (v10Vel * root10 - v10BaseTo0) / len10;
     if (f10 >= 0.0f && f10 <= 1.0f && root10 < t0)
     {
       pointAndTime.x = v0X + f10 * v10X;
       pointAndTime.y = v0Y + f10 * v10Y;
       pointAndTime.z = v0Z + f10 * v10Z;
       pointAndTime.w = root10;
-      t0 = root10;
-      isect = POINT_ON_TRIANGLE_EDGE_01;
+      t0             = root10;
+      isect          = POINT_ON_TRIANGLE_EDGE_01;
     }
     // test against edge20
-    float len20 = v20X * v20X + v20Y * v20Y + v20Z * v20Z;
-    float v20Vel = (v20X * velX + v20Y * velY + v20Z * velZ);
-    float A20 = len20 * -velLen + v20Vel * v20Vel;
+    float len20      = v20X * v20X + v20Y * v20Y + v20Z * v20Z;
+    float v20Vel     = (v20X * velX + v20Y * velY + v20Z * velZ);
+    float A20        = len20 * -velLen + v20Vel * v20Vel;
     float v20BaseTo0 = v20X * -centerV0X + v20Y * -centerV0Y + v20Z * -centerV0Z;
-    float B20 = len20 * 2 * velBaseTo0 - 2 * v20Vel * v20BaseTo0;
-    float C20 = len20 * (radius2 - baseTo0Len) + v20BaseTo0 * v20BaseTo0;
-    float root20 = computeLowestRoot(A20, B20, C20, t0);
-    float f20 = (v20Vel * root20 - v20BaseTo0) / len20;
+    float B20        = len20 * 2 * velBaseTo0 - 2 * v20Vel * v20BaseTo0;
+    float C20        = len20 * (radius2 - baseTo0Len) + v20BaseTo0 * v20BaseTo0;
+    float root20     = computeLowestRoot(A20, B20, C20, t0);
+    float f20        = (v20Vel * root20 - v20BaseTo0) / len20;
     if (f20 >= 0.0f && f20 <= 1.0f && root20 < pt1)
     {
       pointAndTime.x = v0X + f20 * v20X;
       pointAndTime.y = v0Y + f20 * v20Y;
       pointAndTime.z = v0Z + f20 * v20Z;
       pointAndTime.w = root20;
-      t0 = root20;
-      isect = POINT_ON_TRIANGLE_EDGE_20;
+      t0             = root20;
+      isect          = POINT_ON_TRIANGLE_EDGE_20;
     }
     // test against edge21
-    float v21X = v2X - v1X;
-    float v21Y = v2Y - v1Y;
-    float v21Z = v2Z - v1Z;
-    float len21 = v21X * v21X + v21Y * v21Y + v21Z * v21Z;
+    float v21X       = v2X - v1X;
+    float v21Y       = v2Y - v1Y;
+    float v21Z       = v2Z - v1Z;
+    float len21      = v21X * v21X + v21Y * v21Y + v21Z * v21Z;
     float baseTo1Len = centerV1Len;
-    float v21Vel = (v21X * velX + v21Y * velY + v21Z * velZ);
-    float A21 = len21 * -velLen + v21Vel * v21Vel;
+    float v21Vel     = (v21X * velX + v21Y * velY + v21Z * velZ);
+    float A21        = len21 * -velLen + v21Vel * v21Vel;
     float v21BaseTo1 = v21X * -centerV1X + v21Y * -centerV1Y + v21Z * -centerV1Z;
     float velBaseTo1 = velX * -centerV1X + velY * -centerV1Y + velZ * -centerV1Z;
-    float B21 = len21 * 2 * velBaseTo1 - 2 * v21Vel * v21BaseTo1;
-    float C21 = len21 * (radius2 - baseTo1Len) + v21BaseTo1 * v21BaseTo1;
-    float root21 = computeLowestRoot(A21, B21, C21, t0);
-    float f21 = (v21Vel * root21 - v21BaseTo1) / len21;
+    float B21        = len21 * 2 * velBaseTo1 - 2 * v21Vel * v21BaseTo1;
+    float C21        = len21 * (radius2 - baseTo1Len) + v21BaseTo1 * v21BaseTo1;
+    float root21     = computeLowestRoot(A21, B21, C21, t0);
+    float f21        = (v21Vel * root21 - v21BaseTo1) / len21;
     if (f21 >= 0.0f && f21 <= 1.0f && root21 < t0)
     {
       pointAndTime.x = v1X + f21 * v21X;
       pointAndTime.y = v1Y + f21 * v21Y;
       pointAndTime.z = v1Z + f21 * v21Z;
       pointAndTime.w = root21;
-      t0 = root21;
-      isect = POINT_ON_TRIANGLE_EDGE_12;
+      t0             = root21;
+      isect          = POINT_ON_TRIANGLE_EDGE_12;
     }
     return isect;
   }
@@ -1661,8 +1661,8 @@ public class Intersectionf
       return Float.POSITIVE_INFINITY;
     }
     float sqrtD = (float) Math.sqrt(determinant);
-    float r1 = (-b - sqrtD) / (2.0f * a);
-    float r2 = (-b + sqrtD) / (2.0f * a);
+    float r1    = (-b - sqrtD) / (2.0f * a);
+    float r2    = (-b + sqrtD) / (2.0f * a);
     if (r1 > r2)
     {
       float temp = r2;
@@ -1702,24 +1702,24 @@ public class Intersectionf
    */
   public static boolean testPointInTriangle(float pX, float pY, float pZ, float v0X, float v0Y, float v0Z, float v1X, float v1Y, float v1Z, float v2X, float v2Y, float v2Z)
   {
-    float e10X = v1X - v0X;
-    float e10Y = v1Y - v0Y;
-    float e10Z = v1Z - v0Z;
-    float e20X = v2X - v0X;
-    float e20Y = v2Y - v0Y;
-    float e20Z = v2Z - v0Z;
-    float a = e10X * e10X + e10Y * e10Y + e10Z * e10Z;
-    float b = e10X * e20X + e10Y * e20Y + e10Z * e20Z;
-    float c = e20X * e20X + e20Y * e20Y + e20Z * e20Z;
+    float e10X  = v1X - v0X;
+    float e10Y  = v1Y - v0Y;
+    float e10Z  = v1Z - v0Z;
+    float e20X  = v2X - v0X;
+    float e20Y  = v2Y - v0Y;
+    float e20Z  = v2Z - v0Z;
+    float a     = e10X * e10X + e10Y * e10Y + e10Z * e10Z;
+    float b     = e10X * e20X + e10Y * e20Y + e10Z * e20Z;
+    float c     = e20X * e20X + e20Y * e20Y + e20Z * e20Z;
     float ac_bb = a * c - b * b;
-    float vpX = pX - v0X;
-    float vpY = pY - v0Y;
-    float vpZ = pZ - v0Z;
-    float d = vpX * e10X + vpY * e10Y + vpZ * e10Z;
-    float e = vpX * e20X + vpY * e20Y + vpZ * e20Z;
-    float x = d * c - e * b;
-    float y = e * a - d * b;
-    float z = x + y - ac_bb;
+    float vpX   = pX - v0X;
+    float vpY   = pY - v0Y;
+    float vpZ   = pZ - v0Z;
+    float d     = vpX * e10X + vpY * e10Y + vpZ * e10Z;
+    float e     = vpX * e20X + vpY * e20Y + vpZ * e20Z;
+    float x     = d * c - e * b;
+    float y     = e * a - d * b;
+    float z     = x + y - ac_bb;
     return ((Runtime.floatToIntBits(z) & ~(Runtime.floatToIntBits(x) | Runtime.floatToIntBits(y))) & 0x8000000000000000L) != 0L;
   }
 
@@ -1750,18 +1750,18 @@ public class Intersectionf
   public static boolean intersectRaySphere(float originX, float originY, float originZ, float dirX, float dirY, float dirZ,
                                            float centerX, float centerY, float centerZ, float radiusSquared, Vector2f result)
   {
-    float Lx = centerX - originX;
-    float Ly = centerY - originY;
-    float Lz = centerZ - originZ;
+    float Lx  = centerX - originX;
+    float Ly  = centerY - originY;
+    float Lz  = centerZ - originZ;
     float tca = Lx * dirX + Ly * dirY + Lz * dirZ;
-    float d2 = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
+    float d2  = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     float thc = (float) Math.sqrt(radiusSquared - d2);
-    float t0 = tca - thc;
-    float t1 = tca + thc;
+    float t0  = tca - thc;
+    float t1  = tca + thc;
     if (t0 < t1 && t1 >= 0.0f)
     {
       result.x = t0;
@@ -1817,18 +1817,18 @@ public class Intersectionf
   public static boolean testRaySphere(float originX, float originY, float originZ, float dirX, float dirY, float dirZ,
                                       float centerX, float centerY, float centerZ, float radiusSquared)
   {
-    float Lx = centerX - originX;
-    float Ly = centerY - originY;
-    float Lz = centerZ - originZ;
+    float Lx  = centerX - originX;
+    float Ly  = centerY - originY;
+    float Lz  = centerZ - originZ;
     float tca = Lx * dirX + Ly * dirY + Lz * dirZ;
-    float d2 = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
+    float d2  = Lx * Lx + Ly * Ly + Lz * Lz - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     float thc = (float) Math.sqrt(radiusSquared - d2);
-    float t0 = tca - thc;
-    float t1 = tca + thc;
+    float t0  = tca - thc;
+    float t1  = tca + thc;
     return t0 < t1 && t1 >= 0.0f;
   }
 
@@ -1872,12 +1872,12 @@ public class Intersectionf
   public static boolean testLineSegmentSphere(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z,
                                               float centerX, float centerY, float centerZ, float radiusSquared)
   {
-    float dX = p1X - p0X;
-    float dY = p1Y - p0Y;
-    float dZ = p1Z - p0Z;
+    float dX  = p1X - p0X;
+    float dY  = p1Y - p0Y;
+    float dZ  = p1Z - p0Z;
     float nom = (centerX - p0X) * dX + (centerY - p0Y) * dY + (centerZ - p0Z) * dZ;
     float den = dX * dX + dY * dY + dZ * dZ;
-    float u = nom / den;
+    float u   = nom / den;
     if (u < 0.0f)
     {
       dX = p0X - centerX;
@@ -1956,11 +1956,11 @@ public class Intersectionf
     if (invDirX >= 0.0f)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -1989,9 +1989,9 @@ public class Intersectionf
       return false;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     if (tNear < tFar && tFar >= 0.0f)
     {
       result.x = tNear;
@@ -2062,17 +2062,17 @@ public class Intersectionf
   public static int intersectLineSegmentAab(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z,
                                             float minX, float minY, float minZ, float maxX, float maxY, float maxZ, Vector2f result)
   {
-    float dirX = p1X - p0X, dirY = p1Y - p0Y, dirZ = p1Z - p0Z;
+    float dirX    = p1X - p0X, dirY = p1Y - p0Y, dirZ = p1Z - p0Z;
     float invDirX = 1.0f / dirX, invDirY = 1.0f / dirY, invDirZ = 1.0f / dirZ;
     float tNear, tFar, tymin, tymax, tzmin, tzmax;
     if (invDirX >= 0.0f)
     {
       tNear = (minX - p0X) * invDirX;
-      tFar = (maxX - p0X) * invDirX;
+      tFar  = (maxX - p0X) * invDirX;
     } else
     {
       tNear = (maxX - p0X) * invDirX;
-      tFar = (minX - p0X) * invDirX;
+      tFar  = (minX - p0X) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -2101,9 +2101,9 @@ public class Intersectionf
       return OUTSIDE;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     int type = OUTSIDE;
     if (tNear <= tFar && tNear <= 1.0f && tFar >= 0.0f)
     {
@@ -2114,7 +2114,7 @@ public class Intersectionf
       } else if (tNear < 0.0f && tFar <= 1.0f)
       {
         tNear = tFar;
-        type = ONE_INTERSECTION;
+        type  = ONE_INTERSECTION;
       } else if (tNear < 0.0f && tFar > 1.0f)
       {
         type = INSIDE;
@@ -2190,11 +2190,11 @@ public class Intersectionf
     if (invDirX >= 0.0f)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -2223,9 +2223,9 @@ public class Intersectionf
       return false;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     tNear = tzmin > tNear ? tzmin : tNear;
-    tFar = tzmax < tFar ? tzmax : tFar;
+    tFar  = tzmax < tFar ? tzmax : tFar;
     return tNear < tFar && tFar >= 0.0f;
   }
 
@@ -2292,10 +2292,10 @@ public class Intersectionf
     float edge2X = v2X - v0X;
     float edge2Y = v2Y - v0Y;
     float edge2Z = v2Z - v0Z;
-    float pvecX = dirY * edge2Z - dirZ * edge2Y;
-    float pvecY = dirZ * edge2X - dirX * edge2Z;
-    float pvecZ = dirX * edge2Y - dirY * edge2X;
-    float det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    float pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    float pvecY  = dirZ * edge2X - dirX * edge2Z;
+    float pvecZ  = dirX * edge2Y - dirY * edge2X;
+    float det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det < epsilon)
     {
       return false;
@@ -2303,7 +2303,7 @@ public class Intersectionf
     float tvecX = originX - v0X;
     float tvecY = originY - v0Y;
     float tvecZ = originZ - v0Z;
-    float u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ);
+    float u     = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ);
     if (u < 0.0f || u > det)
     {
       return false;
@@ -2311,13 +2311,13 @@ public class Intersectionf
     float qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     float qvecY = tvecZ * edge1X - tvecX * edge1Z;
     float qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    float v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ);
+    float v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ);
     if (v < 0.0f || u + v > det)
     {
       return false;
     }
     float invDet = 1.0f / det;
-    float t = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
+    float t      = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
     return t >= epsilon;
   }
 
@@ -2384,19 +2384,19 @@ public class Intersectionf
     float edge2X = v2X - v0X;
     float edge2Y = v2Y - v0Y;
     float edge2Z = v2Z - v0Z;
-    float pvecX = dirY * edge2Z - dirZ * edge2Y;
-    float pvecY = dirZ * edge2X - dirX * edge2Z;
-    float pvecZ = dirX * edge2Y - dirY * edge2X;
-    float det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    float pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    float pvecY  = dirZ * edge2X - dirX * edge2Z;
+    float pvecZ  = dirX * edge2Y - dirY * edge2X;
+    float det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det > -epsilon && det < epsilon)
     {
       return false;
     }
-    float tvecX = originX - v0X;
-    float tvecY = originY - v0Y;
-    float tvecZ = originZ - v0Z;
+    float tvecX  = originX - v0X;
+    float tvecY  = originY - v0Y;
+    float tvecZ  = originZ - v0Z;
     float invDet = 1.0f / det;
-    float u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
+    float u      = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
     if (u < 0.0f || u > 1.0f)
     {
       return false;
@@ -2404,7 +2404,7 @@ public class Intersectionf
     float qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     float qvecY = tvecZ * edge1X - tvecX * edge1Z;
     float qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    float v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
+    float v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
     if (v < 0.0f || u + v > 1.0f)
     {
       return false;
@@ -2478,10 +2478,10 @@ public class Intersectionf
     float edge2X = v2X - v0X;
     float edge2Y = v2Y - v0Y;
     float edge2Z = v2Z - v0Z;
-    float pvecX = dirY * edge2Z - dirZ * edge2Y;
-    float pvecY = dirZ * edge2X - dirX * edge2Z;
-    float pvecZ = dirX * edge2Y - dirY * edge2X;
-    float det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    float pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    float pvecY  = dirZ * edge2X - dirX * edge2Z;
+    float pvecZ  = dirX * edge2Y - dirY * edge2X;
+    float det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det <= epsilon)
     {
       return -1.0f;
@@ -2489,7 +2489,7 @@ public class Intersectionf
     float tvecX = originX - v0X;
     float tvecY = originY - v0Y;
     float tvecZ = originZ - v0Z;
-    float u = tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ;
+    float u     = tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ;
     if (u < 0.0f || u > det)
     {
       return -1.0f;
@@ -2497,13 +2497,13 @@ public class Intersectionf
     float qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     float qvecY = tvecZ * edge1X - tvecX * edge1Z;
     float qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    float v = dirX * qvecX + dirY * qvecY + dirZ * qvecZ;
+    float v     = dirX * qvecX + dirY * qvecY + dirZ * qvecZ;
     if (v < 0.0f || u + v > det)
     {
       return -1.0f;
     }
     float invDet = 1.0f / det;
-    float t = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
+    float t      = (edge2X * qvecX + edge2Y * qvecY + edge2Z * qvecZ) * invDet;
     return t;
   }
 
@@ -2573,19 +2573,19 @@ public class Intersectionf
     float edge2X = v2X - v0X;
     float edge2Y = v2Y - v0Y;
     float edge2Z = v2Z - v0Z;
-    float pvecX = dirY * edge2Z - dirZ * edge2Y;
-    float pvecY = dirZ * edge2X - dirX * edge2Z;
-    float pvecZ = dirX * edge2Y - dirY * edge2X;
-    float det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+    float pvecX  = dirY * edge2Z - dirZ * edge2Y;
+    float pvecY  = dirZ * edge2X - dirX * edge2Z;
+    float pvecZ  = dirX * edge2Y - dirY * edge2X;
+    float det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
     if (det > -epsilon && det < epsilon)
     {
       return -1.0f;
     }
-    float tvecX = originX - v0X;
-    float tvecY = originY - v0Y;
-    float tvecZ = originZ - v0Z;
+    float tvecX  = originX - v0X;
+    float tvecY  = originY - v0Y;
+    float tvecZ  = originZ - v0Z;
     float invDet = 1.0f / det;
-    float u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
+    float u      = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
     if (u < 0.0f || u > 1.0f)
     {
       return -1.0f;
@@ -2593,7 +2593,7 @@ public class Intersectionf
     float qvecX = tvecY * edge1Z - tvecZ * edge1Y;
     float qvecY = tvecZ * edge1X - tvecX * edge1Z;
     float qvecZ = tvecX * edge1Y - tvecY * edge1X;
-    float v = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
+    float v     = (dirX * qvecX + dirY * qvecY + dirZ * qvecZ) * invDet;
     if (v < 0.0f || u + v > 1.0f)
     {
       return -1.0f;
@@ -2660,7 +2660,7 @@ public class Intersectionf
     float dirX = p1X - p0X;
     float dirY = p1Y - p0Y;
     float dirZ = p1Z - p0Z;
-    float t = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
+    float t    = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
     return t >= 0.0f && t <= 1.0f;
   }
 
@@ -2722,7 +2722,7 @@ public class Intersectionf
     float dirX = p1X - p0X;
     float dirY = p1Y - p0Y;
     float dirZ = p1Z - p0Z;
-    float t = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
+    float t    = intersectRayTriangle(p0X, p0Y, p0Z, dirX, dirY, dirZ, v0X, v0Y, v0Z, v1X, v1Y, v1Z, v2X, v2Y, v2Z, epsilon);
     if (t >= 0.0f && t <= 1.0f)
     {
       intersectionPoint.x = p0X + dirX * t;
@@ -2778,11 +2778,11 @@ public class Intersectionf
   public static boolean intersectLineSegmentPlane(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z,
                                                   float a, float b, float c, float d, Vector3f intersectionPoint)
   {
-    float dirX = p1X - p0X;
-    float dirY = p1Y - p0Y;
-    float dirZ = p1Z - p0Z;
+    float dirX  = p1X - p0X;
+    float dirY  = p1Y - p0Y;
+    float dirZ  = p1Z - p0Z;
     float denom = a * dirX + b * dirY + c * dirZ;
-    float t = -(a * p0X + b * p0Y + c * p0Z + d) / denom;
+    float t     = -(a * p0X + b * p0Y + c * p0Z + d) / denom;
     if (t >= 0.0f && t <= 1.0f)
     {
       intersectionPoint.x = p0X + t * dirX;
@@ -2810,7 +2810,7 @@ public class Intersectionf
   public static boolean testLineCircle(float a, float b, float c, float centerX, float centerY, float radius)
   {
     float denom = (float) Math.sqrt(a * a + b * b);
-    float dist = (a * centerX + b * centerY + c) / denom;
+    float dist  = (a * centerX + b * centerY + c) / denom;
     return -radius <= dist && dist <= radius;
   }
 
@@ -2833,7 +2833,7 @@ public class Intersectionf
   public static boolean intersectLineCircle(float a, float b, float c, float centerX, float centerY, float radius, Vector3f intersectionCenterAndHL)
   {
     float invDenom = Math.invsqrt(a * a + b * b);
-    float dist = (a * centerX + b * centerY + c) * invDenom;
+    float dist     = (a * centerX + b * centerY + c) * invDenom;
     if (-radius <= dist && dist <= radius)
     {
       intersectionCenterAndHL.x = centerX + dist * a * invDenom;
@@ -3013,18 +3013,18 @@ public class Intersectionf
       return false;
     }
     float invMLen = 1.0f / mLen;
-    float nX = maX * invMLen;
-    float nY = maY * invMLen;
-    float cX = bX - aX;
-    float cY = bY - aY;
-    float nDotC = nX * cX + nY * cY;
+    float nX      = maX * invMLen;
+    float nY      = maY * invMLen;
+    float cX      = bX - aX;
+    float cY      = bY - aY;
+    float nDotC   = nX * cX + nY * cY;
     if (nDotC <= 0.0f)
     {
       return false;
     }
-    float cLen = (float) Math.sqrt(cX * cX + cY * cY);
+    float cLen      = (float) Math.sqrt(cX * cX + cY * cY);
     float cLenNdotC = cLen * cLen - nDotC * nDotC;
-    float aRbR2 = aRbR * aRbR;
+    float aRbR2     = aRbR * aRbR;
     if (cLenNdotC >= aRbR2)
     {
       return false;
@@ -3035,7 +3035,7 @@ public class Intersectionf
       return false;
     }
     float distance = nDotC - (float) Math.sqrt(t);
-    float mag = mLen;
+    float mag      = mLen;
     if (mag < distance)
     {
       return false;
@@ -3084,10 +3084,10 @@ public class Intersectionf
    */
   public static boolean intersectCircleCircle(float aX, float aY, float radiusSquaredA, float bX, float bY, float radiusSquaredB, Vector3f intersectionCenterAndHL)
   {
-    float dX = bX - aX, dY = bY - aY;
+    float dX          = bX - aX, dY = bY - aY;
     float distSquared = dX * dX + dY * dY;
-    float h = 0.5f + (radiusSquaredA - radiusSquaredB) / distSquared;
-    float r_i = (float) Math.sqrt(radiusSquaredA - h * h * distSquared);
+    float h           = 0.5f + (radiusSquaredA - radiusSquaredB) / distSquared;
+    float r_i         = (float) Math.sqrt(radiusSquaredA - h * h * distSquared);
     if (r_i >= 0.0f)
     {
       intersectionCenterAndHL.x = aX + h * dX;
@@ -3193,8 +3193,8 @@ public class Intersectionf
    */
   public static float distancePointLine(float pointX, float pointY, float x0, float y0, float x1, float y1)
   {
-    float dx = x1 - x0;
-    float dy = y1 - y0;
+    float dx    = x1 - x0;
+    float dy    = y1 - y0;
     float denom = (float) Math.sqrt(dx * dx + dy * dy);
     return (dx * (y0 - pointY) - (x0 - pointX) * dy) / denom;
   }
@@ -3220,7 +3220,7 @@ public class Intersectionf
   {
     float d21x = x1 - x0, d21y = y1 - y0, d21z = z1 - z0;
     float d10x = x0 - pX, d10y = y0 - pY, d10z = z0 - pZ;
-    float cx = d21y * d10z - d21z * d10y, cy = d21z * d10x - d21x * d10z, cz = d21x * d10y - d21y * d10x;
+    float cx   = d21y * d10z - d21z * d10y, cy = d21z * d10x - d21x * d10z, cz = d21x * d10y - d21y * d10x;
     return (float) Math.sqrt((cx * cx + cy * cy + cz * cz) / (d21x * d21x + d21y * d21y + d21z * d21z));
   }
 
@@ -3300,13 +3300,13 @@ public class Intersectionf
    */
   public static float intersectRayLineSegment(float originX, float originY, float dirX, float dirY, float aX, float aY, float bX, float bY)
   {
-    float v1X = originX - aX;
-    float v1Y = originY - aY;
-    float v2X = bX - aX;
-    float v2Y = bY - aY;
+    float v1X    = originX - aX;
+    float v1Y    = originY - aY;
+    float v2X    = bX - aX;
+    float v2Y    = bY - aY;
     float invV23 = 1.0f / (v2Y * dirX - v2X * dirY);
-    float t1 = (v2X * v1Y - v2Y * v1X) * invV23;
-    float t2 = (v1Y * dirX - v1X * dirY) * invV23;
+    float t1     = (v2X * v1Y - v2Y * v1X) * invV23;
+    float t2     = (v1Y * dirX - v1X * dirY) * invV23;
     if (t1 >= 0.0f && t2 >= 0.0f && t2 <= 1.0f)
     {
       return t1;
@@ -3418,8 +3418,8 @@ public class Intersectionf
     float abX = v1X - v0X, abY = v1Y - v0Y;
     float acX = v2X - v0X, acY = v2Y - v0Y;
     float apX = pX - v0X, apY = pY - v0Y;
-    float d1 = abX * apX + abY * apY;
-    float d2 = acX * apX + acY * apY;
+    float d1  = abX * apX + abY * apY;
+    float d2  = acX * apX + acY * apY;
     if (d1 <= 0.0f && d2 <= 0.0f)
     {
       result.x = v0X;
@@ -3427,8 +3427,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_VERTEX_0;
     }
     float bpX = pX - v1X, bpY = pY - v1Y;
-    float d3 = abX * bpX + abY * bpY;
-    float d4 = acX * bpX + acY * bpY;
+    float d3  = abX * bpX + abY * bpY;
+    float d4  = acX * bpX + acY * bpY;
     if (d3 >= 0.0f && d4 <= d3)
     {
       result.x = v1X;
@@ -3444,8 +3444,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_EDGE_01;
     }
     float cpX = pX - v2X, cpY = pY - v2Y;
-    float d5 = abX * cpX + abY * cpY;
-    float d6 = acX * cpX + acY * cpY;
+    float d5  = abX * cpX + abY * cpY;
+    float d6  = acX * cpX + acY * cpY;
     if (d6 >= 0.0f && d5 <= d6)
     {
       result.x = v2X;
@@ -3469,8 +3469,8 @@ public class Intersectionf
       return POINT_ON_TRIANGLE_EDGE_12;
     }
     float denom = 1.0f / (va + vb + vc);
-    float v = vb * denom;
-    float w = vc * denom;
+    float v     = vb * denom;
+    float w     = vc * denom;
     result.x = v0X + abX * v + acX * w;
     result.y = v0Y + abY * v + acY * w;
     return POINT_ON_TRIANGLE_FACE;
@@ -3524,17 +3524,17 @@ public class Intersectionf
   public static boolean intersectRayCircle(float originX, float originY, float dirX, float dirY,
                                            float centerX, float centerY, float radiusSquared, Vector2f result)
   {
-    float Lx = centerX - originX;
-    float Ly = centerY - originY;
+    float Lx  = centerX - originX;
+    float Ly  = centerY - originY;
     float tca = Lx * dirX + Ly * dirY;
-    float d2 = Lx * Lx + Ly * Ly - tca * tca;
+    float d2  = Lx * Lx + Ly * Ly - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     float thc = (float) Math.sqrt(radiusSquared - d2);
-    float t0 = tca - thc;
-    float t1 = tca + thc;
+    float t0  = tca - thc;
+    float t1  = tca + thc;
     if (t0 < t1 && t1 >= 0.0f)
     {
       result.x = t0;
@@ -3587,17 +3587,17 @@ public class Intersectionf
   public static boolean testRayCircle(float originX, float originY, float dirX, float dirY,
                                       float centerX, float centerY, float radiusSquared)
   {
-    float Lx = centerX - originX;
-    float Ly = centerY - originY;
+    float Lx  = centerX - originX;
+    float Ly  = centerY - originY;
     float tca = Lx * dirX + Ly * dirY;
-    float d2 = Lx * Lx + Ly * Ly - tca * tca;
+    float d2  = Lx * Lx + Ly * Ly - tca * tca;
     if (d2 > radiusSquared)
     {
       return false;
     }
     float thc = (float) Math.sqrt(radiusSquared - d2);
-    float t0 = tca - thc;
-    float t1 = tca + thc;
+    float t0  = tca - thc;
+    float t1  = tca + thc;
     return t0 < t1 && t1 >= 0.0f;
   }
 
@@ -3653,11 +3653,11 @@ public class Intersectionf
     if (invDirX >= 0.0f)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -3673,7 +3673,7 @@ public class Intersectionf
       return OUTSIDE;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     int side = -1; // no intersection side
     if (tNear <= tFar && tFar >= 0.0f)
     {
@@ -3689,12 +3689,12 @@ public class Intersectionf
       float min = daX;
       if (daY < min)
       {
-        min = daY;
+        min  = daY;
         side = 1; // min y coordinate
       }
       if (dbX < min)
       {
-        min = dbX;
+        min  = dbX;
         side = 2; // max xcoordinate
       }
       if (dbY < min)
@@ -3760,17 +3760,17 @@ public class Intersectionf
   public static int intersectLineSegmentAar(float p0X, float p0Y, float p1X, float p1Y,
                                             float minX, float minY, float maxX, float maxY, Vector2f result)
   {
-    float dirX = p1X - p0X, dirY = p1Y - p0Y;
+    float dirX    = p1X - p0X, dirY = p1Y - p0Y;
     float invDirX = 1.0f / dirX, invDirY = 1.0f / dirY;
     float tNear, tFar, tymin, tymax;
     if (invDirX >= 0.0f)
     {
       tNear = (minX - p0X) * invDirX;
-      tFar = (maxX - p0X) * invDirX;
+      tFar  = (maxX - p0X) * invDirX;
     } else
     {
       tNear = (maxX - p0X) * invDirX;
-      tFar = (minX - p0X) * invDirX;
+      tFar  = (minX - p0X) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -3786,7 +3786,7 @@ public class Intersectionf
       return OUTSIDE;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     int type = OUTSIDE;
     if (tNear <= tFar && tNear <= 1.0f && tFar >= 0.0f)
     {
@@ -3797,7 +3797,7 @@ public class Intersectionf
       } else if (tNear < 0.0f && tFar <= 1.0f)
       {
         tNear = tFar;
-        type = ONE_INTERSECTION;
+        type  = ONE_INTERSECTION;
       } else if (tNear < 0.0f && tFar > 1.0f)
       {
         type = INSIDE;
@@ -3865,11 +3865,11 @@ public class Intersectionf
     if (invDirX >= 0.0f)
     {
       tNear = (minX - originX) * invDirX;
-      tFar = (maxX - originX) * invDirX;
+      tFar  = (maxX - originX) * invDirX;
     } else
     {
       tNear = (maxX - originX) * invDirX;
-      tFar = (minX - originX) * invDirX;
+      tFar  = (minX - originX) * invDirX;
     }
     if (invDirY >= 0.0f)
     {
@@ -3885,7 +3885,7 @@ public class Intersectionf
       return false;
     }
     tNear = tymin > tNear || Float.isNaN(tNear) ? tymin : tNear;
-    tFar = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
+    tFar  = tymax < tFar || Float.isNaN(tFar) ? tymax : tFar;
     return tNear < tFar && tFar >= 0.0f;
   }
 
@@ -3977,8 +3977,8 @@ public class Intersectionf
    */
   public static boolean testPointCircle(float pX, float pY, float centerX, float centerY, float radiusSquared)
   {
-    float dx = pX - centerX;
-    float dy = pY - centerY;
+    float dx  = pX - centerX;
+    float dy  = pY - centerY;
     float dx2 = dx * dx;
     float dy2 = dy * dy;
     return dx2 + dy2 <= radiusSquared;
@@ -4005,19 +4005,19 @@ public class Intersectionf
    */
   public static boolean testCircleTriangle(float centerX, float centerY, float radiusSquared, float v0X, float v0Y, float v1X, float v1Y, float v2X, float v2Y)
   {
-    float c1x = centerX - v0X, c1y = centerY - v0Y;
+    float c1x   = centerX - v0X, c1y = centerY - v0Y;
     float c1sqr = c1x * c1x + c1y * c1y - radiusSquared;
     if (c1sqr <= 0.0f)
     {
       return true;
     }
-    float c2x = centerX - v1X, c2y = centerY - v1Y;
+    float c2x   = centerX - v1X, c2y = centerY - v1Y;
     float c2sqr = c2x * c2x + c2y * c2y - radiusSquared;
     if (c2sqr <= 0.0f)
     {
       return true;
     }
-    float c3x = centerX - v2X, c3y = centerY - v2Y;
+    float c3x   = centerX - v2X, c3y = centerY - v2Y;
     float c3sqr = c3x * c3x + c3y * c3y - radiusSquared;
     if (c3sqr <= 0.0f)
     {
@@ -4107,26 +4107,26 @@ public class Intersectionf
    */
   public static int intersectPolygonRay(float[] verticesXY, float originX, float originY, float dirX, float dirY, Vector2f p)
   {
-    float nearestT = Float.POSITIVE_INFINITY;
-    int count = verticesXY.length >> 1;
-    int edgeIndex = -1;
-    float aX = verticesXY[(count - 1) << 1], aY = verticesXY[((count - 1) << 1) + 1];
+    float nearestT  = Float.POSITIVE_INFINITY;
+    int   count     = verticesXY.length >> 1;
+    int   edgeIndex = -1;
+    float aX        = verticesXY[(count - 1) << 1], aY = verticesXY[((count - 1) << 1) + 1];
     for (int i = 0; i < count; i++)
     {
-      float bX = verticesXY[i << 1], bY = verticesXY[(i << 1) + 1];
-      float doaX = originX - aX, doaY = originY - aY;
-      float dbaX = bX - aX, dbaY = bY - aY;
+      float bX        = verticesXY[i << 1], bY = verticesXY[(i << 1) + 1];
+      float doaX      = originX - aX, doaY = originY - aY;
+      float dbaX      = bX - aX, dbaY = bY - aY;
       float invDbaDir = 1.0f / (dbaY * dirX - dbaX * dirY);
-      float t = (dbaX * doaY - dbaY * doaX) * invDbaDir;
+      float t         = (dbaX * doaY - dbaY * doaX) * invDbaDir;
       if (t >= 0.0f && t < nearestT)
       {
         float t2 = (doaY * dirX - doaX * dirY) * invDbaDir;
         if (t2 >= 0.0f && t2 <= 1.0f)
         {
           edgeIndex = (i - 1 + count) % count;
-          nearestT = t;
-          p.x = originX + t * dirX;
-          p.y = originY + t * dirY;
+          nearestT  = t;
+          p.x       = originX + t * dirX;
+          p.y       = originY + t * dirY;
         }
       }
       aX = bX;
@@ -4153,27 +4153,27 @@ public class Intersectionf
    */
   public static int intersectPolygonRay(Vector2fc[] vertices, float originX, float originY, float dirX, float dirY, Vector2f p)
   {
-    float nearestT = Float.POSITIVE_INFINITY;
-    int count = vertices.length;
-    int edgeIndex = -1;
-    float aX = vertices[count - 1].x(), aY = vertices[count - 1].y();
+    float nearestT  = Float.POSITIVE_INFINITY;
+    int   count     = vertices.length;
+    int   edgeIndex = -1;
+    float aX        = vertices[count - 1].x(), aY = vertices[count - 1].y();
     for (int i = 0; i < count; i++)
     {
-      Vector2fc b = vertices[i];
-      float bX = b.x(), bY = b.y();
-      float doaX = originX - aX, doaY = originY - aY;
-      float dbaX = bX - aX, dbaY = bY - aY;
-      float invDbaDir = 1.0f / (dbaY * dirX - dbaX * dirY);
-      float t = (dbaX * doaY - dbaY * doaX) * invDbaDir;
+      Vector2fc b         = vertices[i];
+      float     bX        = b.x(), bY = b.y();
+      float     doaX      = originX - aX, doaY = originY - aY;
+      float     dbaX      = bX - aX, dbaY = bY - aY;
+      float     invDbaDir = 1.0f / (dbaY * dirX - dbaX * dirY);
+      float     t         = (dbaX * doaY - dbaY * doaX) * invDbaDir;
       if (t >= 0.0f && t < nearestT)
       {
         float t2 = (doaY * dirX - doaX * dirY) * invDbaDir;
         if (t2 >= 0.0f && t2 <= 1.0f)
         {
           edgeIndex = (i - 1 + count) % count;
-          nearestT = t;
-          p.x = originX + t * dirX;
-          p.y = originY + t * dirY;
+          nearestT  = t;
+          p.x       = originX + t * dirX;
+          p.y       = originY + t * dirY;
         }
       }
       aX = bX;
@@ -4199,13 +4199,13 @@ public class Intersectionf
    */
   public static boolean intersectLineLine(float ps1x, float ps1y, float pe1x, float pe1y, float ps2x, float ps2y, float pe2x, float pe2y, Vector2f p)
   {
-    float d1x = ps1x - pe1x;
-    float d1y = pe1y - ps1y;
+    float d1x   = ps1x - pe1x;
+    float d1y   = pe1y - ps1y;
     float d1ps1 = d1y * ps1x + d1x * ps1y;
-    float d2x = ps2x - pe2x;
-    float d2y = pe2y - ps2y;
+    float d2x   = ps2x - pe2x;
+    float d2y   = pe2y - ps2y;
     float d2ps2 = d2y * ps2x + d2x * ps2y;
-    float det = d1y * d2x - d2y * d1x;
+    float det   = d1y * d2x - d2y * d1x;
     if (det == 0.0f)
     {
       return false;
@@ -4217,23 +4217,23 @@ public class Intersectionf
 
   private static boolean separatingAxis(Vector2f[] v1s, Vector2f[] v2s, float aX, float aY)
   {
-    float minA = Float.POSITIVE_INFINITY, maxA = Float.NEGATIVE_INFINITY;
-    float minB = Float.POSITIVE_INFINITY, maxB = Float.NEGATIVE_INFINITY;
-    int maxLen = Math.max(v1s.length, v2s.length);
+    float minA   = Float.POSITIVE_INFINITY, maxA = Float.NEGATIVE_INFINITY;
+    float minB   = Float.POSITIVE_INFINITY, maxB = Float.NEGATIVE_INFINITY;
+    int   maxLen = Math.max(v1s.length, v2s.length);
     /* Project both polygons on axis */
     for (int k = 0; k < maxLen; k++)
     {
       if (k < v1s.length)
       {
         Vector2f v1 = v1s[k];
-        float d = v1.x * aX + v1.y * aY;
+        float    d  = v1.x * aX + v1.y * aY;
         if (d < minA) minA = d;
         if (d > maxA) maxA = d;
       }
       if (k < v2s.length)
       {
         Vector2f v2 = v2s[k];
-        float d = v2.x * aX + v2.y * aY;
+        float    d  = v2.x * aX + v2.y * aY;
         if (d < minB) minB = d;
         if (d > maxB) maxB = d;
       }

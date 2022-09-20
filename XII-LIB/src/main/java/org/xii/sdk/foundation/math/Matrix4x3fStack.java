@@ -133,8 +133,8 @@ public class Matrix4x3fStack extends Matrix4x3f
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = super.hashCode();
+    final int prime  = 31;
+    int       result = super.hashCode();
     result = prime * result + curr;
     for (int i = 0; i < curr; i++)
     {
@@ -204,10 +204,10 @@ public class Matrix4x3fStack extends Matrix4x3f
 
   public Object clone() throws CloneNotSupportedException
   {
-    Matrix4x3fStack cloned = (Matrix4x3fStack) super.clone();
-    Matrix4x3f[] clonedMats = new Matrix4x3f[mats.length];
+    Matrix4x3fStack cloned     = (Matrix4x3fStack) super.clone();
+    Matrix4x3f[]    clonedMats = new Matrix4x3f[mats.length];
     for (int i = 0; i < mats.length; i++)
-      clonedMats[i] = (Matrix4x3f) mats[i].clone();
+         clonedMats[i] = (Matrix4x3f) mats[i].clone();
     cloned.mats = clonedMats;
     return cloned;
   }

@@ -833,7 +833,7 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public Vector3f mulProject(Matrix4fc mat, Vector3f dest)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x    = this.x, y = this.y, z = this.z;
     float invW = 1.0f / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
     dest.x = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30()))) * invW;
     dest.y = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31()))) * invW;
@@ -843,7 +843,7 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public Vector3f mulProject(Matrix4fc mat, float w, Vector3f dest)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x    = this.x, y = this.y, z = this.z;
     float invW = 1.0f / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
     dest.x = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
     dest.y = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
@@ -861,7 +861,7 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
    */
   public Vector3f mulProject(Matrix4fc mat)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x    = this.x, y = this.y, z = this.z;
     float invW = 1.0f / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33())));
     this.x = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30()))) * invW;
     this.y = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31()))) * invW;
@@ -1340,13 +1340,13 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   private Vector3f rotateAxisInternal(float angle, float aX, float aY, float aZ, Vector3f dest)
   {
-    float hangle = angle * 0.5f;
+    float hangle   = angle * 0.5f;
     float sinAngle = Math.sin(hangle);
-    float qx = aX * sinAngle, qy = aY * sinAngle, qz = aZ * sinAngle;
-    float qw = Math.cosFromSin(sinAngle, hangle);
-    float w2 = qw * qw, x2 = qx * qx, y2 = qy * qy, z2 = qz * qz, zw = qz * qw;
-    float xy = qx * qy, xz = qx * qz, yw = qy * qw, yz = qy * qz, xw = qx * qw;
-    float x = this.x, y = this.y, z = this.z;
+    float qx       = aX * sinAngle, qy = aY * sinAngle, qz = aZ * sinAngle;
+    float qw       = Math.cosFromSin(sinAngle, hangle);
+    float w2       = qw * qw, x2 = qx * qx, y2 = qy * qy, z2 = qz * qz, zw = qz * qw;
+    float xy       = qx * qy, xz = qx * qz, yw = qy * qw, yz = qy * qz, xw = qx * qw;
+    float x        = this.x, y = this.y, z = this.z;
     dest.x = (w2 + x2 - z2 - y2) * x + (-zw + xy - zw + xy) * y + (yw + xz + xz + yw) * z;
     dest.y = (xy + zw + zw + xy) * x + (y2 - z2 + w2 - x2) * y + (yz + yz - xw - xw) * z;
     dest.z = (xz - yw + xz - yw) * x + (yz + yz + xw + xw) * y + (z2 - y2 - x2 + w2) * z;
@@ -1362,8 +1362,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateX(float angle)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float y = this.y * cos - this.z * sin;
-    float z = this.y * sin + this.z * cos;
+    float y   = this.y * cos - this.z * sin;
+    float z   = this.y * sin + this.z * cos;
     this.y = y;
     this.z = z;
     return this;
@@ -1372,8 +1372,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateX(float angle, Vector3f dest)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float y = this.y * cos - this.z * sin;
-    float z = this.y * sin + this.z * cos;
+    float y   = this.y * cos - this.z * sin;
+    float z   = this.y * sin + this.z * cos;
     dest.x = this.x;
     dest.y = y;
     dest.z = z;
@@ -1389,8 +1389,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateY(float angle)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float x = this.x * cos + this.z * sin;
-    float z = -this.x * sin + this.z * cos;
+    float x   = this.x * cos + this.z * sin;
+    float z   = -this.x * sin + this.z * cos;
     this.x = x;
     this.z = z;
     return this;
@@ -1399,8 +1399,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateY(float angle, Vector3f dest)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float x = this.x * cos + this.z * sin;
-    float z = -this.x * sin + this.z * cos;
+    float x   = this.x * cos + this.z * sin;
+    float z   = -this.x * sin + this.z * cos;
     dest.x = x;
     dest.y = this.y;
     dest.z = z;
@@ -1416,8 +1416,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateZ(float angle)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float x = this.x * cos - this.y * sin;
-    float y = this.x * sin + this.y * cos;
+    float x   = this.x * cos - this.y * sin;
+    float y   = this.x * sin + this.y * cos;
     this.x = x;
     this.y = y;
     return this;
@@ -1426,8 +1426,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
   public Vector3f rotateZ(float angle, Vector3f dest)
   {
     float sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    float x = this.x * cos - this.y * sin;
-    float y = this.x * sin + this.y * cos;
+    float x   = this.x * cos - this.y * sin;
+    float y   = this.x * sin + this.y * cos;
     dest.x = x;
     dest.y = y;
     dest.z = this.z;
@@ -1593,10 +1593,10 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public float angleCos(Vector3fc v)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x              = this.x, y = this.y, z = this.z;
     float length1Squared = Math.fma(x, x, Math.fma(y, y, z * z));
     float length2Squared = Math.fma(v.x(), v.x(), Math.fma(v.y(), v.y(), v.z() * v.z()));
-    float dot = Math.fma(x, v.x(), Math.fma(y, v.y(), z * v.z()));
+    float dot            = Math.fma(x, v.x(), Math.fma(y, v.y(), z * v.z()));
     return dot / (float) Math.sqrt(length1Squared * length2Squared);
   }
 
@@ -1763,8 +1763,8 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + Float.floatToIntBits(x);
     result = prime * result + Float.floatToIntBits(y);
     result = prime * result + Float.floatToIntBits(z);
@@ -1855,9 +1855,9 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
    */
   public Vector3f reflect(Vector3fc normal)
   {
-    float x = normal.x();
-    float y = normal.y();
-    float z = normal.z();
+    float x   = normal.x();
+    float y   = normal.y();
+    float z   = normal.z();
     float dot = Math.fma(this.x, x, Math.fma(this.y, y, this.z * z));
     this.x = this.x - (dot + dot) * x;
     this.y = this.y - (dot + dot) * y;
@@ -1932,7 +1932,7 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public Vector3f smoothStep(Vector3fc v, float t, Vector3f dest)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x  = this.x, y = this.y, z = this.z;
     float t2 = t * t;
     float t3 = t2 * t;
     dest.x = (x + x - v.x() - v.x()) * t3 + (3.0f * v.x() - 3.0f * x) * t2 + x * t + x;
@@ -1943,7 +1943,7 @@ public class Vector3f implements Externalizable, Cloneable, Vector3fc
 
   public Vector3f hermite(Vector3fc t0, Vector3fc v1, Vector3fc t1, float t, Vector3f dest)
   {
-    float x = this.x, y = this.y, z = this.z;
+    float x  = this.x, y = this.y, z = this.z;
     float t2 = t * t;
     float t3 = t2 * t;
     dest.x = (x + x - v1.x() - v1.x() + t1.x() + t0.x()) * t3 + (3.0f * v1.x() - 3.0f * x - t0.x() - t0.x() - t1.x()) * t2 + x * t + x;

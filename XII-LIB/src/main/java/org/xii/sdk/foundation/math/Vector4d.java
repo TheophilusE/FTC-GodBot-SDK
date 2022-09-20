@@ -1353,9 +1353,9 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d mulProject(Matrix4dc mat, Vector4d dest)
   {
     double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
-    double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
-    double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
-    double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
+    double rx   = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
+    double ry   = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
+    double rz   = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
     dest.x = rx;
     dest.y = ry;
     dest.z = rz;
@@ -1372,9 +1372,9 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d mulProject(Matrix4dc mat)
   {
     double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
-    double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
-    double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
-    double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
+    double rx   = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
+    double ry   = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
+    double rz   = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
     this.x = rx;
     this.y = ry;
     this.z = rz;
@@ -1385,9 +1385,9 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector3d mulProject(Matrix4dc mat, Vector3d dest)
   {
     double invW = 1.0 / Math.fma(mat.m03(), x, Math.fma(mat.m13(), y, Math.fma(mat.m23(), z, mat.m33() * w)));
-    double rx = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
-    double ry = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
-    double rz = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
+    double rx   = Math.fma(mat.m00(), x, Math.fma(mat.m10(), y, Math.fma(mat.m20(), z, mat.m30() * w))) * invW;
+    double ry   = Math.fma(mat.m01(), x, Math.fma(mat.m11(), y, Math.fma(mat.m21(), z, mat.m31() * w))) * invW;
+    double rz   = Math.fma(mat.m02(), x, Math.fma(mat.m12(), y, Math.fma(mat.m22(), z, mat.m32() * w))) * invW;
     dest.x = rx;
     dest.y = ry;
     dest.z = rz;
@@ -1504,15 +1504,15 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
 
   private Vector4d rotateAxisInternal(double angle, double aX, double aY, double aZ, Vector4d dest)
   {
-    double hangle = angle * 0.5;
+    double hangle   = angle * 0.5;
     double sinAngle = Math.sin(hangle);
-    double qx = aX * sinAngle, qy = aY * sinAngle, qz = aZ * sinAngle;
-    double qw = Math.cosFromSin(sinAngle, hangle);
-    double w2 = qw * qw, x2 = qx * qx, y2 = qy * qy, z2 = qz * qz, zw = qz * qw;
-    double xy = qx * qy, xz = qx * qz, yw = qy * qw, yz = qy * qz, xw = qx * qw;
-    double nx = (w2 + x2 - z2 - y2) * x + (-zw + xy - zw + xy) * y + (yw + xz + xz + yw) * z;
-    double ny = (xy + zw + zw + xy) * x + (y2 - z2 + w2 - x2) * y + (yz + yz - xw - xw) * z;
-    double nz = (xz - yw + xz - yw) * x + (yz + yz + xw + xw) * y + (z2 - y2 - x2 + w2) * z;
+    double qx       = aX * sinAngle, qy = aY * sinAngle, qz = aZ * sinAngle;
+    double qw       = Math.cosFromSin(sinAngle, hangle);
+    double w2       = qw * qw, x2 = qx * qx, y2 = qy * qy, z2 = qz * qz, zw = qz * qw;
+    double xy       = qx * qy, xz = qx * qz, yw = qy * qw, yz = qy * qz, xw = qx * qw;
+    double nx       = (w2 + x2 - z2 - y2) * x + (-zw + xy - zw + xy) * y + (yw + xz + xz + yw) * z;
+    double ny       = (xy + zw + zw + xy) * x + (y2 - z2 + w2 - x2) * y + (yz + yz - xw - xw) * z;
+    double nz       = (xz - yw + xz - yw) * x + (yz + yz + xw + xw) * y + (z2 - y2 - x2 + w2) * z;
     dest.x = nx;
     dest.y = ny;
     dest.z = nz;
@@ -1528,8 +1528,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateX(double angle)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double y = this.y * cos - this.z * sin;
-    double z = this.y * sin + this.z * cos;
+    double y   = this.y * cos - this.z * sin;
+    double z   = this.y * sin + this.z * cos;
     this.y = y;
     this.z = z;
     return this;
@@ -1538,8 +1538,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateX(double angle, Vector4d dest)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double y = this.y * cos - this.z * sin;
-    double z = this.y * sin + this.z * cos;
+    double y   = this.y * cos - this.z * sin;
+    double z   = this.y * sin + this.z * cos;
     dest.x = this.x;
     dest.y = y;
     dest.z = z;
@@ -1556,8 +1556,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateY(double angle)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double x = this.x * cos + this.z * sin;
-    double z = -this.x * sin + this.z * cos;
+    double x   = this.x * cos + this.z * sin;
+    double z   = -this.x * sin + this.z * cos;
     this.x = x;
     this.z = z;
     return this;
@@ -1566,8 +1566,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateY(double angle, Vector4d dest)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double x = this.x * cos + this.z * sin;
-    double z = -this.x * sin + this.z * cos;
+    double x   = this.x * cos + this.z * sin;
+    double z   = -this.x * sin + this.z * cos;
     dest.x = x;
     dest.y = this.y;
     dest.z = z;
@@ -1584,8 +1584,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateZ(double angle)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double x = this.x * cos - this.y * sin;
-    double y = this.x * sin + this.y * cos;
+    double x   = this.x * cos - this.y * sin;
+    double y   = this.x * sin + this.y * cos;
     this.x = x;
     this.y = y;
     return this;
@@ -1594,8 +1594,8 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   public Vector4d rotateZ(double angle, Vector4d dest)
   {
     double sin = Math.sin(angle), cos = Math.cosFromSin(sin, angle);
-    double x = this.x * cos - this.y * sin;
-    double y = this.x * sin + this.y * cos;
+    double x   = this.x * cos - this.y * sin;
+    double y   = this.x * sin + this.y * cos;
     dest.x = x;
     dest.y = y;
     dest.z = this.z;
@@ -1739,7 +1739,7 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
   {
     double length1Squared = Math.fma(x, x, Math.fma(y, y, Math.fma(z, z, w * w)));
     double length2Squared = Math.fma(v.x(), v.x(), Math.fma(v.y(), v.y(), Math.fma(v.z(), v.z(), v.w() * v.w())));
-    double dot = Math.fma(x, v.x(), Math.fma(y, v.y(), Math.fma(z, v.z(), w * v.w())));
+    double dot            = Math.fma(x, v.x(), Math.fma(y, v.y(), Math.fma(z, v.z(), w * v.w())));
     return dot / Math.sqrt(length1Squared * length2Squared);
   }
 
@@ -1879,16 +1879,16 @@ public class Vector4d implements Externalizable, Cloneable, Vector4dc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(w);
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits(w);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(x);
+    temp   = Double.doubleToLongBits(x);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(y);
+    temp   = Double.doubleToLongBits(y);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(z);
+    temp   = Double.doubleToLongBits(z);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
   }

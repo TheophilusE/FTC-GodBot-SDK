@@ -77,9 +77,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d(AxisAngle4d a)
   {
-    x = a.x;
-    y = a.y;
-    z = a.z;
+    x     = a.x;
+    y     = a.y;
+    z     = a.z;
     angle = (a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI);
   }
 
@@ -90,9 +90,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d(AxisAngle4f a)
   {
-    x = a.x;
-    y = a.y;
-    z = a.z;
+    x     = a.x;
+    y     = a.y;
+    z     = a.z;
     angle = (a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI);
   }
 
@@ -107,7 +107,7 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d(Quaternionfc q)
   {
-    float acos = Math.safeAcos(q.w());
+    float acos    = Math.safeAcos(q.w());
     float invSqrt = Math.invsqrt(1.0f - q.w() * q.w());
     if (Float.isInfinite(invSqrt))
     {
@@ -134,7 +134,7 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d(Quaterniondc q)
   {
-    double acos = Math.safeAcos(q.w());
+    double acos    = Math.safeAcos(q.w());
     double invSqrt = Math.invsqrt(1.0 - q.w() * q.w());
     if (Double.isInfinite(invSqrt))
     {
@@ -160,9 +160,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d(double angle, double x, double y, double z)
   {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+    this.x     = x;
+    this.y     = y;
+    this.z     = z;
     this.angle = (angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI);
   }
 
@@ -196,9 +196,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d set(AxisAngle4d a)
   {
-    x = a.x;
-    y = a.y;
-    z = a.z;
+    x     = a.x;
+    y     = a.y;
+    z     = a.z;
     angle = (a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI);
     return this;
   }
@@ -211,9 +211,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d set(AxisAngle4f a)
   {
-    x = a.x;
-    y = a.y;
-    z = a.z;
+    x     = a.x;
+    y     = a.y;
+    z     = a.z;
     angle = (a.angle < 0.0 ? Math.PI + Math.PI + a.angle % (Math.PI + Math.PI) : a.angle) % (Math.PI + Math.PI);
     return this;
   }
@@ -229,9 +229,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d set(double angle, double x, double y, double z)
   {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+    this.x     = x;
+    this.y     = y;
+    this.z     = z;
     this.angle = (angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI);
     return this;
   }
@@ -269,7 +269,7 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d set(Quaternionfc q)
   {
-    float acos = Math.safeAcos(q.w());
+    float acos    = Math.safeAcos(q.w());
     float invSqrt = Math.invsqrt(1.0f - q.w() * q.w());
     if (Float.isInfinite(invSqrt))
     {
@@ -295,7 +295,7 @@ public class AxisAngle4d implements Externalizable, Cloneable
    */
   public AxisAngle4d set(Quaterniondc q)
   {
-    double acos = Math.safeAcos(q.w());
+    double acos    = Math.safeAcos(q.w());
     double invSqrt = Math.invsqrt(1.0f - q.w() * q.w());
     if (Double.isInfinite(invSqrt))
     {
@@ -344,9 +344,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
       if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
           && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2)
       {
-        x = 0;
-        y = 0;
-        z = 1;
+        x     = 0;
+        y     = 0;
+        z     = 1;
         angle = 0;
         return this;
       }
@@ -377,9 +377,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     }
     double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
     angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
-    x = (nm12 - nm21) / s;
-    y = (nm20 - nm02) / s;
-    z = (nm01 - nm10) / s;
+    x     = (nm12 - nm21) / s;
+    y     = (nm20 - nm02) / s;
+    z     = (nm01 - nm10) / s;
     return this;
   }
 
@@ -415,9 +415,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
       if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
           && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2)
       {
-        x = 0;
-        y = 0;
-        z = 1;
+        x     = 0;
+        y     = 0;
+        z     = 1;
         angle = 0;
         return this;
       }
@@ -448,9 +448,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     }
     double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
     angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
-    x = (nm12 - nm21) / s;
-    y = (nm20 - nm02) / s;
-    z = (nm01 - nm10) / s;
+    x     = (nm12 - nm21) / s;
+    y     = (nm20 - nm02) / s;
+    z     = (nm01 - nm10) / s;
     return this;
   }
 
@@ -486,9 +486,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
       if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
           && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2)
       {
-        x = 0;
-        y = 0;
-        z = 1;
+        x     = 0;
+        y     = 0;
+        z     = 1;
         angle = 0;
         return this;
       }
@@ -519,9 +519,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     }
     double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
     angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
-    x = (nm12 - nm21) / s;
-    y = (nm20 - nm02) / s;
-    z = (nm01 - nm10) / s;
+    x     = (nm12 - nm21) / s;
+    y     = (nm20 - nm02) / s;
+    z     = (nm01 - nm10) / s;
     return this;
   }
 
@@ -557,9 +557,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
       if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
           && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2)
       {
-        x = 0;
-        y = 0;
-        z = 1;
+        x     = 0;
+        y     = 0;
+        z     = 1;
         angle = 0;
         return this;
       }
@@ -590,9 +590,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     }
     double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
     angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
-    x = (nm12 - nm21) / s;
-    y = (nm20 - nm02) / s;
-    z = (nm01 - nm10) / s;
+    x     = (nm12 - nm21) / s;
+    y     = (nm20 - nm02) / s;
+    z     = (nm01 - nm10) / s;
     return this;
   }
 
@@ -628,9 +628,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
       if (Math.abs(nm10 + nm01) < epsilon2 && Math.abs(nm20 + nm02) < epsilon2 && Math.abs(nm21 + nm12) < epsilon2
           && Math.abs(nm00 + nm11 + nm22 - 3) < epsilon2)
       {
-        x = 0;
-        y = 0;
-        z = 1;
+        x     = 0;
+        y     = 0;
+        z     = 1;
         angle = 0;
         return this;
       }
@@ -661,9 +661,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     }
     double s = Math.sqrt((nm12 - nm21) * (nm12 - nm21) + (nm20 - nm02) * (nm20 - nm02) + (nm01 - nm10) * (nm01 - nm10));
     angle = Math.safeAcos((nm00 + nm11 + nm22 - 1) / 2);
-    x = (nm12 - nm21) / s;
-    y = (nm20 - nm02) / s;
-    z = (nm01 - nm10) / s;
+    x     = (nm12 - nm21) / s;
+    y     = (nm20 - nm02) / s;
+    z     = (nm01 - nm10) / s;
     return this;
   }
 
@@ -772,9 +772,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
   public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
   {
     angle = in.readDouble();
-    x = in.readDouble();
-    y = in.readDouble();
-    z = in.readDouble();
+    x     = in.readDouble();
+    y     = in.readDouble();
+    z     = in.readDouble();
   }
 
   /**
@@ -831,8 +831,8 @@ public class AxisAngle4d implements Externalizable, Cloneable
     double cos = Math.cosFromSin(sin, angle);
     double dot = x * v.x() + y * v.y() + z * v.z();
     dest.set(v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x,
-        v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
-        v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z);
+             v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
+             v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z);
     return dest;
   }
 
@@ -861,8 +861,8 @@ public class AxisAngle4d implements Externalizable, Cloneable
     double cos = Math.cosFromSin(sin, angle);
     double dot = x * v.x() + y * v.y() + z * v.z();
     dest.set((float) (v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x),
-        (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
-        (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z));
+             (float) (v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y),
+             (float) (v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z));
     return dest;
   }
 
@@ -891,9 +891,9 @@ public class AxisAngle4d implements Externalizable, Cloneable
     double cos = Math.cosFromSin(sin, angle);
     double dot = x * v.x() + y * v.y() + z * v.z();
     dest.set(v.x() * cos + sin * (y * v.z() - z * v.y()) + (1.0 - cos) * dot * x,
-        v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
-        v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z,
-        dest.w);
+             v.y() * cos + sin * (z * v.x() - x * v.z()) + (1.0 - cos) * dot * y,
+             v.z() * cos + sin * (x * v.y() - y * v.x()) + (1.0 - cos) * dot * z,
+             dest.w);
     return dest;
   }
 
@@ -922,16 +922,16 @@ public class AxisAngle4d implements Externalizable, Cloneable
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI));
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(x);
+    temp   = Double.doubleToLongBits(x);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(y);
+    temp   = Double.doubleToLongBits(y);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(z);
+    temp   = Double.doubleToLongBits(z);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
   }

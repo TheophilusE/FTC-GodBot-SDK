@@ -134,8 +134,8 @@ public class SensorBNO055IMUCalibration extends LinearOpMode
     // We are expecting the IMU to be attached to an I2C port on a Core Device Interface Module and named "imu".
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     parameters.loggingEnabled = true;
-    parameters.loggingTag = "IMU";
-    imu = hardwareMap.get(BNO055IMU.class, "imu");
+    parameters.loggingTag     = "IMU";
+    imu                       = hardwareMap.get(BNO055IMU.class, "imu");
     imu.initialize(parameters);
 
     composeTelemetry();
@@ -165,7 +165,7 @@ public class SensorBNO055IMUCalibration extends LinearOpMode
         // have more than one IMU on your robot, you'll of course want to use
         // different configuration file names for each.
         String filename = "AdafruitIMUCalibration.json";
-        File file = AppUtil.getInstance().getSettingsFile(filename);
+        File   file     = AppUtil.getInstance().getSettingsFile(filename);
         ReadWriteFile.writeFile(file, calibrationData.serialize());
         telemetry.log().add("saved to '%s'", filename);
 

@@ -64,7 +64,7 @@ public class SensorMRGyro extends LinearOpMode
    * implementations. {@link ModernRoboticsI2cGyro}, by contrast, provides functionality that
    * is unique to the Modern Robotics gyro sensor.
    */
-  IntegratingGyroscope gyro;
+  IntegratingGyroscope  gyro;
   ModernRoboticsI2cGyro modernRoboticsI2cGyro;
 
   // A timer helps provide feedback while calibration is taking place
@@ -75,12 +75,12 @@ public class SensorMRGyro extends LinearOpMode
   {
 
     boolean lastResetState = false;
-    boolean curResetState = false;
+    boolean curResetState  = false;
 
     // Get a reference to a Modern Robotics gyro object. We use several interfaces
     // on this object to illustrate which interfaces support which functionality.
     modernRoboticsI2cGyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
-    gyro = (IntegratingGyroscope) modernRoboticsI2cGyro;
+    gyro                  = (IntegratingGyroscope) modernRoboticsI2cGyro;
     // If you're only interested int the IntegratingGyroscope interface, the following will suffice.
     // gyro = hardwareMap.get(IntegratingGyroscope.class, "gyro");
     // A similar approach will work for the Gyroscope interface, if that's all you need.
@@ -123,20 +123,20 @@ public class SensorMRGyro extends LinearOpMode
 
       // The raw() methods report the angular rate of change about each of the
       // three axes directly as reported by the underlying sensor IC.
-      int rawX = modernRoboticsI2cGyro.rawX();
-      int rawY = modernRoboticsI2cGyro.rawY();
-      int rawZ = modernRoboticsI2cGyro.rawZ();
-      int heading = modernRoboticsI2cGyro.getHeading();
+      int rawX        = modernRoboticsI2cGyro.rawX();
+      int rawY        = modernRoboticsI2cGyro.rawY();
+      int rawZ        = modernRoboticsI2cGyro.rawZ();
+      int heading     = modernRoboticsI2cGyro.getHeading();
       int integratedZ = modernRoboticsI2cGyro.getIntegratedZValue();
 
       // Read dimensionalized data from the gyro. This gyro can report angular velocities
       // about all three axes. Additionally, it internally integrates the Z axis to
       // be able to report an absolute angular Z orientation.
-      AngularVelocity rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
-      float zAngle = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+      AngularVelocity rates  = gyro.getAngularVelocity(AngleUnit.DEGREES);
+      float           zAngle = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
 
       // Read administrative information from the gyro
-      int zAxisOffset = modernRoboticsI2cGyro.getZAxisOffset();
+      int zAxisOffset             = modernRoboticsI2cGyro.getZAxisOffset();
       int zAxisScalingCoefficient = modernRoboticsI2cGyro.getZAxisScalingCoefficient();
 
       telemetry.addLine()

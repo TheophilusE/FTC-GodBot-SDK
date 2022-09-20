@@ -66,7 +66,7 @@ public class SensorBNO055IMU extends LinearOpMode
   BNO055IMU imu;
 
   // State used for updating telemetry
-  Orientation angles;
+  Orientation  angles;
   Acceleration gravity;
 
   //----------------------------------------------------------------------------------------------
@@ -81,11 +81,11 @@ public class SensorBNO055IMU extends LinearOpMode
     // algorithm here just reports accelerations to the logcat log; it doesn't actually
     // provide positional information.
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-    parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-    parameters.loggingEnabled = true;
-    parameters.loggingTag = "IMU";
+    parameters.angleUnit                        = BNO055IMU.AngleUnit.DEGREES;
+    parameters.accelUnit                        = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+    parameters.calibrationDataFile              = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+    parameters.loggingEnabled                   = true;
+    parameters.loggingTag                       = "IMU";
     parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
     // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
@@ -127,7 +127,7 @@ public class SensorBNO055IMU extends LinearOpMode
         // Acquiring the angles is relatively expensive; we don't want
         // to do that in each of the three items that need that info, as that's
         // three times the necessary expense.
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        angles  = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         gravity = imu.getGravity();
       }
     });
@@ -191,9 +191,9 @@ public class SensorBNO055IMU extends LinearOpMode
           public String value()
           {
             return String.format(Locale.getDefault(), "%.3f",
-                Math.sqrt(gravity.xAccel * gravity.xAccel
-                    + gravity.yAccel * gravity.yAccel
-                    + gravity.zAccel * gravity.zAccel));
+                                 Math.sqrt(gravity.xAccel * gravity.xAccel
+                                           + gravity.yAccel * gravity.yAccel
+                                           + gravity.zAccel * gravity.zAccel));
           }
         });
   }

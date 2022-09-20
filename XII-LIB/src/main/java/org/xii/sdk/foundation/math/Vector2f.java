@@ -1027,8 +1027,8 @@ public class Vector2f implements Externalizable, Cloneable, Vector2fc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + Float.floatToIntBits(x);
     result = prime * result + Float.floatToIntBits(y);
     return result;

@@ -528,32 +528,32 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f set(AxisAngle4f axisAngle)
   {
-    float x = axisAngle.x;
-    float y = axisAngle.y;
-    float z = axisAngle.z;
-    float angle = axisAngle.angle;
+    float x         = axisAngle.x;
+    float y         = axisAngle.y;
+    float z         = axisAngle.z;
+    float angle     = axisAngle.angle;
     float invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    float s = Math.sin(angle);
-    float c = Math.cosFromSin(s, angle);
+    float s   = Math.sin(angle);
+    float c   = Math.cosFromSin(s, angle);
     float omc = 1.0f - c;
     m00 = c + x * x * omc;
     m11 = c + y * y * omc;
     m22 = c + z * z * omc;
     float tmp1 = x * y * omc;
     float tmp2 = z * s;
-    m10 = tmp1 - tmp2;
-    m01 = tmp1 + tmp2;
+    m10  = tmp1 - tmp2;
+    m01  = tmp1 + tmp2;
     tmp1 = x * z * omc;
     tmp2 = y * s;
-    m20 = tmp1 + tmp2;
-    m02 = tmp1 - tmp2;
+    m20  = tmp1 + tmp2;
+    m02  = tmp1 - tmp2;
     tmp1 = y * z * omc;
     tmp2 = x * s;
-    m21 = tmp1 - tmp2;
-    m12 = tmp1 + tmp2;
+    m21  = tmp1 - tmp2;
+    m12  = tmp1 + tmp2;
     return this;
   }
 
@@ -565,32 +565,32 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f set(AxisAngle4d axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
-    double angle = axisAngle.angle;
+    double x         = axisAngle.x;
+    double y         = axisAngle.y;
+    double z         = axisAngle.z;
+    double angle     = axisAngle.angle;
     double invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0f - c;
     m00 = (float) (c + x * x * omc);
     m11 = (float) (c + y * y * omc);
     m22 = (float) (c + z * z * omc);
     double tmp1 = x * y * omc;
     double tmp2 = z * s;
-    m10 = (float) (tmp1 - tmp2);
-    m01 = (float) (tmp1 + tmp2);
+    m10  = (float) (tmp1 - tmp2);
+    m01  = (float) (tmp1 + tmp2);
     tmp1 = x * z * omc;
     tmp2 = y * s;
-    m20 = (float) (tmp1 + tmp2);
-    m02 = (float) (tmp1 - tmp2);
+    m20  = (float) (tmp1 + tmp2);
+    m02  = (float) (tmp1 - tmp2);
     tmp1 = y * z * omc;
     tmp2 = x * s;
-    m21 = (float) (tmp1 - tmp2);
-    m12 = (float) (tmp1 + tmp2);
+    m21  = (float) (tmp1 - tmp2);
+    m12  = (float) (tmp1 + tmp2);
     return this;
   }
 
@@ -797,8 +797,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public float determinant()
   {
     return (m00 * m11 - m01 * m10) * m22
-        + (m02 * m10 - m00 * m12) * m21
-        + (m01 * m12 - m02 * m11) * m20;
+           + (m02 * m10 - m00 * m12) * m21
+           + (m01 * m12 - m02 * m11) * m20;
   }
 
   /**
@@ -813,11 +813,11 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f invert(Matrix3f dest)
   {
-    float a = Math.fma(m00, m11, -m01 * m10);
-    float b = Math.fma(m02, m10, -m00 * m12);
-    float c = Math.fma(m01, m12, -m02 * m11);
-    float d = Math.fma(a, m22, Math.fma(b, m21, c * m20));
-    float s = 1.0f / d;
+    float a    = Math.fma(m00, m11, -m01 * m10);
+    float b    = Math.fma(m02, m10, -m00 * m12);
+    float c    = Math.fma(m01, m12, -m02 * m11);
+    float d    = Math.fma(a, m22, Math.fma(b, m21, c * m20));
+    float s    = 1.0f / d;
     float nm00 = Math.fma(m11, m22, -m21 * m12) * s;
     float nm01 = Math.fma(m21, m02, -m01 * m22) * s;
     float nm02 = c * s;
@@ -852,8 +852,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public Matrix3f transpose(Matrix3f dest)
   {
     return dest.set(m00, m10, m20,
-        m01, m11, m21,
-        m02, m12, m22);
+                    m01, m11, m21,
+                    m02, m12, m22);
   }
 
   /**
@@ -865,9 +865,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -897,8 +897,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
-        + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
+           + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
   }
 
   /**
@@ -1406,8 +1406,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   {
     float sin = Math.sin(angle);
     float cos = Math.cosFromSin(sin, angle);
-    float C = 1.0f - cos;
-    float xy = x * y, xz = x * z, yz = y * z;
+    float C   = 1.0f - cos;
+    float xy  = x * y, xz = x * z, yz = y * z;
     m00 = cos + x * x * C;
     m10 = xy * C - z * sin;
     m20 = xz * C + y * sin;
@@ -1524,12 +1524,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotationXYZ(float angleX, float angleY, float angleZ)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinX = -sinX;
     float m_sinY = -sinY;
     float m_sinZ = -sinZ;
@@ -1573,12 +1573,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotationZYX(float angleZ, float angleY, float angleX)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinZ = -sinZ;
     float m_sinY = -sinY;
     float m_sinX = -sinX;
@@ -1622,12 +1622,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotationYXZ(float angleY, float angleX, float angleZ)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinY = -sinY;
     float m_sinX = -sinX;
     float m_sinZ = -sinZ;
@@ -1710,8 +1710,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public Vector3f transform(float x, float y, float z, Vector3f dest)
   {
     return dest.set(Math.fma(m00, x, Math.fma(m10, y, m20 * z)),
-        Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
-        Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
+                    Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
+                    Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
   }
 
   public Vector3f transformTranspose(Vector3f v)
@@ -1727,8 +1727,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public Vector3f transformTranspose(float x, float y, float z, Vector3f dest)
   {
     return dest.set(Math.fma(m00, x, Math.fma(m01, y, m02 * z)),
-        Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
-        Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
+                    Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
+                    Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
   }
 
   public void writeExternal(ObjectOutput out) throws IOException
@@ -1957,12 +1957,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f rotateXYZ(float angleX, float angleY, float angleZ, Matrix3f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinX = -sinX;
     float m_sinY = -sinY;
     float m_sinZ = -sinZ;
@@ -2041,12 +2041,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f rotateZYX(float angleZ, float angleY, float angleX, Matrix3f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinZ = -sinZ;
     float m_sinY = -sinY;
     float m_sinX = -sinX;
@@ -2125,12 +2125,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f rotateYXZ(float angleY, float angleX, float angleZ, Matrix3f dest)
   {
-    float sinX = Math.sin(angleX);
-    float cosX = Math.cosFromSin(sinX, angleX);
-    float sinY = Math.sin(angleY);
-    float cosY = Math.cosFromSin(sinY, angleY);
-    float sinZ = Math.sin(angleZ);
-    float cosZ = Math.cosFromSin(sinZ, angleZ);
+    float sinX   = Math.sin(angleX);
+    float cosX   = Math.cosFromSin(sinX, angleX);
+    float sinY   = Math.sin(angleY);
+    float cosY   = Math.cosFromSin(sinY, angleY);
+    float sinZ   = Math.sin(angleZ);
+    float cosZ   = Math.cosFromSin(sinZ, angleZ);
     float m_sinY = -sinY;
     float m_sinX = -sinX;
     float m_sinZ = -sinZ;
@@ -2195,9 +2195,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
     // rotation matrix elements:
     // m30, m31, m32, m03, m13, m23 = 0
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float rm00 = xx * C + c;
     float rm01 = xy * C + z * s;
     float rm02 = xz * C - y * s;
@@ -2259,12 +2259,12 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotateLocal(float ang, float x, float y, float z, Matrix3f dest)
   {
-    float s = Math.sin(ang);
-    float c = Math.cosFromSin(s, ang);
-    float C = 1.0f - c;
-    float xx = x * x, xy = x * y, xz = x * z;
-    float yy = y * y, yz = y * z;
-    float zz = z * z;
+    float s    = Math.sin(ang);
+    float c    = Math.cosFromSin(s, ang);
+    float C    = 1.0f - c;
+    float xx   = x * x, xy = x * y, xz = x * z;
+    float yy   = y * y, yz = y * z;
+    float zz   = z * z;
     float lm00 = xx * C + c;
     float lm01 = xy * C + z * s;
     float lm02 = xz * C - y * s;
@@ -2352,8 +2352,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotateLocalX(float ang, Matrix3f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm01 = cos * m01 - sin * m02;
     float nm02 = sin * m01 + cos * m02;
     float nm11 = cos * m11 - sin * m12;
@@ -2423,8 +2423,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotateLocalY(float ang, Matrix3f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm00 = cos * m00 + sin * m02;
     float nm02 = -sin * m00 + cos * m02;
     float nm10 = cos * m10 + sin * m12;
@@ -2494,8 +2494,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotateLocalZ(float ang, Matrix3f dest)
   {
-    float sin = Math.sin(ang);
-    float cos = Math.cosFromSin(sin, ang);
+    float sin  = Math.sin(ang);
+    float cos  = Math.cosFromSin(sin, ang);
     float nm00 = cos * m00 - sin * m01;
     float nm01 = sin * m00 + cos * m01;
     float nm10 = cos * m10 - sin * m11;
@@ -2591,11 +2591,11 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotate(Quaternionfc quat, Matrix3f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float rm00 = w2 + x2 - z2 - y2;
     float rm01 = dxy + dzw;
     float rm02 = dxz - dyw;
@@ -2648,11 +2648,11 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f rotateLocal(Quaternionfc quat, Matrix3f dest)
   {
-    float w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    float y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    float zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    float xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    float yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    float w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    float y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    float zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    float xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    float yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     float lm00 = w2 + x2 - z2 - y2;
     float lm01 = dxy + dzw;
     float lm02 = dxz - dyw;
@@ -3241,8 +3241,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
     float m00m12 = m00 * m12;
     float m01m12 = m01 * m12;
     float m02m11 = m02 * m11;
-    float det = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
-    float s = 1.0f / det;
+    float det    = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
+    float s      = 1.0f / det;
     /* Invert and transpose in one go */
     float nm00 = (m11 * m22 - m21 * m12) * s;
     float nm01 = (m20 * m12 - m10 * m22) * s;
@@ -3313,8 +3313,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public Vector3f getScale(Vector3f dest)
   {
     return dest.set(Math.sqrt(m00 * m00 + m01 * m01 + m02 * m02),
-        Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12),
-        Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22));
+                    Math.sqrt(m10 * m10 + m11 * m11 + m12 * m12),
+                    Math.sqrt(m20 * m20 + m21 * m21 + m22 * m22));
   }
 
   public Vector3f positiveZ(Vector3f dir)
@@ -3367,8 +3367,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + Float.floatToIntBits(m00);
     result = prime * result + Float.floatToIntBits(m01);
     result = prime * result + Float.floatToIntBits(m02);
@@ -3743,9 +3743,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   {
     // Normalize direction
     float invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    float ndirX = dirX * invDirLength;
-    float ndirY = dirY * invDirLength;
-    float ndirZ = dirZ * invDirLength;
+    float ndirX        = dirX * invDirLength;
+    float ndirY        = dirY * invDirLength;
+    float ndirZ        = dirZ * invDirLength;
     // left = up x direction
     float leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -3830,9 +3830,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   {
     // Normalize direction
     float invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    float ndirX = dirX * invDirLength;
-    float ndirY = dirY * invDirLength;
-    float ndirZ = dirZ * invDirLength;
+    float ndirX        = dirX * invDirLength;
+    float ndirY        = dirY * invDirLength;
+    float ndirZ        = dirZ * invDirLength;
     // left = up x direction
     float leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -3952,7 +3952,7 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f reflect(float nx, float ny, float nz, Matrix3f dest)
   {
-    float da = nx + nx, db = ny + ny, dc = nz + nz;
+    float da   = nx + nx, db = ny + ny, dc = nz + nz;
     float rm00 = 1.0f - da * nx;
     float rm01 = -da * ny;
     float rm02 = -da * nz;
@@ -4039,9 +4039,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
 
   public Matrix3f reflect(Quaternionfc orientation, Matrix3f dest)
   {
-    float num1 = orientation.x() + orientation.x();
-    float num2 = orientation.y() + orientation.y();
-    float num3 = orientation.z() + orientation.z();
+    float num1    = orientation.x() + orientation.x();
+    float num2    = orientation.y() + orientation.y();
+    float num3    = orientation.z() + orientation.z();
     float normalX = orientation.x() * num3 + orientation.w() * num2;
     float normalY = orientation.y() * num3 - orientation.w() * num1;
     float normalZ = 1.0f - (orientation.x() * num1 + orientation.y() * num2);
@@ -4102,9 +4102,9 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
    */
   public Matrix3f reflection(Quaternionfc orientation)
   {
-    float num1 = orientation.x() + orientation.x();
-    float num2 = orientation.y() + orientation.y();
-    float num3 = orientation.z() + orientation.z();
+    float num1    = orientation.x() + orientation.x();
+    float num2    = orientation.y() + orientation.y();
+    float num3    = orientation.z() + orientation.z();
     float normalX = orientation.x() * num3 + orientation.w() * num2;
     float normalY = orientation.y() * num3 - orientation.w() * num1;
     float normalZ = 1.0f - (orientation.x() * num1 + orientation.y() * num2);
@@ -4114,8 +4114,8 @@ public class Matrix3f implements Externalizable, Cloneable, Matrix3fc
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) &&
-        Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
-        Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
+           Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
+           Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
   }
 
   public float quadraticFormProduct(float x, float y, float z)

@@ -66,9 +66,9 @@ public class ConceptSoundsOnBotJava extends LinearOpMode
 {
 
   // Point to sound files on the phone's drive
-  private String soundPath = "/FIRST/blocks/sounds";
-  private File goldFile = new File("/sdcard" + soundPath + "/gold.wav");
-  private File silverFile = new File("/sdcard" + soundPath + "/silver.wav");
+  private String soundPath  = "/FIRST/blocks/sounds";
+  private File   goldFile   = new File("/sdcard" + soundPath + "/gold.wav");
+  private File   silverFile = new File("/sdcard" + soundPath + "/silver.wav");
 
   // Declare OpMode members.
   private boolean isX = false;    // Gamepad button state variables
@@ -82,7 +82,7 @@ public class ConceptSoundsOnBotJava extends LinearOpMode
   {
 
     // Make sure that the sound files exist on the phone
-    boolean goldFound = goldFile.exists();
+    boolean goldFound   = goldFile.exists();
     boolean silverFound = silverFile.exists();
 
     // Display sound status

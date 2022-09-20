@@ -97,17 +97,17 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode
 
   // Since ImageTarget trackables use mm to specifiy their dimensions, we must use mm for all the physical dimension.
   // We will define some constants and conversions here
-  private static final float mmPerInch = 25.4f;
+  private static final float mmPerInch      = 25.4f;
   private static final float mmTargetHeight = 6 * mmPerInch;          // the height of the center of the target image above the floor
-  private static final float halfField = 72 * mmPerInch;
-  private static final float halfTile = 12 * mmPerInch;
+  private static final float halfField      = 72 * mmPerInch;
+  private static final float halfTile       = 12 * mmPerInch;
   private static final float oneAndHalfTile = 36 * mmPerInch;
 
   // Class Members
-  private OpenGLMatrix lastLocation = null;
-  private VuforiaLocalizer vuforia = null;
-  private VuforiaTrackables targets = null;
-  private WebcamName webcamName = null;
+  private OpenGLMatrix      lastLocation = null;
+  private VuforiaLocalizer  vuforia      = null;
+  private VuforiaTrackables targets      = null;
+  private WebcamName        webcamName   = null;
 
   private boolean targetVisible = false;
 
@@ -123,8 +123,8 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode
      * If no camera-preview is desired, use the parameter-less constructor instead (commented out below).
      * Note: A preview window is required if you want to view the camera stream on the Driver Station Phone.
      */
-    int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    int                         cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+    VuforiaLocalizer.Parameters parameters          = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
     // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
     parameters.vuforiaLicenseKey = VUFORIA_KEY;
@@ -190,9 +190,9 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode
      *      In this example, it is centered on the robot (left-to-right and front-to-back), and 6 inches above ground level.
      */
 
-    final float CAMERA_FORWARD_DISPLACEMENT = 0.0f * mmPerInch;   // eg: Enter the forward distance from the center of the robot to the camera lens
+    final float CAMERA_FORWARD_DISPLACEMENT  = 0.0f * mmPerInch;   // eg: Enter the forward distance from the center of the robot to the camera lens
     final float CAMERA_VERTICAL_DISPLACEMENT = 6.0f * mmPerInch;   // eg: Camera is 6 Inches above ground
-    final float CAMERA_LEFT_DISPLACEMENT = 0.0f * mmPerInch;   // eg: Enter the left distance from the center of the robot to the camera lens
+    final float CAMERA_LEFT_DISPLACEMENT     = 0.0f * mmPerInch;   // eg: Enter the left distance from the center of the robot to the camera lens
 
     OpenGLMatrix cameraLocationOnRobot = OpenGLMatrix
         .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
@@ -251,7 +251,7 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode
         // express position (translation) of robot in inches.
         VectorF translation = lastLocation.getTranslation();
         telemetry.addData("Pos (inches)", "{X, Y, Z} = %.1f, %.1f, %.1f",
-            translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
+                          translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
         // express the rotation of the robot in degrees.
         Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
@@ -279,6 +279,6 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode
     VuforiaTrackable aTarget = targets.get(targetIndex);
     aTarget.setName(targetName);
     aTarget.setLocation(OpenGLMatrix.translation(dx, dy, dz)
-        .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, rx, ry, rz)));
+                            .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, rx, ry, rz)));
   }
 }

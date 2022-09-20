@@ -95,23 +95,23 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
 {
 
   /* Declare OpMode members. */
-  private DcMotor leftDrive = null;
-  private DcMotor rightDrive = null;
-  private BNO055IMU imu = null;      // Control/Expansion Hub IMU
+  private DcMotor   leftDrive  = null;
+  private DcMotor   rightDrive = null;
+  private BNO055IMU imu        = null;      // Control/Expansion Hub IMU
 
-  private double robotHeading = 0;
+  private double robotHeading  = 0;
   private double headingOffset = 0;
-  private double headingError = 0;
+  private double headingError  = 0;
 
   // These variable are declared here (as class members) so they can be updated in various methods,
   // but still be displayed by sendTelemetry()
   private double targetHeading = 0;
-  private double driveSpeed = 0;
-  private double turnSpeed = 0;
-  private double leftSpeed = 0;
-  private double rightSpeed = 0;
-  private int leftTarget = 0;
-  private int rightTarget = 0;
+  private double driveSpeed    = 0;
+  private double turnSpeed     = 0;
+  private double leftSpeed     = 0;
+  private double rightSpeed    = 0;
+  private int    leftTarget    = 0;
+  private int    rightTarget   = 0;
 
   // Calculate the COUNTS_PER_INCH for your specific drive train.
   // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -119,24 +119,24 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
   // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
   // This is gearing DOWN for less speed and more torque.
   // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-  static final double COUNTS_PER_MOTOR_REV = 537.7;   // eg: GoBILDA 312 RPM Yellow Jacket
-  static final double DRIVE_GEAR_REDUCTION = 1.0;     // No External Gearing.
+  static final double COUNTS_PER_MOTOR_REV  = 537.7;   // eg: GoBILDA 312 RPM Yellow Jacket
+  static final double DRIVE_GEAR_REDUCTION  = 1.0;     // No External Gearing.
   static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
-  static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-      (WHEEL_DIAMETER_INCHES * 3.1415);
+  static final double COUNTS_PER_INCH       = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                              (WHEEL_DIAMETER_INCHES * 3.1415);
 
   // These constants define the desired driving/control characteristics
   // They can/should be tweaked to suit the specific robot drive train.
-  static final double DRIVE_SPEED = 0.4;     // Max driving speed for better distance accuracy.
-  static final double TURN_SPEED = 0.2;     // Max Turn speed to limit turn rate
+  static final double DRIVE_SPEED       = 0.4;     // Max driving speed for better distance accuracy.
+  static final double TURN_SPEED        = 0.2;     // Max Turn speed to limit turn rate
   static final double HEADING_THRESHOLD = 1.0;    // How close must the heading get to the target before moving to next step.
   // Requiring more accuracy (a smaller number) will often make the turn take longer to get into the final position.
   // Define the Proportional control coefficient (or GAIN) for "heading control".
   // We define one value when Turning (larger errors), and the other is used when Driving straight (smaller errors).
   // Increase these numbers if the heading does not corrects strongly enough (eg: a heavy robot or using tracks)
   // Decrease these numbers if the heading does not settle on the correct value (eg: very agile robot with omni wheels)
-  static final double P_TURN_GAIN = 0.02;     // Larger is more responsive, but also less stable
-  static final double P_DRIVE_GAIN = 0.03;     // Larger is more responsive, but also less stable
+  static final double P_TURN_GAIN       = 0.02;     // Larger is more responsive, but also less stable
+  static final double P_DRIVE_GAIN      = 0.03;     // Larger is more responsive, but also less stable
 
 
   @Override
@@ -144,7 +144,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
   {
 
     // Initialize the drive system variables.
-    leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+    leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
     rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -156,7 +156,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
     // define initialization values for IMU, and then initialize it.
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-    imu = hardwareMap.get(BNO055IMU.class, "imu");
+    imu                  = hardwareMap.get(BNO055IMU.class, "imu");
     imu.initialize(parameters);
 
     // Ensure the robot is stationary.  Reset the encoders and set the motors to BRAKE mode
@@ -233,7 +233,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
 
       // Determine new target position, and pass to motor controller
       int moveCounts = (int) (distance * COUNTS_PER_INCH);
-      leftTarget = leftDrive.getCurrentPosition() + moveCounts;
+      leftTarget  = leftDrive.getCurrentPosition() + moveCounts;
       rightTarget = rightDrive.getCurrentPosition() + moveCounts;
 
       // Set Target FIRST, then turn on RUN_TO_POSITION
@@ -250,7 +250,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
 
       // keep looping while we are still active, and BOTH motors are running.
       while (opModeIsActive() &&
-          (leftDrive.isBusy() && rightDrive.isBusy()))
+             (leftDrive.isBusy() && rightDrive.isBusy()))
       {
 
         // Determine required steering to keep on heading
@@ -394,9 +394,9 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
   public void moveRobot(double drive, double turn)
   {
     driveSpeed = drive;     // save this value as a class member so it can be used by telemetry.
-    turnSpeed = turn;      // save this value as a class member so it can be used by telemetry.
+    turnSpeed  = turn;      // save this value as a class member so it can be used by telemetry.
 
-    leftSpeed = drive - turn;
+    leftSpeed  = drive - turn;
     rightSpeed = drive + turn;
 
     // Scale speeds down if either one exceeds +/- 1.0;
@@ -424,7 +424,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
       telemetry.addData("Motion", "Drive Straight");
       telemetry.addData("Target Pos L:R", "%7d:%7d", leftTarget, rightTarget);
       telemetry.addData("Actual Pos L:R", "%7d:%7d", leftDrive.getCurrentPosition(),
-          rightDrive.getCurrentPosition());
+                        rightDrive.getCurrentPosition());
     } else
     {
       telemetry.addData("Motion", "Turning");
@@ -452,6 +452,6 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode
   {
     // Save a new heading offset equal to the current raw heading.
     headingOffset = getRawHeading();
-    robotHeading = 0;
+    robotHeading  = 0;
   }
 }

@@ -75,51 +75,51 @@ public class FrustumIntersection
    * Return value of {@link #intersectAab(float, float, float, float, float, float) intersectAab()}
    * and its different overloads indicating that the axis-aligned box is fully inside of the frustum.
    */
-  public static final int INSIDE = -2;
+  public static final int INSIDE    = -2;
   /**
    * Return value of {@link #intersectSphere(Vector3fc, float)} or {@link #intersectSphere(float, float, float, float)}
    * indicating that the sphere is completely outside of the frustum.
    */
-  public static final int OUTSIDE = -3;
+  public static final int OUTSIDE   = -3;
 
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>x=-1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_NX = 1 << PLANE_NX;
+  public static final int        PLANE_MASK_NX = 1 << PLANE_NX;
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>x=1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_PX = 1 << PLANE_PX;
+  public static final int        PLANE_MASK_PX = 1 << PLANE_PX;
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>y=-1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_NY = 1 << PLANE_NY;
+  public static final int        PLANE_MASK_NY = 1 << PLANE_NY;
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>y=1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_PY = 1 << PLANE_PY;
+  public static final int        PLANE_MASK_PY = 1 << PLANE_PY;
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>z=-1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_NZ = 1 << PLANE_NZ;
+  public static final int        PLANE_MASK_NZ = 1 << PLANE_NZ;
   /**
    * The value in a bitmask for
    * {@link #intersectAab(float, float, float, float, float, float, int) intersectAab()}
    * that identifies the plane with equation <code>z=1</code> when using the identity frustum.
    */
-  public static final int PLANE_MASK_PZ = 1 << PLANE_PZ;
-  private final Vector4f[] planes = new Vector4f[6];
-  private float nxX, nxY, nxZ, nxW;
+  public static final int        PLANE_MASK_PZ = 1 << PLANE_PZ;
+  private final       Vector4f[] planes        = new Vector4f[6];
+  private             float      nxX, nxY, nxZ, nxW;
   private float pxX, pxY, pxZ, pxW;
   private float nyX, nyY, nyZ, nyW;
   private float pyX, pyY, pyZ, pyW;
@@ -304,11 +304,11 @@ public class FrustumIntersection
   public boolean testPoint(float x, float y, float z)
   {
     return nxX * x + nxY * y + nxZ * z + nxW >= 0 &&
-        pxX * x + pxY * y + pxZ * z + pxW >= 0 &&
-        nyX * x + nyY * y + nyZ * z + nyW >= 0 &&
-        pyX * x + pyY * y + pyZ * z + pyW >= 0 &&
-        nzX * x + nzY * y + nzZ * z + nzW >= 0 &&
-        pzX * x + pzY * y + pzZ * z + pzW >= 0;
+           pxX * x + pxY * y + pxZ * z + pxW >= 0 &&
+           nyX * x + nyY * y + nyZ * z + nyW >= 0 &&
+           pyX * x + pyY * y + pyZ * z + pyW >= 0 &&
+           nzX * x + nzY * y + nzZ * z + nzW >= 0 &&
+           pzX * x + pzY * y + pzZ * z + pzW >= 0;
   }
 
   /**
@@ -345,11 +345,11 @@ public class FrustumIntersection
   public boolean testSphere(float x, float y, float z, float r)
   {
     return nxX * x + nxY * y + nxZ * z + nxW >= -r &&
-        pxX * x + pxY * y + pxZ * z + pxW >= -r &&
-        nyX * x + nyY * y + nyZ * z + nyW >= -r &&
-        pyX * x + pyY * y + pyZ * z + pyW >= -r &&
-        nzX * x + nzY * y + nzZ * z + nzW >= -r &&
-        pzX * x + pzY * y + pzZ * z + pzW >= -r;
+           pxX * x + pxY * y + pxZ * z + pxW >= -r &&
+           nyX * x + nyY * y + nyZ * z + nyW >= -r &&
+           pyX * x + pyY * y + pyZ * z + pyW >= -r &&
+           nzX * x + nzY * y + nzZ * z + nzW >= -r &&
+           pzX * x + pzY * y + pzZ * z + pzW >= -r;
   }
 
   /**
@@ -386,7 +386,7 @@ public class FrustumIntersection
   public int intersectSphere(float x, float y, float z, float r)
   {
     boolean inside = true;
-    float dist;
+    float   dist;
     dist = nxX * x + nxY * y + nxZ * z + nxW;
     if (dist >= -r)
     {
@@ -463,11 +463,11 @@ public class FrustumIntersection
      * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
      */
     return nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) + nxZ * (nxZ < 0 ? minZ : maxZ) >= -nxW &&
-        pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
-        nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
-        pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
-        nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
-        pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
+           pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
+           nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
+           pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
+           nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
+           pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
   }
 
   /**
@@ -510,11 +510,11 @@ public class FrustumIntersection
      * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
      */
     return nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) >= -nxW &&
-        pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
-        nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
-        pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW &&
-        nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) >= -nzW &&
-        pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) >= -pzW;
+           pxX * (pxX < 0 ? minX : maxX) + pxY * (pxY < 0 ? minY : maxY) >= -pxW &&
+           nyX * (nyX < 0 ? minX : maxX) + nyY * (nyY < 0 ? minY : maxY) >= -nyW &&
+           pyX * (pyX < 0 ? minX : maxX) + pyY * (pyY < 0 ? minY : maxY) >= -pyW &&
+           nzX * (nzX < 0 ? minX : maxX) + nzY * (nzY < 0 ? minY : maxY) >= -nzW &&
+           pzX * (pzX < 0 ? minX : maxX) + pzY * (pzY < 0 ? minY : maxY) >= -pzW;
   }
 
   /**
@@ -540,11 +540,11 @@ public class FrustumIntersection
      * It does not distinguish between partially inside and fully inside, though, so the test with the 'p' vertex is omitted.
      */
     return nxX * (nxX < 0 ? minX : maxX) + nxZ * (nxZ < 0 ? minZ : maxZ) >= -nxW &&
-        pxX * (pxX < 0 ? minX : maxX) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
-        nyX * (nyX < 0 ? minX : maxX) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
-        pyX * (pyX < 0 ? minX : maxX) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
-        nzX * (nzX < 0 ? minX : maxX) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
-        pzX * (pzX < 0 ? minX : maxX) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
+           pxX * (pxX < 0 ? minX : maxX) + pxZ * (pxZ < 0 ? minZ : maxZ) >= -pxW &&
+           nyX * (nyX < 0 ? minX : maxX) + nyZ * (nyZ < 0 ? minZ : maxZ) >= -nyW &&
+           pyX * (pyX < 0 ? minX : maxX) + pyZ * (pyZ < 0 ? minZ : maxZ) >= -pyW &&
+           nzX * (nzX < 0 ? minX : maxX) + nzZ * (nzZ < 0 ? minZ : maxZ) >= -nzW &&
+           pzX * (pzX < 0 ? minX : maxX) + pzZ * (pzZ < 0 ? minZ : maxZ) >= -pzW;
   }
 
   /**
@@ -595,7 +595,7 @@ public class FrustumIntersection
      *
      * In addition to the algorithm in the paper, this method also returns the index of the first plane that culled the box.
      */
-    int plane = PLANE_NX;
+    int     plane  = PLANE_NX;
     boolean inside = true;
     if (nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) + nxZ * (nxZ < 0 ? minZ : maxZ) >= -nxW)
     {
@@ -648,7 +648,7 @@ public class FrustumIntersection
   public float distanceToPlane(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int plane)
   {
     return planes[plane].x * (planes[plane].x < 0 ? maxX : minX) + planes[plane].y * (planes[plane].y < 0 ? maxY : minY)
-        + planes[plane].z * (planes[plane].z < 0 ? maxZ : minZ) + planes[plane].w;
+           + planes[plane].z * (planes[plane].z < 0 ? maxZ : minZ) + planes[plane].w;
   }
 
   /**
@@ -719,7 +719,7 @@ public class FrustumIntersection
      *
      * In addition to the algorithm in the paper, this method also returns the index of the first plane that culled the box.
      */
-    int plane = PLANE_NX;
+    int     plane  = PLANE_NX;
     boolean inside = true;
     if ((mask & PLANE_MASK_NX) == 0 || nxX * (nxX < 0 ? minX : maxX) + nxY * (nxY < 0 ? minY : maxY) + nxZ * (nxZ < 0 ? minZ : maxZ) >= -nxW)
     {
@@ -836,9 +836,9 @@ public class FrustumIntersection
      *
      * In addition to the algorithm in the paper, this method also returns the index of the first plane that culled the box.
      */
-    int plane = startPlane;
-    boolean inside = true;
-    Vector4f p = planes[startPlane];
+    int      plane  = startPlane;
+    boolean  inside = true;
+    Vector4f p      = planes[startPlane];
     if ((mask & 1 << startPlane) != 0 && p.x * (p.x < 0 ? minX : maxX) + p.y * (p.y < 0 ? minY : maxY) + p.z * (p.z < 0 ? minZ : maxZ) < -p.w)
     {
       return plane;
@@ -914,7 +914,7 @@ public class FrustumIntersection
     }
     if (da * db < 0.0f)
     {
-      float p = Math.abs(da) / Math.abs(db - da);
+      float p  = Math.abs(da) / Math.abs(db - da);
       float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
       if (da < 0.0f)
       {
@@ -936,7 +936,7 @@ public class FrustumIntersection
     }
     if (da * db < 0.0f)
     {
-      float p = Math.abs(da) / Math.abs(db - da);
+      float p  = Math.abs(da) / Math.abs(db - da);
       float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
       if (da < 0.0f)
       {
@@ -958,7 +958,7 @@ public class FrustumIntersection
     }
     if (da * db < 0.0f)
     {
-      float p = Math.abs(da) / Math.abs(db - da);
+      float p  = Math.abs(da) / Math.abs(db - da);
       float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
       if (da < 0.0f)
       {
@@ -980,7 +980,7 @@ public class FrustumIntersection
     }
     if (da * db < 0.0f)
     {
-      float p = Math.abs(da) / Math.abs(db - da);
+      float p  = Math.abs(da) / Math.abs(db - da);
       float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
       if (da < 0.0f)
       {
@@ -1002,7 +1002,7 @@ public class FrustumIntersection
     }
     if (da * db < 0.0f)
     {
-      float p = Math.abs(da) / Math.abs(db - da);
+      float p  = Math.abs(da) / Math.abs(db - da);
       float dx = Math.fma(bX - aX, p, aX), dy = Math.fma(bY - aY, p, aY), dz = Math.fma(bZ - aZ, p, aZ);
       if (da < 0.0f)
       {

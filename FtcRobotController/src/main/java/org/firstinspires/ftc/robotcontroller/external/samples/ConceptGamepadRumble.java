@@ -90,15 +90,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "Concept: Gamepad Rumble", group = "Concept")
 public class ConceptGamepadRumble extends LinearOpMode
 {
-  boolean lastA = false;                      // Use to track the prior button state.
-  boolean lastLB = false;                     // Use to track the prior button state.
-  boolean highLevel = false;                  // used to prevent multiple level-based rumbles.
+  boolean lastA      = false;                      // Use to track the prior button state.
+  boolean lastLB     = false;                     // Use to track the prior button state.
+  boolean highLevel  = false;                  // used to prevent multiple level-based rumbles.
   boolean secondHalf = false;                 // Use to prevent multiple half-time warning rumbles.
 
   Gamepad.RumbleEffect customRumbleEffect;    // Use to build a custom rumble sequence.
-  ElapsedTime runtime = new ElapsedTime();    // Use to determine when end game is starting.
+  ElapsedTime          runtime = new ElapsedTime();    // Use to determine when end game is starting.
 
-  final double HALF_TIME = 60.0;              // Wait this many seconds before rumble-alert for half-time.
+  final double HALF_TIME         = 60.0;              // Wait this many seconds before rumble-alert for half-time.
   final double TRIGGER_THRESHOLD = 0.75;     // Squeeze more than 3/4 to get rumble.
 
   @Override
@@ -123,7 +123,7 @@ public class ConceptGamepadRumble extends LinearOpMode
     while (opModeIsActive())
     {
       // Read and save the current gamepad button states.
-      boolean currentA = gamepad1.a;
+      boolean currentA  = gamepad1.a;
       boolean currentLB = gamepad1.left_bumper;
 
       // Display the current Rumble status.  Just for interest.

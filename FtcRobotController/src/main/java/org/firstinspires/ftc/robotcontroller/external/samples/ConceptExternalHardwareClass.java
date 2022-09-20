@@ -76,9 +76,9 @@ public class ConceptExternalHardwareClass extends LinearOpMode
   @Override
   public void runOpMode()
   {
-    double drive = 0;
-    double turn = 0;
-    double arm = 0;
+    double drive      = 0;
+    double turn       = 0;
+    double arm        = 0;
     double handOffset = 0;
 
     // initialize all the hardware, using the hardware class. See how clean and simple this is?
@@ -96,7 +96,7 @@ public class ConceptExternalHardwareClass extends LinearOpMode
       // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
       // This way it's also easy to just drive straight, or just turn.
       drive = -gamepad1.left_stick_y;
-      turn = gamepad1.right_stick_x;
+      turn  = gamepad1.right_stick_x;
 
       // Combine drive and turn for blended motion. Use RobotHardware class
       robot.driveRobot(drive, turn);

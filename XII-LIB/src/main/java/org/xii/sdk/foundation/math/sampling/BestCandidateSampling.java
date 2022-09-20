@@ -63,9 +63,9 @@ public class BestCandidateSampling
   public static class Sphere
   {
     private boolean onHemisphere;
-    private int numSamples;
-    private int numCandidates = 60; // <- use a reasonable default
-    private long seed;
+    private int     numSamples;
+    private int     numCandidates = 60; // <- use a reasonable default
+    private long    seed;
 
     /**
      * Create a new instance of {@link Sphere} to configure and generate 'best candidate' sample positions on the unit sphere.
@@ -112,8 +112,8 @@ public class BestCandidateSampling
      */
     public Sphere generate(final FloatBuffer xyzs)
     {
-      final IntHolder i = new IntHolder();
-      final int pos = xyzs.position();
+      final IntHolder i   = new IntHolder();
+      final int       pos = xyzs.position();
       return generate(new Callback3d()
       {
         public void onNewSample(float x, float y, float z)
@@ -189,8 +189,8 @@ public class BestCandidateSampling
      */
     public Sphere generate(Callback3d callback)
     {
-      Random rnd = new Random(seed);
-      Node otree = new Node();
+      Random rnd   = new Random(seed);
+      Node   otree = new Node();
       for (int i = 0; i < numSamples; i++)
       {
         float bestX = Float.NaN, bestY = Float.NaN, bestZ = Float.NaN, bestDist = 0.0f;
@@ -208,9 +208,9 @@ public class BestCandidateSampling
             x2 = rnd.nextFloat() * 2.0f - 1.0f;
           } while (x1 * x1 + x2 * x2 > 1.0f);
           float sqrt = (float) Math.sqrt(1.0 - x1 * x1 - x2 * x2);
-          float x = 2 * x1 * sqrt;
-          float y = 2 * x2 * sqrt;
-          float z = 1.0f - 2.0f * (x1 * x1 + x2 * x2);
+          float x    = 2 * x1 * sqrt;
+          float y    = 2 * x2 * sqrt;
+          float z    = 1.0f - 2.0f * (x1 * x1 + x2 * x2);
           if (onHemisphere)
           {
             z = Math.abs(z);
@@ -219,9 +219,9 @@ public class BestCandidateSampling
           if (minDist > bestDist)
           {
             bestDist = minDist;
-            bestX = x;
-            bestY = y;
-            bestZ = z;
+            bestX    = x;
+            bestY    = y;
+            bestZ    = z;
           }
         }
         callback.onNewSample(bestX, bestY, bestZ);
@@ -246,7 +246,7 @@ public class BestCandidateSampling
       private float arc;
 
       private ArrayList objects;
-      private Node[] children;
+      private Node[]    children;
 
       Node()
       {
@@ -277,9 +277,9 @@ public class BestCandidateSampling
         this.v2x = x2;
         this.v2y = y2;
         this.v2z = z2;
-        cx = (v0x + v1x + v2x) / 3.0f;
-        cy = (v0y + v1y + v2y) / 3.0f;
-        cz = (v0z + v1z + v2z) / 3.0f;
+        cx       = (v0x + v1x + v2x) / 3.0f;
+        cy       = (v0y + v1y + v2y) / 3.0f;
+        cz       = (v0z + v1z + v2z) / 3.0f;
         float invCLen = Math.invsqrt(cx * cx + cy * cy + cz * cz);
         cx *= invCLen;
         cy *= invCLen;
@@ -313,19 +313,19 @@ public class BestCandidateSampling
         float edge2X = v2X - v0X;
         float edge2Y = v2Y - v0Y;
         float edge2Z = v2Z - v0Z;
-        float pvecX = y * edge2Z - z * edge2Y;
-        float pvecY = z * edge2X - x * edge2Z;
-        float pvecZ = x * edge2Y - y * edge2X;
-        float det = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
+        float pvecX  = y * edge2Z - z * edge2Y;
+        float pvecY  = z * edge2X - x * edge2Z;
+        float pvecZ  = x * edge2Y - y * edge2X;
+        float det    = edge1X * pvecX + edge1Y * pvecY + edge1Z * pvecZ;
         if (det > -epsilon && det < epsilon)
         {
           return false;
         }
-        float tvecX = -v0X;
-        float tvecY = -v0Y;
-        float tvecZ = -v0Z;
+        float tvecX  = -v0X;
+        float tvecY  = -v0Y;
+        float tvecZ  = -v0Z;
         float invDet = 1.0f / det;
-        float u = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
+        float u      = (tvecX * pvecX + tvecY * pvecY + tvecZ * pvecZ) * invDet;
         if (u < 0.0f || u > 1.0f)
         {
           return false;
@@ -333,7 +333,7 @@ public class BestCandidateSampling
         float qvecX = tvecY * edge1Z - tvecZ * edge1Y;
         float qvecY = tvecZ * edge1X - tvecX * edge1Z;
         float qvecZ = tvecX * edge1Y - tvecY * edge1X;
-        float v = (x * qvecX + y * qvecY + z * qvecZ) * invDet;
+        float v     = (x * qvecX + y * qvecY + z * qvecZ) * invDet;
         if (v < 0.0f || u + v > 1.0f)
         {
           return false;
@@ -344,23 +344,23 @@ public class BestCandidateSampling
 
       private void split()
       {
-        float w0x = v1x + v2x;
-        float w0y = v1y + v2y;
-        float w0z = v1z + v2z;
+        float w0x  = v1x + v2x;
+        float w0y  = v1y + v2y;
+        float w0z  = v1z + v2z;
         float len0 = Math.invsqrt(w0x * w0x + w0y * w0y + w0z * w0z);
         w0x *= len0;
         w0y *= len0;
         w0z *= len0;
-        float w1x = v0x + v2x;
-        float w1y = v0y + v2y;
-        float w1z = v0z + v2z;
+        float w1x  = v0x + v2x;
+        float w1y  = v0y + v2y;
+        float w1z  = v0z + v2z;
         float len1 = Math.invsqrt(w1x * w1x + w1y * w1y + w1z * w1z);
         w1x *= len1;
         w1y *= len1;
         w1z *= len1;
-        float w2x = v0x + v1x;
-        float w2y = v0y + v1y;
-        float w2z = v0z + v1z;
+        float w2x  = v0x + v1x;
+        float w2y  = v0y + v1y;
+        float w2z  = v0z + v1z;
         float len2 = Math.invsqrt(w2x * w2x + w2y * w2y + w2z * w2z);
         w2x *= len2;
         w2y *= len2;
@@ -404,7 +404,7 @@ public class BestCandidateSampling
         {
           split();
           for (int i = 0; i < MAX_OBJECTS_PER_NODE; i++)
-            insertIntoChild((Vector3f) objects.get(i));
+               insertIntoChild((Vector3f) objects.get(i));
           objects = null;
           insertIntoChild(object);
         } else
@@ -483,7 +483,7 @@ public class BestCandidateSampling
         for (int i = 0; objects != null && i < objects.size(); i++)
         {
           Vector3f o = (Vector3f) objects.get(i);
-          float d = greatCircleDist(o.x, o.y, o.z, x, y, z);
+          float    d = greatCircleDist(o.x, o.y, o.z, x, y, z);
           if (d < nr)
           {
             nr = d;
@@ -510,19 +510,19 @@ public class BestCandidateSampling
     private static final int PXPY = 3;
 
     private float minX, minY, hs;
-    private ArrayList objects;
+    private ArrayList  objects;
     private QuadTree[] children;
 
     QuadTree(float minX, float minY, float size)
     {
       this.minX = minX;
       this.minY = minY;
-      this.hs = size * 0.5f;
+      this.hs   = size * 0.5f;
     }
 
     private void split()
     {
-      children = new QuadTree[4];
+      children       = new QuadTree[4];
       children[NXNY] = new QuadTree(minX, minY, hs);
       children[PXNY] = new QuadTree(minX + hs, minY, hs);
       children[NXPY] = new QuadTree(minX, minY + hs, hs);
@@ -545,7 +545,7 @@ public class BestCandidateSampling
       {
         split();
         for (int i = 0; i < objects.size(); i++)
-          insertIntoChild((Vector2f) objects.get(i));
+             insertIntoChild((Vector2f) objects.get(i));
         objects = null;
         insertIntoChild(object);
       } else
@@ -601,7 +601,7 @@ public class BestCandidateSampling
       for (int i = 0; objects != null && i < objects.size(); i++)
       {
         Vector2f o = (Vector2f) objects.get(i);
-        float d = o.distanceSquared(x, y);
+        float    d = o.distanceSquared(x, y);
         if (d <= lb2)
         {
           return lowerBound;
@@ -622,8 +622,8 @@ public class BestCandidateSampling
    */
   public static class Disk
   {
-    private int numSamples;
-    private int numCandidates = 60; // <- use a reasonable default
+    private int  numSamples;
+    private int  numCandidates = 60; // <- use a reasonable default
     private long seed;
 
     /**
@@ -707,8 +707,8 @@ public class BestCandidateSampling
      */
     public Disk generate(final FloatBuffer xys)
     {
-      final IntHolder i = new IntHolder();
-      final int pos = xys.position();
+      final IntHolder i   = new IntHolder();
+      final int       pos = xys.position();
       return generate(new Callback2d()
       {
         public void onNewSample(float x, float y)
@@ -732,7 +732,7 @@ public class BestCandidateSampling
     public Disk generate(Callback2d callback)
     {
       QuadTree qtree = new QuadTree(-1, -1, 2);
-      Random rnd = new Random(seed);
+      Random   rnd   = new Random(seed);
       for (int i = 0; i < numSamples; i++)
       {
         float bestX = 0, bestY = 0, bestDist = 0.0f;
@@ -748,8 +748,8 @@ public class BestCandidateSampling
           if (minDist > bestDist)
           {
             bestDist = minDist;
-            bestX = x;
-            bestY = y;
+            bestX    = x;
+            bestY    = y;
           }
         }
         callback.onNewSample(bestX, bestY);
@@ -766,8 +766,8 @@ public class BestCandidateSampling
    */
   public static class Quad
   {
-    private int numSamples;
-    private int numCandidates = 60; // <- use a reasonable default
+    private int  numSamples;
+    private int  numCandidates = 60; // <- use a reasonable default
     private long seed;
 
     /**
@@ -851,8 +851,8 @@ public class BestCandidateSampling
      */
     public Quad generate(final FloatBuffer xys)
     {
-      final IntHolder i = new IntHolder();
-      final int pos = xys.position();
+      final IntHolder i   = new IntHolder();
+      final int       pos = xys.position();
       return generate(new Callback2d()
       {
         public void onNewSample(float x, float y)
@@ -876,20 +876,20 @@ public class BestCandidateSampling
     public Quad generate(Callback2d callback)
     {
       QuadTree qtree = new QuadTree(-1, -1, 2);
-      Random rnd = new Random(seed);
+      Random   rnd   = new Random(seed);
       for (int i = 0; i < numSamples; i++)
       {
         float bestX = 0, bestY = 0, bestDist = 0.0f;
         for (int c = 0; c < numCandidates; c++)
         {
-          float x = rnd.nextFloat() * 2.0f - 1.0f;
-          float y = rnd.nextFloat() * 2.0f - 1.0f;
+          float x       = rnd.nextFloat() * 2.0f - 1.0f;
+          float y       = rnd.nextFloat() * 2.0f - 1.0f;
           float minDist = qtree.nearest(x, y, bestDist, Float.POSITIVE_INFINITY);
           if (minDist > bestDist)
           {
             bestDist = minDist;
-            bestX = x;
-            bestY = y;
+            bestX    = x;
+            bestY    = y;
           }
         }
         callback.onNewSample(bestX, bestY);
@@ -920,19 +920,19 @@ public class BestCandidateSampling
 
     private float minX, minY, minZ, hs;
     private ArrayList objects;
-    private Octree[] children;
+    private Octree[]  children;
 
     Octree(float minX, float minY, float minZ, float size)
     {
       this.minX = minX;
       this.minY = minY;
       this.minZ = minZ;
-      this.hs = size * 0.5f;
+      this.hs   = size * 0.5f;
     }
 
     private void split()
     {
-      children = new Octree[8];
+      children         = new Octree[8];
       children[NXNYNZ] = new Octree(minX, minY, minZ, hs);
       children[PXNYNZ] = new Octree(minX + hs, minY, minZ, hs);
       children[NXPYNZ] = new Octree(minX, minY + hs, minZ, hs);
@@ -959,7 +959,7 @@ public class BestCandidateSampling
       {
         split();
         for (int i = 0; i < objects.size(); i++)
-          insertIntoChild((Vector3f) objects.get(i));
+             insertIntoChild((Vector3f) objects.get(i));
         objects = null;
         insertIntoChild(object);
       } else
@@ -1032,7 +1032,7 @@ public class BestCandidateSampling
       for (int i = 0; objects != null && i < objects.size(); i++)
       {
         Vector3f o = (Vector3f) objects.get(i);
-        float d = o.distanceSquared(x, y, z);
+        float    d = o.distanceSquared(x, y, z);
         if (d <= lb2)
         {
           return lowerBound;
@@ -1053,8 +1053,8 @@ public class BestCandidateSampling
    */
   public static class Cube
   {
-    private int numSamples;
-    private int numCandidates = 60; // <- use a reasonable default
+    private int  numSamples;
+    private int  numCandidates = 60; // <- use a reasonable default
     private long seed;
 
     /**
@@ -1142,8 +1142,8 @@ public class BestCandidateSampling
      */
     public Cube generate(final FloatBuffer xyzs)
     {
-      final IntHolder i = new IntHolder();
-      final int pos = xyzs.position();
+      final IntHolder i   = new IntHolder();
+      final int       pos = xyzs.position();
       return generate(new Callback3d()
       {
         public void onNewSample(float x, float y, float z)
@@ -1168,22 +1168,22 @@ public class BestCandidateSampling
     public Cube generate(Callback3d callback)
     {
       Octree octree = new Octree(-1, -1, -1, 2);
-      Random rnd = new Random(seed);
+      Random rnd    = new Random(seed);
       for (int i = 0; i < numSamples; i++)
       {
         float bestX = 0, bestY = 0, bestZ = 0, bestDist = 0.0f;
         for (int c = 0; c < numCandidates; c++)
         {
-          float x = rnd.nextFloat() * 2.0f - 1.0f;
-          float y = rnd.nextFloat() * 2.0f - 1.0f;
-          float z = rnd.nextFloat() * 2.0f - 1.0f;
+          float x       = rnd.nextFloat() * 2.0f - 1.0f;
+          float y       = rnd.nextFloat() * 2.0f - 1.0f;
+          float z       = rnd.nextFloat() * 2.0f - 1.0f;
           float minDist = octree.nearest(x, y, z, bestDist, Float.POSITIVE_INFINITY);
           if (minDist > bestDist)
           {
             bestDist = minDist;
-            bestX = x;
-            bestY = y;
-            bestZ = z;
+            bestX    = x;
+            bestY    = y;
+            bestZ    = z;
           }
         }
         callback.onNewSample(bestX, bestY, bestZ);

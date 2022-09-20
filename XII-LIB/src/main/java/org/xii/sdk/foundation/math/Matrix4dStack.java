@@ -132,8 +132,8 @@ public class Matrix4dStack extends Matrix4d
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = super.hashCode();
+    final int prime  = 31;
+    int       result = super.hashCode();
     result = prime * result + curr;
     for (int i = 0; i < curr; i++)
     {
@@ -203,10 +203,10 @@ public class Matrix4dStack extends Matrix4d
 
   public Object clone() throws CloneNotSupportedException
   {
-    Matrix4dStack cloned = (Matrix4dStack) super.clone();
-    Matrix4d[] clonedMats = new Matrix4d[mats.length];
+    Matrix4dStack cloned     = (Matrix4dStack) super.clone();
+    Matrix4d[]    clonedMats = new Matrix4d[mats.length];
     for (int i = 0; i < mats.length; i++)
-      clonedMats[i] = (Matrix4d) mats[i].clone();
+         clonedMats[i] = (Matrix4d) mats[i].clone();
     cloned.mats = clonedMats;
     return cloned;
   }

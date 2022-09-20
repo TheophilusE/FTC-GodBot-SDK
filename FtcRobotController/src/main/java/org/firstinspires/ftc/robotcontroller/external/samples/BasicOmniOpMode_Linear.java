@@ -69,11 +69,11 @@ public class BasicOmniOpMode_Linear extends LinearOpMode
 {
 
   // Declare OpMode members for each of the 4 motors.
-  private ElapsedTime runtime = new ElapsedTime();
-  private DcMotor leftFrontDrive = null;
-  private DcMotor leftBackDrive = null;
-  private DcMotor rightFrontDrive = null;
-  private DcMotor rightBackDrive = null;
+  private ElapsedTime runtime         = new ElapsedTime();
+  private DcMotor     leftFrontDrive  = null;
+  private DcMotor     leftBackDrive   = null;
+  private DcMotor     rightFrontDrive = null;
+  private DcMotor     rightBackDrive  = null;
 
   @Override
   public void runOpMode()
@@ -81,10 +81,10 @@ public class BasicOmniOpMode_Linear extends LinearOpMode
 
     // Initialize the hardware variables. Note that the strings used here must correspond
     // to the names assigned during the robot configuration step on the DS or RC devices.
-    leftFrontDrive = hardwareMap.get(DcMotor.class, "left_front_drive");
-    leftBackDrive = hardwareMap.get(DcMotor.class, "left_back_drive");
+    leftFrontDrive  = hardwareMap.get(DcMotor.class, "left_front_drive");
+    leftBackDrive   = hardwareMap.get(DcMotor.class, "left_back_drive");
     rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
-    rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+    rightBackDrive  = hardwareMap.get(DcMotor.class, "right_back_drive");
 
     // ########################################################################################
     // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -114,16 +114,16 @@ public class BasicOmniOpMode_Linear extends LinearOpMode
       double max;
 
       // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-      double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+      double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
       double lateral = gamepad1.left_stick_x;
-      double yaw = gamepad1.right_stick_x;
+      double yaw     = gamepad1.right_stick_x;
 
       // Combine the joystick requests for each axis-motion to determine each wheel's power.
       // Set up a variable for each drive wheel to save the power level for telemetry.
-      double leftFrontPower = axial + lateral + yaw;
+      double leftFrontPower  = axial + lateral + yaw;
       double rightFrontPower = axial - lateral - yaw;
-      double leftBackPower = axial - lateral + yaw;
-      double rightBackPower = axial + lateral - yaw;
+      double leftBackPower   = axial - lateral + yaw;
+      double rightBackPower  = axial + lateral - yaw;
 
       // Normalize the values so no wheel power exceeds 100%
       // This ensures that the robot maintains the desired motion.

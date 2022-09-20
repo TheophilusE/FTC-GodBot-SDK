@@ -53,14 +53,14 @@ public class PoissonSampling
   {
 
     private final Vector2f[] grid;
-    private final float diskRadius;
-    private final float diskRadiusSquared;
-    private final float minDist;
-    private final float minDistSquared;
-    private final float cellSize;
-    private final int numCells;
-    private final Random rnd;
-    private final ArrayList processList;
+    private final float      diskRadius;
+    private final float      diskRadiusSquared;
+    private final float      minDist;
+    private final float      minDistSquared;
+    private final float      cellSize;
+    private final int        numCells;
+    private final Random     rnd;
+    private final ArrayList  processList;
 
     /**
      * Create a new instance of {@link Disk} which computes poisson-distributed samples on a disk with the given radius <code>diskRadius</code> and notifies the given
@@ -76,15 +76,15 @@ public class PoissonSampling
      */
     public Disk(long seed, float diskRadius, float minDist, int k, Callback2d callback)
     {
-      this.diskRadius = diskRadius;
+      this.diskRadius        = diskRadius;
       this.diskRadiusSquared = diskRadius * diskRadius;
-      this.minDist = minDist;
-      this.minDistSquared = minDist * minDist;
-      this.rnd = new Random(seed);
-      this.cellSize = minDist / (float) Math.sqrt(2.0);
-      this.numCells = (int) ((diskRadius * 2) / cellSize) + 1;
-      this.grid = new Vector2f[numCells * numCells];
-      this.processList = new ArrayList();
+      this.minDist           = minDist;
+      this.minDistSquared    = minDist * minDist;
+      this.rnd               = new Random(seed);
+      this.cellSize          = minDist / (float) Math.sqrt(2.0);
+      this.numCells          = (int) ((diskRadius * 2) / cellSize) + 1;
+      this.grid              = new Vector2f[numCells * numCells];
+      this.processList       = new ArrayList();
       compute(k, callback);
     }
 
@@ -102,13 +102,13 @@ public class PoissonSampling
       insert(initial);
       while (!processList.isEmpty())
       {
-        int i = rnd.nextInt(processList.size());
+        int      i      = rnd.nextInt(processList.size());
         Vector2f sample = (Vector2f) processList.get(i);
-        boolean found = false;
+        boolean  found  = false;
         search:
         for (int s = 0; s < k; s++)
         {
-          float angle = rnd.nextFloat() * (float) Math.PI2;
+          float angle  = rnd.nextFloat() * (float) Math.PI2;
           float radius = minDist * (rnd.nextFloat() + 1.0f);
           x = (float) (radius * Math.sin_roquen_9(angle + Math.PIHalf));
           y = (float) (radius * Math.sin_roquen_9(angle));

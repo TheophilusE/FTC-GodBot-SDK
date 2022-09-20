@@ -910,8 +910,8 @@ public class Vector2i implements Externalizable, Cloneable, Vector2ic
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
+    final int prime  = 31;
+    int       result = 1;
     result = prime * result + x;
     result = prime * result + y;
     return result;

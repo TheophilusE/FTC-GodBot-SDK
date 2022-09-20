@@ -133,8 +133,8 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = super.hashCode();
+    final int prime  = 31;
+    int       result = super.hashCode();
     result = prime * result + curr;
     for (int i = 0; i < curr; i++)
     {
@@ -204,10 +204,10 @@ public class Matrix3x2dStack extends Matrix3x2d implements Cloneable
 
   public Object clone() throws CloneNotSupportedException
   {
-    Matrix3x2dStack cloned = (Matrix3x2dStack) super.clone();
-    Matrix3x2d[] clonedMats = new Matrix3x2d[mats.length];
+    Matrix3x2dStack cloned     = (Matrix3x2dStack) super.clone();
+    Matrix3x2d[]    clonedMats = new Matrix3x2d[mats.length];
     for (int i = 0; i < mats.length; i++)
-      clonedMats[i] = (Matrix3x2d) mats[i].clone();
+         clonedMats[i] = (Matrix3x2d) mats[i].clone();
     cloned.mats = clonedMats;
     return cloned;
   }

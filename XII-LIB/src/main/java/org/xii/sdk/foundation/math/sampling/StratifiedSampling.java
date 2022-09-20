@@ -82,7 +82,7 @@ public class StratifiedSampling
   public void generateCentered(int n, float centering, Callback2d callback)
   {
     float start = centering * 0.5f;
-    float end = 1.0f - centering;
+    float end   = 1.0f - centering;
     for (int y = 0; y < n; y++)
     {
       for (int x = 0; x < n; x++)

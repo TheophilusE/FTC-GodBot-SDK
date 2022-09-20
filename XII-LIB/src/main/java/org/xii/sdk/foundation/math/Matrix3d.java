@@ -633,32 +633,32 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d set(AxisAngle4f axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
-    double angle = axisAngle.angle;
+    double x         = axisAngle.x;
+    double y         = axisAngle.y;
+    double z         = axisAngle.z;
+    double angle     = axisAngle.angle;
     double invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0 - c;
     m00 = c + x * x * omc;
     m11 = c + y * y * omc;
     m22 = c + z * z * omc;
     double tmp1 = x * y * omc;
     double tmp2 = z * s;
-    m10 = tmp1 - tmp2;
-    m01 = tmp1 + tmp2;
+    m10  = tmp1 - tmp2;
+    m01  = tmp1 + tmp2;
     tmp1 = x * z * omc;
     tmp2 = y * s;
-    m20 = tmp1 + tmp2;
-    m02 = tmp1 - tmp2;
+    m20  = tmp1 + tmp2;
+    m02  = tmp1 - tmp2;
     tmp1 = y * z * omc;
     tmp2 = x * s;
-    m21 = tmp1 - tmp2;
-    m12 = tmp1 + tmp2;
+    m21  = tmp1 - tmp2;
+    m12  = tmp1 + tmp2;
     return this;
   }
 
@@ -670,32 +670,32 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d set(AxisAngle4d axisAngle)
   {
-    double x = axisAngle.x;
-    double y = axisAngle.y;
-    double z = axisAngle.z;
-    double angle = axisAngle.angle;
+    double x         = axisAngle.x;
+    double y         = axisAngle.y;
+    double z         = axisAngle.z;
+    double angle     = axisAngle.angle;
     double invLength = Math.invsqrt(x * x + y * y + z * z);
     x *= invLength;
     y *= invLength;
     z *= invLength;
-    double s = Math.sin(angle);
-    double c = Math.cosFromSin(s, angle);
+    double s   = Math.sin(angle);
+    double c   = Math.cosFromSin(s, angle);
     double omc = 1.0 - c;
     m00 = c + x * x * omc;
     m11 = c + y * y * omc;
     m22 = c + z * z * omc;
     double tmp1 = x * y * omc;
     double tmp2 = z * s;
-    m10 = tmp1 - tmp2;
-    m01 = tmp1 + tmp2;
+    m10  = tmp1 - tmp2;
+    m01  = tmp1 + tmp2;
     tmp1 = x * z * omc;
     tmp2 = y * s;
-    m20 = tmp1 + tmp2;
-    m02 = tmp1 - tmp2;
+    m20  = tmp1 + tmp2;
+    m02  = tmp1 - tmp2;
     tmp1 = y * z * omc;
     tmp2 = x * s;
-    m21 = tmp1 - tmp2;
-    m12 = tmp1 + tmp2;
+    m21  = tmp1 - tmp2;
+    m12  = tmp1 + tmp2;
     return this;
   }
 
@@ -939,8 +939,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public double determinant()
   {
     return (m00 * m11 - m01 * m10) * m22
-        + (m02 * m10 - m00 * m12) * m21
-        + (m01 * m12 - m02 * m11) * m20;
+           + (m02 * m10 - m00 * m12) * m21
+           + (m01 * m12 - m02 * m11) * m20;
   }
 
   /**
@@ -955,11 +955,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d invert(Matrix3d dest)
   {
-    double a = Math.fma(m00, m11, -m01 * m10);
-    double b = Math.fma(m02, m10, -m00 * m12);
-    double c = Math.fma(m01, m12, -m02 * m11);
-    double d = Math.fma(a, m22, Math.fma(b, m21, c * m20));
-    double s = 1.0 / d;
+    double a    = Math.fma(m00, m11, -m01 * m10);
+    double b    = Math.fma(m02, m10, -m00 * m12);
+    double c    = Math.fma(m01, m12, -m02 * m11);
+    double d    = Math.fma(a, m22, Math.fma(b, m21, c * m20));
+    double s    = 1.0 / d;
     double nm00 = Math.fma(m11, m22, -m21 * m12) * s;
     double nm01 = Math.fma(m21, m02, -m01 * m22) * s;
     double nm02 = c * s;
@@ -994,8 +994,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public Matrix3d transpose(Matrix3d dest)
   {
     dest.set(m00, m10, m20,
-        m01, m11, m21,
-        m02, m12, m22);
+             m01, m11, m21,
+             m02, m12, m22);
     return dest;
   }
 
@@ -1008,9 +1008,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public String toString()
   {
-    String str = toString(Options.NUMBER_FORMAT);
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    String       str    = toString(Options.NUMBER_FORMAT);
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -1040,8 +1040,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public String toString(NumberFormat formatter)
   {
     return Runtime.format(m00, formatter) + " " + Runtime.format(m10, formatter) + " " + Runtime.format(m20, formatter) + "\n"
-        + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
-        + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
+           + Runtime.format(m01, formatter) + " " + Runtime.format(m11, formatter) + " " + Runtime.format(m21, formatter) + "\n"
+           + Runtime.format(m02, formatter) + " " + Runtime.format(m12, formatter) + " " + Runtime.format(m22, formatter) + "\n";
   }
 
   /**
@@ -1694,8 +1694,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   {
     double sin = Math.sin(angle);
     double cos = Math.cosFromSin(sin, angle);
-    double C = 1.0 - cos;
-    double xy = x * y, xz = x * z, yz = y * z;
+    double C   = 1.0 - cos;
+    double xy  = x * y, xz = x * z, yz = y * z;
     m00 = cos + x * x * C;
     m10 = xy * C - z * sin;
     m20 = xz * C + y * sin;
@@ -1812,12 +1812,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotationXYZ(double angleX, double angleY, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinX = -sinX;
     double m_sinY = -sinY;
     double m_sinZ = -sinZ;
@@ -1861,12 +1861,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotationZYX(double angleZ, double angleY, double angleX)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinZ = -sinZ;
     double m_sinY = -sinY;
     double m_sinX = -sinX;
@@ -1910,12 +1910,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotationYXZ(double angleY, double angleX, double angleZ)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinY = -sinY;
     double m_sinX = -sinX;
     double m_sinZ = -sinZ;
@@ -2052,8 +2052,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public Vector3d transform(double x, double y, double z, Vector3d dest)
   {
     return dest.set(Math.fma(m00, x, Math.fma(m10, y, m20 * z)),
-        Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
-        Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
+                    Math.fma(m01, x, Math.fma(m11, y, m21 * z)),
+                    Math.fma(m02, x, Math.fma(m12, y, m22 * z)));
   }
 
   public Vector3d transformTranspose(Vector3d v)
@@ -2069,8 +2069,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public Vector3d transformTranspose(double x, double y, double z, Vector3d dest)
   {
     return dest.set(Math.fma(m00, x, Math.fma(m01, y, m02 * z)),
-        Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
-        Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
+                    Math.fma(m10, x, Math.fma(m11, y, m12 * z)),
+                    Math.fma(m20, x, Math.fma(m21, y, m22 * z)));
   }
 
   public void writeExternal(ObjectOutput out) throws IOException
@@ -2276,12 +2276,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d rotateXYZ(double angleX, double angleY, double angleZ, Matrix3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinX = -sinX;
     double m_sinY = -sinY;
     double m_sinZ = -sinZ;
@@ -2337,12 +2337,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d rotateZYX(double angleZ, double angleY, double angleX, Matrix3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinZ = -sinZ;
     double m_sinY = -sinY;
     double m_sinX = -sinX;
@@ -2421,12 +2421,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d rotateYXZ(double angleY, double angleX, double angleZ, Matrix3d dest)
   {
-    double sinX = Math.sin(angleX);
-    double cosX = Math.cosFromSin(sinX, angleX);
-    double sinY = Math.sin(angleY);
-    double cosY = Math.cosFromSin(sinY, angleY);
-    double sinZ = Math.sin(angleZ);
-    double cosZ = Math.cosFromSin(sinZ, angleZ);
+    double sinX   = Math.sin(angleX);
+    double cosX   = Math.cosFromSin(sinX, angleX);
+    double sinY   = Math.sin(angleY);
+    double cosY   = Math.cosFromSin(sinY, angleY);
+    double sinZ   = Math.sin(angleZ);
+    double cosZ   = Math.cosFromSin(sinZ, angleZ);
     double m_sinY = -sinY;
     double m_sinX = -sinX;
     double m_sinZ = -sinZ;
@@ -2491,9 +2491,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
     // rotation matrix elements:
     // m30, m31, m32, m03, m13, m23 = 0
-    double xx = x * x, xy = x * y, xz = x * z;
-    double yy = y * y, yz = y * z;
-    double zz = z * z;
+    double xx   = x * x, xy = x * y, xz = x * z;
+    double yy   = y * y, yz = y * z;
+    double zz   = z * z;
     double rm00 = xx * C + c;
     double rm01 = xy * C + z * s;
     double rm02 = xz * C - y * s;
@@ -2555,12 +2555,12 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocal(double ang, double x, double y, double z, Matrix3d dest)
   {
-    double s = Math.sin(ang);
-    double c = Math.cosFromSin(s, ang);
-    double C = 1.0 - c;
-    double xx = x * x, xy = x * y, xz = x * z;
-    double yy = y * y, yz = y * z;
-    double zz = z * z;
+    double s    = Math.sin(ang);
+    double c    = Math.cosFromSin(s, ang);
+    double C    = 1.0 - c;
+    double xx   = x * x, xy = x * y, xz = x * z;
+    double yy   = y * y, yz = y * z;
+    double zz   = z * z;
     double lm00 = xx * C + c;
     double lm01 = xy * C + z * s;
     double lm02 = xz * C - y * s;
@@ -2648,8 +2648,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocalX(double ang, Matrix3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm01 = cos * m01 - sin * m02;
     double nm02 = sin * m01 + cos * m02;
     double nm11 = cos * m11 - sin * m12;
@@ -2719,8 +2719,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocalY(double ang, Matrix3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm00 = cos * m00 + sin * m02;
     double nm02 = -sin * m00 + cos * m02;
     double nm10 = cos * m10 + sin * m12;
@@ -2790,8 +2790,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocalZ(double ang, Matrix3d dest)
   {
-    double sin = Math.sin(ang);
-    double cos = Math.cosFromSin(sin, ang);
+    double sin  = Math.sin(ang);
+    double cos  = Math.cosFromSin(sin, ang);
     double nm00 = cos * m00 - sin * m01;
     double nm01 = sin * m00 + cos * m01;
     double nm10 = cos * m10 - sin * m11;
@@ -2861,11 +2861,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocal(Quaterniondc quat, Matrix3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double lm00 = w2 + x2 - z2 - y2;
     double lm01 = dxy + dzw;
     double lm02 = dxz - dyw;
@@ -2947,11 +2947,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotateLocal(Quaternionfc quat, Matrix3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double lm00 = w2 + x2 - z2 - y2;
     double lm01 = dxy + dzw;
     double lm02 = dxz - dyw;
@@ -3059,11 +3059,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotate(Quaterniondc quat, Matrix3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = dxy + dzw;
     double rm02 = dxz - dyw;
@@ -3142,11 +3142,11 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d rotate(Quaternionfc quat, Matrix3d dest)
   {
-    double w2 = quat.w() * quat.w(), x2 = quat.x() * quat.x();
-    double y2 = quat.y() * quat.y(), z2 = quat.z() * quat.z();
-    double zw = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
-    double xz = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
-    double yz = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
+    double w2   = quat.w() * quat.w(), x2 = quat.x() * quat.x();
+    double y2   = quat.y() * quat.y(), z2 = quat.z() * quat.z();
+    double zw   = quat.z() * quat.w(), dzw = zw + zw, xy = quat.x() * quat.y(), dxy = xy + xy;
+    double xz   = quat.x() * quat.z(), dxz = xz + xz, yw = quat.y() * quat.w(), dyw = yw + yw;
+    double yz   = quat.y() * quat.z(), dyz = yz + yz, xw = quat.x() * quat.w(), dxw = xw + xw;
     double rm00 = w2 + x2 - z2 - y2;
     double rm01 = dxy + dzw;
     double rm02 = dxz - dyw;
@@ -3606,8 +3606,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
     double m00m12 = m00 * m12;
     double m01m12 = m01 * m12;
     double m02m11 = m02 * m11;
-    double det = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
-    double s = 1.0 / det;
+    double det    = (m00m11 - m01m10) * m22 + (m02m10 - m00m12) * m21 + (m01m12 - m02m11) * m20;
+    double s      = 1.0 / det;
     /* Invert and transpose in one go */
     double nm00 = (m11 * m22 - m21 * m12) * s;
     double nm01 = (m20 * m12 - m10 * m22) * s;
@@ -3953,26 +3953,26 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(m00);
+    final int prime  = 31;
+    int       result = 1;
+    long      temp;
+    temp   = Double.doubleToLongBits(m00);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m01);
+    temp   = Double.doubleToLongBits(m01);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m02);
+    temp   = Double.doubleToLongBits(m02);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m10);
+    temp   = Double.doubleToLongBits(m10);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m11);
+    temp   = Double.doubleToLongBits(m11);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m12);
+    temp   = Double.doubleToLongBits(m12);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m20);
+    temp   = Double.doubleToLongBits(m20);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m21);
+    temp   = Double.doubleToLongBits(m21);
     result = prime * result + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(m22);
+    temp   = Double.doubleToLongBits(m22);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
   }
@@ -4093,32 +4093,32 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public Matrix3d swap(Matrix3d other)
   {
     double tmp;
-    tmp = m00;
-    m00 = other.m00;
+    tmp       = m00;
+    m00       = other.m00;
     other.m00 = tmp;
-    tmp = m01;
-    m01 = other.m01;
+    tmp       = m01;
+    m01       = other.m01;
     other.m01 = tmp;
-    tmp = m02;
-    m02 = other.m02;
+    tmp       = m02;
+    m02       = other.m02;
     other.m02 = tmp;
-    tmp = m10;
-    m10 = other.m10;
+    tmp       = m10;
+    m10       = other.m10;
     other.m10 = tmp;
-    tmp = m11;
-    m11 = other.m11;
+    tmp       = m11;
+    m11       = other.m11;
     other.m11 = tmp;
-    tmp = m12;
-    m12 = other.m12;
+    tmp       = m12;
+    m12       = other.m12;
     other.m12 = tmp;
-    tmp = m20;
-    m20 = other.m20;
+    tmp       = m20;
+    m20       = other.m20;
     other.m20 = tmp;
-    tmp = m21;
-    m21 = other.m21;
+    tmp       = m21;
+    m21       = other.m21;
     other.m21 = tmp;
-    tmp = m22;
-    m22 = other.m22;
+    tmp       = m22;
+    m22       = other.m22;
     other.m22 = tmp;
     return this;
   }
@@ -4366,9 +4366,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   {
     // Normalize direction
     double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    double ndirX = dirX * invDirLength;
-    double ndirY = dirY * invDirLength;
-    double ndirZ = dirZ * invDirLength;
+    double ndirX        = dirX * invDirLength;
+    double ndirY        = dirY * invDirLength;
+    double ndirZ        = dirZ * invDirLength;
     // left = up x direction
     double leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -4453,9 +4453,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   {
     // Normalize direction
     double invDirLength = Math.invsqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-    double ndirX = dirX * invDirLength;
-    double ndirY = dirY * invDirLength;
-    double ndirZ = dirZ * invDirLength;
+    double ndirX        = dirX * invDirLength;
+    double ndirY        = dirY * invDirLength;
+    double ndirZ        = dirZ * invDirLength;
     // left = up x direction
     double leftX, leftY, leftZ;
     leftX = upY * ndirZ - upZ * ndirY;
@@ -4575,7 +4575,7 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d reflect(double nx, double ny, double nz, Matrix3d dest)
   {
-    double da = nx + nx, db = ny + ny, dc = nz + nz;
+    double da   = nx + nx, db = ny + ny, dc = nz + nz;
     double rm00 = 1.0 - da * nx;
     double rm01 = -da * ny;
     double rm02 = -da * nz;
@@ -4662,9 +4662,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
 
   public Matrix3d reflect(Quaterniondc orientation, Matrix3d dest)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
     double normalX = (double) (orientation.x() * num3 + orientation.w() * num2);
     double normalY = (double) (orientation.y() * num3 - orientation.w() * num1);
     double normalZ = (double) (1.0 - (orientation.x() * num1 + orientation.y() * num2));
@@ -4725,9 +4725,9 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
    */
   public Matrix3d reflection(Quaterniondc orientation)
   {
-    double num1 = orientation.x() + orientation.x();
-    double num2 = orientation.y() + orientation.y();
-    double num3 = orientation.z() + orientation.z();
+    double num1    = orientation.x() + orientation.x();
+    double num2    = orientation.y() + orientation.y();
+    double num3    = orientation.z() + orientation.z();
     double normalX = orientation.x() * num3 + orientation.w() * num2;
     double normalY = orientation.y() * num3 - orientation.w() * num1;
     double normalZ = 1.0 - (orientation.x() * num1 + orientation.y() * num2);
@@ -4737,8 +4737,8 @@ public class Matrix3d implements Externalizable, Cloneable, Matrix3dc
   public boolean isFinite()
   {
     return Math.isFinite(m00) && Math.isFinite(m01) && Math.isFinite(m02) &&
-        Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
-        Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
+           Math.isFinite(m10) && Math.isFinite(m11) && Math.isFinite(m12) &&
+           Math.isFinite(m20) && Math.isFinite(m21) && Math.isFinite(m22);
   }
 
   public double quadraticFormProduct(double x, double y, double z)

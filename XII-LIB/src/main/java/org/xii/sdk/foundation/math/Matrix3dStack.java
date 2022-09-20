@@ -133,8 +133,8 @@ public class Matrix3dStack extends Matrix3d
 
   public int hashCode()
   {
-    final int prime = 31;
-    int result = super.hashCode();
+    final int prime  = 31;
+    int       result = super.hashCode();
     result = prime * result + curr;
     for (int i = 0; i < curr; i++)
     {
@@ -204,10 +204,10 @@ public class Matrix3dStack extends Matrix3d
 
   public Object clone() throws CloneNotSupportedException
   {
-    Matrix3dStack cloned = (Matrix3dStack) super.clone();
-    Matrix3d[] clonedMats = new Matrix3d[mats.length];
+    Matrix3dStack cloned     = (Matrix3dStack) super.clone();
+    Matrix3d[]    clonedMats = new Matrix3d[mats.length];
     for (int i = 0; i < mats.length; i++)
-      clonedMats[i] = (Matrix3d) mats[i].clone();
+         clonedMats[i] = (Matrix3d) mats[i].clone();
     cloned.mats = clonedMats;
     return cloned;
   }

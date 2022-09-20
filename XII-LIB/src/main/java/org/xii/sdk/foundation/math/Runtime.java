@@ -36,12 +36,12 @@ public final class Runtime
 {
 
   //#ifndef __GWT__
-  public static final boolean HAS_floatToRawIntBits = hasFloatToRawIntBits();
+  public static final boolean HAS_floatToRawIntBits   = hasFloatToRawIntBits();
   public static final boolean HAS_doubleToRawLongBits = hasDoubleToRawLongBits();
-  public static final boolean HAS_Long_rotateLeft = hasLongRotateLeft();
+  public static final boolean HAS_Long_rotateLeft     = hasLongRotateLeft();
   //#endif
 //#ifdef __HAS_MATH_FMA__
-  public static final boolean HAS_Math_fma = Options.USE_MATH_FMA && hasMathFma();
+  public static final boolean HAS_Math_fma            = Options.USE_MATH_FMA && hasMathFma();
 
   private Runtime()
   {
@@ -146,8 +146,8 @@ public final class Runtime
 
   public static String formatNumbers(String str)
   {
-    StringBuffer res = new StringBuffer();
-    int eIndex = Integer.MIN_VALUE;
+    StringBuffer res    = new StringBuffer();
+    int          eIndex = Integer.MIN_VALUE;
     for (int i = 0; i < str.length(); i++)
     {
       char c = str.charAt(i);
@@ -182,8 +182,8 @@ public final class Runtime
 
   private static String padLeft(NumberFormat format, String str)
   {
-    int len = format.format(0.0).length();
-    StringBuffer sb = new StringBuffer();
+    int          len = format.format(0.0).length();
+    StringBuffer sb  = new StringBuffer();
     for (int i = 0; i < len - str.length() + 1; i++)
     {
       sb.append(" ");

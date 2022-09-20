@@ -71,7 +71,7 @@ public class Convolution
       throw new IllegalArgumentException("dest must have at least " + (rows * cols) + " remaining values");
     }
     float sum = 0.0f;
-    int pos = dest.position();
+    int   pos = dest.position();
     for (int i = 0, y = -(rows - 1) / 2; y <= (rows - 1) / 2; y++)
     {
       for (int x = -(cols - 1) / 2; x <= (cols - 1) / 2; x++, i++)
@@ -122,7 +122,7 @@ public class Convolution
       {
         float k = (float) Math.exp(-(y * y + x * x) / (2.0 * sigma * sigma));
         dest[i] = k;
-        sum += k;
+                  sum += k;
       }
     }
     for (int i = 0; i < rows * cols; i++)

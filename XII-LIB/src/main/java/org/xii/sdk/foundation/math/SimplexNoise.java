@@ -39,46 +39,46 @@ public class SimplexNoise
   // Use a three-component vector here to save memory. (instead of using 4-component 'Grad' class)
   // And as the original author mentioned on the 'Grad' class, using a class to store the gradient components
   // is indeed faster compared to using a simple int[] array...
-  private static final Vector3b[] grad3 = {new Vector3b(1, 1, 0), new Vector3b(-1, 1, 0), new Vector3b(1, -1, 0), new Vector3b(-1, -1, 0),
-      new Vector3b(1, 0, 1), new Vector3b(-1, 0, 1), new Vector3b(1, 0, -1), new Vector3b(-1, 0, -1), new Vector3b(0, 1, 1), new Vector3b(0, -1, 1),
-      new Vector3b(0, 1, -1), new Vector3b(0, -1, -1)};
+  private static final Vector3b[] grad3     = {new Vector3b(1, 1, 0), new Vector3b(-1, 1, 0), new Vector3b(1, -1, 0), new Vector3b(-1, -1, 0),
+                                               new Vector3b(1, 0, 1), new Vector3b(-1, 0, 1), new Vector3b(1, 0, -1), new Vector3b(-1, 0, -1), new Vector3b(0, 1, 1), new Vector3b(0, -1, 1),
+                                               new Vector3b(0, 1, -1), new Vector3b(0, -1, -1)};
   // Kai Burjack:
   // As the original author mentioned on the 'Grad' class, using a class to store the gradient components
   // is indeed faster compared to using a simple int[] array...
-  private static final Vector4b[] grad4 = {new Vector4b(0, 1, 1, 1), new Vector4b(0, 1, 1, -1), new Vector4b(0, 1, -1, 1), new Vector4b(0, 1, -1, -1),
-      new Vector4b(0, -1, 1, 1), new Vector4b(0, -1, 1, -1), new Vector4b(0, -1, -1, 1), new Vector4b(0, -1, -1, -1), new Vector4b(1, 0, 1, 1),
-      new Vector4b(1, 0, 1, -1), new Vector4b(1, 0, -1, 1), new Vector4b(1, 0, -1, -1), new Vector4b(-1, 0, 1, 1), new Vector4b(-1, 0, 1, -1),
-      new Vector4b(-1, 0, -1, 1), new Vector4b(-1, 0, -1, -1), new Vector4b(1, 1, 0, 1), new Vector4b(1, 1, 0, -1), new Vector4b(1, -1, 0, 1),
-      new Vector4b(1, -1, 0, -1), new Vector4b(-1, 1, 0, 1), new Vector4b(-1, 1, 0, -1), new Vector4b(-1, -1, 0, 1), new Vector4b(-1, -1, 0, -1),
-      new Vector4b(1, 1, 1, 0), new Vector4b(1, 1, -1, 0), new Vector4b(1, -1, 1, 0), new Vector4b(1, -1, -1, 0), new Vector4b(-1, 1, 1, 0),
-      new Vector4b(-1, 1, -1, 0), new Vector4b(-1, -1, 1, 0), new Vector4b(-1, -1, -1, 0)};
+  private static final Vector4b[] grad4     = {new Vector4b(0, 1, 1, 1), new Vector4b(0, 1, 1, -1), new Vector4b(0, 1, -1, 1), new Vector4b(0, 1, -1, -1),
+                                               new Vector4b(0, -1, 1, 1), new Vector4b(0, -1, 1, -1), new Vector4b(0, -1, -1, 1), new Vector4b(0, -1, -1, -1), new Vector4b(1, 0, 1, 1),
+                                               new Vector4b(1, 0, 1, -1), new Vector4b(1, 0, -1, 1), new Vector4b(1, 0, -1, -1), new Vector4b(-1, 0, 1, 1), new Vector4b(-1, 0, 1, -1),
+                                               new Vector4b(-1, 0, -1, 1), new Vector4b(-1, 0, -1, -1), new Vector4b(1, 1, 0, 1), new Vector4b(1, 1, 0, -1), new Vector4b(1, -1, 0, 1),
+                                               new Vector4b(1, -1, 0, -1), new Vector4b(-1, 1, 0, 1), new Vector4b(-1, 1, 0, -1), new Vector4b(-1, -1, 0, 1), new Vector4b(-1, -1, 0, -1),
+                                               new Vector4b(1, 1, 1, 0), new Vector4b(1, 1, -1, 0), new Vector4b(1, -1, 1, 0), new Vector4b(1, -1, -1, 0), new Vector4b(-1, 1, 1, 0),
+                                               new Vector4b(-1, 1, -1, 0), new Vector4b(-1, -1, 1, 0), new Vector4b(-1, -1, -1, 0)};
   // Kai Burjack:
   // Use a byte[] instead of a short[] to save memory
-  private static final byte[] p = {-105, -96, -119, 91, 90, 15, -125, 13, -55, 95, 96, 53, -62, -23, 7, -31, -116, 36, 103, 30, 69, -114, 8, 99, 37, -16,
-      21, 10, 23, -66, 6, -108, -9, 120, -22, 75, 0, 26, -59, 62, 94, -4, -37, -53, 117, 35, 11, 32, 57, -79, 33, 88, -19, -107, 56, 87, -82, 20, 125,
-      -120, -85, -88, 68, -81, 74, -91, 71, -122, -117, 48, 27, -90, 77, -110, -98, -25, 83, 111, -27, 122, 60, -45, -123, -26, -36, 105, 92, 41, 55, 46,
-      -11, 40, -12, 102, -113, 54, 65, 25, 63, -95, 1, -40, 80, 73, -47, 76, -124, -69, -48, 89, 18, -87, -56, -60, -121, -126, 116, -68, -97, 86, -92,
-      100, 109, -58, -83, -70, 3, 64, 52, -39, -30, -6, 124, 123, 5, -54, 38, -109, 118, 126, -1, 82, 85, -44, -49, -50, 59, -29, 47, 16, 58, 17, -74,
-      -67, 28, 42, -33, -73, -86, -43, 119, -8, -104, 2, 44, -102, -93, 70, -35, -103, 101, -101, -89, 43, -84, 9, -127, 22, 39, -3, 19, 98, 108, 110,
-      79, 113, -32, -24, -78, -71, 112, 104, -38, -10, 97, -28, -5, 34, -14, -63, -18, -46, -112, 12, -65, -77, -94, -15, 81, 51, -111, -21, -7, 14, -17,
-      107, 49, -64, -42, 31, -75, -57, 106, -99, -72, 84, -52, -80, 115, 121, 50, 45, 127, 4, -106, -2, -118, -20, -51, 93, -34, 114, 67, 29, 24, 72,
-      -13, -115, -128, -61, 78, 66, -41, 61, -100, -76};
+  private static final byte[]     p         = {-105, -96, -119, 91, 90, 15, -125, 13, -55, 95, 96, 53, -62, -23, 7, -31, -116, 36, 103, 30, 69, -114, 8, 99, 37, -16,
+                                               21, 10, 23, -66, 6, -108, -9, 120, -22, 75, 0, 26, -59, 62, 94, -4, -37, -53, 117, 35, 11, 32, 57, -79, 33, 88, -19, -107, 56, 87, -82, 20, 125,
+                                               -120, -85, -88, 68, -81, 74, -91, 71, -122, -117, 48, 27, -90, 77, -110, -98, -25, 83, 111, -27, 122, 60, -45, -123, -26, -36, 105, 92, 41, 55, 46,
+                                               -11, 40, -12, 102, -113, 54, 65, 25, 63, -95, 1, -40, 80, 73, -47, 76, -124, -69, -48, 89, 18, -87, -56, -60, -121, -126, 116, -68, -97, 86, -92,
+                                               100, 109, -58, -83, -70, 3, 64, 52, -39, -30, -6, 124, 123, 5, -54, 38, -109, 118, 126, -1, 82, 85, -44, -49, -50, 59, -29, 47, 16, 58, 17, -74,
+                                               -67, 28, 42, -33, -73, -86, -43, 119, -8, -104, 2, 44, -102, -93, 70, -35, -103, 101, -101, -89, 43, -84, 9, -127, 22, 39, -3, 19, 98, 108, 110,
+                                               79, 113, -32, -24, -78, -71, 112, 104, -38, -10, 97, -28, -5, 34, -14, -63, -18, -46, -112, 12, -65, -77, -94, -15, 81, 51, -111, -21, -7, 14, -17,
+                                               107, 49, -64, -42, 31, -75, -57, 106, -99, -72, 84, -52, -80, 115, 121, 50, 45, 127, 4, -106, -2, -118, -20, -51, 93, -34, 114, 67, 29, 24, 72,
+                                               -13, -115, -128, -61, 78, 66, -41, 61, -100, -76};
   // To remove the need for index wrapping, float the permutation table length
-  private static final byte[] perm = new byte[512];
-  private static final byte[] permMod12 = new byte[512];
+  private static final byte[]     perm      = new byte[512];
+  private static final byte[]     permMod12 = new byte[512];
   // Skewing and unskewing factors for 2, 3, and 4 dimensions
-  private static final float F2 = 0.3660254037844386f; // <- (float) (0.5f * (Math.sqrt(3.0f) - 1.0f));
-  private static final float G2 = 0.21132486540518713f; // <- (float) ((3.0f - Math.sqrt(3.0f)) / 6.0f);
-  private static final float F3 = 1.0f / 3.0f;
-  private static final float G3 = 1.0f / 6.0f;
-  private static final float F4 = 0.30901699437494745f; // <- (float) ((Math.sqrt(5.0f) - 1.0f) / 4.0f);
-  private static final float G4 = 0.1381966011250105f; // <- (float) ((5.0f - Math.sqrt(5.0f)) / 20.0f);
+  private static final float      F2        = 0.3660254037844386f; // <- (float) (0.5f * (Math.sqrt(3.0f) - 1.0f));
+  private static final float      G2        = 0.21132486540518713f; // <- (float) ((3.0f - Math.sqrt(3.0f)) / 6.0f);
+  private static final float      F3        = 1.0f / 3.0f;
+  private static final float      G3        = 1.0f / 6.0f;
+  private static final float      F4        = 0.30901699437494745f; // <- (float) ((Math.sqrt(5.0f) - 1.0f) / 4.0f);
+  private static final float      G4        = 0.1381966011250105f; // <- (float) ((5.0f - Math.sqrt(5.0f)) / 20.0f);
 
   static
   {
     for (int i = 0; i < 512; i++)
     {
-      perm[i] = p[i & 255];
+      perm[i]      = p[i & 255];
       permMod12[i] = (byte) ((perm[i] & 0xFF) % 12);
     }
   }
@@ -118,10 +118,10 @@ public class SimplexNoise
   {
     float n0, n1, n2; // Noise contributions from the three corners
     // Skew the input space to determine which simplex cell we're in
-    float s = (x + y) * F2; // Hairy factor for 2D
-    int i = fastfloor(x + s);
-    int j = fastfloor(y + s);
-    float t = (i + j) * G2;
+    float s  = (x + y) * F2; // Hairy factor for 2D
+    int   i  = fastfloor(x + s);
+    int   j  = fastfloor(y + s);
+    float t  = (i + j) * G2;
     float X0 = i - t; // Unskew the cell origin back to (x,y) space
     float Y0 = j - t;
     float x0 = x - X0; // The x,y distances from the cell origin
@@ -147,8 +147,8 @@ public class SimplexNoise
     float x2 = x0 - 1.0f + 2.0f * G2; // Offsets for last corner in (x,y) unskewed coords
     float y2 = y0 - 1.0f + 2.0f * G2;
     // Work out the hashed gradient indices of the three simplex corners
-    int ii = i & 255;
-    int jj = j & 255;
+    int ii  = i & 255;
+    int jj  = j & 255;
     int gi0 = permMod12[ii + perm[jj] & 0xFF] & 0xFF;
     int gi1 = permMod12[ii + i1 + perm[jj + j1] & 0xFF] & 0xFF;
     int gi2 = permMod12[ii + 1 + perm[jj + 1] & 0xFF] & 0xFF;
@@ -199,11 +199,11 @@ public class SimplexNoise
   {
     float n0, n1, n2, n3; // Noise contributions from the four corners
     // Skew the input space to determine which simplex cell we're in
-    float s = (x + y + z) * F3; // Very nice and simple skew factor for 3D
-    int i = fastfloor(x + s);
-    int j = fastfloor(y + s);
-    int k = fastfloor(z + s);
-    float t = (i + j + k) * G3;
+    float s  = (x + y + z) * F3; // Very nice and simple skew factor for 3D
+    int   i  = fastfloor(x + s);
+    int   j  = fastfloor(y + s);
+    int   k  = fastfloor(z + s);
+    float t  = (i + j + k) * G3;
     float X0 = i - t; // Unskew the cell origin back to (x,y,z) space
     float Y0 = j - t;
     float Z0 = k - t;
@@ -287,9 +287,9 @@ public class SimplexNoise
     float y3 = y0 - 1.0f + 3.0f * G3;
     float z3 = z0 - 1.0f + 3.0f * G3;
     // Work out the hashed gradient indices of the four simplex corners
-    int ii = i & 255;
-    int jj = j & 255;
-    int kk = k & 255;
+    int ii  = i & 255;
+    int jj  = j & 255;
+    int kk  = k & 255;
     int gi0 = permMod12[ii + perm[jj + perm[kk] & 0xFF] & 0xFF] & 0xFF;
     int gi1 = permMod12[ii + i1 + perm[jj + j1 + perm[kk + k1] & 0xFF] & 0xFF] & 0xFF;
     int gi2 = permMod12[ii + i2 + perm[jj + j2 + perm[kk + k2] & 0xFF] & 0xFF] & 0xFF;
@@ -351,12 +351,12 @@ public class SimplexNoise
   {
     float n0, n1, n2, n3, n4; // Noise contributions from the five corners
     // Skew the (x,y,z,w) space to determine which cell of 24 simplices we're in
-    float s = (x + y + z + w) * F4; // Factor for 4D skewing
-    int i = fastfloor(x + s);
-    int j = fastfloor(y + s);
-    int k = fastfloor(z + s);
-    int l = fastfloor(w + s);
-    float t = (i + j + k + l) * G4; // Factor for 4D unskewing
+    float s  = (x + y + z + w) * F4; // Factor for 4D skewing
+    int   i  = fastfloor(x + s);
+    int   j  = fastfloor(y + s);
+    int   k  = fastfloor(z + s);
+    int   l  = fastfloor(w + s);
+    float t  = (i + j + k + l) * G4; // Factor for 4D unskewing
     float X0 = i - t; // Unskew the cell origin back to (x,y,z,w) space
     float Y0 = j - t;
     float Z0 = k - t;
@@ -456,10 +456,10 @@ public class SimplexNoise
     float z4 = z0 - 1.0f + 4.0f * G4;
     float w4 = w0 - 1.0f + 4.0f * G4;
     // Work out the hashed gradient indices of the five simplex corners
-    int ii = i & 255;
-    int jj = j & 255;
-    int kk = k & 255;
-    int ll = l & 255;
+    int ii  = i & 255;
+    int jj  = j & 255;
+    int kk  = k & 255;
+    int ll  = l & 255;
     int gi0 = (perm[ii + perm[jj + perm[kk + perm[ll] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
     int gi1 = (perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
     int gi2 = (perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2] & 0xFF] & 0xFF] & 0xFF] & 0xFF) % 32;
