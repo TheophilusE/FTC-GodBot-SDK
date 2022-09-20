@@ -19,6 +19,13 @@ android {
     namespace = 'org.firstinspires.ftc.teamcode'
 }
 
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
 dependencies {
     implementation project(':FtcRobotController')
     implementation project(':XII-LIB')
