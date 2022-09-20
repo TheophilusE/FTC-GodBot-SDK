@@ -49,22 +49,20 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
  * You can use the X button on gamepad1 to toggle the LED on and off.
  *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
+ * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 @TeleOp(name = "Sensor: MR Color", group = "Sensor")
 @Disabled
-public class SensorMRColor extends LinearOpMode
-{
+public class SensorMRColor extends LinearOpMode {
 
   ColorSensor colorSensor;    // Hardware Device Object
 
 
   @Override
-  public void runOpMode()
-  {
+  public void runOpMode() {
 
     // hsvValues is an array that will hold the hue, saturation, and value information.
-    float hsvValues[] = {0F, 0F, 0F};
+    float hsvValues[] = {0F,0F,0F};
 
     // values is a reference to the hsvValues array.
     final float values[] = hsvValues;
@@ -92,15 +90,13 @@ public class SensorMRColor extends LinearOpMode
 
     // while the op mode is active, loop and read the RGB data.
     // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
-    while (opModeIsActive())
-    {
+    while (opModeIsActive()) {
 
       // check the status of the x button on either gamepad.
       bCurrState = gamepad1.x;
 
       // check for button state transitions.
-      if (bCurrState && (bCurrState != bPrevState))
-      {
+      if (bCurrState && (bCurrState != bPrevState))  {
 
         // button is transitioning to a pressed state. So Toggle LED
         bLedOn = !bLedOn;
@@ -124,10 +120,8 @@ public class SensorMRColor extends LinearOpMode
       // change the background color to match the color detected by the RGB sensor.
       // pass a reference to the hue, saturation, and value array as an argument
       // to the HSVToColor method.
-      relativeLayout.post(new Runnable()
-      {
-        public void run()
-        {
+      relativeLayout.post(new Runnable() {
+        public void run() {
           relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
         }
       });
@@ -136,10 +130,8 @@ public class SensorMRColor extends LinearOpMode
     }
 
     // Set the panel back to the default color
-    relativeLayout.post(new Runnable()
-    {
-      public void run()
-      {
+    relativeLayout.post(new Runnable() {
+      public void run() {
         relativeLayout.setBackgroundColor(Color.WHITE);
       }
     });
