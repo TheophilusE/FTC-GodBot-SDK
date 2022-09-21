@@ -728,4 +728,20 @@ public class Math
 //#endif
     return r;
   }
+
+  /*
+    Normalizes a value between 0 and 1. Effectively a range between 0% and 100%.
+   */
+  public static float normalize(float value, float min, float max)
+  {
+    return (value - min) / (max - min);
+  }
+
+  /*
+    Normalizes a value between 0 and 1. Effectively a range between 0% and 100%.
+   */
+  public static double normalize(double value, double min, double max)
+  {
+    return (value - min) / (max - min);
+  }
 }
